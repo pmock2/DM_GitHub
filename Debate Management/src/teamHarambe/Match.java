@@ -1,6 +1,8 @@
 /**
  * Created by Daylon on 9/29/2016.
  */
+package teamHarambe;
+
 public class Match {
     Team team1;
     Team team2;

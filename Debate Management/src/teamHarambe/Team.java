@@ -1,6 +1,8 @@
 /**
  * Created by Daylon on 9/28/2016.
  */
+package teamHarambe;
+
 public class Team {
     String name;
     double score;
