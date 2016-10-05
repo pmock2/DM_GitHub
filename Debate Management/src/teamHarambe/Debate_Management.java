@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Debate_Management {
 
+    static String password;
     static Scanner in;
 
     static List<Team> teamlist = new LinkedList<>();
@@ -14,6 +15,9 @@ public class Debate_Management {
 
 
     public static void main(String args[]) throws InterruptedException {
+        System.out.println("Welcome to the DM system.");
+        TimeUnit.SECONDS.sleep(1);
+        passwordSet();
         teamSet();
         createSchedule();
         printSchedule();
@@ -104,5 +108,47 @@ public class Debate_Management {
                 schedulelist.remove(0);
             }
         }
+    }
+
+    static int userPick() throws InterruptedException
+    {
+        in = new Scanner(System.in);
+        int choice = 0;
+        try
+        {
+            choice = in.nextInt();
+        }
+        catch(InputMismatchException e)
+        {
+            System.out.println("Please input a number");
+            TimeUnit.SECONDS.sleep(1);
+            in.next();
+        }
+        return choice;
+    }
+
+    static void passwordSet() throws InterruptedException
+    {
+        System.out.println("Please set a super referee password:");
+        System.out.println();
+        password = userString();
+        System.out.println("Password is set to: " + password);
+        TimeUnit.SECONDS.sleep(1);
+        int userPick;
+        System.out.println("Are you sure you want to use this password?\n1. yes\n2. no");
+        userPick = userPick();
+        while (userPick != 1)
+        {
+            System.out.println("Please set a super referee password:");
+            System.out.println();
+            password = userString();
+            System.out.println("Password is set to: " + password);
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Are you sure you want to use this password?\n1. yes\n2. no");
+            userPick = userPick();
+        }
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Password is set");
+        TimeUnit.SECONDS.sleep(1);
     }
         }
