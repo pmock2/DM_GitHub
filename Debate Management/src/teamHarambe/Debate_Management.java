@@ -92,6 +92,7 @@ public class Debate_Management {
             }
 
     static void printSchedule() throws InterruptedException {
+        /* /////////////////////OLD METHOD//////////////////////////
         for(int j = 0; j < matchlist.size(); j++)
         {
             schedulelist.add(matchlist.get(j));
@@ -108,7 +109,50 @@ public class Debate_Management {
                 schedulelist.remove(0);
             }
         }
+    */ /////////////////////OLD METHOD//////////////////////////
+        add = true;
+        int r = (int) (Math.random() * matchlist.size());
+        Match temp = matchlist.get(r);
+        schedulelist.add(temp);
+        for (int i = 0; i < 9; i++)
+        {
+            System.out.println();
+            System.out.println("Week " + (i + 1) + ": ");
+            TimeUnit.SECONDS.sleep(1);
+            int counter = 0;
+            for (int h = 0; h < 5; h++)
+            {
+                while (counter < 5) {
+                    for (Match match : matchlist) {
+                        add = true;
+                        for (Match m : schedulelist) {
+                            if (m.getTeam1().getName().equals(match.getTeam1().getName()) || m.getTeam1().getName().equals(match.getTeam2().getName())) {
+                                add = false;
+                            } else if (m.getTeam2().getName().equals(match.getTeam1().getName()) || m.getTeam2().getName().equals(match.getTeam2().getName())) {
+                                add = false;
+                            }
+                        }
+                        if (add)
+                        {
+                            temp = match;
+                            break;
+                        }
+                    }
+                    if (add) {
+                        schedulelist.add(temp);
+                        System.out.println(temp.getTeam1().getName() + " vs " + temp.getTeam2().getName());
+                        counter++;
+                    }
+                }
+            }
+
+        }
     }
+
+
+
+
+
 
     static int userPick() throws InterruptedException
     {
