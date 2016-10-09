@@ -10,8 +10,10 @@ public class Debate_Management {
 
     static List<Team> teamlist = new LinkedList<>();
     static List<Match> matchlist = new LinkedList<>();
+    static List<Match> organizedlist = new LinkedList<>();
     static List<Match> schedulelist = new LinkedList<>();
     static boolean add = false;
+    static boolean generated = false;
 
 
     public static void main(String args[]) throws InterruptedException {
@@ -19,9 +21,18 @@ public class Debate_Management {
         TimeUnit.SECONDS.sleep(1);
         passwordSet();
         teamSet();
-        createSchedule();
+        while (!generated)
+        try {
+            createSchedule();
+            organizeSchedule();
+        }
+        catch (NullPointerException e)
+        {
+            organizedlist.clear();
+            matchlist.clear();
+            schedulelist.clear();
+        }
         printSchedule();
-
     }
 
     static String userString() throws InterruptedException {
@@ -52,8 +63,6 @@ public class Debate_Management {
     }
 
     static void createSchedule() throws InterruptedException {
-        System.out.println("Creating schedule");
-        TimeUnit.SECONDS.sleep(1);
                 int r1 = (int) (Math.random() * teamlist.size());
                 int r2 = (int) (Math.random() * teamlist.size());
                     while (r1 == r2)
@@ -91,32 +100,44 @@ public class Debate_Management {
                         matchlist.add(temp);
                     }
                 }
-                    System.out.println("Total amount of matches: " + matchlist.size());
             }
 
 
 
-    static void printSchedule() throws InterruptedException {
+    static void organizeSchedule() throws InterruptedException {
         for(int j = 0; j < matchlist.size(); j++)
         {
-            schedulelist.add(matchlist.get(j));
+            organizedlist.add(matchlist.get(j));
         }
 
+        for (int i = 0; i < 9; i++)
+        {
+            resetIsPlaying(organizedlist);
+            for (int h = 0; h < 5; h++)
+            {
+                Match temp = getFreshMatch(organizedlist);
+                temp.getTeam1().isPlayingCurrently = true;
+                temp.getTeam2().isPlayingCurrently = true;
+                organizedlist.remove(temp);
+                schedulelist.add(temp);
+            }
+        }
+        generated = true;
+    }
+
+    static void printSchedule() throws InterruptedException {
         for (int i = 0; i < 9; i++)
         {
             System.out.println();
             System.out.println("Week " + (i + 1) + ": ");
             TimeUnit.SECONDS.sleep(1);
-            resetIsPlaying(schedulelist);
             for (int h = 0; h < 5; h++)
             {
-                Match temp = getFreshMatch(schedulelist);
-                System.out.println(temp.getTeam1().getName() + " vs " + temp.getTeam2().getName());
-                temp.getTeam1().isPlayingCurrently = true;
-                temp.getTeam2().isPlayingCurrently = true;
-                schedulelist.remove(temp);
+                 System.out.println(schedulelist.get(0).getTeam1().getName() + " vs " + schedulelist.get(0).getTeam2().getName());
+                schedulelist.remove(0);
             }
         }
+
     }
 
 
@@ -168,15 +189,12 @@ public class Debate_Management {
 
     static Match getFreshMatch(List<Match> e)
     {
-        while(true)
-        {
         for (Match m : e) {
             if (!m.getTeam1().isPlayingCurrently && !m.getTeam2().isPlayingCurrently) {
                 return m;
             }
         }
-
-        }
+        return null;
     }
 
     static void resetIsPlaying(List<Match> e)
