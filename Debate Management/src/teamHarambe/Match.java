@@ -3,6 +3,8 @@
  */
 package teamHarambe;
 
+import java.util.List;
+
 public class Match {
     Team team1;
     Team team2;
@@ -63,4 +65,5 @@ public class Match {
     public int getTime() {
         return time;
     }
+
 }

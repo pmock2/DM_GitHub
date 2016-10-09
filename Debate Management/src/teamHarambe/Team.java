@@ -6,10 +6,12 @@ package teamHarambe;
 public class Team {
     String name;
     double score;
+    boolean isPlayingCurrently;
 
-    public Team(String name, double score) {
+    public Team(String name, double score, boolean isPlayingCurrently) {
         this.name = name;
         this.score = score;
+        this.isPlayingCurrently = isPlayingCurrently;
     }
 
     public String getName() {

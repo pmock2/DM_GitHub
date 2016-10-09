@@ -42,7 +42,7 @@ public class Debate_Management {
         System.out.println("Please enter the ten team names, each followed by the enter key");
         for (int i = 0; i < 10; i++) {
             System.out.print((i + 1) + ". ");
-            teamlist.add(new Team(userString(), 0));
+            teamlist.add(new Team(userString(), 0, false));
         }
         System.out.println("Thank you. Your teams are: ");
         TimeUnit.SECONDS.sleep(1);
@@ -64,6 +64,7 @@ public class Debate_Management {
                     matchlist.add(temp);
                 while (matchlist.size() < 45)
                 {
+                    //create random temporary match
                     r1 = (int) (Math.random() * teamlist.size());
                     r2 = (int) (Math.random() * teamlist.size());
                     while (r1 == r2)
@@ -72,6 +73,8 @@ public class Debate_Management {
                     }
                     temp = new Match(teamlist.get(r1), teamlist.get(r2));
                     add = true;
+
+                    //compare temporary match to every match in the match list
                     for (Match m : matchlist)
                     {
                         if (m.getTeam1().getName().equals(temp.getTeam1().getName()) && m.getTeam2().getName().equals(temp.getTeam2().getName()))
@@ -91,8 +94,9 @@ public class Debate_Management {
                     System.out.println("Total amount of matches: " + matchlist.size());
             }
 
+
+
     static void printSchedule() throws InterruptedException {
-        /* /////////////////////OLD METHOD//////////////////////////
         for(int j = 0; j < matchlist.size(); j++)
         {
             schedulelist.add(matchlist.get(j));
@@ -103,49 +107,15 @@ public class Debate_Management {
             System.out.println();
             System.out.println("Week " + (i + 1) + ": ");
             TimeUnit.SECONDS.sleep(1);
+            resetIsPlaying(schedulelist);
             for (int h = 0; h < 5; h++)
             {
-                System.out.println(schedulelist.get(0).getTeam1().getName() + " vs " + schedulelist.get(0).getTeam2().getName());
-                schedulelist.remove(0);
+                Match temp = getFreshMatch(schedulelist);
+                System.out.println(temp.getTeam1().getName() + " vs " + temp.getTeam2().getName());
+                temp.getTeam1().isPlayingCurrently = true;
+                temp.getTeam2().isPlayingCurrently = true;
+                schedulelist.remove(temp);
             }
-        }
-    */ /////////////////////OLD METHOD//////////////////////////
-        add = true;
-        int r = (int) (Math.random() * matchlist.size());
-        Match temp = matchlist.get(r);
-        schedulelist.add(temp);
-        for (int i = 0; i < 9; i++)
-        {
-            System.out.println();
-            System.out.println("Week " + (i + 1) + ": ");
-            TimeUnit.SECONDS.sleep(1);
-            int counter = 0;
-            for (int h = 0; h < 5; h++)
-            {
-                while (counter < 5) {
-                    for (Match match : matchlist) {
-                        add = true;
-                        for (Match m : schedulelist) {
-                            if (m.getTeam1().getName().equals(match.getTeam1().getName()) || m.getTeam1().getName().equals(match.getTeam2().getName())) {
-                                add = false;
-                            } else if (m.getTeam2().getName().equals(match.getTeam1().getName()) || m.getTeam2().getName().equals(match.getTeam2().getName())) {
-                                add = false;
-                            }
-                        }
-                        if (add)
-                        {
-                            temp = match;
-                            break;
-                        }
-                    }
-                    if (add) {
-                        schedulelist.add(temp);
-                        System.out.println(temp.getTeam1().getName() + " vs " + temp.getTeam2().getName());
-                        counter++;
-                    }
-                }
-            }
-
         }
     }
 
@@ -194,5 +164,27 @@ public class Debate_Management {
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Password is set");
         TimeUnit.SECONDS.sleep(1);
+    }
+
+    static Match getFreshMatch(List<Match> e)
+    {
+        while(true)
+        {
+        for (Match m : e) {
+            if (!m.getTeam1().isPlayingCurrently && !m.getTeam2().isPlayingCurrently) {
+                return m;
+            }
+        }
+
+        }
+    }
+
+    static void resetIsPlaying(List<Match> e)
+    {
+        for (Match m : e)
+        {
+            m.getTeam1().isPlayingCurrently = false;
+            m.getTeam2().isPlayingCurrently = false;
+        }
     }
         }
