@@ -42,7 +42,7 @@ public class Schedule {
 	 * Minimum required #weeks = #teams if odd or #teams-1 if even
 	 * #matches per week required for that amount of weeks = floor(#teams/2)
 	 * 
-	 * Probably room to improve method's differentiation between even/odd #teams  
+	 * Probably room to improve method's differentiation between even/odd #teams
 	 */
 	private void generateSchedule(String[] teamNames) {
 		Week[] week; String pivot = null;
