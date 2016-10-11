@@ -9,12 +9,6 @@ public class Debate_Management {
     static Scanner in;
 
     static List<Team> teamlist = new LinkedList<>();
-    static List<Match> matchlist = new LinkedList<>();
-    static List<Match> organizedlist = new LinkedList<>();
-    static List<Match> schedulelist = new LinkedList<>();
-    static boolean add = false;
-    static boolean generated = false;
-
 
     public static void main(String args[]) throws InterruptedException {
         System.out.println("Welcome to the DM system.");
@@ -42,7 +36,7 @@ public class Debate_Management {
         System.out.println("Please enter the ten team names, each followed by the enter key");
         for (int i = 0; i < 10; i++) {
             System.out.print((i + 1) + ". ");
-            teamlist.add(new Team(userString(), 0, false));
+            teamlist.add(new Team(userString(), 0));
         }
         System.out.println("Thank you. Your teams are: ");
         TimeUnit.SECONDS.sleep(1);
@@ -100,22 +94,4 @@ public class Debate_Management {
         TimeUnit.SECONDS.sleep(1);
     }
 
-    static Match getFreshMatch(List<Match> e)
-    {
-        for (Match m : e) {
-            if (!m.getTeam1().isPlayingCurrently && !m.getTeam2().isPlayingCurrently) {
-                return m;
-            }
-        }
-        return null;
-    }
-
-    static void resetIsPlaying(List<Match> e)
-    {
-        for (Match m : e)
-        {
-            m.getTeam1().isPlayingCurrently = false;
-            m.getTeam2().isPlayingCurrently = false;
-        }
-    }
         }

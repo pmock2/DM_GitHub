@@ -3,14 +3,13 @@
  */
 package teamHarambe;
 
-import java.util.List;
-
 public class Match {
     Team team1;
     Team team2;
     int time;
     double team1Score;
     double team2Score;
+    Referee referee;
 
     public Match(Team team1, Team team2)
     {
@@ -18,12 +17,13 @@ public class Match {
         this.team2 = team2;
     }
 
-    public Match(Team team1, Team team2, double team1Score, double team2Score)
+    public Match(Team team1, Team team2, double team1Score, double team2Score, Referee referee)
     {
         this.team1 = team1;
         this.team2 = team2;
         this.team1Score = team1Score;
         this.team2Score = team2Score;
+        this.referee = referee;
     }
 
     public void setTeam1(Team team1) {
