@@ -66,4 +66,7 @@ public class Match {
         return time;
     }
 
+    public String toString() {
+        return team1.getName() + " - " + team2.getName();
+    }
 }
