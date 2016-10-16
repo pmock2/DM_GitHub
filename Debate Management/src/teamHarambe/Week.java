@@ -1,7 +1,10 @@
 package teamHarambe;
 
 public class Week {
+
     Match[] matches;
+
+
     public Week(Match[] matches) {
         this.matches = matches;
     }

@@ -6,9 +6,9 @@ import java.util.Random;
 public class Schedule {
 	Week[] schedule;
 
-	public Schedule(List<Team> teamlist) {
+	public Schedule(List<Team> teamlist, List<Referee> refereelist) {
 
-		generateSchedule(shuffleTeams(teamlist));
+		generateSchedule(shuffleTeams(teamlist), refereelist);
 	}
 
 	public String toString() {
@@ -47,7 +47,8 @@ public class Schedule {
 	 *
 	 * Probably room to improve method's differentiation between even/odd #teams
 	 */
-	private void generateSchedule(List<Team> list) {
+	private void generateSchedule(List<Team> list, List<Referee> Rlist) {
+		Random rand = new Random();
 		Week[] week; Team pivot = null;
 		boolean evenNumTeams = list.size() % 2 == 0;
 		int matchesPerWeek = list.size()/2;
@@ -61,12 +62,12 @@ public class Schedule {
 		for (int offset=0; offset < week.length; offset++) {
 			Match[] weekMatches = new Match[matchesPerWeek];
 			if (evenNumTeams) {
-				weekMatches[0] = new Match(pivot, list.get(offset));
+				weekMatches[0] = new Match(pivot, list.get(offset), 0, 0, Rlist.get(rand.nextInt(Rlist.size()) + 0));
 			}
 			for (int i=1; i < weekMatches.length +  (evenNumTeams ? 0 : 1); i++) {
 				int slot0 = (i+offset);
 				int slot1 = slot0 + (list.size()-(2*i));
-				weekMatches[evenNumTeams ? i : i-1] = new Match(list.get(slot0 % list.size()), list.get(slot1 % list.size()));
+				weekMatches[evenNumTeams ? i : i-1] = new Match(list.get(slot0 % list.size()), list.get(slot1 % list.size()), 0, 0, Rlist.get(rand.nextInt(Rlist.size()) + 0));
 			}
 
 			week[offset] = new Week(weekMatches);

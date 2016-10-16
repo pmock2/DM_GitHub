@@ -11,12 +11,6 @@ public class Match {
     double team2Score;
     Referee referee;
 
-    public Match(Team team1, Team team2)
-    {
-        this.team1 = team1;
-        this.team2 = team2;
-    }
-
     public Match(Team team1, Team team2, double team1Score, double team2Score, Referee referee)
     {
         this.team1 = team1;
@@ -54,6 +48,14 @@ public class Match {
         this.team2Score = team2Score;
     }
 
+    public Referee getReferee() {
+        return referee;
+    }
+
+    public void setReferee(Referee referee) {
+        this.referee = referee;
+    }
+
     public Team getTeam1() {
         return team1;
     }
@@ -67,6 +69,6 @@ public class Match {
     }
 
     public String toString() {
-        return team1.getName() + " - " + team2.getName();
+        return team1.getName() + " - " + team2.getName() + " - refereed by ID # " + getReferee().getId();
     }
 }

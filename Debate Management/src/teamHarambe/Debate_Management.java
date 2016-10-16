@@ -9,11 +9,18 @@ public class Debate_Management {
     static Scanner in;
 
     static List<Team> teamlist = new LinkedList<>();
+    static List<Referee> refereelist = new LinkedList<>();
+
 
     public static void main(String args[]) throws InterruptedException {
         System.out.println("Welcome to the DM system.");
         TimeUnit.SECONDS.sleep(1);
-        passwordSet();
+        System.out.println("For testing purposes,");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("the system will create 5 referee objects with random ID numbers.");
+        TimeUnit.SECONDS.sleep(3);
+        //passwordSet();
+        createReferees();
         teamSet();
         createSchedule();
     }
@@ -46,7 +53,7 @@ public class Debate_Management {
     }
 
     static void createSchedule() throws InterruptedException {
-        Schedule schedule = new Schedule(teamlist);
+        Schedule schedule = new Schedule(teamlist, refereelist);
         System.out.println("Schedule: ");
         System.out.println(schedule.toString());
             }
@@ -92,6 +99,24 @@ public class Debate_Management {
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Password is set");
         TimeUnit.SECONDS.sleep(1);
+    }
+
+    static void createReferees() throws InterruptedException
+    {
+        Random r = new Random();
+        Referee a = new Referee(r.nextInt(999999999) + 111111111, true);
+        Referee b = new Referee(r.nextInt(999999999) + 111111111, false);
+        Referee c = new Referee(r.nextInt(999999999) + 111111111, false);
+        Referee d = new Referee(r.nextInt(999999999) + 111111111, false);
+        Referee e = new Referee(r.nextInt(999999999) + 111111111, false);
+
+        refereelist.add(a);
+        refereelist.add(b);
+        refereelist.add(c);
+        refereelist.add(d);
+        refereelist.add(e);
+
+
     }
 
         }
