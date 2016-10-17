@@ -3,27 +3,21 @@
  */
 package teamHarambe;
 
-import java.util.List;
-
 public class Match {
     Team team1;
     Team team2;
     int time;
     double team1Score;
     double team2Score;
+    Referee referee;
 
-    public Match(Team team1, Team team2)
-    {
-        this.team1 = team1;
-        this.team2 = team2;
-    }
-
-    public Match(Team team1, Team team2, double team1Score, double team2Score)
+    public Match(Team team1, Team team2, double team1Score, double team2Score, Referee referee)
     {
         this.team1 = team1;
         this.team2 = team2;
         this.team1Score = team1Score;
         this.team2Score = team2Score;
+        this.referee = referee;
     }
 
     public void setTeam1(Team team1) {
@@ -54,6 +48,14 @@ public class Match {
         this.team2Score = team2Score;
     }
 
+    public Referee getReferee() {
+        return referee;
+    }
+
+    public void setReferee(Referee referee) {
+        this.referee = referee;
+    }
+
     public Team getTeam1() {
         return team1;
     }
@@ -66,4 +68,7 @@ public class Match {
         return time;
     }
 
+    public String toString() {
+        return team1.getName() + " - " + team2.getName() + " - refereed by ID # " + getReferee().getId();
+    }
 }

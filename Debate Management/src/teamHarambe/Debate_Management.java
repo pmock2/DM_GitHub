@@ -9,30 +9,20 @@ public class Debate_Management {
     static Scanner in;
 
     static List<Team> teamlist = new LinkedList<>();
-    static List<Match> matchlist = new LinkedList<>();
-    static List<Match> organizedlist = new LinkedList<>();
-    static List<Match> schedulelist = new LinkedList<>();
-    static boolean add = false;
-    static boolean generated = false;
+    static List<Referee> refereelist = new LinkedList<>();
 
 
     public static void main(String args[]) throws InterruptedException {
         System.out.println("Welcome to the DM system.");
         TimeUnit.SECONDS.sleep(1);
-        passwordSet();
+        System.out.println("For testing purposes,");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("the system will create 5 referee objects with random ID numbers.");
+        TimeUnit.SECONDS.sleep(3);
+        //passwordSet();
+        createReferees();
         teamSet();
-        while (!generated)
-        try {
-            createSchedule();
-            organizeSchedule();
-        }
-        catch (NullPointerException e)
-        {
-            organizedlist.clear();
-            matchlist.clear();
-            schedulelist.clear();
-        }
-        printSchedule();
+        createSchedule();
     }
 
     static String userString() throws InterruptedException {
@@ -53,7 +43,7 @@ public class Debate_Management {
         System.out.println("Please enter the ten team names, each followed by the enter key");
         for (int i = 0; i < 10; i++) {
             System.out.print((i + 1) + ". ");
-            teamlist.add(new Team(userString(), 0, false));
+            teamlist.add(new Team(userString(), 0));
         }
         System.out.println("Thank you. Your teams are: ");
         TimeUnit.SECONDS.sleep(1);
@@ -63,86 +53,10 @@ public class Debate_Management {
     }
 
     static void createSchedule() throws InterruptedException {
-                int r1 = (int) (Math.random() * teamlist.size());
-                int r2 = (int) (Math.random() * teamlist.size());
-                    while (r1 == r2)
-                    {
-                        r2 = (int) (Math.random() * teamlist.size());
-                    }
-                    Match temp = new Match(teamlist.get(r1), teamlist.get(r2));
-                    matchlist.add(temp);
-                while (matchlist.size() < 45)
-                {
-                    //create random temporary match
-                    r1 = (int) (Math.random() * teamlist.size());
-                    r2 = (int) (Math.random() * teamlist.size());
-                    while (r1 == r2)
-                    {
-                        r2 = (int) (Math.random() * teamlist.size());
-                    }
-                    temp = new Match(teamlist.get(r1), teamlist.get(r2));
-                    add = true;
-
-                    //compare temporary match to every match in the match list
-                    for (Match m : matchlist)
-                    {
-                        if (m.getTeam1().getName().equals(temp.getTeam1().getName()) && m.getTeam2().getName().equals(temp.getTeam2().getName()))
-                        {
-                            add = false;
-                        }
-                        else if (m.getTeam1().getName().equals(temp.getTeam2().getName()) && m.getTeam2().getName().equals(temp.getTeam1().getName()))
-                        {
-                            add = false;
-                        }
-                    }
-                    if (add)
-                    {
-                        matchlist.add(temp);
-                    }
-                }
+        Schedule schedule = new Schedule(teamlist, refereelist);
+        System.out.println("Schedule: ");
+        System.out.println(schedule.toString());
             }
-
-
-
-    static void organizeSchedule() throws InterruptedException {
-        for(int j = 0; j < matchlist.size(); j++)
-        {
-            organizedlist.add(matchlist.get(j));
-        }
-
-        for (int i = 0; i < 9; i++)
-        {
-            resetIsPlaying(organizedlist);
-            for (int h = 0; h < 5; h++)
-            {
-                Match temp = getFreshMatch(organizedlist);
-                temp.getTeam1().isPlayingCurrently = true;
-                temp.getTeam2().isPlayingCurrently = true;
-                organizedlist.remove(temp);
-                schedulelist.add(temp);
-            }
-        }
-        generated = true;
-    }
-
-    static void printSchedule() throws InterruptedException {
-        for (int i = 0; i < 9; i++)
-        {
-            System.out.println();
-            System.out.println("Week " + (i + 1) + ": ");
-            TimeUnit.SECONDS.sleep(1);
-            for (int h = 0; h < 5; h++)
-            {
-                 System.out.println(schedulelist.get(0).getTeam1().getName() + " vs " + schedulelist.get(0).getTeam2().getName());
-                schedulelist.remove(0);
-            }
-        }
-
-    }
-
-
-
-
 
 
     static int userPick() throws InterruptedException
@@ -187,22 +101,22 @@ public class Debate_Management {
         TimeUnit.SECONDS.sleep(1);
     }
 
-    static Match getFreshMatch(List<Match> e)
+    static void createReferees() throws InterruptedException
     {
-        for (Match m : e) {
-            if (!m.getTeam1().isPlayingCurrently && !m.getTeam2().isPlayingCurrently) {
-                return m;
-            }
-        }
-        return null;
+        Random r = new Random();
+        Referee a = new Referee(r.nextInt(999999999) + 111111111, true);
+        Referee b = new Referee(r.nextInt(999999999) + 111111111, false);
+        Referee c = new Referee(r.nextInt(999999999) + 111111111, false);
+        Referee d = new Referee(r.nextInt(999999999) + 111111111, false);
+        Referee e = new Referee(r.nextInt(999999999) + 111111111, false);
+
+        refereelist.add(a);
+        refereelist.add(b);
+        refereelist.add(c);
+        refereelist.add(d);
+        refereelist.add(e);
+
+
     }
 
-    static void resetIsPlaying(List<Match> e)
-    {
-        for (Match m : e)
-        {
-            m.getTeam1().isPlayingCurrently = false;
-            m.getTeam2().isPlayingCurrently = false;
-        }
-    }
         }
