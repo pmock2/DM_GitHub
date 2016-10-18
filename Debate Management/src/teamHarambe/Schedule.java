@@ -15,7 +15,7 @@ public class Schedule {
 		String s = "";
 
 		for (int week=0; week < schedule.length; week++) {
-			s += "Week "+(week+1)+":\n" + schedule[week].toString() + "\n\n";
+			s += "Week "+(week+1)+":\n" + schedule[week].toString() + "\n";
 		}
 
 		return s;

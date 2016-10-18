@@ -1,0 +1,25 @@
+package teamHarambe;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
+public class Client {
+
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		int number,temp;
+		Socket s = new Socket("127.0.0.1", 1234);
+		Scanner console = new Scanner(System.in);
+		Scanner fromServer = new Scanner(s.getInputStream());
+		PrintStream toServer = new PrintStream(s.getOutputStream());
+		
+		System.out.println("Enter a number:");
+		number = console.nextInt();
+		toServer.println(number);
+		temp = fromServer.nextInt();
+		System.out.println("Returned number: " + temp);
+	}
+
+}

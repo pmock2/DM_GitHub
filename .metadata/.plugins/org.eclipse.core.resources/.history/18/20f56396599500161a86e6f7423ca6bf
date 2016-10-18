@@ -1,0 +1,56 @@
+package teamHarambe;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Server {
+
+	public static void main(String[] args) throws IOException {
+		ServerSocket server = new ServerSocket(1234);
+		Socket s = server.accept();
+		Scanner fromClient = new Scanner(s.getInputStream());
+		PrintWriter toClient = new PrintWriter(s.getOutputStream(), true);
+		
+		while (true) {
+			String message = fromClient.next();
+			System.out.println("Command from client: " + message);
+			if (message.equals("Team_Names")) {
+				List<Team> teams = new LinkedList<>();
+				List<Referee> referees = generateRefereeList();
+				Schedule schedule;
+				
+				while (true) {
+					message = fromClient.next();
+					if (message.equals("End_Team_Names")) {
+						break;
+					} else {
+						teams.add(new Team(message));
+					}
+				}
+				
+				schedule = new Schedule(teams, referees);
+				System.out.println(schedule.toString());
+				toClient.println("This is a test\n test test test");
+			}
+		}
+	}
+
+	private static List<Referee> generateRefereeList() {
+		List<Referee> referees = new LinkedList<>();
+		Random r = new Random();
+		int numReferees = 5;
+		
+		for (int i=0; i < numReferees; i ++) {
+			referees.add(new Referee(r.nextInt(999999999) + 111111111, i==0));
+		}
+		
+		return referees;
+	}
+}

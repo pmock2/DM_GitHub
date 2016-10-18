@@ -1,0 +1,47 @@
+package teamHarambe;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Client {
+	static List<String> teamNames = new LinkedList<>();
+	static Scanner console = new Scanner(System.in);
+
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		int number,temp;
+		Socket s = new Socket("127.0.0.1", 1234);
+		Scanner fromServer = new Scanner(s.getInputStream());
+		PrintStream toServer = new PrintStream(s.getOutputStream());
+		
+		promptTeams();
+		toServer.println("Team_Names");
+		for (int i=0; i < teamNames.size(); i++) {
+			toServer.println(teamNames.get(i));
+		}
+		toServer.println("End_Team_Names");
+		
+		while (true) {
+			System.out.println(fromServer.next());
+		}
+		
+		/*System.out.println("Enter a number:");
+		number = console.nextInt();
+		toServer.println(number);
+		temp = fromServer.nextInt();
+		System.out.println("Returned number: " + temp);*/
+	}
+	
+	static void promptTeams() {
+        System.out.println("Please enter the ten team names, each followed by the enter key.");
+        for (int i = 0; i < 10; i++) {
+            System.out.print((i + 1) + ". ");
+            teamNames.add(console.next());
+        }
+    }
+
+}
