@@ -69,6 +69,6 @@ public class Match {
     }
 
     public String toString() {
-        return team1.getName() + " - " + team2.getName() + " - refereed by ID # " + getReferee().getId();
+        return team1.getName() + " - " + team2.getName() + "; Refereed by ID # " + getReferee().getId();
     }
 }

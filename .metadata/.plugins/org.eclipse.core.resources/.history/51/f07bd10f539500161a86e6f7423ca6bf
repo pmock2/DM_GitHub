@@ -1,0 +1,40 @@
+package teamHarambe;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Server {
+
+	public static void main(String[] args) throws IOException {
+		ServerSocket server = new ServerSocket(1234);
+		Socket s = server.accept();
+		Scanner fromClient = new Scanner(s.getInputStream());
+		PrintStream toClient = new PrintStream(s.getOutputStream());
+		
+		while (true) {
+			String message = fromClient.next();
+			if (message == "Team_Names") {
+				List<Team> teams = new LinkedList<>();
+				while (true) {
+					message = fromClient.next();
+					if (message == "End_Team_Names") {
+						break;
+					} else {
+						teams.add(new Team(message));
+					}
+				}
+				
+				System.out.println("Teams are:");
+				for (int i=0; i < teams.size(); i++) {
+					System.out.println(teams.get(i));
+				}
+			}
+		}
+	}
+
+}

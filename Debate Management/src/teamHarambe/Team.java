@@ -7,9 +7,9 @@ public class Team {
     String name;
     double points;
 
-    public Team(String name, double points) {
+    public Team(String name) {
         this.name = name;
-        this.points = points;
+        this.points = 0;
     }
 
     public String getName() {
