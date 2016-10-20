@@ -17,13 +17,35 @@ public class Server {
 	
 	public static void main(String[] args) throws IOException {
 		ServerSocket server = new ServerSocket(1234);
-		int numTeams;		
+		int numTeams = 0;		
 		
 		System.out.println("Welcome to first time setup!");
 		System.out.print("Please create a password: ");
 		System.out.println("Your password is " + console.nextLine());
 		System.out.println("How many teams will play in the debate season?");
-		numTeams = console.nextInt();
+		boolean valid = false;
+		while(numTeams < 2)
+		{
+			try
+			{
+				numTeams =  (int) Double.parseDouble(console.nextLine());
+
+			}
+			//checks input to make sure it is a number
+			catch (NumberFormatException ex)
+			{
+				System.out.println("Invalid input, try again:");
+			}
+		}
+		
+//		try 
+//		{
+//			numTeams = console.nextInt();
+//		}
+//		catch(InputMismatchException e)
+//		{
+//			console.next();
+//		}
 		promptTeams(numTeams);
 		
 		List<Referee> referees = generateRefereeList();
@@ -42,7 +64,9 @@ public class Server {
         System.out.println("Please enter " + numTeams + " team names.");
         for (int i = 0; i < numTeams; i++) {
             System.out.print((i + 1) + ". ");
+            
             teams.add(new Team(console.next()));
+            
         }
     }
 	
