@@ -12,11 +12,14 @@ import java.util.Random;
 
 public class ConnectionHandler implements Runnable {
 	Socket s;
+	Schedule schedule;
 	BufferedReader fromClient;
 	PrintStream toClient;
 	
-	ConnectionHandler(Socket s) throws IOException {
+	//TODO store schedule in database and have ConnectionHandler read from db
+	ConnectionHandler(Socket s, Schedule schedule) throws IOException {
 		this.s = s;
+		this.schedule = schedule;
 		this.fromClient = new BufferedReader(new InputStreamReader(s.getInputStream()));
 		this.toClient = new PrintStream(s.getOutputStream());
 	}
@@ -26,23 +29,9 @@ public class ConnectionHandler implements Runnable {
 			try {
 				String message = fromClient.readLine();
 				System.out.println("Command from client: " + message);
-				if (message.equals("Team_Names")) {
-					List<Team> teams = new LinkedList<>();
-					List<Referee> referees = generateRefereeList();
-					Schedule schedule;
-					
-					while (true) {
-						message = fromClient.readLine();
-						if (message.equals("End_Team_Names")) {
-							break;
-						} else {
-							teams.add(new Team(message));
-						}
-					}
-					
-					schedule = new Schedule(teams, referees);
+				if (message.equals("Get_Schedule")) {
 					toClient.println(schedule.toString());
-					System.out.println("Sent info to client");
+					System.out.println("Sent schedule to client");
 				}
 			} catch (SocketException e) {
 				System.out.println("Client disconnected.");
@@ -52,17 +41,5 @@ public class ConnectionHandler implements Runnable {
 				break;
 			}
 		}
-	}
-	
-	private static List<Referee> generateRefereeList() {
-		List<Referee> referees = new LinkedList<>();
-		Random r = new Random();
-		int numReferees = 10;
-		
-		for (int i=0; i < numReferees; i ++) {
-			referees.add(new Referee(r.nextInt(999999999) + 111111111, i==0));
-		}
-		
-		return referees;
 	}
 }
