@@ -57,7 +57,7 @@ public class ConnectionHandler implements Runnable {
 	private static List<Referee> generateRefereeList() {
 		List<Referee> referees = new LinkedList<>();
 		Random r = new Random();
-		int numReferees = 5;
+		int numReferees = 10;
 		
 		for (int i=0; i < numReferees; i ++) {
 			referees.add(new Referee(r.nextInt(999999999) + 111111111, i==0));
