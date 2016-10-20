@@ -1,5 +1,6 @@
 package teamHarambe;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -52,6 +53,9 @@ public class Schedule {
 		Week[] week; Team pivot = null;
 		boolean evenNumTeams = list.size() % 2 == 0;
 		int matchesPerWeek = list.size()/2;
+		List<Referee> temp;
+		temp = (List)((LinkedList)Rlist).clone();
+
 
 		if (evenNumTeams) {
 			pivot = list.get(0);
@@ -60,14 +64,24 @@ public class Schedule {
 		week = new Week[list.size()];
 
 		for (int offset=0; offset < week.length; offset++) {
+			if (temp.size() > 0)
+			{
+				temp.clear();
+			}
+			temp = (List)((LinkedList)Rlist).clone();
+			int tempInt;
 			Match[] weekMatches = new Match[matchesPerWeek];
 			if (evenNumTeams) {
-				weekMatches[0] = new Match(pivot, list.get(offset), 0, 0, Rlist.get(rand.nextInt(Rlist.size()) + 0));
+				tempInt = rand.nextInt(temp.size()) + 0;
+				weekMatches[0] = new Match(pivot, list.get(offset), 0, 0, temp.get(tempInt));
+				temp.remove(tempInt);
 			}
 			for (int i=1; i < weekMatches.length +  (evenNumTeams ? 0 : 1); i++) {
 				int slot0 = (i+offset);
 				int slot1 = slot0 + (list.size()-(2*i));
-				weekMatches[evenNumTeams ? i : i-1] = new Match(list.get(slot0 % list.size()), list.get(slot1 % list.size()), 0, 0, Rlist.get(rand.nextInt(Rlist.size()) + 0));
+				tempInt = rand.nextInt(temp.size()) + 0;
+				weekMatches[evenNumTeams ? i : i-1] = new Match(list.get(slot0 % list.size()), list.get(slot1 % list.size()), 0, 0, temp.get(tempInt));
+				temp.remove(tempInt);
 			}
 
 			week[offset] = new Week(weekMatches);
