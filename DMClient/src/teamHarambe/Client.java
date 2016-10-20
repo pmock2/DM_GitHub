@@ -1,0 +1,25 @@
+package teamHarambe;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
+public class Client {
+	static Scanner console = new Scanner(System.in);
+
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		Socket s = new Socket("127.0.0.1", 1234);
+		BufferedReader fromServer = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		PrintStream toServer = new PrintStream(s.getOutputStream());
+		
+		toServer.println("Get_Schedule");
+		System.out.println("Sent request for schedule to server.");
+		while (true) {
+			System.out.println(fromServer.readLine());
+		}
+	}
+}

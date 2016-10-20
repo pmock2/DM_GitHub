@@ -1,0 +1,24 @@
+package teamHarambe;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Server {
+	static Scanner console = new Scanner(System.in);
+	
+	public static void main(String[] args) throws IOException {
+		ServerSocket server = new ServerSocket(1234);
+		
+		
+		System.out.println("Welcome to first time setup!");
+		System.out.println("");
+		
+		while (true) {
+			Socket s = server.accept();
+			Runnable connectionHandler = new ConnectionHandler(s);
+			new Thread(connectionHandler).start();
+		}
+	}
+}
