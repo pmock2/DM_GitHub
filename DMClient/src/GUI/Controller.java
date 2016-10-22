@@ -85,7 +85,7 @@ public class Controller {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.DECORATED);
-            stage.setTitle("Login");
+            stage.setTitle("Current Standings");
             stage.setScene(new Scene(root1));
             stage.show();
         }
