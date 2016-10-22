@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
-      <Button layoutX="348.0" layoutY="199.0" mnemonicParsing="false" text="Submit" />
-      <Label layoutX="121.0" layoutY="105.0" text="Password or Pin" textFill="#c31d1d">
+      <TextField fx:id="loginText" layoutX="175.0" layoutY="213.0" />
+      <PasswordField fx:id="loginPassword" layoutX="175.0" layoutY="267.0" />
+      <Button fx:id="loginButton" layoutX="148.0" layoutY="327.0" mnemonicParsing="false" onAction="#attemptLogin" text="Submit" />
+      <Label layoutX="147.0" layoutY="106.0" text="Referee Login" textFill="#c31d1d">
          <font>
             <Font size="34.0" />
          </font>
       </Label>
-      <Label layoutX="109.0" layoutY="147.0" text="Please enter your password or pin to continue" />
-      <PasswordField layoutX="159.0" layoutY="199.0" />
+      <Label layoutX="138.0" layoutY="148.0" text="Please enter your username and password" />
+      <Label layoutX="223.0" layoutY="196.0" text="Username" />
+      <Label layoutX="224.0" layoutY="250.0" text="Password" />
+      <Button fx:id="backButton" layoutX="235.0" layoutY="327.0" mnemonicParsing="false" onAction="#goBack" text="Back to Main Menu" />
    </children>
 </Pane>

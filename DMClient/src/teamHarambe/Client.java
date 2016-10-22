@@ -25,7 +25,7 @@ public class Client {
 		}
 		catch(Exception e)
 		{
-			JOptionPane.showMessageDialog(null, "Please make sure the server is running.", "Unable to pinpoint server", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "No server detected. Please make sure the server is running.", "Server error", JOptionPane.ERROR_MESSAGE);
 		}
 
 		if (serverRunning) {
