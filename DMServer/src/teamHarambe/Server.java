@@ -1,5 +1,7 @@
 package teamHarambe;
 
+import javafx.application.Application;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,8 +19,13 @@ public class Server {
 	
 	public static void main(String[] args) throws IOException {
 		ServerSocket server = new ServerSocket(1234);
-		int numTeams = 0;		
-		
+		int numTeams = 0;
+
+		(new Thread(){
+			public void run(){
+				Application.launch(GUI.ServerMenu.class, args);
+			}
+		}).start();
 		System.out.println("Welcome to first time setup!");
 		System.out.print("Please create a password: ");
 		System.out.println("Your password is " + console.nextLine());

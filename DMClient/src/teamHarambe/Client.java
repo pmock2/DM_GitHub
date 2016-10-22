@@ -29,11 +29,6 @@ public class Client {
 		}
 
 		if (serverRunning) {
-
-			//START INITIAL CHECK FOR SERVER SETUP
-			if (MethodProvider.checkForSetup() == false) {
-				Application.launch(GUI.SuperUserSetup_1.class, args);
-			} else {
 				Application.launch(GUI.Main_3.class, args);
 			}
 
@@ -45,4 +40,3 @@ public class Client {
 			}
 		}
 	}
-}
