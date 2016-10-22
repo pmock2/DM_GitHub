@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="260.0" layoutY="37.0" text="WEEK 10" textFill="#c62b17">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="85.0" text="Match-up" />
+      <Label layoutX="280.0" layoutY="85.0" text="Score" />
+      <Label layoutX="450.0" layoutY="85.0" text="Winner" />
+      <Label layoutX="45.0" layoutY="130.0" text="Team A vs B" />
+      <Label layoutX="45.0" layoutY="165.0" text="Team C vs D" />
+      <Label layoutX="45.0" layoutY="200.0" text="Team E vs F" />
+      <Label layoutX="45.0" layoutY="235.0" text="Team G vs H" />
+      <Label layoutX="45.0" layoutY="270.0" text="Team I vs J" />
+      <Button layoutX="240.0" layoutY="362.0" mnemonicParsing="false" text="Submit Changes" />
+      <TextField layoutX="239.0" layoutY="125.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField layoutX="240.0" layoutY="160.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField layoutX="240.0" layoutY="195.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField layoutX="240.0" layoutY="230.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField layoutX="240.0" layoutY="265.0" prefHeight="27.0" prefWidth="54.0" />
+      <Label layoutX="450.0" layoutY="130.0" text="Label" />
+      <Label layoutX="450.0" layoutY="165.0" text="Label" />
+      <Label layoutX="450.0" layoutY="200.0" text="Label" />
+      <Label layoutX="450.0" layoutY="235.0" text="Label" />
+      <Label layoutX="450.0" layoutY="270.0" text="Label" />
+      <TextField layoutX="316.0" layoutY="125.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField layoutX="316.0" layoutY="160.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField layoutX="316.0" layoutY="195.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField layoutX="316.0" layoutY="230.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField layoutX="316.0" layoutY="265.0" prefHeight="27.0" prefWidth="54.0" />
+      <Label alignment="CENTER" layoutX="296.0" layoutY="130.0" prefHeight="17.0" prefWidth="19.0" text="-" />
+      <Label alignment="CENTER" layoutX="296.0" layoutY="165.0" prefHeight="17.0" prefWidth="19.0" text="-" />
+      <Label alignment="CENTER" layoutX="296.0" layoutY="200.0" prefHeight="17.0" prefWidth="19.0" text="-" />
+      <Label alignment="CENTER" layoutX="296.0" layoutY="235.0" prefHeight="17.0" prefWidth="19.0" text="-" />
+      <Label alignment="CENTER" layoutX="296.0" layoutY="270.0" prefHeight="17.0" prefWidth="19.0" text="-" />
+   </children>
+</Pane>
+
