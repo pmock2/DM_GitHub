@@ -31,6 +31,7 @@ public class ConnectionHandler implements Runnable {
 				System.out.println("Command from client: " + message);
 				if (message.equals("Get_Schedule")) {
 					toClient.println(schedule.toString());
+					toClient.println("End_Schedule");
 					System.out.println("Sent schedule to client");
 				}
 			} catch (SocketException e) {

@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Client {
 
@@ -32,11 +34,16 @@ public class Client {
 				Application.launch(GUI.Main_3.class, args);
 			}
 
-
 			toServer.println("Get_Schedule");
 			System.out.println("Sent request for schedule to server.");
-			while (true) {
-				System.out.println(fromServer.readLine());
+			List<String> lines = new LinkedList<>();
+			String message = fromServer.readLine();
+			while (!message.equals("End_Schedule")) {
+				System.out.println(message);
+				lines.add(message);
+				message = fromServer.readLine();
 			}
+			Schedule schedule = new Schedule(lines);
+			System.out.println("Received schedule");
 		}
 	}
