@@ -1,0 +1,9 @@
+package teamHarambe;
+
+public class Schedule {
+	String[] schedule;
+	
+	public Schedule(String[] lines) {
+		this.schedule = lines;
+	}
+}
