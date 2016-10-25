@@ -20,12 +20,6 @@ public class Server {
 	
 	public static void main(String[] args) throws IOException {
 		ServerSocket server = new ServerSocket(1234);
-
-		(new Thread(){
-			public void run(){
-				Application.launch(GUI.ServerMenu.class, args);
-			}
-		}).start();
 		
 		System.out.println("Welcome to first time setup!");
 		System.out.print("Please create a password: ");

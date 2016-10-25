@@ -1,4 +1,5 @@
 package teamHarambe;
+
 import javafx.application.Application;
 
 import javax.swing.*;
@@ -24,14 +25,24 @@ public class Client {
 			fromServer = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			toServer = new PrintStream(s.getOutputStream());
 			serverRunning = true;
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No server detected. Please make sure the server is running.", "Server error", JOptionPane.ERROR_MESSAGE);
 		}
 
 		if (serverRunning) {
-				Application.launch(GUI.Main_3.class, args);
+
+			if (MethodProvider.checkForSetup()) {
+				(new Thread() {
+					public void run() {
+						Application.launch(GUI.Main_3.class, args);
+					}
+				}).start();
+			} else {
+				(new Thread(){
+					public void run(){
+						Application.launch(GUI.SuperUserSetup_1.class, args);
+					}
+				}).start();
 			}
 
 			toServer.println("Get_Schedule");
@@ -47,3 +58,4 @@ public class Client {
 			System.out.println("Received schedule");
 		}
 	}
+}
