@@ -6,20 +6,19 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+
+import org.json.JSONObject;
 
 public class ConnectionHandler implements Runnable {
 	Socket s;
-	Schedule schedule;
+	JSONObject database;
 	BufferedReader fromClient;
 	PrintStream toClient;
 	
 	//TODO store schedule in database and have ConnectionHandler read from db
-	ConnectionHandler(Socket s, Schedule schedule) throws IOException {
+	ConnectionHandler(Socket s, JSONObject database) throws IOException {
 		this.s = s;
-		this.schedule = schedule;
+		this.database = database;
 		this.fromClient = new BufferedReader(new InputStreamReader(s.getInputStream()));
 		this.toClient = new PrintStream(s.getOutputStream());
 	}
@@ -30,7 +29,7 @@ public class ConnectionHandler implements Runnable {
 				String message = fromClient.readLine();
 				System.out.println("Command from client: " + message);
 				if (message.equals("Get_Schedule")) {
-					toClient.println(schedule.toString());
+					toClient.println(database.getJSONObject("Schedule").toString());
 					toClient.println("End_Schedule");
 					System.out.println("Sent schedule to client");
 				}

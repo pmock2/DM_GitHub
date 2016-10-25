@@ -21,6 +21,17 @@ public class Schedule {
 
 		return s;
 	}
+	
+	public String toJSON() {
+		String s = "{\n";
+		
+		for (int week=0; week < schedule.length; week++) {
+			s += "\t\"Week" + week + "\" : " + schedule[week].toJSON() + (week+1 == schedule.length ? "" : ",") + "\n";
+		}
+		
+		s += "}";
+		return s;
+	}
 
 	private List<Team> shuffleTeams(List<Team> list) {
 		Random rand = new Random();

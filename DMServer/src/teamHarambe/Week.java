@@ -18,4 +18,15 @@ public class Week {
 
         return s;
     }
+    
+    public String toJSON() {
+    	String s = "{\n";
+    	
+    	for (int i=0; i < matches.length; i++) {
+    		s += "\t\"Match" + i + "\" : \"" + matches[i].toString() + "\"" + (i+1 == matches.length ? "" : ",") + "\n";
+    	}
+    	
+    	s += "}";
+    	return s;
+    }
 }

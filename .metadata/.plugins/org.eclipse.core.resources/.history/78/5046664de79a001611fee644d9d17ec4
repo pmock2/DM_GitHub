@@ -1,0 +1,24 @@
+{
+ "Schedule": {
+	"Week0" : {
+	"Match0" : "1 - 5; Refereed by ID # 635405859",
+	"Match1" : "2 - 3; Refereed by ID # 181395290"
+},
+	"Week1" : {
+	"Match0" : "2 - 4; Refereed by ID # 181395290",
+	"Match1" : "3 - 5; Refereed by ID # 224470862"
+},
+	"Week2" : {
+	"Match0" : "3 - 1; Refereed by ID # 224470862",
+	"Match1" : "5 - 4; Refereed by ID # 508698559"
+},
+	"Week3" : {
+	"Match0" : "5 - 2; Refereed by ID # 181395290",
+	"Match1" : "4 - 1; Refereed by ID # 224470862"
+},
+	"Week4" : {
+	"Match0" : "4 - 3; Refereed by ID # 508698559",
+	"Match1" : "1 - 2; Refereed by ID # 224470862"
+}
+}
+}
