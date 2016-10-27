@@ -3,6 +3,8 @@ package teamHarambe;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -15,6 +17,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.security.*;
 
 import org.json.JSONObject;
 
@@ -26,7 +29,7 @@ public class Server {
 	public static List<Referee> referees = new LinkedList<>();
 	public static Schedule schedule;
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 		ServerSocket server = new ServerSocket(1234);
 		loadData();
 		
@@ -39,7 +42,7 @@ public class Server {
 		}
 	}
 	
-	private static void loadData() throws IOException {
+	private static void loadData() throws IOException, NoSuchAlgorithmException {
 		File dbFile = new File(databasePath);
 		if (dbFile.exists()) {
 			JSONObject database = new JSONObject(readFile(databasePath, StandardCharsets.UTF_8));
@@ -190,11 +193,14 @@ public class Server {
 		return password;
 	}
 	
-	private static void generateRefereeList(int numReferees) {
+	private static void generateRefereeList(int numReferees) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		Random r = new Random();
 		
 		for (int i=0; i < numReferees; i ++) {
-			referees.add(new Referee(r.nextInt(999999999) + 111111111, "email", "password", i==0));
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update("password".getBytes(), 0, "password".length());
+			String md5 = new BigInteger(1, md.digest()).toString(16); // Hash value
+			referees.add(new Referee(r.nextInt(999999999) + 111111111, "email", md5, i==0));
 		}
 	}
 	

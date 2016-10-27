@@ -18,7 +18,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigInteger;
 import java.net.Socket;
+import java.security.MessageDigest;
 
 import org.json.JSONObject;
 
@@ -159,9 +161,12 @@ public class Controller {
 	public void attemptLogin(ActionEvent event)
     {
         try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(getLoginPassword().getBytes(), 0, getLoginPassword().length());
+            String md5 = new BigInteger(1, md.digest()).toString(16);
         	Client.toServer.println("Login");
         	Client.toServer.println(getLoginUsername());
-        	Client.toServer.println(getLoginPassword());
+        	Client.toServer.println(md5);
         	String loginResult = Client.fromServer.readLine();
 
         	if (loginResult.equals("Login_Success")) {
