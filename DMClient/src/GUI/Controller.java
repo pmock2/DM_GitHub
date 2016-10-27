@@ -35,7 +35,7 @@ public class Controller {
     public TextField loginText;
     public PasswordField loginPassword;
     public TextArea sTextArea;
-    public Label w1;
+    public Label invalidCredentials;
 
     ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(
             "one", "two", "three", "four", "five"));
@@ -178,8 +178,7 @@ public class Controller {
                 stage.setScene(new Scene(root1));
                 stage.show();
         	} else {
-        		//Prompt for re-enter
-        		System.out.println("Incorrect login info! Please re-enter.");
+                invalidCredentials.setVisible(true);
         		loginText.setText("");
         		loginPassword.setText("");
         	}

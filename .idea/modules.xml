@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DMClient/DMClient.iml" filepath="$PROJECT_DIR$/DMClient/DMClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/DMServer/DMServer.iml" filepath="$PROJECT_DIR$/DMServer/DMServer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Debate Management/Debate Management.iml" filepath="$PROJECT_DIR$/Debate Management/Debate Management.iml" />
     </modules>
   </component>
 </project>
