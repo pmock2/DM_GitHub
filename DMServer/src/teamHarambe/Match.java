@@ -6,18 +6,21 @@ package teamHarambe;
 public class Match {
     Team team1;
     Team team2;
-    int time;
-    double team1Score;
-    double team2Score;
     Referee referee;
+    double team1Score = 0;
+    double team2Score = 0;
+   
 
-    public Match(Team team1, Team team2, double team1Score, double team2Score, Referee referee)
-    {
+    public Match(Team team1, Team team2, Referee referee) {
         this.team1 = team1;
         this.team2 = team2;
-        this.team1Score = team1Score;
-        this.team2Score = team2Score;
         this.referee = referee;
+    }
+    
+    public Match(Team team1, Team team2, Referee referee, double score1, double score2) {
+    	this(team1, team2, referee);
+    	team1Score = score1;
+    	team2Score = score2;
     }
 
     public void setTeam1(Team team1) {
@@ -26,10 +29,6 @@ public class Match {
 
     public void setTeam2(Team team2) {
         this.team2 = team2;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
     }
 
     public double getTeam1Score() {
@@ -64,11 +63,15 @@ public class Match {
         return team2;
     }
 
-    public int getTime() {
-        return time;
-    }
-
     public String toString() {
         return team1.getName() + " - " + team2.getName() + "; Refereed by ID # " + getReferee().getId();
+    }
+    
+    public String toJSON() {
+    	String s = "{\"Team0\" : " + team1.getId() + ", \"Team1\" : " + team2.getId() + ", "
+    			 + "\"Referee\" : " + getReferee().getId() + ", "
+    			 + "\"Score0\" : " + team1Score + ", \"Score1\" : " + team2Score + "}";
+    	
+    	return s;
     }
 }

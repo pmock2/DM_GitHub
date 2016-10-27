@@ -4,15 +4,36 @@
 package teamHarambe;
 
 public class Team {
+	int id;
     String name;
-    double points;
+    double wins;
 
-    public Team(String name) {
+    public Team(int id, String name) {
+    	this.id = id;
         this.name = name;
-        this.points = 0;
+        this.wins = 0;
+    }
+    
+    public Team(int id, String name, double wins) {
+    	this(id, name);
+    	this.wins = wins;
     }
 
     public String getName() {
         return name;
+    }
+    
+    public int getId() {
+    	return id;
+    }
+    
+    public double getWins() {
+    	return wins;
+    }
+    
+    public String toJSON() {
+    	String s = "{\"Name\" : \"" + name + "\", \"Wins\" : " + wins + "}";
+    	
+    	return s;
     }
 }

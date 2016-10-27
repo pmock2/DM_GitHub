@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import teamHarambe.Client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
+
+import org.json.JSONObject;
 
 public class Controller {
 
@@ -34,10 +37,6 @@ public class Controller {
     public TextArea sTextArea;
     public Label w1;
 
-    private Socket s;
-    private BufferedReader fromServer;
-    private PrintStream toServer;
-
     ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(
             "one", "two", "three", "four", "five"));
 
@@ -47,9 +46,6 @@ public class Controller {
         choiceBox.getItems().addAll("one", "two", "three", "four", "five");
         choiceBox.getSelectionModel().select("one");
         //scheduleTextArea.setText("");
-        s = new Socket("127.0.0.1", 1234);
-        fromServer = new BufferedReader(new InputStreamReader(s.getInputStream()));
-        toServer = new PrintStream(s.getOutputStream());
     }
 
     public void checkInitialUser(ActionEvent event)
@@ -106,6 +102,10 @@ public class Controller {
     public void openStandings(ActionEvent event)
     {
         try{
+        	Client.toServer.println("Get_Rankings");
+        	JSONObject rankings = new JSONObject(Client.fromServer.readLine());
+        	System.out.println("Got rankings!");
+        	System.out.println(rankings.toString());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Standings.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -156,12 +156,18 @@ public class Controller {
         }
     }
 
-    public void attemptLogin(ActionEvent event)
+	public void attemptLogin(ActionEvent event)
     {
         try{
-            if (getLoginUsername().equals("Referee") && getLoginPassword().equals("Password"))
-            {
-                Stage stage = (Stage) loginButton.getScene().getWindow();
+        	Client.toServer.println("Login");
+        	Client.toServer.println(getLoginUsername());
+        	Client.toServer.println(getLoginPassword());
+        	String loginResult = Client.fromServer.readLine();
+
+        	if (loginResult.equals("Login_Success")) {
+        		Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());
+        		System.out.println("Client successfully logged in with permission level of " + Client.permissionLevel);
+        		Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
@@ -171,7 +177,12 @@ public class Controller {
                 stage.setTitle("Referee Menu");
                 stage.setScene(new Scene(root1));
                 stage.show();
-            }
+        	} else {
+        		//Prompt for re-enter
+        		System.out.println("Incorrect login info! Please re-enter.");
+        		loginText.setText("");
+        		loginPassword.setText("");
+        	}
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -209,11 +220,11 @@ public class Controller {
 
     public void setScheduleTextArea() throws IOException {
         sTextArea.clear();
-        toServer.println("Get_Schedule");
-        String message = fromServer.readLine();
+        Client.toServer.println("Get_Schedule");
+        String message = Client.fromServer.readLine();
         while (!message.equals("End_Schedule")) {
             sTextArea.appendText(message + "\n");
-            message = fromServer.readLine();
+            message = Client.fromServer.readLine();
         }
     }
 

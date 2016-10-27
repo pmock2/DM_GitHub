@@ -3,6 +3,9 @@ package teamHarambe;
 import javafx.application.Application;
 
 import javax.swing.*;
+
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,8 +18,9 @@ import java.util.List;
 public class Client {
 
 	static Socket s;
-	static BufferedReader fromServer;
-	static PrintStream toServer;
+	public static BufferedReader fromServer;
+	public static PrintStream toServer;
+	public static int permissionLevel = -1;
 	static boolean serverRunning = false;
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
@@ -44,20 +48,6 @@ public class Client {
 					}
 				}).start();
 			}
-
-			/*
-			toServer.println("Get_Schedule");
-			System.out.println("Sent request for schedule to server.");
-			List<String> lines = new LinkedList<>();
-			String message = fromServer.readLine();
-			while (!message.equals("End_Schedule")) {
-				System.out.println(message);
-				lines.add(message);
-				message = fromServer.readLine();
-			}
-			Schedule schedule = new Schedule(lines);
-			System.out.println("Received schedule");
-			*/
 		}
 	}
 }

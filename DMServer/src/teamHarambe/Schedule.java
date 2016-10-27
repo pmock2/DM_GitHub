@@ -11,6 +11,10 @@ public class Schedule {
 
 		generateSchedule(shuffleTeams(teamlist), refereelist);
 	}
+	
+	public Schedule(Week[] weekArray) {
+		schedule = weekArray;
+	}
 
 	public String toString() {
 		String s = "";
@@ -84,14 +88,14 @@ public class Schedule {
 			Match[] weekMatches = new Match[matchesPerWeek];
 			if (evenNumTeams) {
 				tempInt = rand.nextInt(temp.size()) + 0;
-				weekMatches[0] = new Match(pivot, list.get(offset), 0, 0, temp.get(tempInt));
+				weekMatches[0] = new Match(pivot, list.get(offset), temp.get(tempInt));
 				temp.remove(tempInt);
 			}
 			for (int i=1; i < weekMatches.length +  (evenNumTeams ? 0 : 1); i++) {
 				int slot0 = (i+offset);
 				int slot1 = slot0 + (list.size()-(2*i));
 				tempInt = rand.nextInt(temp.size()) + 0;
-				weekMatches[evenNumTeams ? i : i-1] = new Match(list.get(slot0 % list.size()), list.get(slot1 % list.size()), 0, 0, temp.get(tempInt));
+				weekMatches[evenNumTeams ? i : i-1] = new Match(list.get(slot0 % list.size()), list.get(slot1 % list.size()), temp.get(tempInt));
 				temp.remove(tempInt);
 			}
 

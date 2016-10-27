@@ -1,0 +1,33 @@
+{
+	"Schedule" : {
+	"Week0" : {
+	"Match0" : {"Team0" : 4, "Team1" : 3, "Referee" : 828190811, "Score0" : 0.0, "Score1" : 0.0},
+	"Match1" : {"Team0" : 2, "Team1" : 1, "Referee" : 831462835, "Score0" : 0.0, "Score1" : 0.0}
+},
+	"Week1" : {
+	"Match0" : {"Team0" : 2, "Team1" : 0, "Referee" : 828190811, "Score0" : 0.0, "Score1" : 0.0},
+	"Match1" : {"Team0" : 1, "Team1" : 3, "Referee" : 831462835, "Score0" : 0.0, "Score1" : 0.0}
+},
+	"Week2" : {
+	"Match0" : {"Team0" : 1, "Team1" : 4, "Referee" : 507988213, "Score0" : 0.0, "Score1" : 0.0},
+	"Match1" : {"Team0" : 3, "Team1" : 0, "Referee" : 831462835, "Score0" : 0.0, "Score1" : 0.0}
+},
+	"Week3" : {
+	"Match0" : {"Team0" : 3, "Team1" : 2, "Referee" : 831462835, "Score0" : 0.0, "Score1" : 0.0},
+	"Match1" : {"Team0" : 0, "Team1" : 4, "Referee" : 828190811, "Score0" : 0.0, "Score1" : 0.0}
+},
+	"Week4" : {
+	"Match0" : {"Team0" : 0, "Team1" : 1, "Referee" : 507988213, "Score0" : 0.0, "Score1" : 0.0},
+	"Match1" : {"Team0" : 4, "Team1" : 2, "Referee" : 831462835, "Score0" : 0.0, "Score1" : 0.0}
+}
+},
+	"Teams" : {
+		0 : {"Name" : "1", "Wins" : 0.0},
+		4 : {"Name" : "5", "Wins" : 0.0},
+		2 : {"Name" : "3", "Wins" : 0.0},
+		1 : {"Name" : "2", "Wins" : 0.0},
+		3 : {"Name" : "4", "Wins" : 0.0}
+	},
+	"Referees" : {
+	}
+}

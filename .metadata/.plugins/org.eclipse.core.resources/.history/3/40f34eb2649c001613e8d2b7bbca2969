@@ -1,0 +1,40 @@
+package teamHarambe;
+
+import org.json.JSONObject;
+
+public class Week {
+
+    Match[] matches;
+
+
+    public Week(Match[] matches) {
+        this.matches = matches;
+    }
+
+    public String toString() {
+        String s = "";
+
+        for (int i=0; i < matches.length; i++) {
+            s = s + matches[i].toString() + "\n";
+        }
+
+        return s;
+    }
+    
+    public String toJSON() {
+    	String s = "{\n";
+    	
+    	for (int i=0; i < matches.length; i++) {
+    		s += "\t\"Match" + i + "\" : " + matches[i].toJSON() + (i+1 == matches.length ? "" : ",") + "\n";
+    	}
+    	
+    	s += "}";
+    	return s;
+    }
+    
+    public static Match[] parseWeekMatches(JSONObject matchList) {
+    	Match[] matches = {};
+    	
+    	return matches;
+    }
+}

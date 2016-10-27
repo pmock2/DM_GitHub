@@ -13,31 +13,41 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import org.json.JSONObject;
 
 public class Server {
-	static List<Team> teams = new LinkedList<>();
-	static Scanner console = new Scanner(System.in);
-	static Schedule schedule;
+	private static Scanner console = new Scanner(System.in);
+	private static String databasePath = "resources/Database.json";
+	
+	public static List<Team> teams = new LinkedList<>();
+	public static List<Referee> referees = new LinkedList<>();
+	public static Schedule schedule;
 	
 	public static void main(String[] args) throws IOException {
 		ServerSocket server = new ServerSocket(1234);
-		JSONObject database = getDatabase();
+		loadData();
 		
 		System.out.println("Server ready to accept clients.");
 		
 		while (true) {
 			Socket s = server.accept();
-			Runnable connectionHandler = new ConnectionHandler(s, database);
+			Runnable connectionHandler = new ConnectionHandler(s);
 			new Thread(connectionHandler).start();
 		}
-	} 
+	}
 	
-	private static JSONObject getDatabase() throws IOException {
-		File dbFile = new File("resources/Database.json");
-		if (!dbFile.exists()) {
+	private static void loadData() throws IOException {
+		File dbFile = new File(databasePath);
+		if (dbFile.exists()) {
+			JSONObject database = new JSONObject(readFile(databasePath, StandardCharsets.UTF_8));
+			loadTeams(database.getJSONObject("Teams"));
+			loadReferees(database.getJSONObject("Referees"));
+			loadSchedule(database.getJSONObject("Schedule"));
+			System.out.println(schedule.toString());
+		} else {
 			dbFile.createNewFile();
 			
 			System.out.println("Welcome to first time setup!");
@@ -49,21 +59,80 @@ public class Server {
 			
 			System.out.println("How many referees will manage the season?");
 			int numReferees = promptInt(numTeams/2);		
-			List<Referee> referees = generateRefereeList(numReferees);
+			generateRefereeList(numReferees);
 			
 			System.out.println("Enter the season start date.");
 			Calendar startDate = promptDate();
 		
 			schedule = new Schedule(teams, referees);
 			
-			String filePath = dbFile.getPath();
-			String dbString = "{\n \"Schedule\": "+ schedule.toJSON() + "\n}";
-			PrintWriter writer = new PrintWriter(filePath, "UTF-8");
-			writer.println(dbString);
-			writer.close();
+			saveData();
 		}
+	}
+	
+	private static void loadTeams(JSONObject teamList) {
+		String[] teamIds = JSONObject.getNames(teamList);
+		for (int i=0; i < teamIds.length; i ++) {
+			JSONObject teamData = teamList.getJSONObject(teamIds[i]);
+			int teamId = Integer.parseInt(teamIds[i]);
 
-		return new JSONObject(readFile("resources/Database.json", StandardCharsets.UTF_8));
+			teams.add(new Team(
+					teamId, teamData.getString("Name"), teamData.getDouble("Wins")
+			));
+		}
+	}
+	
+	private static void loadReferees(JSONObject refereeList) {
+		String[] refereeIds = JSONObject.getNames(refereeList);
+		for (int i=0; i < refereeIds.length; i ++) {
+			JSONObject refereeData = refereeList.getJSONObject(refereeIds[i]);
+			int refereeId = Integer.parseInt(refereeIds[i]);
+			
+			referees.add(new Referee (
+				refereeId, refereeData.getString("Email"), refereeData.getString("Password"), refereeData.getBoolean("IsSuper")
+			));
+		}
+	}
+	
+	private static void loadSchedule(JSONObject weekList) {
+		String[] weekNames = JSONObject.getNames(weekList);
+		Week[] weekArray = new Week[weekNames.length];
+		
+		for (int i=0; i < weekNames.length; i++) {
+			Match[] matches = Week.parseWeekMatches(weekList.getJSONObject(weekNames[i]));
+			int weekNumber = Integer.parseInt(weekNames[i].replaceAll("\\D+", ""));
+			weekArray[weekNumber] = new Week(matches);
+		}
+		
+		schedule = new Schedule(weekArray);
+	}
+	
+	private static void saveData() throws IOException {
+		PrintWriter writer = new PrintWriter(databasePath, "UTF-8");
+		String dbString = generateDatabaseJSON();
+		writer.println(dbString);
+		writer.close();
+	}
+	
+	private static String generateDatabaseJSON() {
+		String s = "{\n";
+		
+		s += "\t\"Schedule\" : " + schedule.toJSON() + ",\n";
+		
+		s += "\t\"Teams\" : {\n";
+		for (int i=0; i < teams.size(); i++) {
+			s += "\t\t" + teams.get(i).getId() + " : " + teams.get(i).toJSON() + (i+1 == teams.size() ? "" : ",") + "\n";
+		}
+		s += "\t},\n";
+		
+		s += "\t\"Referees\" : {\n";
+		for (int i=0; i < referees.size(); i++) {
+			s += "\t\t" + referees.get(i).getId() + " : " + referees.get(i).toJSON() + (i+1 == referees.size() ? "" : ",") + "\n";
+		}
+		s += "\t}\n";
+		
+		s += "}";
+		return s;
 	}
 
 	private static int promptInt(int minValue) {
@@ -88,7 +157,7 @@ public class Server {
         System.out.println("Please enter " + numTeams + " team names.");
         for (int i = 0; i < numTeams; i++) {
             System.out.print((i + 1) + ". ");
-            teams.add(new Team(console.next()));
+            teams.add(new Team(i, console.next()));
         }
     }
 	
@@ -121,15 +190,12 @@ public class Server {
 		return password;
 	}
 	
-	private static List<Referee> generateRefereeList(int numReferees) {
-		List<Referee> referees = new LinkedList<>();
+	private static void generateRefereeList(int numReferees) {
 		Random r = new Random();
 		
 		for (int i=0; i < numReferees; i ++) {
-			referees.add(new Referee(r.nextInt(999999999) + 111111111, i==0));
+			referees.add(new Referee(r.nextInt(999999999) + 111111111, "email", "password", i==0));
 		}
-		
-		return referees;
 	}
 	
 	private static String readFile(String path, Charset encoding) throws IOException {
@@ -137,5 +203,44 @@ public class Server {
 		return new String(encoded, encoding);
 	}
 
-
+	public static JSONObject rankingsFromSchedule() {
+		Team[] sortedTeams = new Team[teams.size()];
+		
+		for (int i=0; i < sortedTeams.length; i++) {
+			int insertAt = 0;
+			for (int j=0; j < i; j++) {
+				if (sortedTeams[j].getWins() > teams.get(i).getWins()) {
+					insertAt++;
+				} else {
+					break;
+				}
+			}
+			
+			//Shift array over
+			for (int j=sortedTeams.length-1; j > insertAt; j--) {
+				sortedTeams[j] = sortedTeams[j-1];
+			}
+			sortedTeams[insertAt] = teams.get(i);
+		}
+		
+		JSONObject rankings = new JSONObject();
+		
+		int ranking = 1;
+		double lastScore = sortedTeams[0].getWins();
+		for (int i=0; i < sortedTeams.length; i++) {
+			double thisScore = sortedTeams[i].getWins();
+			if (thisScore != lastScore) {
+				lastScore = thisScore;
+				ranking = i+1;
+			}
+			
+			JSONObject data = new JSONObject();
+			data.put("Name", sortedTeams[i].getName());
+			data.put("Wins", sortedTeams[i].getWins());
+			data.put("Rank", ranking);
+			rankings.put(""+i, data);
+		}
+		
+		return rankings;
+	}
 }
