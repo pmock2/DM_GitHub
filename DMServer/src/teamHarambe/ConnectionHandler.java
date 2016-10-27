@@ -29,7 +29,7 @@ public class ConnectionHandler implements Runnable {
 				String message = fromClient.readLine();
 				System.out.println("Command from client: " + message);
 				if (message.equals("Get_Schedule")) {
-					toClient.println(database.getJSONObject("Schedule").toString());
+					toClient.println(database.getJSONObject("Schedule").toString(1));
 					toClient.println("End_Schedule");
 					System.out.println("Sent schedule to client");
 				}

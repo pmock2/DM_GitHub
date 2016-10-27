@@ -45,6 +45,7 @@ public class Client {
 				}).start();
 			}
 
+			/*
 			toServer.println("Get_Schedule");
 			System.out.println("Sent request for schedule to server.");
 			List<String> lines = new LinkedList<>();
@@ -56,6 +57,7 @@ public class Client {
 			}
 			Schedule schedule = new Schedule(lines);
 			System.out.println("Received schedule");
+			*/
 		}
 	}
 }

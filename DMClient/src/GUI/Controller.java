@@ -32,6 +32,7 @@ public class Controller {
     public TextField loginText;
     public PasswordField loginPassword;
     public TextArea sTextArea;
+    public Label w1;
 
     private Socket s;
     private BufferedReader fromServer;
@@ -149,7 +150,6 @@ public class Controller {
             stage.setTitle("Schedule");
             stage.setScene(new Scene(root1));
             stage.show();
-            //setScheduleTextArea();
         }
         catch (Exception e) {
             e.printStackTrace();
