@@ -28,6 +28,7 @@ public class ConnectionHandler implements Runnable {
 			try {
 				String message = fromClient.readLine();
 				System.out.println("Command from client: " + message);
+
 				switch(message)
 				{
 					case "Get_Schedule":
@@ -35,6 +36,7 @@ public class ConnectionHandler implements Runnable {
 						toClient.println(Server.schedule.toJSON());
 						toClient.println("End_Schedule");
 						System.out.println("Sent schedule to client");
+						break;
 					}
 					case "Login":
 					{
@@ -50,10 +52,12 @@ public class ConnectionHandler implements Runnable {
 						} else {
 							toClient.println("Login_Fail");
 						}
+						break;
 					}
 					case "Get_Rankings":
 					{
 						toClient.println(Server.rankingsFromSchedule().toString());
+						break;
 					}
 					case "Does_DB_Exist":
 					{
@@ -65,10 +69,10 @@ public class ConnectionHandler implements Runnable {
 						{
 							toClient.println("false");
 						}
+						break;
 					}
-
-
 				}
+
 			} catch (SocketException e) {
 				System.out.println("Client disconnected.");
 				break;
