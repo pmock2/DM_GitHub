@@ -1,9 +1,6 @@
 package teamHarambe;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -13,6 +10,8 @@ public class ConnectionHandler implements Runnable {
 	Socket s;
 	BufferedReader fromClient;
 	PrintStream toClient;
+	private static String databasePath = "resources/Database.json";
+	File dbFile = new File(databasePath);
 	
 	//TODO store schedule in database and have ConnectionHandler read from db
 	ConnectionHandler(Socket s) throws IOException {
@@ -29,25 +28,46 @@ public class ConnectionHandler implements Runnable {
 			try {
 				String message = fromClient.readLine();
 				System.out.println("Command from client: " + message);
-				if (message.equals("Get_Schedule")) {
-					toClient.println(Server.schedule.toJSON());
-					toClient.println("End_Schedule");
-					System.out.println("Sent schedule to client");
-				} else if (message.equals("Login")) {
-					String email = fromClient.readLine();
-					String password = fromClient.readLine();
-					Referee loginAs = refereeFromEmail(email);
-					
-					if (loginAs != null && loginAs.verifyPassword(password)) {
-						userAccount = loginAs;
-						permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
-						toClient.println("Login_Success");
-						toClient.println(permissionLevel);
-					} else {
-						toClient.println("Login_Fail");
+				switch(message)
+				{
+					case "Get_Schedule":
+					{
+						toClient.println(Server.schedule.toJSON());
+						toClient.println("End_Schedule");
+						System.out.println("Sent schedule to client");
 					}
-				} else if (message.equals("Get_Rankings")) {
-					toClient.println(Server.rankingsFromSchedule().toString());
+					case "Login":
+					{
+						String email = fromClient.readLine();
+						String password = fromClient.readLine();
+						Referee loginAs = refereeFromEmail(email);
+
+						if (loginAs != null && loginAs.verifyPassword(password)) {
+							userAccount = loginAs;
+							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
+							toClient.println("Login_Success");
+							toClient.println(permissionLevel);
+						} else {
+							toClient.println("Login_Fail");
+						}
+					}
+					case "Get_Rankings":
+					{
+						toClient.println(Server.rankingsFromSchedule().toString());
+					}
+					case "Does_DB_Exist":
+					{
+						if (dbFile.exists())
+						{
+							toClient.println("true");
+						}
+						else
+						{
+							toClient.println("false");
+						}
+					}
+
+
 				}
 			} catch (SocketException e) {
 				System.out.println("Client disconnected.");

@@ -33,8 +33,8 @@ public class Client {
 			JOptionPane.showMessageDialog(null, "No server detected. Please make sure the server is running.", "Server error", JOptionPane.ERROR_MESSAGE);
 		}
 
-		if (serverRunning) {
-
+		if (serverRunning)
+		{
 			if (MethodProvider.checkForSetup()) {
 				(new Thread() {
 					public void run() {
