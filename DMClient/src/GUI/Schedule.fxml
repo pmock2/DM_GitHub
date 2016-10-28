@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ScheduleController">
    <children>
       <Label layoutX="252.0" text="Schedule" textFill="RED">
          <font>
@@ -14,6 +13,5 @@
          </font>
       </Label>
       <TextArea fx:id="sTextArea" editable="false" layoutX="131.0" layoutY="79.0" prefHeight="243.0" prefWidth="338.0" />
-      <Button fx:id="showButton" layoutX="257.0" layoutY="46.0" mnemonicParsing="false" onAction="#showSchedule" text="Get Schedule" />
    </children>
 </Pane>

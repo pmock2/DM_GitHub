@@ -2,9 +2,11 @@ package GUI;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,11 +22,13 @@ import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.net.Socket;
+import java.net.URL;
 import java.security.MessageDigest;
+import java.util.ResourceBundle;
 
 import org.json.JSONObject;
 
-public class Controller {
+public class Controller implements Initializable {
 
     @FXML
     private ChoiceBox referee;
@@ -38,16 +42,9 @@ public class Controller {
     public PasswordField loginPassword;
     public TextArea sTextArea;
     public Label invalidCredentials;
+    public ChoiceBox cb;
 
-    ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(
-            "one", "two", "three", "four", "five"));
-
-
-    public void initialize() throws IOException {
-        choiceBox.getItems().removeAll(choiceBox.getItems());
-        choiceBox.getItems().addAll("one", "two", "three", "four", "five");
-        choiceBox.getSelectionModel().select("one");
-        //scheduleTextArea.setText("");
+    public void initialize(URL url, ResourceBundle rb) {
     }
 
     public void checkInitialUser(ActionEvent event)
@@ -56,14 +53,15 @@ public class Controller {
         try{
             Stage stage = (Stage) beginButton.getScene().getWindow();
             stage.hide();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddTeams.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.DECORATED);
-            stage.setTitle("Main Menu");
+            stage.setTitle("Enter Team Amount");
             stage.setScene(new Scene(root1));
             stage.show();
+            //setData();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -83,16 +81,6 @@ public class Controller {
             stage.setTitle("Login");
             stage.setScene(new Scene(root1));
             stage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showSchedule(ActionEvent event)
-    {
-        try{
-            setScheduleTextArea();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -220,16 +208,6 @@ public class Controller {
     public String getLoginPassword()
     {
         return loginPassword.getText();
-    }
-
-    public void setScheduleTextArea() throws IOException {
-        sTextArea.clear();
-        Client.toServer.println("Get_Schedule");
-        String message = Client.fromServer.readLine();
-        while (!message.equals("End_Schedule")) {
-            sTextArea.appendText(message + "\n");
-            message = Client.fromServer.readLine();
-        }
     }
 
 }
