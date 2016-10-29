@@ -31,7 +31,8 @@ public class Server {
 	
 	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 		ServerSocket server = new ServerSocket(1234);
-		loadData();
+		//loadData();
+		generateRefereeList(10);
 		
 		System.out.println("Server ready to accept clients.");
 		
@@ -110,7 +111,7 @@ public class Server {
 		schedule = new Schedule(weekArray);
 	}
 	
-	private static void saveData() throws IOException {
+	public static void saveData() throws IOException {
 		PrintWriter writer = new PrintWriter(databasePath, "UTF-8");
 		String dbString = generateDatabaseJSON();
 		writer.println(dbString);

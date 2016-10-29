@@ -2,20 +2,39 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ChoiceBoxController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddTeamsController">
    <children>
-      <Label layoutX="43.0" layoutY="25.0" text="How many teams will play this season?">
+      <Label layoutX="261.0" layoutY="31.0" text="Please Enter Season Information">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Separator layoutX="-5.0" layoutY="58.0" prefHeight="12.0" prefWidth="401.0" />
-      <ChoiceBox fx:id="cb" layoutX="169.0" layoutY="96.0" prefHeight="25.0" prefWidth="57.0" />
-      <Button layoutX="171.0" layoutY="179.0" mnemonicParsing="false" text="Submit" />
+      <Separator layoutX="-5.0" layoutY="58.0" prefHeight="12.0" prefWidth="784.0" />
+      <ChoiceBox fx:id="cb" layoutX="102.0" layoutY="93.0" prefHeight="25.0" prefWidth="57.0" />
+      <Button fx:id="submit" layoutX="362.0" layoutY="339.0" mnemonicParsing="false" onAction="#attemptSubmit" text="Submit" />
+      <Label layoutX="83.0" layoutY="70.0" text="Amount of Teams" />
+      <DatePicker fx:id="dpDate" layoutX="43.0" layoutY="238.0" />
+      <Label layoutX="83.0" layoutY="215.0" text="Season Start Date" />
+      <TextField fx:id="t1" layoutX="368.0" layoutY="93.0" />
+      <TextField fx:id="t3" layoutX="368.0" layoutY="138.0" visible="false" />
+      <TextField fx:id="t5" layoutX="368.0" layoutY="190.0" visible="false" />
+      <TextField fx:id="t7" layoutX="368.0" layoutY="238.0" visible="false" />
+      <TextField fx:id="t9" layoutX="368.0" layoutY="282.0" visible="false" />
+      <TextField fx:id="t2" layoutX="576.0" layoutY="93.0" />
+      <TextField fx:id="t4" layoutX="576.0" layoutY="138.0" visible="false" />
+      <TextField fx:id="t6" layoutX="576.0" layoutY="190.0" visible="false" />
+      <TextField fx:id="t8" layoutX="576.0" layoutY="238.0" visible="false" />
+      <TextField fx:id="t10" layoutX="576.0" layoutY="282.0" visible="false" />
+      <Label layoutX="506.0" layoutY="70.0" text="Team Names" />
+      <Separator layoutX="5.0" layoutY="319.0" prefHeight="2.0" prefWidth="777.0" />
+      <Separator layoutX="291.0" layoutY="63.0" orientation="VERTICAL" prefHeight="256.0" prefWidth="7.0" />
+      <Separator layoutX="-6.0" layoutY="172.0" prefHeight="12.0" prefWidth="300.0" />
    </children>
 </Pane>

@@ -3,6 +3,7 @@ package teamHarambe;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Calendar;
 
 import org.json.JSONObject;
 
@@ -31,6 +32,33 @@ public class ConnectionHandler implements Runnable {
 
 				switch(message)
 				{
+					case "Create_DB":
+					{
+						if (dbFile.exists())
+						{
+							dbFile.delete();
+						}
+						String numTeams = fromClient.readLine();
+						for (int i = 0; i < Integer.parseInt(numTeams); i++)
+						{
+							Server.teams.add(new Team(i, fromClient.readLine()));
+						}
+						String dateYear = fromClient.readLine();
+						String dateMonth = fromClient.readLine();
+						String dateDay = fromClient.readLine();
+						Calendar selectedDate = Calendar.getInstance();
+						selectedDate.set(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+						Server.schedule = new Schedule(Server.teams, Server.referees);
+						Server.saveData();
+						if (dbFile.exists())
+						{
+							toClient.println("Success");
+						}
+						else
+						{
+							toClient.println("Failure");
+						}
+					}
 					case "Get_Schedule":
 					{
 						toClient.println(Server.schedule.toJSON());
