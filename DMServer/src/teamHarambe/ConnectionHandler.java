@@ -58,6 +58,7 @@ public class ConnectionHandler implements Runnable {
 						{
 							toClient.println("Failure");
 						}
+						break;
 					}
 					case "Get_Schedule":
 					{
