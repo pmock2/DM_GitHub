@@ -22,15 +22,15 @@
       <Label layoutX="83.0" layoutY="70.0" text="Amount of Teams" />
       <DatePicker fx:id="dpDate" layoutX="43.0" layoutY="238.0" />
       <Label layoutX="83.0" layoutY="215.0" text="Season Start Date" />
-      <TextField fx:id="t1" layoutX="368.0" layoutY="93.0" />
+      <TextField fx:id="t1" layoutX="368.0" layoutY="93.0" visible="false" />
+      <TextField fx:id="t2" layoutX="576.0" layoutY="93.0" visible="false" />
       <TextField fx:id="t3" layoutX="368.0" layoutY="138.0" visible="false" />
-      <TextField fx:id="t5" layoutX="368.0" layoutY="190.0" visible="false" />
-      <TextField fx:id="t7" layoutX="368.0" layoutY="238.0" visible="false" />
-      <TextField fx:id="t9" layoutX="368.0" layoutY="282.0" visible="false" />
-      <TextField fx:id="t2" layoutX="576.0" layoutY="93.0" />
       <TextField fx:id="t4" layoutX="576.0" layoutY="138.0" visible="false" />
+      <TextField fx:id="t5" layoutX="368.0" layoutY="190.0" visible="false" />
       <TextField fx:id="t6" layoutX="576.0" layoutY="190.0" visible="false" />
+      <TextField fx:id="t7" layoutX="368.0" layoutY="238.0" visible="false" />
       <TextField fx:id="t8" layoutX="576.0" layoutY="238.0" visible="false" />
+      <TextField fx:id="t9" layoutX="368.0" layoutY="282.0" visible="false" />
       <TextField fx:id="t10" layoutX="576.0" layoutY="282.0" visible="false" />
       <Label layoutX="506.0" layoutY="70.0" text="Team Names" />
       <Separator layoutX="5.0" layoutY="319.0" prefHeight="2.0" prefWidth="777.0" />

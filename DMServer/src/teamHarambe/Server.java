@@ -31,7 +31,7 @@ public class Server {
 	
 	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 		ServerSocket server = new ServerSocket(1234);
-		//loadData();
+		loadData();
 		generateRefereeList(10);
 		
 		System.out.println("Server ready to accept clients.");
@@ -51,26 +51,6 @@ public class Server {
 			loadReferees(database.getJSONObject("Referees"));
 			loadSchedule(database.getJSONObject("Schedule"));
 			System.out.println(schedule.toString());
-		} else {
-			dbFile.createNewFile();
-			
-			System.out.println("Welcome to first time setup!");
-			String password = promptInitialPassword();
-			
-			System.out.println("How many teams will play in the debate season?");
-			int numTeams = promptInt(2);
-			promptTeams(numTeams);
-			
-			System.out.println("How many referees will manage the season?");
-			int numReferees = promptInt(numTeams/2);		
-			generateRefereeList(numReferees);
-			
-			System.out.println("Enter the season start date.");
-			Calendar startDate = promptDate();
-		
-			schedule = new Schedule(teams, referees);
-			
-			saveData();
 		}
 	}
 	
