@@ -25,10 +25,10 @@ public class Week {
     	String s = "{\n";
     	
     	for (int i=0; i < matches.length; i++) {
-    		s += "\t\t\t\"Match" + i + "\" : " + matches[i].toJSON() + (i+1 == matches.length ? "" : ",") + "\n";
+    		s += "\t\"Match" + i + "\" : " + matches[i].toJSON() + (i+1 == matches.length ? "" : ",") + "\n";
     	}
     	
-    	s += "\t\t}";
+    	s += "}";
     	return s;
     }
     

@@ -30,10 +30,10 @@ public class Schedule {
 		String s = "{\n";
 		
 		for (int week=0; week < schedule.length; week++) {
-			s += "\t\t\"Week" + week + "\" : " + schedule[week].toJSON() + (week+1 == schedule.length ? "" : ",") + "\n";
+			s += "\t\"Week" + week + "\" : " + schedule[week].toJSON() + (week+1 == schedule.length ? "" : ",") + "\n";
 		}
 		
-		s += "\t}";
+		s += "}";
 		return s;
 	}
 
