@@ -880,15 +880,98 @@ public class AddTeamsController implements Initializable {
 
     private boolean checkData()
     {
-        if (Integer.parseInt(cb.getValue()) > Integer.parseInt(ref.getValue()))
-        {
-            JOptionPane.showMessageDialog(null, "You must have one referee per team.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
+        try {
+            if (Integer.parseInt(cb.getValue()) > Integer.parseInt(ref.getValue())) {
+                JOptionPane.showMessageDialog(null, "You must have one referee per team.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         }
+        catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "You must Select a number of teams and a number of referees", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         switch(cb.getValue())
         {
             case "2":
             {
+                if (t1.getText().equals("") || t2.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "3":
+            {
+                if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "4":
+            {
+                if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "5":
+            {
+                if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "6":
+            {
+                if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "7":
+            {
+                if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals("") || t7.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "8":
+            {
+                if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals("") || t7.getText().equals("") || t8.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "9":
+            {
+                if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals("") || t7.getText().equals("") || t8.getText().equals("") || t9.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "10":
+            {
+                if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals("") || t7.getText().equals("") || t8.getText().equals("") || t9.getText().equals("") || t10.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
                 break;
             }
         }
