@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -9,32 +10,70 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddTeamsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddTeamsController">
    <children>
-      <Label layoutX="261.0" layoutY="31.0" text="Please Enter Season Information">
+      <Label layoutX="352.0" layoutY="31.0" text="Please Enter Season Information">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Separator layoutX="-5.0" layoutY="58.0" prefHeight="12.0" prefWidth="784.0" />
+      <Separator layoutX="-5.0" layoutY="58.0" prefHeight="12.0" prefWidth="966.0" />
       <ChoiceBox fx:id="cb" layoutX="102.0" layoutY="93.0" prefHeight="25.0" prefWidth="57.0" />
-      <Button fx:id="submit" layoutX="362.0" layoutY="339.0" mnemonicParsing="false" onAction="#attemptSubmit" text="Submit" />
+      <Button fx:id="submit" layoutX="441.0" layoutY="509.0" mnemonicParsing="false" onAction="#attemptSubmit" text="Submit" />
       <Label layoutX="83.0" layoutY="70.0" text="Amount of Teams" />
-      <DatePicker fx:id="dpDate" layoutX="43.0" layoutY="238.0" />
-      <Label layoutX="83.0" layoutY="215.0" text="Season Start Date" />
-      <TextField fx:id="t1" layoutX="368.0" layoutY="93.0" visible="false" />
-      <TextField fx:id="t2" layoutX="576.0" layoutY="93.0" visible="false" />
-      <TextField fx:id="t3" layoutX="368.0" layoutY="138.0" visible="false" />
-      <TextField fx:id="t4" layoutX="576.0" layoutY="138.0" visible="false" />
-      <TextField fx:id="t5" layoutX="368.0" layoutY="190.0" visible="false" />
-      <TextField fx:id="t6" layoutX="576.0" layoutY="190.0" visible="false" />
-      <TextField fx:id="t7" layoutX="368.0" layoutY="238.0" visible="false" />
-      <TextField fx:id="t8" layoutX="576.0" layoutY="238.0" visible="false" />
-      <TextField fx:id="t9" layoutX="368.0" layoutY="282.0" visible="false" />
-      <TextField fx:id="t10" layoutX="576.0" layoutY="282.0" visible="false" />
-      <Label layoutX="506.0" layoutY="70.0" text="Team Names" />
-      <Separator layoutX="5.0" layoutY="319.0" prefHeight="2.0" prefWidth="777.0" />
-      <Separator layoutX="291.0" layoutY="63.0" orientation="VERTICAL" prefHeight="256.0" prefWidth="7.0" />
+      <DatePicker fx:id="dpDate" layoutX="43.0" layoutY="364.0" />
+      <Label layoutX="84.0" layoutY="337.0" text="Season Start Date" />
+      <Label fx:id="l1" layoutX="359.0" layoutY="79.0" text="Team Names" />
+      <Label layoutX="77.0" layoutY="207.0" text="Amount of Referees" />
+      <Label layoutX="649.0" layoutY="79.0" text="Referee Information" />
+      <ChoiceBox fx:id="ref" layoutX="102.0" layoutY="230.0" prefHeight="25.0" prefWidth="57.0" />
+      <TextField fx:id="t1" layoutX="319.0" layoutY="106.0" visible="false" />
+      <TextField fx:id="t2" layoutX="319.0" layoutY="138.0" visible="false" />
+      <TextField fx:id="t3" layoutX="319.0" layoutY="172.0" visible="false" />
+      <TextField fx:id="t4" layoutX="319.0" layoutY="203.0" visible="false" />
+      <TextField fx:id="t5" layoutX="319.0" layoutY="238.0" visible="false" />
+      <TextField fx:id="t6" layoutX="319.0" layoutY="270.0" visible="false" />
+      <TextField fx:id="t7" layoutX="319.0" layoutY="305.0" visible="false" />
+      <TextField fx:id="t8" layoutX="319.0" layoutY="339.0" visible="false" />
+      <TextField fx:id="t9" layoutX="319.0" layoutY="376.0" visible="false" />
+      <TextField fx:id="t10" layoutX="319.0" layoutY="412.0" visible="false" />
+      <TextField fx:id="e1" layoutX="496.0" layoutY="138.0" visible="false" />
+      <TextField fx:id="p1" layoutX="680.0" layoutY="138.0" visible="false" />
+      <CheckBox fx:id="c1" layoutX="881.0" layoutY="142.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e2" layoutX="496.0" layoutY="172.0" visible="false" />
+      <TextField fx:id="p2" layoutX="680.0" layoutY="172.0" visible="false" />
+      <CheckBox fx:id="c2" layoutX="881.0" layoutY="176.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e3" layoutX="496.0" layoutY="203.0" visible="false" />
+      <TextField fx:id="p3" layoutX="679.0" layoutY="203.0" visible="false" />
+      <CheckBox fx:id="c3" layoutX="881.0" layoutY="207.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e4" layoutX="496.0" layoutY="238.0" visible="false" />
+      <TextField fx:id="p4" layoutX="679.0" layoutY="238.0" visible="false" />
+      <CheckBox fx:id="c4" layoutX="881.0" layoutY="242.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e5" layoutX="496.0" layoutY="270.0" visible="false" />
+      <TextField fx:id="p5" layoutX="679.0" layoutY="270.0" visible="false" />
+      <CheckBox fx:id="c5" layoutX="881.0" layoutY="274.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e6" layoutX="496.0" layoutY="305.0" visible="false" />
+      <TextField fx:id="p6" layoutX="679.0" layoutY="305.0" visible="false" />
+      <CheckBox fx:id="c6" layoutX="881.0" layoutY="309.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e7" layoutX="497.0" layoutY="339.0" visible="false" />
+      <TextField fx:id="p7" layoutX="680.0" layoutY="339.0" visible="false" />
+      <CheckBox fx:id="c7" layoutX="882.0" layoutY="343.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e8" layoutX="497.0" layoutY="377.0" visible="false" />
+      <TextField fx:id="p8" layoutX="680.0" layoutY="377.0" visible="false" />
+      <CheckBox fx:id="c8" layoutX="882.0" layoutY="381.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e9" layoutX="497.0" layoutY="412.0" visible="false" />
+      <TextField fx:id="p9" layoutX="680.0" layoutY="412.0" visible="false" />
+      <CheckBox fx:id="c9" layoutX="882.0" layoutY="416.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e10" layoutX="497.0" layoutY="446.0" visible="false" />
+      <TextField fx:id="p10" layoutX="680.0" layoutY="446.0" visible="false" />
+      <CheckBox fx:id="c10" layoutX="882.0" layoutY="450.0" mnemonicParsing="false" visible="false" />
+      <Separator layoutX="-6.0" layoutY="311.0" prefHeight="12.0" prefWidth="300.0" />
+      <Separator layoutX="289.0" layoutY="63.0" orientation="VERTICAL" prefHeight="421.0" prefWidth="9.0" />
       <Separator layoutX="-6.0" layoutY="172.0" prefHeight="12.0" prefWidth="300.0" />
+      <Separator layoutX="481.0" layoutY="63.0" orientation="VERTICAL" prefHeight="421.0" prefWidth="9.0" />
+      <Separator layoutX="-5.0" layoutY="478.0" prefHeight="12.0" prefWidth="966.0" />
+      <Label fx:id="l2" layoutX="554.0" layoutY="110.0" text="E-Mail" visible="false" />
+      <Label fx:id="l3" layoutX="729.0" layoutY="110.0" text="Password" visible="false" />
+      <Label fx:id="l4" layoutX="866.0" layoutY="110.0" text="Super Ref" visible="false" />
    </children>
 </Pane>

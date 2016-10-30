@@ -115,7 +115,8 @@ public class ConnectionHandler implements Runnable {
 						toClient.println("false");
 						break;
 					}
-					case "Get_RefereedMatches": {
+					case "Get_RefereedMatches":
+						{
 						Calendar today = Calendar.getInstance();
 						List<Match> seasonMatches = Server.schedule.getMatches();
 						JSONObject jsonMatches = new JSONObject();

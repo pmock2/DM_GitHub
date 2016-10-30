@@ -16,7 +16,7 @@ public class AddTeams extends Application {
         primaryStage.setTitle("Add Teams");
         primaryStage.setScene(new Scene(root, 600, 375));
         primaryStage.show();
-        
+
     }
 
 
