@@ -8,9 +8,6 @@ import javafx.stage.Stage;
 import teamHarambe.Client;
 
 import javax.swing.*;
-
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,14 +40,10 @@ public class ScheduleController implements Initializable {
 
         }
         else {
-        	String scheduleString = "";
             while (!message.equals("End_Schedule")) {
                 sTextArea.appendText(message + "\n");
-                scheduleString += message;
                 message = Client.fromServer.readLine();
             }
-            
-            JSONObject schedule = new JSONObject(scheduleString);
         }
     }
 }
