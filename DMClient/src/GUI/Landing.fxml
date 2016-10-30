@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="82.0" fitWidth="88.0" layoutX="177.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../resources/blue-question.png" />
+            <Image url="@blue-question.png" />
          </image></ImageView>
       <Label layoutX="154.0" layoutY="209.0" text="No Schedule Found">
          <font>
