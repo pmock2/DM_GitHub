@@ -1,26 +1,28 @@
 package teamHarambe;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 public class Schedule {
-	Week[] schedule;
+	Calendar startDate;
+	List<Match> matches = new LinkedList<>();
 
-	public Schedule(List<Team> teamlist, List<Referee> refereelist) {
-
+	public Schedule(List<Team> teamlist, List<Referee> refereelist, Calendar startDate) {
+		this.startDate = startDate;
 		generateSchedule(shuffleTeams(teamlist), refereelist);
 	}
 	
-	public Schedule(Week[] weekArray) {
-		schedule = weekArray;
+	public Schedule(List<Match> matches) {
+		this.matches = matches;
 	}
 
 	public String toString() {
 		String s = "";
 
-		for (int week=0; week < schedule.length; week++) {
-			s += "Week "+(week+1)+":\n" + schedule[week].toString() + "\n";
+		for (int i=0; i < matches.size(); i++) {
+			s += matches.get(i).toString() + "\n";
 		}
 
 		return s;
@@ -29,12 +31,17 @@ public class Schedule {
 	public String toJSON() {
 		String s = "{\n";
 		
-		for (int week=0; week < schedule.length; week++) {
-			s += "\t\t\"Week" + week + "\" : " + schedule[week].toJSON() + (week+1 == schedule.length ? "" : ",") + "\n";
+		for (int i=0; i < matches.size(); i++) {
+			//s += "\t\t\"Week" + week + "\" : " + schedule[week].toJSON() + (week+1 == schedule.length ? "" : ",") + "\n";
+			s += "\t\t" + matches.get(i).getId() + " : " + matches.get(i).toJSON() + (i+1 == matches.size() ? "" : ",") + "\n";
 		}
 		
 		s += "\t}";
 		return s;
+	}
+	
+	public List<Match> getMatches() {
+		return matches;
 	}
 
 	private List<Team> shuffleTeams(List<Team> list) {
@@ -48,6 +55,17 @@ public class Schedule {
 		}
 
 		return list;
+	}
+	
+	long msInWeek = 1000 * 60 * 60 * 24 * 7;
+	private Calendar getDateFromWeek(int weekInt) {
+		long week = (long)weekInt;
+		long startMs = startDate.getTimeInMillis();
+		long newMs = startMs + (msInWeek * week);
+		Calendar newDate = Calendar.getInstance();
+		newDate.setTimeInMillis(newMs);
+		
+		return newDate;
 	}
 
 	/*
@@ -65,8 +83,9 @@ public class Schedule {
 	 */
 	private void generateSchedule(List<Team> list, List<Referee> Rlist) {
 		Random rand = new Random();
-		Week[] week; Team pivot = null;
+		Team pivot = null;
 		boolean evenNumTeams = list.size() % 2 == 0;
+		int numWeeks = list.size() - (evenNumTeams ? 1 : 0);
 		int matchesPerWeek = list.size()/2;
 		List<Referee> temp;
 		temp = (List)((LinkedList)Rlist).clone();
@@ -76,32 +95,28 @@ public class Schedule {
 			pivot = list.get(0);
 			list = list.subList(1, list.size());
 		}
-		week = new Week[list.size()];
 
-		for (int offset=0; offset < week.length; offset++) {
+		for (int offset=0; offset < numWeeks; offset++) {
+			Calendar weekDate = getDateFromWeek(offset);
 			if (temp.size() > 0)
 			{
 				temp.clear();
 			}
 			temp = (List)((LinkedList)Rlist).clone();
 			int tempInt;
-			Match[] weekMatches = new Match[matchesPerWeek];
+
 			if (evenNumTeams) {
 				tempInt = rand.nextInt(temp.size()) + 0;
-				weekMatches[0] = new Match(pivot, list.get(offset), temp.get(tempInt));
+				matches.add(new Match(matches.size(), pivot, list.get(offset), temp.get(tempInt), weekDate));
 				temp.remove(tempInt);
 			}
-			for (int i=1; i < weekMatches.length +  (evenNumTeams ? 0 : 1); i++) {
+			for (int i=1; i < matchesPerWeek + (evenNumTeams ? 0 : 1); i++) {
 				int slot0 = (i+offset);
 				int slot1 = slot0 + (list.size()-(2*i));
 				tempInt = rand.nextInt(temp.size()) + 0;
-				weekMatches[evenNumTeams ? i : i-1] = new Match(list.get(slot0 % list.size()), list.get(slot1 % list.size()), temp.get(tempInt));
+				matches.add(new Match(matches.size(), list.get(slot0 % list.size()), list.get(slot1 % list.size()), temp.get(tempInt), weekDate));
 				temp.remove(tempInt);
 			}
-
-			week[offset] = new Week(weekMatches);
 		}
-
-		this.schedule = week;
 	}
 }

@@ -28,12 +28,12 @@ public class Server {
 	public static List<Team> teams = new LinkedList<>();
 	public static List<Referee> referees = new LinkedList<>();
 	public static Schedule schedule;
-	
+
 	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 		ServerSocket server = new ServerSocket(1234);
 		loadData();
 		generateRefereeList(10);
-		
+
 		System.out.println("Server ready to accept clients.");
 		
 		while (true) {
@@ -78,17 +78,16 @@ public class Server {
 		}
 	}
 	
-	private static void loadSchedule(JSONObject weekList) {
-		String[] weekNames = JSONObject.getNames(weekList);
-		Week[] weekArray = new Week[weekNames.length];
+	private static void loadSchedule(JSONObject matchList) {
+		String[] matchIds = JSONObject.getNames(matchList);
+		List<Match> matches = new LinkedList<>();
 		
-		for (int i=0; i < weekNames.length; i++) {
-			Match[] matches = Week.parseWeekMatches(weekList.getJSONObject(weekNames[i]));
-			int weekNumber = Integer.parseInt(weekNames[i].replaceAll("\\D+", ""));
-			weekArray[weekNumber] = new Week(matches);
+		for (int i=0; i < matchIds.length; i++) {
+			int matchId = Integer.parseInt(matchIds[i]);
+			matches.add(new Match(matchId, matchList.getJSONObject(matchIds[i])));
 		}
 		
-		schedule = new Schedule(weekArray);
+		schedule = new Schedule(matches);
 	}
 	
 	public static void saveData() throws IOException {

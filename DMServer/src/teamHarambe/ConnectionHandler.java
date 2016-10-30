@@ -50,7 +50,7 @@ public class ConnectionHandler implements Runnable {
 						selectedDate.set(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
 						
 						Server.teams = teams;
-						Server.schedule = new Schedule(Server.teams, Server.referees);
+						Server.schedule = new Schedule(Server.teams, Server.referees, selectedDate);
 						Server.saveData();
 
 						if (dbFile.exists()) {
@@ -113,6 +113,20 @@ public class ConnectionHandler implements Runnable {
 							}
 						}
 						toClient.println("false");
+						break;
+					}
+					case "Get_RefereedMatches": {
+						Calendar today = Calendar.getInstance();
+						List<Match> seasonMatches = Server.schedule.getMatches();
+						JSONObject jsonMatches = new JSONObject();
+						
+						for(int i=0; i < seasonMatches.size(); i++) {
+							if (seasonMatches.get(i).getReferee() == userAccount && seasonMatches.get(i).isMatchOnDate(today)) {
+								jsonMatches.put(seasonMatches.get(i).getId()+"", seasonMatches.get(i).toJSON());
+							}
+						}
+						
+						toClient.println(jsonMatches.toString());
 						break;
 					}
 
