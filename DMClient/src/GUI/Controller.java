@@ -223,7 +223,7 @@ public class Controller implements Initializable {
             stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.DECORATED);
-            stage.setTitle("Main Menu");
+            stage.setTitle("Create Schedule");
             stage.setScene(new Scene(root1));
             stage.show();
         }
