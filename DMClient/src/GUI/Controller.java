@@ -27,6 +27,9 @@ import java.security.MessageDigest;
 import java.util.ResourceBundle;
 
 import org.json.JSONObject;
+import teamHarambe.MethodProvider;
+
+import javax.swing.*;
 
 public class Controller implements Initializable {
 
@@ -89,24 +92,25 @@ public class Controller implements Initializable {
 
 
 
-    public void openStandings(ActionEvent event)
+    public void openStandings(ActionEvent event) throws IOException
     {
-        try{
-        	Client.toServer.println("Get_Rankings");
-        	JSONObject rankings = new JSONObject(Client.fromServer.readLine());
-        	System.out.println("Got rankings!");
-        	System.out.println(rankings.toString());
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Standings.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.DECORATED);
-            stage.setTitle("Current Standings");
-            stage.setScene(new Scene(root1));
-            stage.show();
+        if (MethodProvider.checkForSetup()) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Standings.fxml"));
+                Parent root1 = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Current Standings");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Standings do not exist. Please log in if you would like to create them.", "Standings error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -131,18 +135,23 @@ public class Controller implements Initializable {
 
     public void openSchedule(ActionEvent event) throws IOException
     {
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Schedule.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.DECORATED);
-            stage.setTitle("Schedule");
-            stage.setScene(new Scene(root1));
-            stage.show();
+        if (MethodProvider.checkForSetup()) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Schedule.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Schedule");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+
+            }
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Schedule does not exist. Please log in if you would like to create one.", "Schedule error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -194,6 +203,29 @@ public class Controller implements Initializable {
                 stage.setTitle("Main Menu");
                 stage.setScene(new Scene(root1));
                 stage.show();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createSchedule(ActionEvent event) throws IOException
+    {
+        if (MethodProvider.checkForSetup())
+        {
+            JOptionPane.showMessageDialog(null, "A schedule already exists. If you create a new one, the old one will be deleted.", "Schedule exists", JOptionPane.INFORMATION_MESSAGE);
+        }
+        try{
+            Stage stage = (Stage) sLogoutButton.getScene().getWindow();
+            stage.hide();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddTeams.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Main Menu");
+            stage.setScene(new Scene(root1));
+            stage.show();
         }
         catch (Exception e) {
             e.printStackTrace();

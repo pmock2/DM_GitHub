@@ -137,43 +137,6 @@ public class Server {
 		return input;
 	}
 	
-	private static void promptTeams(int numTeams) {
-        System.out.println("Please enter " + numTeams + " team names.");
-        for (int i = 0; i < numTeams; i++) {
-            System.out.print((i + 1) + ". ");
-            teams.add(new Team(i, console.next()));
-        }
-    }
-	
-	private static Calendar promptDate() {
-		Calendar selectedDate = Calendar.getInstance();//shitty Java library
-		int selectedYear, selectedMonth, selectedDay;
-		int currentYear = selectedDate.get(Calendar.YEAR);
-		int currentMonth = selectedDate.get(Calendar.MONTH);
-		int currentDay = selectedDate.get(Calendar.DAY_OF_MONTH);
-		
-		System.out.print("Enter the season start year: ");
-		selectedYear = promptInt(currentYear);
-		System.out.print("Enter the season start month: ");
-		selectedMonth = promptInt(selectedYear == currentYear ? currentMonth+1 : 1)-1;
-		System.out.print("Enter the season start day: ");
-		selectedDay = promptInt(selectedYear == currentYear && selectedMonth == currentMonth ? currentDay : 1);
-		
-		selectedDate.set(selectedYear, selectedMonth, selectedDay);
-		
-		return selectedDate;
-	}
-	
-	private static String promptInitialPassword() {
-		String password;
-		System.out.print("Please create a password: ");
-		
-		password = console.nextLine();
-		System.out.println("Your password is " + password);
-		
-		return password;
-	}
-	
 	private static void generateRefereeList(int numReferees) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		Random r = new Random();
 		
@@ -185,7 +148,7 @@ public class Server {
 		}
 	}
 	
-	private static String readFile(String path, Charset encoding) throws IOException {
+	public static String readFile(String path, Charset encoding) throws IOException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		return new String(encoded, encoding);
 	}

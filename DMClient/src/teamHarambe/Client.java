@@ -44,7 +44,7 @@ public class Client {
 			} else {
 				(new Thread(){
 					public void run(){
-						Application.launch(GUI.SuperUserSetup_1.class, args);
+						Application.launch(GUI.Landing.class, args);
 					}
 				}).start();
 			}

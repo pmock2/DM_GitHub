@@ -3,6 +3,7 @@ package teamHarambe;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 
 import org.json.JSONObject;
@@ -62,10 +63,10 @@ public class ConnectionHandler implements Runnable {
 					}
 					case "Get_Schedule":
 					{
-						toClient.println(Server.schedule.toJSON());
-						toClient.println("End_Schedule");
-						System.out.println("Sent schedule to client");
-						break;
+							toClient.println(Server.schedule.toJSON());
+							toClient.println("End_Schedule");
+							System.out.println("Sent schedule to client");
+							break;
 					}
 					case "Login":
 					{
@@ -83,9 +84,10 @@ public class ConnectionHandler implements Runnable {
 						}
 						break;
 					}
-					case "Get_Rankings":
+					case "Get_Standings":
 					{
 						toClient.println(Server.rankingsFromSchedule().toString());
+						Server.rankingsFromSchedule().remove("");
 						break;
 					}
 					case "Does_DB_Exist":
@@ -100,6 +102,21 @@ public class ConnectionHandler implements Runnable {
 						}
 						break;
 					}
+					case "Does_Schedule_Exist":
+					{
+						if (dbFile.exists())
+						{
+							JSONObject database = new JSONObject(Server.readFile(databasePath, StandardCharsets.UTF_8));
+							if (database.getJSONObject("Schedule") != null)
+							{
+								toClient.println("true");
+								break;
+							}
+						}
+						toClient.println("false");
+						break;
+					}
+
 				}
 
 			} catch (SocketException e) {

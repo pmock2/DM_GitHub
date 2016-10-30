@@ -21,7 +21,7 @@
       </Label>
       <Button layoutX="312.0" layoutY="200.0" mnemonicParsing="false" onAction="#openSchedule" text="View Schedule" />
       <Label layoutX="198.0" layoutY="120.0" text="Advanced Options for Super Referee" />
-      <Button layoutX="307.0" layoutY="255.0" mnemonicParsing="false" text="Referee Options" />
+      <Button layoutX="307.0" layoutY="255.0" mnemonicParsing="false" onAction="#createSchedule" text="Create Schedule" />
       <Button layoutX="164.0" layoutY="255.0" mnemonicParsing="false" text="View Change Log" />
       <Hyperlink fx:id="sLogoutButton" layoutX="524.0" onAction="#superLogout" text="Logout" />
    </children>

@@ -13,7 +13,7 @@ public class MethodProvider {
         //RETURN TRUE IF IT HAS BEEN SETUP
         //ELSE RETURN FALSE
         //Check if DB Exists
-        Client.toServer.println("Does_DB_Exist");
+        Client.toServer.println("Does_Schedule_Exist");
         String exists = Client.fromServer.readLine();
         return (exists.equals("true"));
     }

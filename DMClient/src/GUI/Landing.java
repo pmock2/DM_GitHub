@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 /**
  * Created by claytonleikness on 10/6/16.
  */
-public class About extends Application {
+public class Landing extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("About.fxml"));
-        primaryStage.setTitle("About Page");
-        primaryStage.setScene(new Scene(root, 500, 450));
+        Parent root = FXMLLoader.load(getClass().getResource("Landing.fxml"));
+        primaryStage.setTitle("Landing Page");
+        primaryStage.setScene(new Scene(root, 436, 450));
         primaryStage.show();
     }
 

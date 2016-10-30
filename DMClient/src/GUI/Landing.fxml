@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LandingController">
+   <children>
+      <ImageView fitHeight="82.0" fitWidth="88.0" layoutX="177.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/blue-question.png" />
+         </image></ImageView>
+      <Label layoutX="154.0" layoutY="209.0" text="No Schedule Found">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="178.0" layoutY="292.0" text="Super Referee?" />
+      <Button fx:id="create" layoutX="168.0" layoutY="318.0" mnemonicParsing="false" onAction="#openLogin" text="Create one now" />
+   </children>
+</Pane>
