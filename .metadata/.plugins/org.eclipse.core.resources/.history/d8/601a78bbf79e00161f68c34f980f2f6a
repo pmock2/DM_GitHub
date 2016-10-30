@@ -116,7 +116,7 @@ public class ConnectionHandler implements Runnable {
 						break;
 					}
 					case "Get_RefereedMatches":
-					{
+						{
 						Calendar today = Calendar.getInstance();
 						List<Match> seasonMatches = Server.schedule.getMatches();
 						JSONObject jsonMatches = new JSONObject();
@@ -130,25 +130,7 @@ public class ConnectionHandler implements Runnable {
 						toClient.println(jsonMatches.toString());
 						break;
 					}
-					case "Get_Referees":
-					{
-						if (permissionLevel < 2) {
-							toClient.println("Exception_InsufficientPermissions");
-							break;
-						}
-						
-						JSONObject referees = new JSONObject();
-						for (int i=0; i < Server.referees.size(); i++) {
-							Referee referee = Server.referees.get(i);
-							if (!referee.isSuperReferee) {
-								JSONObject refereeJSON = new JSONObject();
-								refereeJSON.put("Email", referee.getEmail());
-								referees.put(referee.getId()+"", refereeJSON);
-							}
-						}
-						
-						toClient.println(referees.toString());
-					}
+
 				}
 
 			} catch (SocketException e) {
