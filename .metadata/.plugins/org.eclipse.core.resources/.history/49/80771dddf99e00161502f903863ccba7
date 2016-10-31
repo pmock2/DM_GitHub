@@ -15,7 +15,7 @@ public class Match {
     int id;
     double team1Score = 0;
     double team2Score = 0;
-    boolean scored = false;
+   
 
     public Match(int id, Team team1, Team team2, Referee referee, Calendar date) {
     	this.id = id;
@@ -23,6 +23,12 @@ public class Match {
         this.team2 = team2;
         this.referee = referee;
         this.date = date;
+    }
+    
+    public Match(int id, Team team1, Team team2, Referee referee, Calendar date, double score1, double score2) {
+    	this(id, team1, team2, referee, date);
+    	team1Score = score1;
+    	team2Score = score2;
     }
     
     public Match(int id, JSONObject matchData) {
@@ -44,7 +50,6 @@ public class Match {
 		this.team1 = Server.teams.get(matchData.getInt("Team0"));
 		this.team2 = Server.teams.get(matchData.getInt("Team1"));
 		this.referee = matchReferee;
-		this.scored = matchData.getBoolean("Scored");
 		this.team1Score = matchData.getDouble("Score0");
 		this.team2Score = matchData.getDouble("Score1");
     }
@@ -93,18 +98,6 @@ public class Match {
     	return id;
     }
     
-    public Calendar getDate() {
-    	return date;
-    }
-    
-    public void setDate(Calendar newDate) {
-    	date = newDate;
-    }
-    
-    public boolean isScored() {
-    	return scored;
-    }
-    
     public boolean isMatchOnDate(Calendar date) {
     	return this.date.get(this.date.YEAR) == date.get(date.YEAR) &&
     		   this.date.get(this.date.MONTH) == date.get(date.MONTH) &&
@@ -129,7 +122,6 @@ public class Match {
     	String s = "{\"Team0\" : " + team1.getId() + ", \"Team1\" : " + team2.getId() + ", "
     			 + "\"Referee\" : " + getReferee().getId() + ", "
     			 + "\"Date\" : " + dateToJSON() + ", "
-    			 + "\"Scored\" : " + (scored ? "true" : "false") + ", "
     			 + "\"Score0\" : " + team1Score + ", \"Score1\" : " + team2Score + "}";
     	
     	return s;

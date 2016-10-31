@@ -25,6 +25,13 @@ public class Match {
         this.date = date;
     }
     
+    public Match(int id, Team team1, Team team2, Referee referee, Calendar date, boolean scored, double score1, double score2) {
+    	this(id, team1, team2, referee, date);
+    	team1Score = score1;
+    	team2Score = score2;
+    	this.scored = scored;
+    }
+    
     public Match(int id, JSONObject matchData) {
     	int matchRefereeId = matchData.getInt("Referee");
 		Referee matchReferee = null;
@@ -44,7 +51,6 @@ public class Match {
 		this.team1 = Server.teams.get(matchData.getInt("Team0"));
 		this.team2 = Server.teams.get(matchData.getInt("Team1"));
 		this.referee = matchReferee;
-		this.scored = matchData.getBoolean("Scored");
 		this.team1Score = matchData.getDouble("Score0");
 		this.team2Score = matchData.getDouble("Score1");
     }
@@ -91,18 +97,6 @@ public class Match {
     
     public int getId() {
     	return id;
-    }
-    
-    public Calendar getDate() {
-    	return date;
-    }
-    
-    public void setDate(Calendar newDate) {
-    	date = newDate;
-    }
-    
-    public boolean isScored() {
-    	return scored;
     }
     
     public boolean isMatchOnDate(Calendar date) {

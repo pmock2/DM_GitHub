@@ -170,7 +170,6 @@ public class ConnectionHandler implements Runnable {
 						if (permissionLevel >= 2 || (match.getReferee() == userAccount && !match.isScored())) {
 							match.setTeam1Score(team0Score);
 							match.setTeam2Score(team1Score);
-							Server.saveData();
 						} else {
 							toClient.println("Exception_InsufficientPermissions");
 						}
@@ -197,24 +196,10 @@ public class ConnectionHandler implements Runnable {
 						List<Match> matches = Server.schedule.getMatches();
 						Match match = matches.get(matchId);
 						for (int i=0; i < matches.size(); i++) {
-							Match other = matches.get(i);
-							if (i != matchId && match.isMatchOnDate(other.getDate())) {
-								String team0Name = match.getTeam1().getName();
-								String team1Name = match.getTeam2().getName();
-								String team2Name = other.getTeam1().getName();
-								String team3Name = other.getTeam2().getName();
+							if (i != matchId && match.isMatchOnDate(matches.get(i).getDate())) {
 								
-								if (team0Name.equals(team2Name) || team0Name.equals(team3Name) ||
-								    team1Name.equals(team2Name) || team1Name.equals(team3Name)
-								) {
-									toClient.println("Exception_ConflictingDate");
-									break;
-								}
 							}
 						}
-						
-						match.setDate(newDate);
-						Server.saveData();
 					}
 				}
 

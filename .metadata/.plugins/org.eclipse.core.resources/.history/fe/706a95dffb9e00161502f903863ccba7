@@ -93,14 +93,6 @@ public class Match {
     	return id;
     }
     
-    public Calendar getDate() {
-    	return date;
-    }
-    
-    public void setDate(Calendar newDate) {
-    	date = newDate;
-    }
-    
     public boolean isScored() {
     	return scored;
     }

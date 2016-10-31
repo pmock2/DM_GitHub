@@ -24,7 +24,6 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.net.URL;
 import java.security.MessageDigest;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import org.json.JSONObject;
@@ -243,29 +242,6 @@ public class Controller implements Initializable {
     	Client.toServer.println("Get_Referees");
     	String jsonString = Client.fromServer.readLine();
     	return new JSONObject(jsonString);
-    }
-    
-    public void setMatchScore(int matchId, double team0Score, double team1Score, boolean team0Forfiet, boolean team1Forfiet) throws IOException {
-    	JSONObject data = new JSONObject();
-    	data.put("MatchId", matchId);
-    	data.put("Team0Score", team0Score);
-    	data.put("Team1Score", team1Score);
-    	data.put("Team0Forfiet", team0Forfiet);
-    	data.put("Team1Forfiet", team1Forfiet);
-    	
-    	Client.toServer.println("Set_MatchScore");
-    	Client.toServer.println(data.toString());
-    }
-    
-    public void setMatchDate(int matchId, Calendar newDate) throws IOException {
-    	JSONObject data = new JSONObject();
-    	data.put("MatchId", matchId);
-    	data.put("Year", newDate.get(newDate.YEAR));
-    	data.put("Month", newDate.get(newDate.MONTH));
-    	data.put("Day", newDate.get(newDate.DAY_OF_MONTH));
-    	
-    	Client.toServer.println("Set_MatchDate");
-    	Client.toServer.println(data.toString());
     }
 
     public String getLoginUsername()

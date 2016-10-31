@@ -93,18 +93,6 @@ public class Match {
     	return id;
     }
     
-    public Calendar getDate() {
-    	return date;
-    }
-    
-    public void setDate(Calendar newDate) {
-    	date = newDate;
-    }
-    
-    public boolean isScored() {
-    	return scored;
-    }
-    
     public boolean isMatchOnDate(Calendar date) {
     	return this.date.get(this.date.YEAR) == date.get(date.YEAR) &&
     		   this.date.get(this.date.MONTH) == date.get(date.MONTH) &&

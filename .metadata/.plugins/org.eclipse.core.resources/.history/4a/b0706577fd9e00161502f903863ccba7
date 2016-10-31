@@ -260,12 +260,6 @@ public class Controller implements Initializable {
     public void setMatchDate(int matchId, Calendar newDate) throws IOException {
     	JSONObject data = new JSONObject();
     	data.put("MatchId", matchId);
-    	data.put("Year", newDate.get(newDate.YEAR));
-    	data.put("Month", newDate.get(newDate.MONTH));
-    	data.put("Day", newDate.get(newDate.DAY_OF_MONTH));
-    	
-    	Client.toServer.println("Set_MatchDate");
-    	Client.toServer.println(data.toString());
     }
 
     public String getLoginUsername()
