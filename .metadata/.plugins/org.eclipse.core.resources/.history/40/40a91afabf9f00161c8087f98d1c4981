@@ -1,6 +1,7 @@
 package teamHarambe;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -13,39 +14,33 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.security.*;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Server {
-	private static Scanner console = new Scanner(System.in);
-	private static String databasePath = "resources/Database.json";
-	
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.activation.*;
+
+public class Server {	
 	public static List<Team> teams = new LinkedList<>();
 	public static List<Referee> referees = new LinkedList<>();
 	public static Schedule schedule;
 	
-	private static void printDate(Calendar c) {
-		System.out.println("Year: " + c.YEAR + ", Month: " + c.MONTH + ", Day: " + c.DAY_OF_MONTH + ", MS: " + c.getTimeInMillis());
-	}
-	
+	private static String databasePath = getDatabasePath();
+
 	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-		ServerSocket server = new ServerSocket(1234);
 		loadData();
-		generateRefereeList(10);
 		
-		Calendar c = Calendar.getInstance();
-		printDate(c);
-		long ms = c.getTimeInMillis();
-		long msInWeek = 1000 * 60 * 60 * 24 * 7;
-		Calendar c2 = Calendar.getInstance();
-		c2.setTimeInMillis(ms + msInWeek*16);
-		printDate(c2);
-		
+		ServerSocket server = new ServerSocket(1234);
 		System.out.println("Server ready to accept clients.");
 		
 		while (true) {
@@ -55,19 +50,44 @@ public class Server {
 		}
 	}
 	
+	private static String getDatabasePath() {
+		File resources = new File("resources");
+		if (!resources.exists()) {
+			resources.mkdir();
+		}
+		return resources.getPath()+"/Database.json";
+	}
+	
+	private static void createDatabase() throws IOException {
+		System.out.println("Creating database");
+		Referee superReferee = new Referee(0, "DMSuperReferee@mail.com", true);
+		String dbString = "";
+		dbString += "{\n";
+		dbString += "\t\"Schedule\" : null,\n";
+		dbString += "\t\"Teams\" : {},\n";
+		dbString += "\t\"Referees\" : {\n";
+		dbString += "\t\t" + superReferee.getId() + " : " + superReferee.toJSON() + "\n";
+		dbString += "\t}\n";
+		dbString += "}";
+		
+		saveData(dbString);
+	}
+	
 	private static void loadData() throws IOException, NoSuchAlgorithmException {
 		File dbFile = new File(databasePath);
-		if (dbFile.exists()) {
-			JSONObject database = new JSONObject(readFile(databasePath, StandardCharsets.UTF_8));
-			loadTeams(database.getJSONObject("Teams"));
-			loadReferees(database.getJSONObject("Referees"));
-			loadSchedule(database.getJSONObject("Schedule"));
-			System.out.println(schedule.toString());
+		if (!dbFile.exists()) {
+			createDatabase();
 		}
+		
+		JSONObject database = new JSONObject(readFile(databasePath, StandardCharsets.UTF_8));
+		loadTeams(database.getJSONObject("Teams"));
+		loadReferees(database.getJSONObject("Referees"));
+		try {loadSchedule(database.getJSONObject("Schedule"));} catch(JSONException e) {}
 	}
 	
 	private static void loadTeams(JSONObject teamList) {
 		String[] teamIds = JSONObject.getNames(teamList);
+		teamIds = (teamIds == null ? new String[0] : teamIds);
 		for (int i=0; i < teamIds.length; i ++) {
 			JSONObject teamData = teamList.getJSONObject(teamIds[i]);
 			int teamId = Integer.parseInt(teamIds[i]);
@@ -83,15 +103,25 @@ public class Server {
 		for (int i=0; i < refereeIds.length; i ++) {
 			JSONObject refereeData = refereeList.getJSONObject(refereeIds[i]);
 			int refereeId = Integer.parseInt(refereeIds[i]);
+			String password = null;
+			JSONObject loginCode = null;
+			
+			try {
+				password = refereeData.getString("Password");
+			} catch (JSONException e) {}
+			try {
+				loginCode = refereeData.getJSONObject("LoginCode");
+			} catch (JSONException e) {}
 			
 			referees.add(new Referee (
-				refereeId, refereeData.getString("Email"), refereeData.getString("Password"), refereeData.getBoolean("IsSuper")
+				refereeId, refereeData.getString("Email"), password, loginCode, refereeData.getBoolean("IsSuper")
 			));
 		}
 	}
 	
 	private static void loadSchedule(JSONObject matchList) {
 		String[] matchIds = JSONObject.getNames(matchList);
+		matchIds = (matchIds == null ? new String[0] : matchIds);
 		List<Match> matches = new LinkedList<>();
 		
 		for (int i=0; i < matchIds.length; i++) {
@@ -103,8 +133,11 @@ public class Server {
 	}
 	
 	public static void saveData() throws IOException {
+		saveData(generateDatabaseJSON());
+	}
+	
+	public static void saveData(String dbString) throws IOException {
 		PrintWriter writer = new PrintWriter(databasePath, "UTF-8");
-		String dbString = generateDatabaseJSON();
 		writer.println(dbString);
 		writer.close();
 	}
@@ -128,35 +161,6 @@ public class Server {
 		
 		s += "}";
 		return s;
-	}
-
-	private static int promptInt(int minValue) {
-		int input = 0;
-		
-		do {
-			try {
-				input =  console.nextInt();
-				if (input < minValue) {
-					System.out.print("Please input an integer >= " + minValue + ": ");
-				}
-			}
-			catch (NumberFormatException e) {
-				System.out.print("Please input an integer >= " + minValue + ": ");
-			}
-		} while (input < minValue);
-		
-		return input;
-	}
-	
-	private static void generateRefereeList(int numReferees) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-		Random r = new Random();
-		
-		for (int i=0; i < numReferees; i ++) {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update("password".getBytes(), 0, "password".length());
-			String md5 = new BigInteger(1, md.digest()).toString(16); // Hash value
-			referees.add(new Referee(r.nextInt(999999999) + 111111111, "email", md5, i==0));
-		}
 	}
 	
 	public static String readFile(String path, Charset encoding) throws IOException {

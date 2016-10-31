@@ -103,11 +103,9 @@ public class ConnectionHandler implements Runnable {
 						}
 						break;
 					}
-					case "RequestPasswordReset":
+					case "SetPassword":
 					{
-						String email = fromClient.readLine();
-						Referee referee = refereeFromEmail(email);
-						referee.sendPasswordReset();
+						
 						break;
 					}
 					case "Get_Standings":

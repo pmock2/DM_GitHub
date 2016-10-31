@@ -177,7 +177,7 @@ public class Controller implements Initializable {
         	
         	if (loginResult.equals("Login_CodeSuccess")) {
         		System.out.println("Code success. Prompting for password set.");
-        		String newPassword = "password";
+        		String newPassword = null;
         		md.update(newPassword.getBytes(), 0, newPassword.length());
         		Client.toServer.println(new BigInteger(1, md.digest()).toString(16));
         		

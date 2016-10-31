@@ -6,7 +6,6 @@
 			<accessrule kind="accessible" pattern="javafx/**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Drew/Downloads/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Drew/Desktop/activation.jar"/>
+	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

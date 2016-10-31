@@ -34,10 +34,9 @@ public class Referee {
     }
     
     public void setPassword(String newPassword) {
-    	System.out.println("Password set to :"+newPassword);
     	this.password = newPassword;
     	loginCode = null;
-    	try {Server.saveData();} catch (Exception e){e.printStackTrace();}
+    	try {Server.saveData();} catch (Exception e){}
     }
 
 	public int getId() {
@@ -70,7 +69,7 @@ public class Referee {
     	return s;
     }
     
-    public void sendPasswordReset() {
+    private void sendPasswordReset() {
     	Random generator = new Random();
     	String code = generator.nextInt(1000000)+"";
 		MessageDigest md = null;

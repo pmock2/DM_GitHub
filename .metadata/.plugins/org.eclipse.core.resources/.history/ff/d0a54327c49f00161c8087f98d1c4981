@@ -70,7 +70,7 @@ public class Referee {
     	return s;
     }
     
-    public void sendPasswordReset() {
+    private void sendPasswordReset() {
     	Random generator = new Random();
     	String code = generator.nextInt(1000000)+"";
 		MessageDigest md = null;

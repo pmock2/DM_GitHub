@@ -1,7 +1,8 @@
 {
 	"Schedule" : null,
-	"Teams" : {},
+	"Teams" : {
+	},
 	"Referees" : {
-		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : null, "LoginCode" : {"Code":"57653b913a2d4a4b2c64da4a56314be6"}, "IsSuper" : true}
+		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : "5f4dcc3b5aa765d61d8327deb882cf99", "LoginCode" : null, "IsSuper" : true}
 	}
 }

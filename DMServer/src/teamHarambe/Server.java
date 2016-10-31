@@ -145,7 +145,7 @@ public class Server {
 	private static String generateDatabaseJSON() {
 		String s = "{\n";
 		
-		s += "\t\"Schedule\" : " + schedule.toJSON() + ",\n";
+		s += "\t\"Schedule\" : " + (schedule == null ? "null" : schedule.toJSON()) + ",\n";
 		
 		s += "\t\"Teams\" : {\n";
 		for (int i=0; i < teams.size(); i++) {
