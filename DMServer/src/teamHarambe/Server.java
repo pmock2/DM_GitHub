@@ -31,8 +31,8 @@ public class Server {
 
 	public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 		ServerSocket server = new ServerSocket(1234);
+		//generateRefereeList(10);
 		loadData();
-		generateRefereeList(10);
 
 		System.out.println("Server ready to accept clients.");
 		
