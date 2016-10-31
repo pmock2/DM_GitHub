@@ -216,19 +216,6 @@ public class ConnectionHandler implements Runnable {
 						match.setDate(newDate);
 						Server.saveData();
 					}
-					case "Is_User_Super":
-					{
-						if (permissionLevel < 2)
-						{
-							toClient.println("False");
-							break;
-						}
-						else
-						{
-							toClient.println("True");
-							break;
-						}
-					}
 				}
 
 			} catch (SocketException e) {

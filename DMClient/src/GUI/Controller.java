@@ -52,17 +52,9 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         if (createButton != null)
         {
-            try
+            if (Client.permissionLevel < 2)
             {
-                Client.toServer.println("Is_User_Super");
-                String message = Client.fromServer.readLine();
-                if (message.equals("False"))
-                {
-                    createButton.setVisible(false);
-                }
-            } catch (IOException e)
-            {
-                e.printStackTrace();
+                createButton.setVisible(false);
             }
         }
     }
