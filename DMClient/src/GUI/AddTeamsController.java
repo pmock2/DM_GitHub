@@ -285,6 +285,12 @@ public class AddTeamsController implements Initializable {
                     c8.setSelected(false);
                     c9.setSelected(false);
                     c10.setSelected(false);
+                    try {
+                        e1.setText(getEmailForId(1));
+                    } catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
                     break;
                 }
                 case "2": {
@@ -733,17 +739,27 @@ public class AddTeamsController implements Initializable {
     });
 }
 
-    private void useRefereeEmails() throws IOException {
+    private String getEmailForId(int id) throws IOException {
     	JSONObject referees = Client.getReferees();
     	String[] idList = JSONObject.getNames(referees);
-    	
-    	for (int i=0; i < idList.length; i++) {
-    		int id = Integer.parseInt(idList[i]);
-    		JSONObject data = referees.getJSONObject(idList[i]);
-    		String email = data.getString("Email");
-    		
+        JSONObject data = referees.getJSONObject(idList[id]);
+        String email = data.getString("Email");
+
+  //  	for (int i=0; i < idList.length; i++)
+  //  	{
+  //  		int id = Integer.parseInt(idList[i]);
+  //  		JSONObject data = referees.getJSONObject(idList[i]);
+   // 		String email = data.getString("Email");
     		//Do Stuff Here
-    	}
+   // 	}
+    	return email;
+    }
+
+    private int getRefereeCount() throws IOException
+    {
+        JSONObject referees = Client.getReferees();
+        String[] idList = JSONObject.getNames(referees);
+        return idList.length;
     }
     
     private void setData()
