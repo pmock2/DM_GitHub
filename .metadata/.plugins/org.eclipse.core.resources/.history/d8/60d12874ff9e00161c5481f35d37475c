@@ -239,6 +239,12 @@ public class Controller implements Initializable {
     	return new JSONObject(jsonString);
     }
     
+    public JSONObject getReferees() throws IOException {
+    	Client.toServer.println("Get_Referees");
+    	String jsonString = Client.fromServer.readLine();
+    	return new JSONObject(jsonString);
+    }
+    
     public void setMatchScore(int matchId, double team0Score, double team1Score, boolean team0Forfiet, boolean team1Forfiet) throws IOException {
     	JSONObject data = new JSONObject();
     	data.put("MatchId", matchId);

@@ -733,7 +733,7 @@ public class AddTeamsController implements Initializable {
     });
 }
 
-    private void useRefereeEmails() throws IOException {
+    private void getRefereeEmails() throws IOException {
     	JSONObject referees = Client.getReferees();
     	String[] idList = JSONObject.getNames(referees);
     	

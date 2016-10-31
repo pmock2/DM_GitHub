@@ -51,7 +51,7 @@ public class Client {
 		}
 	}
 	
-	public static JSONObject getReferees() throws IOException {
+	public JSONObject getReferees() throws IOException {
     	toServer.println("Get_Referees");
     	String jsonString = fromServer.readLine();
     	return new JSONObject(jsonString);
