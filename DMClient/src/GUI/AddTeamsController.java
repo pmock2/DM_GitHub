@@ -33,10 +33,11 @@ public class AddTeamsController implements Initializable {
     @FXML
     public ChoiceBox<String> cb, ref;
     public TextField t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
-    public CheckBox c1, c2, c3, c4, c5, c6, c7, c8, c9, c10;
+    public CheckBox c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
     public Label l1, l2, l3, l4;
     public DatePicker dpDate;
     public Button submit;
+    private String s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 = null;
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,6 +58,18 @@ public class AddTeamsController implements Initializable {
 
         dpDate.setDayCellFactory(dayCellFactory);
         setData();
+
+        o10.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
+                if (o10.isSelected())
+                {
+                    e10.setDisable(false);
+                    p10.setDisable(false);
+                    c10.setDisable(false);
+                }
+        }
+                                           });
         cb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldSelection, String newSelection) {
@@ -286,10 +299,16 @@ public class AddTeamsController implements Initializable {
                     c9.setSelected(false);
                     c10.setSelected(false);
                     try {
-                        e1.setText(getEmailForId(1));
-                    } catch (IOException e)
+                        s1 = getEmailForId(0);
+                    } catch (Exception e)
                     {
-                        e.printStackTrace();
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
                     }
                     break;
                 }
@@ -352,6 +371,26 @@ public class AddTeamsController implements Initializable {
                     c8.setSelected(false);
                     c9.setSelected(false);
                     c10.setSelected(false);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(0);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
                     break;
                 }
                 case "3": {
@@ -410,6 +449,34 @@ public class AddTeamsController implements Initializable {
                     c8.setSelected(false);
                     c9.setSelected(false);
                     c10.setSelected(false);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(1);
+                        s3 = getEmailForId(2);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
+                    if (s3 != null)
+                    {
+                        e3.setText(s3);
+                        e3.setDisable(true);
+                        p3.setDisable(true);
+                        c3.setDisable(true);
+                    }
                     break;
                 }
                 case "4": {
@@ -465,6 +532,42 @@ public class AddTeamsController implements Initializable {
                     c8.setSelected(false);
                     c9.setSelected(false);
                     c10.setSelected(false);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(1);
+                        s3 = getEmailForId(2);
+                        s4 = getEmailForId(3);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
+                    if (s3 != null)
+                    {
+                        e3.setText(s3);
+                        e3.setDisable(true);
+                        p3.setDisable(true);
+                        c3.setDisable(true);
+                    }
+                    if (s4 != null)
+                    {
+                        e4.setText(s4);
+                        e4.setDisable(true);
+                        p4.setDisable(true);
+                        c4.setDisable(true);
+                    }
                     break;
                 }
                 case "5": {
@@ -517,6 +620,50 @@ public class AddTeamsController implements Initializable {
                     c8.setSelected(false);
                     c9.setSelected(false);
                     c10.setSelected(false);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(1);
+                        s3 = getEmailForId(2);
+                        s4 = getEmailForId(3);
+                        s5 = getEmailForId(4);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
+                    if (s3 != null)
+                    {
+                        e3.setText(s3);
+                        e3.setDisable(true);
+                        p3.setDisable(true);
+                        c3.setDisable(true);
+                    }
+                    if (s4 != null)
+                    {
+                        e4.setText(s4);
+                        e4.setDisable(true);
+                        p4.setDisable(true);
+                        c4.setDisable(true);
+                    }
+                    if (s5 != null)
+                    {
+                        e5.setText(s5);
+                        e5.setDisable(true);
+                        p5.setDisable(true);
+                        c5.setDisable(true);
+                    }
                     break;
                 }
                 case "6": {
@@ -566,6 +713,58 @@ public class AddTeamsController implements Initializable {
                     c8.setSelected(false);
                     c9.setSelected(false);
                     c10.setSelected(false);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(1);
+                        s3 = getEmailForId(2);
+                        s4 = getEmailForId(3);
+                        s5 = getEmailForId(4);
+                        s6 = getEmailForId(5);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
+                    if (s3 != null)
+                    {
+                        e3.setText(s3);
+                        e3.setDisable(true);
+                        p3.setDisable(true);
+                        c3.setDisable(true);
+                    }
+                    if (s4 != null)
+                    {
+                        e4.setText(s4);
+                        e4.setDisable(true);
+                        p4.setDisable(true);
+                        c4.setDisable(true);
+                    }
+                    if (s5 != null)
+                    {
+                        e5.setText(s5);
+                        e5.setDisable(true);
+                        p5.setDisable(true);
+                        c5.setDisable(true);
+                    }
+                    if (s6 != null)
+                    {
+                        e6.setText(s6);
+                        e6.setDisable(true);
+                        p6.setDisable(true);
+                        c6.setDisable(true);
+                    }
                     break;
                 }
                 case "7": {
@@ -612,6 +811,66 @@ public class AddTeamsController implements Initializable {
                     c8.setSelected(false);
                     c9.setSelected(false);
                     c10.setSelected(false);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(1);
+                        s3 = getEmailForId(2);
+                        s4 = getEmailForId(3);
+                        s5 = getEmailForId(4);
+                        s6 = getEmailForId(5);
+                        s7 = getEmailForId(6);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
+                    if (s3 != null)
+                    {
+                        e3.setText(s3);
+                        e3.setDisable(true);
+                        p3.setDisable(true);
+                        c3.setDisable(true);
+                    }
+                    if (s4 != null)
+                    {
+                        e4.setText(s4);
+                        e4.setDisable(true);
+                        p4.setDisable(true);
+                        c4.setDisable(true);
+                    }
+                    if (s5 != null)
+                    {
+                        e5.setText(s5);
+                        e5.setDisable(true);
+                        p5.setDisable(true);
+                        c5.setDisable(true);
+                    }
+                    if (s6 != null)
+                    {
+                        e6.setText(s6);
+                        e6.setDisable(true);
+                        p6.setDisable(true);
+                        c6.setDisable(true);
+                    }
+                    if (s7 != null)
+                    {
+                        e7.setText(s7);
+                        e7.setDisable(true);
+                        p7.setDisable(true);
+                        c7.setDisable(true);
+                    }
                     break;
                 }
                 case "8": {
@@ -655,6 +914,74 @@ public class AddTeamsController implements Initializable {
                     p10.clear();
                     c9.setSelected(false);
                     c10.setSelected(false);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(1);
+                        s3 = getEmailForId(2);
+                        s4 = getEmailForId(3);
+                        s5 = getEmailForId(4);
+                        s6 = getEmailForId(5);
+                        s7 = getEmailForId(6);
+                        s8 = getEmailForId(7);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
+                    if (s3 != null)
+                    {
+                        e3.setText(s3);
+                        e3.setDisable(true);
+                        p3.setDisable(true);
+                        c3.setDisable(true);
+                    }
+                    if (s4 != null)
+                    {
+                        e4.setText(s4);
+                        e4.setDisable(true);
+                        p4.setDisable(true);
+                        c4.setDisable(true);
+                    }
+                    if (s5 != null)
+                    {
+                        e5.setText(s5);
+                        e5.setDisable(true);
+                        p5.setDisable(true);
+                        c5.setDisable(true);
+                    }
+                    if (s6 != null)
+                    {
+                        e6.setText(s6);
+                        e6.setDisable(true);
+                        p6.setDisable(true);
+                        c6.setDisable(true);
+                    }
+                    if (s7 != null)
+                    {
+                        e7.setText(s7);
+                        e7.setDisable(true);
+                        p7.setDisable(true);
+                        c7.setDisable(true);
+                    }
+                    if (s8 != null)
+                    {
+                        e8.setText(s8);
+                        e8.setDisable(true);
+                        p8.setDisable(true);
+                        c8.setDisable(true);
+                    }
                     break;
                 }
                 case "9": {
@@ -695,6 +1022,82 @@ public class AddTeamsController implements Initializable {
                     e10.clear();
                     p10.clear();
                     c10.setSelected(false);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(1);
+                        s3 = getEmailForId(2);
+                        s4 = getEmailForId(3);
+                        s5 = getEmailForId(4);
+                        s6 = getEmailForId(5);
+                        s7 = getEmailForId(6);
+                        s8 = getEmailForId(7);
+                        s9 = getEmailForId(8);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
+                    if (s3 != null)
+                    {
+                        e3.setText(s3);
+                        e3.setDisable(true);
+                        p3.setDisable(true);
+                        c3.setDisable(true);
+                    }
+                    if (s4 != null)
+                    {
+                        e4.setText(s4);
+                        e4.setDisable(true);
+                        p4.setDisable(true);
+                        c4.setDisable(true);
+                    }
+                    if (s5 != null)
+                    {
+                        e5.setText(s5);
+                        e5.setDisable(true);
+                        p5.setDisable(true);
+                        c5.setDisable(true);
+                    }
+                    if (s6 != null)
+                    {
+                        e6.setText(s6);
+                        e6.setDisable(true);
+                        p6.setDisable(true);
+                        c6.setDisable(true);
+                    }
+                    if (s7 != null)
+                    {
+                        e7.setText(s7);
+                        e7.setDisable(true);
+                        p7.setDisable(true);
+                        c7.setDisable(true);
+                    }
+                    if (s8 != null)
+                    {
+                        e8.setText(s8);
+                        e8.setDisable(true);
+                        p8.setDisable(true);
+                        c8.setDisable(true);
+                    }
+                    if (s9 != null)
+                    {
+                        e9.setText(s9);
+                        e9.setDisable(true);
+                        p9.setDisable(true);
+                        c9.setDisable(true);
+                    }
                     break;
                 }
                 case "10": {
@@ -732,6 +1135,90 @@ public class AddTeamsController implements Initializable {
                     e10.setVisible(true);
                     p10.setVisible(true);
                     c10.setVisible(true);
+                    try {
+                        s1 = getEmailForId(0);
+                        s2 = getEmailForId(1);
+                        s3 = getEmailForId(2);
+                        s4 = getEmailForId(3);
+                        s5 = getEmailForId(4);
+                        s6 = getEmailForId(5);
+                        s7 = getEmailForId(6);
+                        s8 = getEmailForId(7);
+                        s9 = getEmailForId(8);
+                        s10 = getEmailForId(9);
+                    } catch (Exception e)
+                    {
+                    }
+                    if (s1 != null)
+                    {
+                        e1.setText(s1);
+                        e1.setDisable(true);
+                        p1.setDisable(true);
+                        c1.setDisable(true);
+                    }
+                    if (s2 != null)
+                    {
+                        e2.setText(s2);
+                        e2.setDisable(true);
+                        p2.setDisable(true);
+                        c2.setDisable(true);
+                    }
+                    if (s3 != null)
+                    {
+                        e3.setText(s3);
+                        e3.setDisable(true);
+                        p3.setDisable(true);
+                        c3.setDisable(true);
+                    }
+                    if (s4 != null)
+                    {
+                        e4.setText(s4);
+                        e4.setDisable(true);
+                        p4.setDisable(true);
+                        c4.setDisable(true);
+                    }
+                    if (s5 != null)
+                    {
+                        e5.setText(s5);
+                        e5.setDisable(true);
+                        p5.setDisable(true);
+                        c5.setDisable(true);
+                    }
+                    if (s6 != null)
+                    {
+                        e6.setText(s6);
+                        e6.setDisable(true);
+                        p6.setDisable(true);
+                        c6.setDisable(true);
+                    }
+                    if (s7 != null)
+                    {
+                        e7.setText(s7);
+                        e7.setDisable(true);
+                        p7.setDisable(true);
+                        c7.setDisable(true);
+                    }
+                    if (s8 != null)
+                    {
+                        e8.setText(s8);
+                        e8.setDisable(true);
+                        p8.setDisable(true);
+                        c8.setDisable(true);
+                    }
+                    if (s9 != null)
+                    {
+                        e9.setText(s9);
+                        e9.setDisable(true);
+                        p9.setDisable(true);
+                        c9.setDisable(true);
+                    }
+                    if (s10 != null)
+                    {
+                        e10.setText(s10);
+                        e10.setDisable(true);
+                        p10.setDisable(true);
+                        c10.setDisable(true);
+                    }
                     break;
                 }
             }
@@ -905,6 +1392,69 @@ public class AddTeamsController implements Initializable {
             }
         }
 
+    }
+
+    public void overwrite1(ActionEvent event) throws IOException
+    {
+        e1.setDisable(false);
+        p1.setDisable(false);
+        c1.setDisable(false);
+    }
+
+    public void overwrite2(ActionEvent event) throws IOException
+    {
+        e2.setDisable(false);
+        p2.setDisable(false);
+        c2.setDisable(false);
+    }
+
+    public void overwrite3(ActionEvent event) throws IOException
+    {
+        e3.setDisable(false);
+        p3.setDisable(false);
+        c3.setDisable(false);
+    }
+
+    public void overwrite4(ActionEvent event) throws IOException
+    {
+        e4.setDisable(false);
+        p4.setDisable(false);
+        c4.setDisable(false);
+    }
+
+    public void overwrite5(ActionEvent event) throws IOException
+    {
+        e5.setDisable(false);
+        p5.setDisable(false);
+        c5.setDisable(false);
+    }
+
+    public void overwrite6(ActionEvent event) throws IOException
+    {
+        e6.setDisable(false);
+        p6.setDisable(false);
+        c6.setDisable(false);
+    }
+
+    public void overwrite7(ActionEvent event) throws IOException
+    {
+        e7.setDisable(false);
+        p7.setDisable(false);
+        c7.setDisable(false);
+    }
+
+    public void overwrite8(ActionEvent event) throws IOException
+    {
+        e8.setDisable(false);
+        p8.setDisable(false);
+        c8.setDisable(false);
+    }
+
+    public void overwrite9(ActionEvent event) throws IOException
+    {
+        e9.setDisable(false);
+        p9.setDisable(false);
+        c9.setDisable(false);
     }
 
     private boolean checkData()
