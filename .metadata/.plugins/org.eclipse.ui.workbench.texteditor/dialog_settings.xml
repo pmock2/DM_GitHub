@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="String[]" key="selection"/>
+		<item value="initialize" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="initialize"/>
+			<item value="AddTeamsController"/>
+			<item value="Does_DB_Exist"/>
+			<item value="databasePath"/>
 			<item value="String[]"/>
 			<item value="schedule"/>
 			<item value="s"/>
 			<item value="toServer"/>
-			<item value="fromServer"/>
-			<item value="attemptLogin"/>
-			<item value="new match"/>
-			<item value="new team"/>
 		</list>
 		<list key="replacehistory">
 		</list>

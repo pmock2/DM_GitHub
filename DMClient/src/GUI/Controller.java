@@ -174,6 +174,15 @@ public class Controller implements Initializable {
         	Client.toServer.println(getLoginUsername());
         	Client.toServer.println(md5);
         	String loginResult = Client.fromServer.readLine();
+        	
+        	if (loginResult.equals("Login_CodeSuccess")) {
+        		System.out.println("Code success. Prompting for password set.");
+        		String newPassword = null;
+        		md.update(newPassword.getBytes(), 0, newPassword.length());
+        		Client.toServer.println(new BigInteger(1, md.digest()).toString(16));
+        		
+        		loginResult = Client.fromServer.readLine();
+        	}
 
         	if (loginResult.equals("Login_Success")) {
         		Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());

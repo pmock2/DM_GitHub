@@ -1,9 +1,12 @@
 package teamHarambe;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.net.Socket;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -72,8 +75,25 @@ public class ConnectionHandler implements Runnable {
 						String email = fromClient.readLine();
 						String password = fromClient.readLine();
 						Referee loginAs = refereeFromEmail(email);
+						
+						if (loginAs == null) {
+							toClient.println("Login_Fail");
+							break;
+						}
 
-						if (loginAs != null && loginAs.verifyPassword(password)) {
+						if (loginAs.verifyLoginCode(password)) {
+							System.out.println("Code matched");
+							toClient.println("Login_CodeSuccess");
+							String newPassword = fromClient.readLine();
+							System.out.println("Client setting password to "+newPassword);
+							password = newPassword;
+							loginAs.setPassword(password);
+						} else {
+							System.out.println("Didn't match");
+						}
+						
+						System.out.println("PAssword: "+password);
+						if (loginAs.verifyPassword(password)) {
 							userAccount = loginAs;
 							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
 							toClient.println("Login_Success");
@@ -81,6 +101,11 @@ public class ConnectionHandler implements Runnable {
 						} else {
 							toClient.println("Login_Fail");
 						}
+						break;
+					}
+					case "SetPassword":
+					{
+						
 						break;
 					}
 					case "Get_Standings":
@@ -91,28 +116,12 @@ public class ConnectionHandler implements Runnable {
 					}
 					case "Does_DB_Exist":
 					{
-						if (dbFile.exists())
-						{
-							toClient.println("true");
-						}
-						else
-						{
-							toClient.println("false");
-						}
+						toClient.println("true");
 						break;
 					}
 					case "Does_Schedule_Exist":
 					{
-						if (dbFile.exists())
-						{
-							JSONObject database = new JSONObject(Server.readFile(databasePath, StandardCharsets.UTF_8));
-							if (database.getJSONObject("Schedule") != null)
-							{
-								toClient.println("true");
-								break;
-							}
-						}
-						toClient.println("false");
+						toClient.println(Server.schedule == null ? "false" : "true");
 						break;
 					}
 					case "Get_RefereedMatches":

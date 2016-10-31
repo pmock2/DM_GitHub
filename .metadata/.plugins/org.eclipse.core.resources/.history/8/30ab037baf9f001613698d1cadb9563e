@@ -1,0 +1,88 @@
+package teamHarambe;
+
+import javax.mail.MessagingException;
+
+import org.json.JSONObject;
+
+/**
+ * Created by Daylon on 10/7/2016.
+ */
+
+public class Referee {
+    int id;
+    String email;
+    String password = null;
+    boolean isSuperReferee;
+    JSONObject loginCode = null;
+
+    public Referee(int id, String email, boolean isSuperReferee) {
+    	this.id = id;
+        this.email = email;
+        this.isSuperReferee = isSuperReferee;
+        try {
+        	sendPasswordReset();
+        } catch (Exception e) {e.printStackTrace();};
+    }
+    
+    public Referee(int id, String email, String password, JSONObject loginCode, boolean isSuperReferee) {
+        this(id, email, isSuperReferee);
+    	this.password = password;
+    	this.loginCode = loginCode;
+    }
+
+	public int getId() {
+        return id;
+    }
+    
+    public String getEmail() {
+    	return email;
+    }
+    
+    public boolean verifyPassword(String password) {
+    	return this.password.equals(password);
+    }
+    
+    private String getPasswordResetTitle() {
+    	String s = (password == null ? "DM Password Setup" : "DM Password Reset");
+    	
+    	return s;
+    }
+    
+    private String getPasswordResetMessage() {
+    	String s = "You have been emailed a login code. Please log in with this code to "
+    			+ (password == null ? "set" : "reset") + " your password."
+    			+ (password == null ? "" : "The code will expire in 10 minutes.");
+    	
+    	return s;
+    }
+    
+    private void sendPasswordReset() throws MessagingException {
+    	EmailSender.sendEmail(getEmail(), getPasswordResetTitle(), getPasswordResetMessage());
+    }
+    
+    public String getPasswordJSON() {
+    	String s = "";
+    	
+    	s += (password == null ? "" : "\"");
+    	s += password;
+    	s += (password == null ? "" : "\"");
+    	
+    	return s;
+    }
+    
+    public String getLoginCodeJSON() {
+    	String s = "";
+    	
+    	s += (loginCode == null ? null : loginCode.toString());
+    	
+    	return s;
+    }
+    
+    public String toJSON() {
+    	String s = "{\"Email\" : \"" + email + "\", \"Password\" : " + getPasswordJSON() +", "
+    			 + "\"LoginCode\" : " + getLoginCodeJSON() + ", "
+    			 + "\"IsSuper\" : " + (isSuperReferee == true ? "true" : "false") + "}";
+    	
+    	return s;
+    }
+}
