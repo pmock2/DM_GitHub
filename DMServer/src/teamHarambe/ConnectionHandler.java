@@ -132,10 +132,10 @@ public class ConnectionHandler implements Runnable {
 					}
 					case "Get_Referees":
 					{
-					//	if (permissionLevel < 2) {
-					//		toClient.println("Exception_InsufficientPermissions");
-					//		break;
-					//	}
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
 						
 						JSONObject referees = new JSONObject();
 						for (int i=0; i < Server.referees.size(); i++) {
@@ -215,6 +215,19 @@ public class ConnectionHandler implements Runnable {
 						
 						match.setDate(newDate);
 						Server.saveData();
+					}
+					case "Is_User_Super":
+					{
+						if (permissionLevel < 2)
+						{
+							toClient.println("False");
+							break;
+						}
+						else
+						{
+							toClient.println("True");
+							break;
+						}
 					}
 				}
 

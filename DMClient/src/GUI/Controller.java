@@ -47,8 +47,24 @@ public class Controller implements Initializable {
     public TextArea sTextArea;
     public Label invalidCredentials;
     public ChoiceBox cb;
+    public Button createButton;
 
     public void initialize(URL url, ResourceBundle rb) {
+        if (createButton != null)
+        {
+            try
+            {
+                Client.toServer.println("Is_User_Super");
+                String message = Client.fromServer.readLine();
+                if (message.equals("False"))
+                {
+                    createButton.setVisible(false);
+                }
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void checkInitialUser(ActionEvent event)
