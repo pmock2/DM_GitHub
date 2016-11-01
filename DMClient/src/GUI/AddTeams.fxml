@@ -10,22 +10,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddTeamsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddTeamsController">
    <children>
-      <Label layoutX="442.0" layoutY="36.0" text="Please Enter Season Information">
+      <Label layoutX="266.0" layoutY="36.0" text="Please Enter Season Information">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Separator layoutX="-5.0" layoutY="58.0" prefHeight="12.0" prefWidth="1059.0" />
+      <Separator layoutX="-5.0" layoutY="58.0" prefHeight="12.0" prefWidth="786.0" />
       <ChoiceBox fx:id="cb" layoutX="102.0" layoutY="93.0" prefHeight="25.0" prefWidth="57.0" />
-      <Button fx:id="submit" layoutX="544.0" layoutY="518.0" mnemonicParsing="false" onAction="#attemptSubmit" text="Submit" />
+      <Button fx:id="submit" layoutX="361.0" layoutY="518.0" mnemonicParsing="false" onAction="#attemptSubmit" text="Submit" />
       <Label layoutX="83.0" layoutY="70.0" text="Amount of Teams" />
       <DatePicker fx:id="dpDate" layoutX="43.0" layoutY="364.0" />
       <Label layoutX="84.0" layoutY="337.0" text="Season Start Date" />
       <Label fx:id="l1" layoutX="359.0" layoutY="79.0" text="Team Names" />
       <Label layoutX="77.0" layoutY="207.0" text="Amount of Referees" />
-      <Label layoutX="649.0" layoutY="79.0" text="Referee Information" />
+      <Label layoutX="531.0" layoutY="79.0" text="Referee E-Mail" />
       <ChoiceBox fx:id="ref" layoutX="102.0" layoutY="230.0" prefHeight="25.0" prefWidth="57.0" />
       <TextField fx:id="t1" layoutX="319.0" layoutY="106.0" visible="false" />
       <TextField fx:id="t2" layoutX="319.0" layoutY="138.0" visible="false" />
@@ -37,54 +37,31 @@
       <TextField fx:id="t8" layoutX="319.0" layoutY="339.0" visible="false" />
       <TextField fx:id="t9" layoutX="319.0" layoutY="376.0" visible="false" />
       <TextField fx:id="t10" layoutX="319.0" layoutY="412.0" visible="false" />
-      <TextField fx:id="e1" layoutX="496.0" layoutY="138.0" visible="false" />
-      <TextField fx:id="p1" layoutX="680.0" layoutY="138.0" visible="false" />
-      <CheckBox fx:id="c1" layoutX="881.0" layoutY="142.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o1" layoutX="985.0" layoutY="142.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e2" layoutX="496.0" layoutY="172.0" visible="false" />
-      <TextField fx:id="p2" layoutX="680.0" layoutY="172.0" visible="false" />
-      <CheckBox fx:id="c2" layoutX="881.0" layoutY="176.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o2" layoutX="985.0" layoutY="176.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e3" layoutX="496.0" layoutY="203.0" visible="false" />
-      <TextField fx:id="p3" layoutX="679.0" layoutY="203.0" visible="false" />
-      <CheckBox fx:id="c3" layoutX="881.0" layoutY="207.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o3" layoutX="985.0" layoutY="207.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e4" layoutX="496.0" layoutY="238.0" visible="false" />
-      <TextField fx:id="p4" layoutX="679.0" layoutY="238.0" visible="false" />
-      <CheckBox fx:id="c4" layoutX="881.0" layoutY="242.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o4" layoutX="985.0" layoutY="242.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e5" layoutX="496.0" layoutY="270.0" visible="false" />
-      <TextField fx:id="p5" layoutX="679.0" layoutY="270.0" visible="false" />
-      <CheckBox fx:id="c5" layoutX="881.0" layoutY="274.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o5" layoutX="985.0" layoutY="274.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e6" layoutX="496.0" layoutY="305.0" visible="false" />
-      <TextField fx:id="p6" layoutX="679.0" layoutY="305.0" visible="false" />
-      <CheckBox fx:id="c6" layoutX="881.0" layoutY="309.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o6" layoutX="985.0" layoutY="309.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e7" layoutX="497.0" layoutY="339.0" visible="false" />
-      <TextField fx:id="p7" layoutX="680.0" layoutY="339.0" visible="false" />
-      <CheckBox fx:id="c7" layoutX="882.0" layoutY="343.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o7" layoutX="985.0" layoutY="343.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e8" layoutX="497.0" layoutY="377.0" visible="false" />
-      <TextField fx:id="p8" layoutX="680.0" layoutY="377.0" visible="false" />
-      <CheckBox fx:id="c8" layoutX="882.0" layoutY="381.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o8" layoutX="985.0" layoutY="381.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e9" layoutX="497.0" layoutY="412.0" visible="false" />
-      <TextField fx:id="p9" layoutX="680.0" layoutY="412.0" visible="false" />
-      <CheckBox fx:id="c9" layoutX="882.0" layoutY="416.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o9" layoutX="985.0" layoutY="416.0" mnemonicParsing="false" visible="false" />
-      <TextField fx:id="e10" layoutX="497.0" layoutY="446.0" visible="false" />
-      <TextField fx:id="p10" layoutX="680.0" layoutY="446.0" visible="false" />
-      <CheckBox fx:id="c10" layoutX="882.0" layoutY="450.0" mnemonicParsing="false" visible="false" />
-      <CheckBox fx:id="o10" layoutX="985.0" layoutY="450.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e1" layoutX="496.0" layoutY="107.0" visible="false" />
+      <CheckBox fx:id="o1" layoutX="687.0" layoutY="111.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e2" layoutX="496.0" layoutY="141.0" visible="false" />
+      <CheckBox fx:id="o2" layoutX="687.0" layoutY="145.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e3" layoutX="496.0" layoutY="172.0" visible="false" />
+      <CheckBox fx:id="o3" layoutX="687.0" layoutY="176.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e4" layoutX="496.0" layoutY="207.0" visible="false" />
+      <CheckBox fx:id="o4" layoutX="687.0" layoutY="211.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e5" layoutX="496.0" layoutY="239.0" visible="false" />
+      <CheckBox fx:id="o5" layoutX="687.0" layoutY="243.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e6" layoutX="496.0" layoutY="274.0" visible="false" />
+      <CheckBox fx:id="o6" layoutX="687.0" layoutY="278.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e7" layoutX="497.0" layoutY="308.0" visible="false" />
+      <CheckBox fx:id="o7" layoutX="687.0" layoutY="312.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e8" layoutX="497.0" layoutY="346.0" visible="false" />
+      <CheckBox fx:id="o8" layoutX="687.0" layoutY="350.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e9" layoutX="497.0" layoutY="381.0" visible="false" />
+      <CheckBox fx:id="o9" layoutX="687.0" layoutY="385.0" mnemonicParsing="false" visible="false" />
+      <TextField fx:id="e10" layoutX="497.0" layoutY="415.0" visible="false" />
+      <CheckBox fx:id="o10" layoutX="687.0" layoutY="419.0" mnemonicParsing="false" visible="false" />
       <Separator layoutX="-6.0" layoutY="311.0" prefHeight="12.0" prefWidth="300.0" />
       <Separator layoutX="289.0" layoutY="63.0" orientation="VERTICAL" prefHeight="421.0" prefWidth="9.0" />
       <Separator layoutX="-6.0" layoutY="172.0" prefHeight="12.0" prefWidth="300.0" />
       <Separator layoutX="481.0" layoutY="63.0" orientation="VERTICAL" prefHeight="421.0" prefWidth="9.0" />
-      <Separator layoutX="-5.0" layoutY="478.0" prefHeight="12.0" prefWidth="1059.0" />
-      <Label fx:id="l2" layoutX="554.0" layoutY="110.0" text="E-Mail" visible="false" />
-      <Label fx:id="l3" layoutX="729.0" layoutY="110.0" text="Password" visible="false" />
-      <Label fx:id="l4" layoutX="866.0" layoutY="110.0" text="Super Ref" visible="false" />
-      <Label fx:id="l5" layoutX="970.0" layoutY="110.0" text="Overwrite" visible="false" />
+      <Separator layoutX="-5.0" layoutY="478.0" prefHeight="12.0" prefWidth="786.0" />
+      <Label fx:id="l2" layoutX="672.0" layoutY="79.0" text="Overwrite" visible="false" />
    </children>
 </Pane>

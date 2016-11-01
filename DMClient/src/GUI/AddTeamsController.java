@@ -32,9 +32,9 @@ public class AddTeamsController implements Initializable {
 
     @FXML
     public ChoiceBox<String> cb, ref;
-    public TextField t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
-    public CheckBox c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
-    public Label l1, l2, l3, l4, l5;
+    public TextField t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10;
+    public CheckBox o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
+    public Label l1, l2;
     public DatePicker dpDate;
     public Button submit;
     private String s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 = null;
@@ -65,8 +65,6 @@ public class AddTeamsController implements Initializable {
                 if (o1.isSelected())
                 {
                     e1.setDisable(false);
-                    p1.setDisable(false);
-                    c1.setDisable(false);
                 }
                 else
                 {
@@ -80,10 +78,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        p1.clear();
-                        c1.setDisable(true);
-                        c1.setSelected(false);
                         o1.setVisible(true);
                     }
                 }
@@ -96,8 +90,6 @@ public class AddTeamsController implements Initializable {
                 if (o2.isSelected())
                 {
                     e2.setDisable(false);
-                    p2.setDisable(false);
-                    c2.setDisable(false);
                 }
                 else
                 {
@@ -111,10 +103,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        p2.clear();
-                        c2.setDisable(true);
-                        c2.setSelected(false);
                         o2.setVisible(true);
                     }
                 }
@@ -127,8 +115,6 @@ public class AddTeamsController implements Initializable {
                 if (o3.isSelected())
                 {
                     e3.setDisable(false);
-                    p3.setDisable(false);
-                    c3.setDisable(false);
                 }
                 else
                 {
@@ -142,10 +128,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        p3.clear();
-                        c3.setDisable(true);
-                        c3.setSelected(false);
                         o3.setVisible(true);
                     }
                 }
@@ -158,8 +140,6 @@ public class AddTeamsController implements Initializable {
                 if (o4.isSelected())
                 {
                     e4.setDisable(false);
-                    p4.setDisable(false);
-                    c4.setDisable(false);
                 }
                 else
                 {
@@ -173,10 +153,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e4.setText(s4);
                         e4.setDisable(true);
-                        p4.setDisable(true);
-                        p4.clear();
-                        c4.setDisable(true);
-                        c4.setSelected(false);
                         o4.setVisible(true);
                     }
                 }
@@ -189,8 +165,6 @@ public class AddTeamsController implements Initializable {
                 if (o5.isSelected())
                 {
                     e5.setDisable(false);
-                    p5.setDisable(false);
-                    c5.setDisable(false);
                 }
                 else
                 {
@@ -204,10 +178,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e5.setText(s5);
                         e5.setDisable(true);
-                        p5.setDisable(true);
-                        p5.clear();
-                        c5.setDisable(true);
-                        c5.setSelected(false);
                         o5.setVisible(true);
                     }
                 }
@@ -220,8 +190,6 @@ public class AddTeamsController implements Initializable {
                 if (o6.isSelected())
                 {
                     e6.setDisable(false);
-                    p6.setDisable(false);
-                    c6.setDisable(false);
                 }
                 else
                 {
@@ -235,10 +203,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e6.setText(s6);
                         e6.setDisable(true);
-                        p6.setDisable(true);
-                        p6.clear();
-                        c6.setDisable(true);
-                        c6.setSelected(false);
                         o6.setVisible(true);
                     }
                 }
@@ -251,8 +215,6 @@ public class AddTeamsController implements Initializable {
                 if (o7.isSelected())
                 {
                     e7.setDisable(false);
-                    p7.setDisable(false);
-                    c7.setDisable(false);
                 }
                 else
                 {
@@ -266,10 +228,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e7.setText(s7);
                         e7.setDisable(true);
-                        p7.setDisable(true);
-                        p7.clear();
-                        c7.setDisable(true);
-                        c7.setSelected(false);
                         o7.setVisible(true);
                     }
                 }
@@ -282,8 +240,6 @@ public class AddTeamsController implements Initializable {
                 if (o8.isSelected())
                 {
                     e8.setDisable(false);
-                    p8.setDisable(false);
-                    c8.setDisable(false);
                 }
                 else
                 {
@@ -297,10 +253,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e8.setText(s8);
                         e8.setDisable(true);
-                        p8.setDisable(true);
-                        p8.clear();
-                        c8.setDisable(true);
-                        c8.setSelected(false);
                         o8.setVisible(true);
                     }
                 }
@@ -313,8 +265,6 @@ public class AddTeamsController implements Initializable {
                 if (o9.isSelected())
                 {
                     e9.setDisable(false);
-                    p9.setDisable(false);
-                    c9.setDisable(false);
                 }
                 else
                 {
@@ -328,10 +278,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e9.setText(s9);
                         e9.setDisable(true);
-                        p9.setDisable(true);
-                        p9.clear();
-                        c9.setDisable(true);
-                        c9.setSelected(false);
                         o9.setVisible(true);
                     }
                 }
@@ -344,8 +290,6 @@ public class AddTeamsController implements Initializable {
                 if (o10.isSelected())
                 {
                     e10.setDisable(false);
-                    p10.setDisable(false);
-                    c10.setDisable(false);
                 }
                 else
                 {
@@ -359,10 +303,6 @@ public class AddTeamsController implements Initializable {
                     {
                         e10.setText(s10);
                         e10.setDisable(true);
-                        p10.setDisable(true);
-                        p10.clear();
-                        c10.setDisable(true);
-                        c10.setSelected(false);
                         o10.setVisible(true);
                     }
                 }
@@ -535,41 +475,18 @@ public class AddTeamsController implements Initializable {
         {
             l1.setVisible(true);
             l2.setVisible(true);
-            l3.setVisible(true);
-            l4.setVisible(true);
-            l5.setVisible(true);
             switch ((String) ref.getValue()) {
                 case "1": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(false);
-                    p2.setVisible(false);
-                    c2.setVisible(false);
                     e3.setVisible(false);
-                    p3.setVisible(false);
-                    c3.setVisible(false);
                     e4.setVisible(false);
-                    p4.setVisible(false);
-                    c4.setVisible(false);
                     e5.setVisible(false);
-                    p5.setVisible(false);
-                    c5.setVisible(false);
                     e6.setVisible(false);
-                    p6.setVisible(false);
-                    c6.setVisible(false);
                     e7.setVisible(false);
-                    p7.setVisible(false);
-                    c7.setVisible(false);
                     e8.setVisible(false);
-                    p8.setVisible(false);
-                    c8.setVisible(false);
                     e9.setVisible(false);
-                    p9.setVisible(false);
-                    c9.setVisible(false);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o2.setVisible(false);
                     o3.setVisible(false);
                     o4.setVisible(false);
@@ -597,24 +514,6 @@ public class AddTeamsController implements Initializable {
                     e8.clear();
                     e9.clear();
                     e10.clear();
-                    p2.clear();
-                    p3.clear();
-                    p4.clear();
-                    p5.clear();
-                    p6.clear();
-                    p7.clear();
-                    p8.clear();
-                    p9.clear();
-                    p10.clear();
-                    c2.setSelected(false);
-                    c3.setSelected(false);
-                    c4.setSelected(false);
-                    c5.setSelected(false);
-                    c6.setSelected(false);
-                    c7.setSelected(false);
-                    c8.setSelected(false);
-                    c9.setSelected(false);
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                     } catch (Exception e)
@@ -624,43 +523,21 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     break;
                 }
                 case "2": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(false);
-                    p3.setVisible(false);
-                    c3.setVisible(false);
                     e4.setVisible(false);
-                    p4.setVisible(false);
-                    c4.setVisible(false);
                     e5.setVisible(false);
-                    p5.setVisible(false);
-                    c5.setVisible(false);
                     e6.setVisible(false);
-                    p6.setVisible(false);
-                    c6.setVisible(false);
                     e7.setVisible(false);
-                    p7.setVisible(false);
-                    c7.setVisible(false);
                     e8.setVisible(false);
-                    p8.setVisible(false);
-                    c8.setVisible(false);
                     e9.setVisible(false);
-                    p9.setVisible(false);
-                    c9.setVisible(false);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o3.setVisible(false);
                     o4.setVisible(false);
                     o5.setVisible(false);
@@ -685,22 +562,6 @@ public class AddTeamsController implements Initializable {
                     e8.clear();
                     e9.clear();
                     e10.clear();
-                    p3.clear();
-                    p4.clear();
-                    p5.clear();
-                    p6.clear();
-                    p7.clear();
-                    p8.clear();
-                    p9.clear();
-                    p10.clear();
-                    c3.setSelected(false);
-                    c4.setSelected(false);
-                    c5.setSelected(false);
-                    c6.setSelected(false);
-                    c7.setSelected(false);
-                    c8.setSelected(false);
-                    c9.setSelected(false);
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(0);
@@ -711,51 +572,27 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     break;
                 }
                 case "3": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(true);
-                    p3.setVisible(true);
-                    c3.setVisible(true);
                     e4.setVisible(false);
-                    p4.setVisible(false);
-                    c4.setVisible(false);
                     e5.setVisible(false);
-                    p5.setVisible(false);
-                    c5.setVisible(false);
                     e6.setVisible(false);
-                    p6.setVisible(false);
-                    c6.setVisible(false);
                     e7.setVisible(false);
-                    p7.setVisible(false);
-                    c7.setVisible(false);
                     e8.setVisible(false);
-                    p8.setVisible(false);
-                    c8.setVisible(false);
                     e9.setVisible(false);
-                    p9.setVisible(false);
-                    c9.setVisible(false);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o4.setVisible(false);
                     o5.setVisible(false);
                     o6.setVisible(false);
@@ -777,20 +614,6 @@ public class AddTeamsController implements Initializable {
                     e8.clear();
                     e9.clear();
                     e10.clear();
-                    p4.clear();
-                    p5.clear();
-                    p6.clear();
-                    p7.clear();
-                    p8.clear();
-                    p9.clear();
-                    p10.clear();
-                    c4.setSelected(false);
-                    c5.setSelected(false);
-                    c6.setSelected(false);
-                    c7.setSelected(false);
-                    c8.setSelected(false);
-                    c9.setSelected(false);
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(1);
@@ -802,59 +625,33 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     if (s3 != null)
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        c3.setDisable(true);
                         o3.setVisible(true);
                     }
                     break;
                 }
                 case "4": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(true);
-                    p3.setVisible(true);
-                    c3.setVisible(true);
                     e4.setVisible(true);
-                    p4.setVisible(true);
-                    c4.setVisible(true);
                     e5.setVisible(false);
-                    p5.setVisible(false);
-                    c5.setVisible(false);
                     e6.setVisible(false);
-                    p6.setVisible(false);
-                    c6.setVisible(false);
                     e7.setVisible(false);
-                    p7.setVisible(false);
-                    c7.setVisible(false);
                     e8.setVisible(false);
-                    p8.setVisible(false);
-                    c8.setVisible(false);
                     e9.setVisible(false);
-                    p9.setVisible(false);
-                    c9.setVisible(false);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o5.setVisible(false);
                     o6.setVisible(false);
                     o7.setVisible(false);
@@ -873,18 +670,6 @@ public class AddTeamsController implements Initializable {
                     e8.clear();
                     e9.clear();
                     e10.clear();
-                    p5.clear();
-                    p6.clear();
-                    p7.clear();
-                    p8.clear();
-                    p9.clear();
-                    p10.clear();
-                    c5.setSelected(false);
-                    c6.setSelected(false);
-                    c7.setSelected(false);
-                    c8.setSelected(false);
-                    c9.setSelected(false);
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(1);
@@ -897,67 +682,39 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     if (s3 != null)
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        c3.setDisable(true);
                         o3.setVisible(true);
                     }
                     if (s4 != null)
                     {
                         e4.setText(s4);
                         e4.setDisable(true);
-                        p4.setDisable(true);
-                        c4.setDisable(true);
                         o4.setVisible(true);
                     }
                     break;
                 }
                 case "5": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(true);
-                    p3.setVisible(true);
-                    c3.setVisible(true);
                     e4.setVisible(true);
-                    p4.setVisible(true);
-                    c4.setVisible(true);
                     e5.setVisible(true);
-                    p5.setVisible(true);
-                    c5.setVisible(true);
                     e6.setVisible(false);
-                    p6.setVisible(false);
-                    c6.setVisible(false);
                     e7.setVisible(false);
-                    p7.setVisible(false);
-                    c7.setVisible(false);
                     e8.setVisible(false);
-                    p8.setVisible(false);
-                    c8.setVisible(false);
                     e9.setVisible(false);
-                    p9.setVisible(false);
-                    c9.setVisible(false);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o6.setVisible(false);
                     o7.setVisible(false);
                     o8.setVisible(false);
@@ -973,16 +730,6 @@ public class AddTeamsController implements Initializable {
                     e8.clear();
                     e9.clear();
                     e10.clear();
-                    p6.clear();
-                    p7.clear();
-                    p8.clear();
-                    p9.clear();
-                    p10.clear();
-                    c6.setSelected(false);
-                    c7.setSelected(false);
-                    c8.setSelected(false);
-                    c9.setSelected(false);
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(1);
@@ -996,75 +743,45 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     if (s3 != null)
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        c3.setDisable(true);
                         o3.setVisible(true);
                     }
                     if (s4 != null)
                     {
                         e4.setText(s4);
                         e4.setDisable(true);
-                        p4.setDisable(true);
-                        c4.setDisable(true);
                         o4.setVisible(true);
                     }
                     if (s5 != null)
                     {
                         e5.setText(s5);
                         e5.setDisable(true);
-                        p5.setDisable(true);
-                        c5.setDisable(true);
                         o5.setVisible(true);
                     }
                     break;
                 }
                 case "6": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(true);
-                    p3.setVisible(true);
-                    c3.setVisible(true);
                     e4.setVisible(true);
-                    p4.setVisible(true);
-                    c4.setVisible(true);
                     e5.setVisible(true);
-                    p5.setVisible(true);
-                    c5.setVisible(true);
                     e6.setVisible(true);
-                    p6.setVisible(true);
-                    c6.setVisible(true);
                     e7.setVisible(false);
-                    p7.setVisible(false);
-                    c7.setVisible(false);
                     e8.setVisible(false);
-                    p8.setVisible(false);
-                    c8.setVisible(false);
                     e9.setVisible(false);
-                    p9.setVisible(false);
-                    c9.setVisible(false);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o7.setVisible(false);
                     o8.setVisible(false);
                     o9.setVisible(false);
@@ -1077,14 +794,6 @@ public class AddTeamsController implements Initializable {
                     e8.clear();
                     e9.clear();
                     e10.clear();
-                    p7.clear();
-                    p8.clear();
-                    p9.clear();
-                    p10.clear();
-                    c7.setSelected(false);
-                    c8.setSelected(false);
-                    c9.setSelected(false);
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(1);
@@ -1099,83 +808,51 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     if (s3 != null)
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        c3.setDisable(true);
                         o3.setVisible(true);
                     }
                     if (s4 != null)
                     {
                         e4.setText(s4);
                         e4.setDisable(true);
-                        p4.setDisable(true);
-                        c4.setDisable(true);
                         o4.setVisible(true);
                     }
                     if (s5 != null)
                     {
                         e5.setText(s5);
                         e5.setDisable(true);
-                        p5.setDisable(true);
-                        c5.setDisable(true);
                         o5.setVisible(true);
                     }
                     if (s6 != null)
                     {
                         e6.setText(s6);
                         e6.setDisable(true);
-                        p6.setDisable(true);
-                        c6.setDisable(true);
                         o6.setVisible(true);
                     }
                     break;
                 }
                 case "7": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(true);
-                    p3.setVisible(true);
-                    c3.setVisible(true);
                     e4.setVisible(true);
-                    p4.setVisible(true);
-                    c4.setVisible(true);
                     e5.setVisible(true);
-                    p5.setVisible(true);
-                    c5.setVisible(true);
                     e6.setVisible(true);
-                    p6.setVisible(true);
-                    c6.setVisible(true);
                     e7.setVisible(true);
-                    p7.setVisible(true);
-                    c7.setVisible(true);
                     e8.setVisible(false);
-                    p8.setVisible(false);
-                    c8.setVisible(false);
                     e9.setVisible(false);
-                    p9.setVisible(false);
-                    c9.setVisible(false);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o8.setVisible(false);
                     o9.setVisible(false);
                     o10.setVisible(false);
@@ -1185,12 +862,6 @@ public class AddTeamsController implements Initializable {
                     e8.clear();
                     e9.clear();
                     e10.clear();
-                    p8.clear();
-                    p9.clear();
-                    p10.clear();
-                    c8.setSelected(false);
-                    c9.setSelected(false);
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(1);
@@ -1206,100 +877,62 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     if (s3 != null)
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        c3.setDisable(true);
                         o3.setVisible(true);
                     }
                     if (s4 != null)
                     {
                         e4.setText(s4);
                         e4.setDisable(true);
-                        p4.setDisable(true);
-                        c4.setDisable(true);
                         o4.setVisible(true);
                     }
                     if (s5 != null)
                     {
                         e5.setText(s5);
                         e5.setDisable(true);
-                        p5.setDisable(true);
-                        c5.setDisable(true);
                         o5.setVisible(true);
                     }
                     if (s6 != null)
                     {
                         e6.setText(s6);
                         e6.setDisable(true);
-                        p6.setDisable(true);
-                        c6.setDisable(true);
                         o6.setVisible(true);
                     }
                     if (s7 != null)
                     {
                         e7.setText(s7);
                         e7.setDisable(true);
-                        p7.setDisable(true);
-                        c7.setDisable(true);
                     }
                     break;
                 }
                 case "8": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(true);
-                    p3.setVisible(true);
-                    c3.setVisible(true);
                     e4.setVisible(true);
-                    p4.setVisible(true);
-                    c4.setVisible(true);
                     e5.setVisible(true);
-                    p5.setVisible(true);
-                    c5.setVisible(true);
                     e6.setVisible(true);
-                    p6.setVisible(true);
-                    c6.setVisible(true);
                     e7.setVisible(true);
-                    p7.setVisible(true);
-                    c7.setVisible(true);
                     e8.setVisible(true);
-                    p8.setVisible(true);
-                    c8.setVisible(true);
                     e9.setVisible(false);
-                    p9.setVisible(false);
-                    c9.setVisible(false);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o9.setVisible(false);
                     o10.setVisible(false);
                     o9.setSelected(false);
                     o10.setSelected(false);
                     e9.clear();
                     e10.clear();
-                    p9.clear();
-                    p10.clear();
-                    c9.setSelected(false);
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(1);
@@ -1316,104 +949,66 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     if (s3 != null)
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        c3.setDisable(true);
                         o3.setVisible(true);
                     }
                     if (s4 != null)
                     {
                         e4.setText(s4);
                         e4.setDisable(true);
-                        p4.setDisable(true);
-                        c4.setDisable(true);
                         o4.setVisible(true);
                     }
                     if (s5 != null)
                     {
                         e5.setText(s5);
                         e5.setDisable(true);
-                        p5.setDisable(true);
-                        c5.setDisable(true);
                         o5.setVisible(true);
                     }
                     if (s6 != null)
                     {
                         e6.setText(s6);
                         e6.setDisable(true);
-                        p6.setDisable(true);
-                        c6.setDisable(true);
                         o6.setVisible(true);
                     }
                     if (s7 != null)
                     {
                         e7.setText(s7);
                         e7.setDisable(true);
-                        p7.setDisable(true);
-                        c7.setDisable(true);
                         o7.setVisible(true);
                     }
                     if (s8 != null)
                     {
                         e8.setText(s8);
                         e8.setDisable(true);
-                        p8.setDisable(true);
-                        c8.setDisable(true);
                         o8.setVisible(true);
                     }
                     break;
                 }
                 case "9": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(true);
-                    p3.setVisible(true);
-                    c3.setVisible(true);
                     e4.setVisible(true);
-                    p4.setVisible(true);
-                    c4.setVisible(true);
                     e5.setVisible(true);
-                    p5.setVisible(true);
-                    c5.setVisible(true);
                     e6.setVisible(true);
-                    p6.setVisible(true);
-                    c6.setVisible(true);
                     e7.setVisible(true);
-                    p7.setVisible(true);
-                    c7.setVisible(true);
                     e8.setVisible(true);
-                    p8.setVisible(true);
-                    c8.setVisible(true);
                     e9.setVisible(true);
-                    p9.setVisible(true);
-                    c9.setVisible(true);
                     e10.setVisible(false);
-                    p10.setVisible(false);
-                    c10.setVisible(false);
                     o10.setVisible(false);
                     o10.setSelected(false);
                     e10.clear();
-                    p10.clear();
-                    c10.setSelected(false);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(1);
@@ -1431,107 +1026,69 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     if (s3 != null)
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        c3.setDisable(true);
                         o3.setVisible(true);
                     }
                     if (s4 != null)
                     {
                         e4.setText(s4);
                         e4.setDisable(true);
-                        p4.setDisable(true);
-                        c4.setDisable(true);
                         o4.setVisible(true);
                     }
                     if (s5 != null)
                     {
                         e5.setText(s5);
                         e5.setDisable(true);
-                        p5.setDisable(true);
-                        c5.setDisable(true);
                         o5.setVisible(true);
                     }
                     if (s6 != null)
                     {
                         e6.setText(s6);
                         e6.setDisable(true);
-                        p6.setDisable(true);
-                        c6.setDisable(true);
                         o6.setVisible(true);
                     }
                     if (s7 != null)
                     {
                         e7.setText(s7);
                         e7.setDisable(true);
-                        p7.setDisable(true);
-                        c7.setDisable(true);
                         o7.setVisible(true);
                     }
                     if (s8 != null)
                     {
                         e8.setText(s8);
                         e8.setDisable(true);
-                        p8.setDisable(true);
-                        c8.setDisable(true);
                         o8.setVisible(true);
                     }
                     if (s9 != null)
                     {
                         e9.setText(s9);
                         e9.setDisable(true);
-                        p9.setDisable(true);
-                        c9.setDisable(true);
                         o9.setVisible(true);
                     }
                     break;
                 }
                 case "10": {
                     e1.setVisible(true);
-                    p1.setVisible(true);
-                    c1.setVisible(true);
                     e2.setVisible(true);
-                    p2.setVisible(true);
-                    c2.setVisible(true);
                     e3.setVisible(true);
-                    p3.setVisible(true);
-                    c3.setVisible(true);
                     e4.setVisible(true);
-                    p4.setVisible(true);
-                    c4.setVisible(true);
                     e5.setVisible(true);
-                    p5.setVisible(true);
-                    c5.setVisible(true);
                     e6.setVisible(true);
-                    p6.setVisible(true);
-                    c6.setVisible(true);
                     e7.setVisible(true);
-                    p7.setVisible(true);
-                    c7.setVisible(true);
                     e8.setVisible(true);
-                    p8.setVisible(true);
-                    c8.setVisible(true);
                     e9.setVisible(true);
-                    p9.setVisible(true);
-                    c9.setVisible(true);
                     e10.setVisible(true);
-                    p10.setVisible(true);
-                    c10.setVisible(true);
                     try {
                         s1 = getEmailForId(0);
                         s2 = getEmailForId(1);
@@ -1550,80 +1107,60 @@ public class AddTeamsController implements Initializable {
                     {
                         e1.setText(s1);
                         e1.setDisable(true);
-                        p1.setDisable(true);
-                        c1.setDisable(true);
                         o1.setVisible(true);
                     }
                     if (s2 != null)
                     {
                         e2.setText(s2);
                         e2.setDisable(true);
-                        p2.setDisable(true);
-                        c2.setDisable(true);
                         o2.setVisible(true);
                     }
                     if (s3 != null)
                     {
                         e3.setText(s3);
                         e3.setDisable(true);
-                        p3.setDisable(true);
-                        c3.setDisable(true);
                         o3.setVisible(true);
                     }
                     if (s4 != null)
                     {
                         e4.setText(s4);
                         e4.setDisable(true);
-                        p4.setDisable(true);
-                        c4.setDisable(true);
                         o4.setVisible(true);
                     }
                     if (s5 != null)
                     {
                         e5.setText(s5);
                         e5.setDisable(true);
-                        p5.setDisable(true);
-                        c5.setDisable(true);
                         o5.setVisible(true);
                     }
                     if (s6 != null)
                     {
                         e6.setText(s6);
                         e6.setDisable(true);
-                        p6.setDisable(true);
-                        c6.setDisable(true);
                         o6.setVisible(true);
                     }
                     if (s7 != null)
                     {
                         e7.setText(s7);
                         e7.setDisable(true);
-                        p7.setDisable(true);
-                        c7.setDisable(true);
                         o7.setVisible(true);
                     }
                     if (s8 != null)
                     {
                         e8.setText(s8);
                         e8.setDisable(true);
-                        p8.setDisable(true);
-                        c8.setDisable(true);
                         o8.setVisible(true);
                     }
                     if (s9 != null)
                     {
                         e9.setText(s9);
                         e9.setDisable(true);
-                        p9.setDisable(true);
-                        c9.setDisable(true);
                         o9.setVisible(true);
                     }
                     if (s10 != null)
                     {
                         e10.setText(s10);
                         e10.setDisable(true);
-                        p10.setDisable(true);
-                        c10.setDisable(true);
                         o10.setVisible(true);
                     }
                     break;
@@ -1799,69 +1336,6 @@ public class AddTeamsController implements Initializable {
             }
         }
 
-    }
-
-    public void overwrite1(ActionEvent event) throws IOException
-    {
-        e1.setDisable(false);
-        p1.setDisable(false);
-        c1.setDisable(false);
-    }
-
-    public void overwrite2(ActionEvent event) throws IOException
-    {
-        e2.setDisable(false);
-        p2.setDisable(false);
-        c2.setDisable(false);
-    }
-
-    public void overwrite3(ActionEvent event) throws IOException
-    {
-        e3.setDisable(false);
-        p3.setDisable(false);
-        c3.setDisable(false);
-    }
-
-    public void overwrite4(ActionEvent event) throws IOException
-    {
-        e4.setDisable(false);
-        p4.setDisable(false);
-        c4.setDisable(false);
-    }
-
-    public void overwrite5(ActionEvent event) throws IOException
-    {
-        e5.setDisable(false);
-        p5.setDisable(false);
-        c5.setDisable(false);
-    }
-
-    public void overwrite6(ActionEvent event) throws IOException
-    {
-        e6.setDisable(false);
-        p6.setDisable(false);
-        c6.setDisable(false);
-    }
-
-    public void overwrite7(ActionEvent event) throws IOException
-    {
-        e7.setDisable(false);
-        p7.setDisable(false);
-        c7.setDisable(false);
-    }
-
-    public void overwrite8(ActionEvent event) throws IOException
-    {
-        e8.setDisable(false);
-        p8.setDisable(false);
-        c8.setDisable(false);
-    }
-
-    public void overwrite9(ActionEvent event) throws IOException
-    {
-        e9.setDisable(false);
-        p9.setDisable(false);
-        c9.setDisable(false);
     }
 
     private boolean checkData()
