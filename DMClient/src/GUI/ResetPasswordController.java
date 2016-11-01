@@ -17,7 +17,10 @@ import teamHarambe.Client;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 public class ResetPasswordController implements Initializable {
@@ -31,11 +34,11 @@ public class ResetPasswordController implements Initializable {
     {
     }
 
-    public void attemptReset(ActionEvent event)
+    public void attemptReset(ActionEvent event) throws NoSuchAlgorithmException
     {
         try{
 
-            if (!pass1.equals(pass2))
+            if (!pass1.getText().equals(pass2.getText()))
             {
                 JOptionPane.showMessageDialog(null, "Passwords must match.", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -46,6 +49,12 @@ public class ResetPasswordController implements Initializable {
             }
             else
             {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(pass2.getText().getBytes(), 0, pass2.getText().length());
+                String md5 = new BigInteger(1, md.digest()).toString(16);
+                Client.toServer.println(md5);
+
+                JOptionPane.showMessageDialog(null, "Password reset successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
                 Stage stage = (Stage) resetButton.getScene().getWindow();
                 stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));

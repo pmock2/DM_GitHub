@@ -92,7 +92,7 @@ public class ConnectionHandler implements Runnable {
 							System.out.println("Didn't match");
 						}
 						
-						System.out.println("PAssword: "+password);
+						System.out.println("Password: "+password);
 						if (loginAs.verifyPassword(password)) {
 							userAccount = loginAs;
 							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);

@@ -176,12 +176,21 @@ public class Controller implements Initializable {
         	String loginResult = Client.fromServer.readLine();
         	
         	if (loginResult.equals("Login_CodeSuccess")) {
-        		System.out.println("Code success. Prompting for password set.");
-        		String newPassword = "password";
-        		md.update(newPassword.getBytes(), 0, newPassword.length());
-        		Client.toServer.println(new BigInteger(1, md.digest()).toString(16));
-        		
-        		loginResult = Client.fromServer.readLine();
+                try{
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    stage.hide();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ResetPassword.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initStyle(StageStyle.DECORATED);
+                    stage.setTitle("Password Reset");
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
         	}
 
         	if (loginResult.equals("Login_Success")) {
