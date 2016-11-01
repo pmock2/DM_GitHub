@@ -12,7 +12,7 @@
    <children>
       <TextField fx:id="loginText" layoutX="175.0" layoutY="213.0" />
       <PasswordField fx:id="loginPassword" layoutX="175.0" layoutY="267.0" />
-      <Hyperlink fx:id="forgot" layoutX="153.0" layoutY="317.0" onAction="#openForgotten" text="I forgot my Username or Password" />
+      <Hyperlink fx:id="forgot" layoutX="188.0" layoutY="317.0" onAction="#openForgotten" text="I forgot my Password" />
       <Button fx:id="loginButton" layoutX="148.0" layoutY="340.0" mnemonicParsing="false" onAction="#attemptLogin" text="Submit" />
       <Label layoutX="147.0" layoutY="106.0" text="Referee Login" textFill="#c31d1d">
          <font>
@@ -20,7 +20,7 @@
          </font>
       </Label>
       <Label layoutX="138.0" layoutY="148.0" text="Please enter your username and password" />
-      <Label layoutX="223.0" layoutY="196.0" text="Username" />
+      <Label layoutX="233.0" layoutY="196.0" text="E-Mail" />
       <Label layoutX="224.0" layoutY="250.0" text="Password" />
       <Button fx:id="backButton" layoutX="235.0" layoutY="340.0" mnemonicParsing="false" onAction="#goBack" text="Back to Main Menu" />
       <Label fx:id="invalidCredentials" layoutX="124.0" layoutY="292.0" text="Invalid Username or Password. Please try again." textFill="RED" visible="false" />
