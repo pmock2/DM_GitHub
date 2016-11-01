@@ -1867,8 +1867,8 @@ public class AddTeamsController implements Initializable {
     private boolean checkData()
     {
         try {
-            if (Integer.parseInt(cb.getValue())/2 > Integer.parseInt(ref.getValue())) {
-                JOptionPane.showMessageDialog(null, "You must have one referee per every two teams.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (Integer.parseInt(cb.getValue()) > Integer.parseInt(ref.getValue())) {
+                JOptionPane.showMessageDialog(null, "You must have one referee per team.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
