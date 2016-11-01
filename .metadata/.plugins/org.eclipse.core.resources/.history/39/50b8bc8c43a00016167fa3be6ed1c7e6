@@ -54,10 +54,10 @@ public class ConnectionHandler implements Runnable {
 						
 						JSONObject referees = new JSONObject(fromClient.readLine());
 						String[] refereeIds = JSONObject.getNames(referees);
-						for (int i=0; i < refereeIds.length; i++) {
+						for (int i=1; i < refereeIds.length; i++) {
 							int refereeId = Integer.parseInt(refereeIds[i]);
 							JSONObject data = referees.getJSONObject(refereeIds[i]);
-							boolean found = false;;
+							boolean found = false;
 							
 							for (int j=0; j < Server.referees.size(); j++) {
 								if (Server.referees.get(j).getId() == refereeId) {

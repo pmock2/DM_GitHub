@@ -1,0 +1,16 @@
+{
+	"Schedule" : {
+		0 : {"Team0" : 2, "Team1" : 1, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 1,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		1 : {"Team0" : 1, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 8,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		2 : {"Team0" : 0, "Team1" : 2, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0}
+	},
+	"Teams" : {
+		0 : {"Name" : "TT1", "Wins" : 0.0},
+		2 : {"Name" : "TT4", "Wins" : 0.0},
+		1 : {"Name" : "TT2", "Wins" : 0.0}
+	},
+	"Referees" : {
+		1 : {"Email" : "DMReferee1@mail.com", "Password" : "87f77988ccb5aa917c93201ba314fcd4", "LoginCode" : null, "IsSuper" : false},
+		2 : {"Email" : "DMReferee2@mail.com", "Password" : null, "LoginCode" : null, "IsSuper" : false}
+	}
+}
