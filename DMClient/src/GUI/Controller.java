@@ -80,6 +80,25 @@ public class Controller implements Initializable {
         }
     }
 
+    public void openForgotten(ActionEvent event)
+    {
+        try{
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.hide();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SendEmail.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Forgotten Password");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void openLogin(ActionEvent event)
     {
         try{

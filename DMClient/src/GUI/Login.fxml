@@ -12,7 +12,7 @@
    <children>
       <TextField fx:id="loginText" layoutX="175.0" layoutY="213.0" />
       <PasswordField fx:id="loginPassword" layoutX="175.0" layoutY="267.0" />
-      <Hyperlink layoutX="153.0" layoutY="317.0" text="I forgot my Username or Password" />
+      <Hyperlink fx:id="forgot" layoutX="153.0" layoutY="317.0" onAction="#openForgotten" text="I forgot my Username or Password" />
       <Button fx:id="loginButton" layoutX="148.0" layoutY="340.0" mnemonicParsing="false" onAction="#attemptLogin" text="Submit" />
       <Label layoutX="147.0" layoutY="106.0" text="Referee Login" textFill="#c31d1d">
          <font>
