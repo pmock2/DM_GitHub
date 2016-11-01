@@ -47,7 +47,7 @@ public class Controller implements Initializable {
     public TextArea sTextArea;
     public Label invalidCredentials;
     public ChoiceBox cb;
-    public Button createButton;
+    public Button createButton, auditLogButton;
 
     public void initialize(URL url, ResourceBundle rb) {
         if (createButton != null)
@@ -55,6 +55,13 @@ public class Controller implements Initializable {
             if (Client.permissionLevel < 2)
             {
                 createButton.setVisible(false);
+            }
+        }
+        if (auditLogButton != null)
+        {
+            if (Client.permissionLevel < 2)
+            {
+                auditLogButton.setDisable(true);
             }
         }
     }

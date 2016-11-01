@@ -27,6 +27,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddTeamsController implements Initializable {
 
@@ -38,6 +40,8 @@ public class AddTeamsController implements Initializable {
     public DatePicker dpDate;
     public Button submit;
     private String s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 = null;
+    public static final Pattern VALID_EMAIL =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -563,7 +567,7 @@ public class AddTeamsController implements Initializable {
                     e10.clear();
                     try {
                         s1 = getEmailForId(0);
-                        s2 = getEmailForId(0);
+                        s2 = getEmailForId(1);
                     } catch (Exception e)
                     {
                     }
@@ -1173,16 +1177,8 @@ public class AddTeamsController implements Initializable {
     	JSONObject referees = Client.getReferees();
     	String[] idList = JSONObject.getNames(referees);
         JSONObject data = referees.getJSONObject(idList[id]);
-        String email = data.getString("Email");
 
-  //  	for (int i=0; i < idList.length; i++)
-  //  	{
-  //  		int id = Integer.parseInt(idList[i]);
-  //  		JSONObject data = referees.getJSONObject(idList[i]);
-   // 		String email = data.getString("Email");
-    		//Do Stuff Here
-   // 	}
-    	return email;
+    	return data.getString("Email");
     }
 
     private int getRefereeCount() throws IOException
@@ -1363,7 +1359,7 @@ public class AddTeamsController implements Initializable {
                 Stage stage = (Stage) submit.getScene().getWindow();
                 stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                Parent root1 = fxmlLoader.load();
                 stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.DECORATED);
@@ -1474,7 +1470,99 @@ public class AddTeamsController implements Initializable {
                 break;
             }
         }
+
+        switch(ref.getValue())
+        {
+            case "2":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "3":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "4":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "5":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "6":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "7":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()) || !validEmail(e7.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "8":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()) || !validEmail(e7.getText()) || !validEmail(e8.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "9":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()) || !validEmail(e7.getText()) || !validEmail(e8.getText()) || !validEmail(e9.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+            case "10":
+            {
+                if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()) || !validEmail(e7.getText()) || !validEmail(e8.getText()) || !validEmail(e9.getText()) || !validEmail(e10.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            }
+        }
+
+
         return true;
+    }
+
+    private static boolean validEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL .matcher(emailStr);
+        return matcher.find();
     }
 
 
