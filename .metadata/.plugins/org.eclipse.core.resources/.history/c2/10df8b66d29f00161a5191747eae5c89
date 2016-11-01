@@ -107,12 +107,7 @@ public class ConnectionHandler implements Runnable {
 					{
 						String email = fromClient.readLine();
 						Referee referee = refereeFromEmail(email);
-						if (referee != null) {
-							referee.sendPasswordReset();
-							toClient.println("Reset_Success");
-						} else {
-							toClient.println("Reset_Fail");
-						}
+						referee.sendPasswordReset();
 						break;
 					}
 					case "Get_Standings":
