@@ -51,6 +51,7 @@ public class AddTeamsController implements Initializable {
                 if (item.isBefore(LocalDate.now()) || item.isAfter(LocalDate.now().plusYears(1))) {
                     setStyle("-fx-background-color: #ffc0cb;");
                     setDisable(true);
+
                 }
             }
         };
@@ -1219,43 +1220,6 @@ public class AddTeamsController implements Initializable {
                 "10");
 
     }
-    
-    private JSONObject newReferees() throws IOException {
-    	JSONObject referees = new JSONObject();
-    	
-    	if (!e1.getText().equals("")) {
-    		referees.put("1", new JSONObject("{\"Email\" : " + e1.getText() + "}"));
-    	}
-    	if (!e2.getText().equals("")) {
-    		referees.put("2", new JSONObject("{\"Email\" : " + e2.getText() + "}"));
-    	}
-    	if (!e3.getText().equals("")) {
-    		referees.put("3", new JSONObject("{\"Email\" : " + e3.getText() + "}"));
-    	}
-    	if (!e4.getText().equals("")) {
-    		referees.put("4", new JSONObject("{\"Email\" : " + e4.getText() + "}"));
-    	}
-    	if (!e5.getText().equals("")) {
-    		referees.put("5", new JSONObject("{\"Email\" : " + e5.getText() + "}"));
-    	}
-    	if (!e6.getText().equals("")) {
-    		referees.put("6", new JSONObject("{\"Email\" : " + e6.getText() + "}"));
-    	}
-    	if (!e7.getText().equals("")) {
-    		referees.put("7", new JSONObject("{\"Email\" : " + e7.getText() + "}"));
-    	}
-    	if (!e8.getText().equals("")) {
-    		referees.put("8", new JSONObject("{\"Email\" : " + e8.getText() + "}"));
-    	}
-    	if (!e9.getText().equals("")) {
-    		referees.put("9", new JSONObject("{\"Email\" : " + e9.getText() + "}"));
-    	}
-    	if (!e10.getText().equals("")) {
-    		referees.put("10", new JSONObject("{\"Email\" : " + e10.getText() + "}"));
-    	}
-    	
-    	return referees;
-    }
 
     public void attemptSubmit(ActionEvent event) throws IOException
     {
@@ -1354,9 +1318,6 @@ public class AddTeamsController implements Initializable {
             Client.toServer.println(dateYear);
             Client.toServer.println(dateMonth);
             Client.toServer.println(dateDay);
-            
-            Client.toServer.println(newReferees().toString());
-            
             String result = Client.fromServer.readLine();
             if (result.equals("Success")) {
                 JOptionPane.showMessageDialog(null, "Database successfully created!", "Success", JOptionPane.INFORMATION_MESSAGE);

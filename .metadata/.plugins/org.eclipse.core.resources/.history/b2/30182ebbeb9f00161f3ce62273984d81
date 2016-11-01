@@ -33,14 +33,10 @@ public class Referee {
     	this.loginCode = loginCode;
     }
     
-    public void clearLoginCode() {
-    	this.loginCode = null;
-    	try {Server.saveData();} catch (Exception e){e.printStackTrace();}
-    }
-    
     public void setEmail(String newEmail) {
     	System.out.println("Email set to: "+newEmail);
     	this.email = newEmail;
+    	loginCode = null;
     	try {Server.saveData();} catch (Exception e){e.printStackTrace();}
     }
     

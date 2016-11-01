@@ -56,25 +56,11 @@ public class ConnectionHandler implements Runnable {
 						String[] refereeIds = JSONObject.getNames(referees);
 						for (int i=1; i < refereeIds.length; i++) {
 							int refereeId = Integer.parseInt(refereeIds[i]);
-							JSONObject data = referees.getJSONObject(refereeIds[i]);
-							if (Server.referees.size() <= refereeId) {
-								Server.referees.add(refereeId, new Referee(refereeId, data.getString("Email"), false));
+							Referee referee = Server.referees.get(refereeId);
+							if (referee == null) {
+								
 							} else {
-								Server.referees.get(refereeId).setEmail(data.getString("Email"));
-							}
-						}
-						for (int i=Server.referees.size()-1; i >= 0 ; i--) {
-							boolean found = false;
-							for (int v=0; v < refereeIds.length; v++) {
-								int refereeId = Integer.parseInt(refereeIds[v]);
-								if (refereeId == Server.referees.get(i).getId()) {
-									found = true;
-									break;
-								}
-							}
-							
-							if (!found) {
-								Server.referees.remove(i);
+								referee.setEmail(referees.getJSONObject(refereeIds[i]).getString("Email"));
 							}
 						}
 						
@@ -116,7 +102,6 @@ public class ConnectionHandler implements Runnable {
 						
 						if (loginAs.verifyPassword(password)) {
 							userAccount = loginAs;
-							userAccount.clearLoginCode();
 							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
 							toClient.println("Login_Success");
 							toClient.println(permissionLevel);

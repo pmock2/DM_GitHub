@@ -116,7 +116,6 @@ public class ConnectionHandler implements Runnable {
 						
 						if (loginAs.verifyPassword(password)) {
 							userAccount = loginAs;
-							userAccount.clearLoginCode();
 							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
 							toClient.println("Login_Success");
 							toClient.println(permissionLevel);

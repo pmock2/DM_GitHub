@@ -63,20 +63,6 @@ public class ConnectionHandler implements Runnable {
 								Server.referees.get(refereeId).setEmail(data.getString("Email"));
 							}
 						}
-						for (int i=Server.referees.size()-1; i >= 0 ; i--) {
-							boolean found = false;
-							for (int v=0; v < refereeIds.length; v++) {
-								int refereeId = Integer.parseInt(refereeIds[v]);
-								if (refereeId == Server.referees.get(i).getId()) {
-									found = true;
-									break;
-								}
-							}
-							
-							if (!found) {
-								Server.referees.remove(i);
-							}
-						}
 						
 						Server.teams = teams;
 						Server.schedule = new Schedule(Server.teams, Server.referees, selectedDate);
@@ -116,7 +102,6 @@ public class ConnectionHandler implements Runnable {
 						
 						if (loginAs.verifyPassword(password)) {
 							userAccount = loginAs;
-							userAccount.clearLoginCode();
 							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
 							toClient.println("Login_Success");
 							toClient.println(permissionLevel);
