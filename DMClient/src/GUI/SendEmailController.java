@@ -55,7 +55,6 @@ public class SendEmailController implements Initializable {
                     stage.setScene(new Scene(root1));
                     stage.show();
                 }
-                //TODO COMPARE EMAIL ENTERED TO EMAILS IN THE DATABASE FOR A MATCH
                 catch (IOException e) {
                     e.printStackTrace();
                 }
