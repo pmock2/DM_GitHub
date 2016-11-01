@@ -211,22 +211,20 @@ public class Controller implements Initializable {
                     e.printStackTrace();
                 }
         	}
-        	
+
         	if (loginResult.equals("Login_Success")) {
-                try{
-                	Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());
-            		System.out.println("Client successfully logged in with permission level of " + Client.permissionLevel);
-            		Stage stage = (Stage) loginButton.getScene().getWindow();
-                    stage.hide();
-    	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
-    	            Parent root1 = (Parent) fxmlLoader.load();
-    	            stage = new Stage();
-    	            stage.initModality(Modality.APPLICATION_MODAL);
-    	            stage.initStyle(StageStyle.DECORATED);
-    	            stage.setTitle("Referee Menu");
-    	            stage.setScene(new Scene(root1));
-    	            stage.show();
-                } catch (Exception e) {} 
+        		Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());
+        		System.out.println("Client successfully logged in with permission level of " + Client.permissionLevel);
+        		Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.hide();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Referee Menu");
+                stage.setScene(new Scene(root1));
+                stage.show();
         	} else {
                 invalidCredentials.setVisible(true);
         		loginText.setText("");

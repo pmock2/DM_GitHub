@@ -1,0 +1,24 @@
+{
+	"Schedule" : {
+		0 : {"Team0" : 2, "Team1" : 1, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 1,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		1 : {"Team0" : 0, "Team1" : 4, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 1,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		2 : {"Team0" : 0, "Team1" : 3, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 8,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		3 : {"Team0" : 4, "Team1" : 1, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 8,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		4 : {"Team0" : 4, "Team1" : 2, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		5 : {"Team0" : 1, "Team1" : 3, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		6 : {"Team0" : 1, "Team1" : 0, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 22,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		7 : {"Team0" : 3, "Team1" : 2, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 22,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		8 : {"Team0" : 3, "Team1" : 4, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 29,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0},
+		9 : {"Team0" : 2, "Team1" : 0, "Referee" : 0, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 29,}, "Scored" : false, "Score0" : 0.0, "Score1" : 0.0}
+	},
+	"Teams" : {
+		3 : {"Name" : "Team4", "Wins" : 0.0},
+		2 : {"Name" : "Team3", "Wins" : 0.0},
+		0 : {"Name" : "Team1", "Wins" : 0.0},
+		4 : {"Name" : "Team5", "Wins" : 0.0},
+		1 : {"Name" : "Team2", "Wins" : 0.0}
+	},
+	"Referees" : {
+		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : "5f4dcc3b5aa765d61d8327deb882cf99", "LoginCode" : null, "IsSuper" : true}
+	}
+}

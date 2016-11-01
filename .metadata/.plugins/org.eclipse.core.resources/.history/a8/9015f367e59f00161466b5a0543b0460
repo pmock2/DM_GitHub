@@ -82,17 +82,25 @@ public class ConnectionHandler implements Runnable {
 						}
 
 						if (loginAs.verifyLoginCode(password)) {
+							System.out.println("Code matched");
 							toClient.println("Login_CodeSuccess");
 							String newPassword = fromClient.readLine();
+							System.out.println("Client setting password to "+newPassword);
 							password = newPassword;
 							loginAs.setPassword(password);
+						} else {
+							System.out.println("Didn't match");
 						}
 						
+						System.out.println("Password: "+password);
 						if (loginAs.verifyPassword(password)) {
+							System.out.println("Verification success");
 							userAccount = loginAs;
 							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
 							toClient.println("Login_Success");
+							System.out.println("Success told");
 							toClient.println(permissionLevel);
+							System.out.println("PermissionLevel told");
 						} else {
 							System.out.println("Verification failed");
 							toClient.println("Login_Fail");

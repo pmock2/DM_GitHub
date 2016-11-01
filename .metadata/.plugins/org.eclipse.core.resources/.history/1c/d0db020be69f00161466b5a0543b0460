@@ -88,7 +88,6 @@ public class Referee {
     	
     	try {
     		EmailSender.sendEmail(getEmail(), getPasswordResetTitle(), getPasswordResetMessage(""+code));
-    		Server.saveData();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}

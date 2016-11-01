@@ -56,8 +56,6 @@ public class ResetPasswordController implements Initializable {
                 String response = Client.fromServer.readLine();
                 
                 if (response.equals("Login_Success")) {
-                	Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());
-                	System.out.println("Client successfully logged in with permission level of " + Client.permissionLevel);
 	                JOptionPane.showMessageDialog(null, "Password reset successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
 	                Stage stage = (Stage) resetButton.getScene().getWindow();
 	                stage.hide();
@@ -70,7 +68,7 @@ public class ResetPasswordController implements Initializable {
 	                stage.setScene(new Scene(root1));
 	                stage.show();
                 } else {
-                	//Issue
+                	Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());
                 }
             }
         }
