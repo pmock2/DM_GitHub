@@ -9,6 +9,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import javafx.application.Application;
+
 public class EmailSender {
 	private static String from = "teamharambedm@gmail.com";
 	private static String password = "teamharambe123";
@@ -32,8 +34,20 @@ public class EmailSender {
         message.setText(body);
         
         Transport transport = session.getTransport("smtp");
-        transport.connect(host, from, password);
-        transport.sendMessage(message, message.getAllRecipients());
-        transport.close();
+        
+        (new Thread() {//This part can take a couple seconds to complete
+			public void run() {
+				try {
+					transport.connect(host, from, password);
+					transport.sendMessage(message, message.getAllRecipients());
+			        transport.close();
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+		        
+			}
+		}).start();
+        
+        
     }
 }
