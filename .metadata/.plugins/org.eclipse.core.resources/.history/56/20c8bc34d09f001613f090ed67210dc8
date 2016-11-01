@@ -242,7 +242,7 @@ public class ConnectionHandler implements Runnable {
 	private Referee refereeFromEmail(String email) {
 		Referee referee = null;
 		for (int i=0; i < Server.referees.size(); i++) {
-			if (Server.referees.get(i).getEmail().toLowerCase().equals(email.toLowerCase())) {
+			if (Server.referees.get(i).getEmail().equals(email)) {
 				return Server.referees.get(i);
 			}
 		}
