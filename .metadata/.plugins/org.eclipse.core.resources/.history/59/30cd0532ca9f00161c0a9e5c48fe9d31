@@ -87,6 +87,8 @@ public class Schedule {
 		boolean evenNumTeams = teams.size() % 2 == 0;
 		int numWeeks = teams.size() - (evenNumTeams ? 1 : 0);
 		int matchesPerWeek = teams.size()/2;
+		List<Referee> temp;
+		temp = (List)((LinkedList)referees).clone();
 
 
 		if (evenNumTeams) {
@@ -94,19 +96,26 @@ public class Schedule {
 			teams = teams.subList(1, teams.size());
 		}
 
-		int iterator = 0;
 		for (int offset=0; offset < numWeeks; offset++) {
 			Calendar weekDate = getDateFromWeek(offset);
+			if (temp.size() > 0)
+			{
+				temp.clear();
+			}
+			temp = (List)((LinkedList)referees).clone();
+			int tempInt;
 
 			if (evenNumTeams) {
-				matches.add(new Match(matches.size(), pivot, teams.get(offset), referees.get(iterator), weekDate));
-				iterator = (iterator++) % referees.size();
+				tempInt = rand.nextInt(temp.size()) + 0;
+				matches.add(new Match(matches.size(), pivot, teams.get(offset), temp.get(tempInt), weekDate));
+				temp.remove(tempInt);
 			}
 			for (int i=1; i < matchesPerWeek + (evenNumTeams ? 0 : 1); i++) {
 				int slot0 = (i+offset);
 				int slot1 = slot0 + (teams.size()-(2*i));
-				matches.add(new Match(matches.size(), teams.get(slot0 % teams.size()), teams.get(slot1 % teams.size()), referees.get(iterator), weekDate));
-				iterator = (iterator++) % referees.size();
+				tempInt = rand.nextInt(temp.size()) + 0;
+				matches.add(new Match(matches.size(), teams.get(slot0 % teams.size()), teams.get(slot1 % teams.size()), temp.get(tempInt), weekDate));
+				temp.remove(tempInt);
 			}
 		}
 	}
