@@ -35,9 +35,12 @@ public class SendEmailController implements Initializable {
     {
     }
 
-    public void attemptSend(ActionEvent event) throws NoSuchAlgorithmException
+    public void attemptSend(ActionEvent event) throws NoSuchAlgorithmException, IOException
     {
-            if (emailMatch())
+        Client.toServer.println("RequestPasswordReset");
+        Client.toServer.println(email.getText());
+        String message = Client.fromServer.readLine();
+            if (message.equals("Reset_Success"))
             {
                 try {
                     JOptionPane.showMessageDialog(null, "Email sent successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
@@ -57,9 +60,13 @@ public class SendEmailController implements Initializable {
                     e.printStackTrace();
                 }
             }
-            else
+            else if (message.equals("Reset_Fail"))
             {
                 error.setVisible(true);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Oops. Something went wrong.", "We're doomed", JOptionPane.ERROR_MESSAGE);
             }
 
     }
@@ -85,6 +92,7 @@ public class SendEmailController implements Initializable {
 
     private boolean emailMatch()
     {
+        Client.toServer.println("");
         return true;
     }
 
