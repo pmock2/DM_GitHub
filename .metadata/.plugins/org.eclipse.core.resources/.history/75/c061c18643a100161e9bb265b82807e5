@@ -106,7 +106,7 @@ public class ConnectionHandler implements Runnable {
 							match.put("Team0Name", Server.teams.get(match.getInt("Team0")).getName());
 							match.put("Team1Name", Server.teams.get(match.getInt("Team1")).getName());
 						}
-						toClient.println(clientSchedule.toString());
+						toClient.println();
 						toClient.println("End_Schedule");
 						System.out.println("Sent schedule to client");
 						break;
