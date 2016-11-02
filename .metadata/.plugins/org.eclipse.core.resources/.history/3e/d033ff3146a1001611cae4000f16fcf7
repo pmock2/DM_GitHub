@@ -105,7 +105,6 @@ public class ConnectionHandler implements Runnable {
 							JSONObject match = clientSchedule.getJSONObject(keyNames[i]);
 							match.put("Team0Name", Server.teams.get(match.getInt("Team0")).getName());
 							match.put("Team1Name", Server.teams.get(match.getInt("Team1")).getName());
-							match.put("RefereeName", Server.referees.get(match.getInt("Referee")).getEmail());
 						}
 						toClient.println(clientSchedule.toString());
 						toClient.println("End_Schedule");
