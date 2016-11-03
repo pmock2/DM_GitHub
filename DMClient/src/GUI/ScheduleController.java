@@ -48,6 +48,13 @@ public class ScheduleController implements Initializable {
             if (Client.permissionLevel > 1)
             {
                 tv.setEditable(true);
+                datecolumn.setEditable(true);
+                team1column.setEditable(true);
+                team2column.setEditable(true);
+                refcolumn.setEditable(true);
+                score1column.setEditable(true);
+                score2column.setEditable(true);
+                saveButton.setVisible(true);
             }
         }
         catch (Exception e)

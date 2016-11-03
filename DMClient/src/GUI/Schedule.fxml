@@ -16,14 +16,14 @@
       </Label>
       <TableView fx:id="tv" layoutX="34.0" layoutY="67.0" prefHeight="266.0" prefWidth="533.0">
         <columns>
-          <TableColumn fx:id="datecolumn" prefWidth="94.0" text="Date" />
-          <TableColumn fx:id="team1column" minWidth="6.0" prefWidth="53.0" text="Team A" />
-            <TableColumn fx:id="team2column" prefWidth="62.0" text="Team B" />
-            <TableColumn fx:id="score1column" minWidth="0.0" prefWidth="54.0" text="Score A" />
-            <TableColumn fx:id="score2column" prefWidth="61.0" text="Score B" />
-            <TableColumn fx:id="refcolumn" prefWidth="208.0" text="Referee" />
+          <TableColumn fx:id="datecolumn" editable="false" prefWidth="94.0" text="Date" />
+          <TableColumn fx:id="team1column" editable="false" minWidth="6.0" prefWidth="53.0" text="Team A" />
+            <TableColumn fx:id="team2column" editable="false" prefWidth="62.0" text="Team B" />
+            <TableColumn fx:id="score1column" editable="false" minWidth="0.0" prefWidth="54.0" text="Score A" />
+            <TableColumn fx:id="score2column" editable="false" prefWidth="61.0" text="Score B" />
+            <TableColumn fx:id="refcolumn" editable="false" prefWidth="208.0" text="Referee" />
         </columns>
       </TableView>
-      <Button fx:id="saveButton" layoutX="34.0" layoutY="23.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" />
+      <Button fx:id="saveButton" layoutX="34.0" layoutY="23.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" visible="false" />
    </children>
 </Pane>
