@@ -99,15 +99,4 @@ public class StandingsController implements Initializable {
         return null;
     }
 
-    public void attemptSave(ActionEvent event) throws IOException
-    {
-        JSONObject schedule = new JSONObject();
-        String JSONString = "";
-        for (int i=0; i < data.size(); i++)
-        {
-            schedule.put("Team0", data.get(i).getTeam1());
-            schedule.put("Wins", data.get(i).getWins());
-        }
-        System.out.println(schedule.toString());
-    }
     }
