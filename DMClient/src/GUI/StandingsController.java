@@ -1,8 +1,15 @@
 package GUI;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 import teamHarambe.Client;
@@ -15,28 +22,63 @@ import java.util.ResourceBundle;
 public class StandingsController implements Initializable {
 
     @FXML
-    public TextArea standingsTextArea;
+    public TableView<Standings.StandingsData> tv = new TableView<>();
+    public TableColumn teamcolumn, winscolumn;
+    public Button saveButton;
+    private ObservableList<Standings.StandingsData> data = FXCollections.observableArrayList();
 
 
     public void initialize(URL url, ResourceBundle rb) {
+        teamcolumn.setCellValueFactory(new PropertyValueFactory<>("team1"));
+        winscolumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
+
         try {
-            setStandingsTextArea();
+            data = getStandingsData();
+            tv.setItems(data);
+
+            if (Client.permissionLevel > 1)
+            {
+                tv.setEditable(true);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void setStandingsTextArea() throws IOException {
-        standingsTextArea.clear();
+    public ObservableList<Standings.StandingsData> getStandingsData() throws IOException
+    {
+        ObservableList<Standings.StandingsData> data = FXCollections.observableArrayList();
+        JSONObject standings = importStandings();
+        String[] keyNames = JSONObject.getNames(standings);
+        for (int i=0; i < keyNames.length; i++)
+        {
+            JSONObject matchData = standings.getJSONObject(keyNames[i]);
+            data.add(new Standings.StandingsData(matchData.getString("Name"), Double.toString(matchData.getDouble("Wins"))));
+        }
+        return data;
+    }
+
+    public JSONObject importStandings() throws IOException {
         Client.toServer.println("Get_Standings");
         String message = Client.fromServer.readLine();
-        if (message.equals("No_Standings_Found"))
-        {
+        if (message.equals("No_Standings_Found")) {
             JOptionPane.showMessageDialog(null, "Standings do not exist. Please log in if you would like to create them.", "Standings error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            System.out.println(message);
+            return new JSONObject(message);
         }
-        else {
-            JSONObject rankings = new JSONObject(message);
-            standingsTextArea.appendText(rankings.toString(1));
-            }
+        return null;
+    }
+
+    public void attemptSave(ActionEvent event) throws IOException
+    {
+        JSONObject schedule = new JSONObject();
+        String JSONString = "";
+        for (int i=0; i < data.size(); i++)
+        {
+            schedule.put("Team0", data.get(i).getTeam1());
+            schedule.put("Wins", data.get(i).getWins());
         }
+        System.out.println(schedule.toString());
+    }
     }

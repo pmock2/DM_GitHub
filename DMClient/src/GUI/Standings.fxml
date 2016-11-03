@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.StandingsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.StandingsController">
    <children>
-      <Label layoutX="248.0" text="Standings" textFill="RED">
+      <Label layoutX="119.0" layoutY="-3.0" text="Standings" textFill="RED">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextArea fx:id="standingsTextArea" editable="false" layoutX="131.0" layoutY="79.0" prefHeight="243.0" prefWidth="338.0" />
+      <TableView fx:id="tv" layoutX="20.0" layoutY="67.0" prefHeight="266.0" prefWidth="301.0">
+        <columns>
+          <TableColumn fx:id="teamcolumn" prefWidth="123.0" text="Team" />
+          <TableColumn fx:id="winscolumn" minWidth="6.0" prefWidth="159.0" text="Wins" />
+        </columns>
+      </TableView>
+      <Button fx:id="saveButton" layoutX="126.0" layoutY="32.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" />
    </children>
 </Pane>

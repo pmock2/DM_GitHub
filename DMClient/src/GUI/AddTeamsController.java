@@ -1386,7 +1386,7 @@ public class AddTeamsController implements Initializable {
                 JOptionPane.showMessageDialog(null, "You must Select a number of teams and a number of referees", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            
+
         switch(cb.getValue())
         {
             case "2":
