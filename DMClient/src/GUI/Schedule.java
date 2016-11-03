@@ -17,7 +17,7 @@ public class Schedule extends Application {
         primaryStage.show();
     }
 
-    public static class ScheduleData {
+    public static class ScheduleData {//This is a match -- not a schedule
 
         private final SimpleStringProperty team1;
         private final SimpleStringProperty team2;
@@ -25,14 +25,20 @@ public class Schedule extends Application {
         private final SimpleStringProperty date;
         private final SimpleStringProperty score1;
         private final SimpleStringProperty score2;
+        private final int matchId;
 
-        public ScheduleData(String t1, String t2, String ref, String date, String s1, String s2) {
+        public ScheduleData(int matchId, String t1, String t2, String ref, String date, String s1, String s2) {
+        	this.matchId = matchId;
             this.team1 = new SimpleStringProperty(t1);
             this.team2 = new SimpleStringProperty(t2);
             this.referee = new SimpleStringProperty(ref);
             this.date = new SimpleStringProperty(date);
             this.score1 = new SimpleStringProperty(s1);
             this.score2 = new SimpleStringProperty(s2);
+        }
+        
+        public int getMatchId() {
+        	return matchId;
         }
 
         public String getTeam1() {
@@ -142,7 +148,6 @@ public class Schedule extends Application {
             }
             return day;
         }
-
     }
 
 

@@ -123,22 +123,25 @@ public class ScheduleController implements Initializable {
     public void attemptSave(ActionEvent event) throws IOException
     {
         JSONObject schedule = new JSONObject();
-        JSONObject date = new JSONObject();
-        String JSONString = "";
         for (int i=0; i < data.size(); i++)
         {
-            schedule.put("Team0", data.get(i).getTeam1());
-            schedule.put("Team1", data.get(i).getTeam2());
-            schedule.put("Referee", data.get(i).getRef());
-            date.put("Year", data.get(i).dateToYear());
-            date.put("Month", data.get(i).dateToMonth());
-            date.put("Day", data.get(i).dateToDay());
-            schedule.put("Date", date);
-            schedule.put("Scored", false);
-            schedule.put("Score0", data.get(i).getScore1());
-            schedule.put("Score1", data.get(i).getScore2());
+        	JSONObject match = new JSONObject();
+        	JSONObject date = new JSONObject();
+
+        	match.put("RefereeName", data.get(i).getRef());
+            match.put("Team0Score", Integer.parseInt(data.get(i).getScore1()));
+            match.put("Team1Score", Integer.parseInt(data.get(i).getScore2()));
+            
+            date.put("Year", Integer.parseInt(data.get(i).dateToYear()));
+            date.put("Month", Integer.parseInt(data.get(i).dateToMonth())-1);
+            date.put("Day", Integer.parseInt(data.get(i).dateToDay()));
+            match.put("Date", date);
+            
+            schedule.put(""+(data.get(i).getMatchId()), match);
         }
-        System.out.println(schedule.toString());
+
+        Client.toServer.println(schedule.toString());
+        String response = Client.fromServer.readLine();//Exception_ConflictingDate or Exception_InsufficientPermissions
     }
 
 
@@ -154,7 +157,11 @@ public class ScheduleController implements Initializable {
             int year = date.getInt("Year");
             int month = (date.getInt("Month")+1);
             int day = date.getInt("Day");
-            data.add(new Schedule.ScheduleData(matchData.getString("Team0Name"), matchData.getString("Team1Name"), matchData.getString("RefereeName"), month+"/"+day+"/"+year, Integer.toString(matchData.getInt("Score0")), Integer.toString(matchData.getInt("Score1"))));
+            data.add(new Schedule.ScheduleData(
+            		Integer.parseInt(keyNames[i]), matchData.getString("Team0Name"), matchData.getString("Team1Name"), 
+            		matchData.getString("RefereeName"), month+"/"+day+"/"+year, Integer.toString(matchData.getInt("Score0")), 
+            		Integer.toString(matchData.getInt("Score1")
+            )));
         }
         return data;
     }

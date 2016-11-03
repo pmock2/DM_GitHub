@@ -13,8 +13,8 @@ public class Match {
     Referee referee;
     Calendar date;
     int id;
-    double team1Score = 0;
-    double team2Score = 0;
+    int team1Score = 0;
+    int team2Score = 0;
     boolean scored = false;
 
     public Match(int id, Team team1, Team team2, Referee referee, Calendar date) {
@@ -45,8 +45,15 @@ public class Match {
 		this.team2 = Server.teams.get(matchData.getInt("Team1"));
 		this.referee = matchReferee;
 		this.scored = matchData.getBoolean("Scored");
-		this.team1Score = matchData.getDouble("Score0");
-		this.team2Score = matchData.getDouble("Score1");
+		this.team1Score = matchData.getInt("Score0");
+		this.team2Score = matchData.getInt("Score1");
+    }
+    
+    public Match(int matchId, Team team0, Team team1, Referee referee, Calendar date, int team0Score, int team1Score, boolean scored) {
+    	this(matchId, team0, team1, referee, date);
+    	this.team1Score = team0Score;
+    	this.team2Score = team1Score;
+    	this.scored = true;
     }
 
     public void setTeam1(Team team1) {
@@ -61,7 +68,7 @@ public class Match {
         return team1Score;
     }
 
-    public void setTeam1Score(double team1Score) {
+    public void setTeam1Score(int team1Score) {
         this.team1Score = team1Score;
     }
 
@@ -69,8 +76,12 @@ public class Match {
         return team2Score;
     }
 
-    public void setTeam2Score(double team2Score) {
+    public void setTeam2Score(int team2Score) {
         this.team2Score = team2Score;
+    }
+    
+    public boolean getScored() {
+    	return scored;
     }
 
     public Referee getReferee() {

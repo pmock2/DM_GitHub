@@ -170,6 +170,7 @@ public class Controller implements Initializable {
 
     public void openSchedule(ActionEvent event) throws IOException
     {
+    	System.out.println("Opening schedule");
         if (MethodProvider.checkForSetup()) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Schedule.fxml"));

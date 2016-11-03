@@ -112,6 +112,57 @@ public class ConnectionHandler implements Runnable {
 						System.out.println("Sent schedule to client");
 						break;
 					}
+					case "Update_Schedule":
+					{
+						JSONObject changedSchedule = new JSONObject(fromClient.readLine());
+						List<Match> currentSchedule = Server.schedule.getMatches();
+						List<Match> newSchedule = new LinkedList<>();
+						
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						boolean conflictingDate = false;
+						String matchIds[] = JSONObject.getNames(changedSchedule);
+						for (int i=0; i < matchIds.length; i++) {
+							int matchId = Integer.parseInt(matchIds[i]);
+							JSONObject changedMatch = changedSchedule.getJSONObject(matchIds[i]);
+							Match currentMatch = currentSchedule.get(matchId);
+
+							int team0Score = changedMatch.getInt("Team0Score");
+							int team1Score = changedMatch.getInt("Team1Score");
+							
+							JSONObject date = changedMatch.getJSONObject("Date");
+							int year = date.getInt("Year"), month = date.getInt("Month"), day = date.getInt("Day");
+							Calendar newDate = Calendar.getInstance();
+							newDate.set(year, month, day);
+							if (dateConflicts(matchId, newDate)) {
+								conflictingDate = true;
+								break;
+							}
+							
+							String refereeEmail = changedMatch.getString("RefereeName");
+							Referee referee = refereeFromEmail(refereeEmail);
+							
+							boolean changed = (team0Score != currentMatch.getTeam1Score()) || (team1Score != currentMatch.getTeam2Score());
+							boolean scored = changed ? true : currentMatch.getScored();
+							
+							newSchedule.add(
+									new Match(matchId, currentMatch.getTeam1(), currentMatch.getTeam2(), referee, newDate, 
+										      team0Score, team1Score, scored)
+							);
+						}
+						
+						if (!conflictingDate) {
+							Server.schedule = new Schedule(newSchedule);
+							Server.saveData();
+							toClient.println("Update_Success");
+						} else {
+							toClient.println("Exception_ConflictingDate");
+						}
+						break;
+					}
 					case "Login":
 					{
 						String email = fromClient.readLine();
@@ -216,8 +267,8 @@ public class ConnectionHandler implements Runnable {
 						JSONObject args = new JSONObject(argsString);
 						
 						int matchId = args.getInt("MatchId");
-						double team0Score = args.getDouble("Team0Score");
-						double team1Score = args.getDouble("Team1Score");
+						int team0Score = args.getInt("Team0Score");
+						int team1Score = args.getInt("Team1Score");
 						boolean team0Forfiet = args.getBoolean("Team0Forfiet");
 						boolean team1Forfiet = args.getBoolean("Team1Forfiet");
 						
@@ -231,45 +282,6 @@ public class ConnectionHandler implements Runnable {
 						}
 						
 						break;
-					}
-					case "Set_MatchDate":
-					{
-						if (permissionLevel < 2) {
-							toClient.println("Exception_InsufficientPermissions");
-							break;
-						}
-						
-						String argsString = fromClient.readLine();
-						JSONObject args = new JSONObject(argsString);
-						
-						int matchId = args.getInt("MatchId");
-						int year = args.getInt("Year");
-						int month = args.getInt("Year");
-						int day = args.getInt("Day");
-						Calendar newDate = Calendar.getInstance();
-						newDate.set(year, month, day);
-						
-						List<Match> matches = Server.schedule.getMatches();
-						Match match = matches.get(matchId);
-						for (int i=0; i < matches.size(); i++) {
-							Match other = matches.get(i);
-							if (i != matchId && match.isMatchOnDate(other.getDate())) {
-								String team0Name = match.getTeam1().getName();
-								String team1Name = match.getTeam2().getName();
-								String team2Name = other.getTeam1().getName();
-								String team3Name = other.getTeam2().getName();
-								
-								if (team0Name.equals(team2Name) || team0Name.equals(team3Name) ||
-								    team1Name.equals(team2Name) || team1Name.equals(team3Name)
-								) {
-									toClient.println("Exception_ConflictingDate");
-									break;
-								}
-							}
-						}
-						
-						match.setDate(newDate);
-						Server.saveData();
 					}
 				}
 
@@ -292,5 +304,27 @@ public class ConnectionHandler implements Runnable {
 		}
 		
 		return referee;
+	}
+	
+	private boolean dateConflicts(int matchId, Calendar newDate) {
+		List<Match> matches = Server.schedule.getMatches();
+		Match match = matches.get(matchId);
+		for (int i=0; i < matches.size(); i++) {
+			Match other = matches.get(i);
+			if (i != matchId && match.isMatchOnDate(other.getDate())) {
+				String team0Name = match.getTeam1().getName();
+				String team1Name = match.getTeam2().getName();
+				String team2Name = other.getTeam1().getName();
+				String team3Name = other.getTeam2().getName();
+				
+				if (team0Name.equals(team2Name) || team0Name.equals(team3Name) ||
+				    team1Name.equals(team2Name) || team1Name.equals(team3Name)
+				) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 }
