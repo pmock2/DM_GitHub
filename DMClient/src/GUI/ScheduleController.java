@@ -147,8 +147,14 @@ public class ScheduleController implements Initializable {
             schedule.put(""+(data.get(i).getMatchId()), match);
         }
 
+        Client.toServer.println("Update_Schedule");
         Client.toServer.println(schedule.toString());
         String response = Client.fromServer.readLine();//Exception_ConflictingDate or Exception_InsufficientPermissions
+        if (response.equals("Exception_ConflictingDate"))
+        {
+            JOptionPane.showMessageDialog(null, "Detected conflicting data. Data did not save", "Date error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
 

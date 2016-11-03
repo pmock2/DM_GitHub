@@ -3,6 +3,7 @@ package GUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 import teamHarambe.Client;
@@ -46,6 +48,30 @@ public class StandingsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+       teamcolumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        teamcolumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Standings.StandingsData, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Standings.StandingsData, String> t) {
+                        ((Standings.StandingsData) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setTeam1(t.getNewValue());
+                    }
+                }
+        );
+
+        winscolumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        winscolumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Standings.StandingsData, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Standings.StandingsData, String> t) {
+                        ((Standings.StandingsData) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setWins(t.getNewValue());
+                    }
+                }
+        );
     }
 
     public ObservableList<Standings.StandingsData> getStandingsData() throws IOException
