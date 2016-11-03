@@ -43,7 +43,6 @@ public class StandingsController implements Initializable {
                 tv.setEditable(true);
                 teamcolumn.setEditable(true);
                 winscolumn.setEditable(true);
-                saveButton.setVisible(true);
             }
         } catch (Exception e) {
             e.printStackTrace();
