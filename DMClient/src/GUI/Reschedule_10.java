@@ -15,7 +15,7 @@ public class Reschedule_10 extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Reschedule.fxml"));
         primaryStage.setTitle("Reschedule");
-        primaryStage.setScene(new Scene(root, 500, 630));
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 

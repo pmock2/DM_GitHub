@@ -145,7 +145,7 @@ public class Controller implements Initializable {
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Standings do not exist. Please log in if you would like to create them.", "Standings error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Standings do not exist. The super referee must create the schedule.", "Standings error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -187,7 +187,7 @@ public class Controller implements Initializable {
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Schedule does not exist. Please log in if you would like to create one.", "Schedule error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Schedule does not exist. The super referee must create the schedule.", "Schedule error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

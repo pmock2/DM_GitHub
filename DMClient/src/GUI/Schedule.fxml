@@ -20,14 +20,15 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="tv" layoutX="56.0" layoutY="90.0" prefHeight="541.0" prefWidth="769.0">
+            <TableView id="myTable" fx:id="tv" layoutX="56.0" layoutY="90.0" prefHeight="541.0" prefWidth="769.0" styleClass="table-column" stylesheets="@Style.css">
               <columns>
                 <TableColumn fx:id="datecolumn" editable="false" prefWidth="113.0" text="Date" />
-                <TableColumn fx:id="team1column" editable="false" minWidth="6.0" prefWidth="88.0" text="Team A" />
-                  <TableColumn fx:id="team2column" editable="false" prefWidth="95.0" text="Team B" />
-                  <TableColumn fx:id="score1column" editable="false" minWidth="0.0" prefWidth="92.0" text="Score A" />
-                  <TableColumn fx:id="score2column" editable="false" prefWidth="108.0" text="Score B" />
-                  <TableColumn fx:id="refcolumn" editable="false" prefWidth="272.0" text="Referee" />
+                <TableColumn fx:id="team1column" editable="false" minWidth="6.0" prefWidth="140.0" text="Home" />
+                  <TableColumn fx:id="team1column1" editable="false" minWidth="0.0" prefWidth="31.0" text="Vs." />
+                  <TableColumn fx:id="team2column" editable="false" prefWidth="140.0" text="Away" />
+                  <TableColumn fx:id="score1column" editable="false" minWidth="0.0" prefWidth="60.0" text="Score A" />
+                  <TableColumn fx:id="score2column" editable="false" prefWidth="60.0" text="Score B" />
+                  <TableColumn fx:id="refcolumn" editable="false" prefWidth="224.0" text="Referee" />
               </columns>
             </TableView>
             <Button fx:id="saveButton" layoutX="34.0" layoutY="23.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" visible="false" />
