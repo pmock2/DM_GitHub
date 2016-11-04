@@ -23,6 +23,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="create" layoutX="282.0" layoutY="361.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="31.0" prefWidth="236.0" text="Create one now" />
+      <Button fx:id="create" layoutX="282.0" layoutY="361.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="31.0" prefWidth="236.0" text="Log In To Create Schedule" />
    </children>
 </Pane>
