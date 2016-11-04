@@ -24,6 +24,6 @@
       <Button fx:id="createButton" layoutX="239.0" layoutY="341.0" mnemonicParsing="false" onAction="#createSchedule" text="New Schedule" />
       <Button fx:id="auditLogButton" layoutX="170.0" layoutY="255.0" mnemonicParsing="false" text="View Audit Log" />
       <Hyperlink fx:id="sLogoutButton" layoutX="524.0" onAction="#superLogout" text="Logout" />
-      <Button layoutX="299.0" layoutY="255.0" mnemonicParsing="false" text="Input Match Scores" />
+      <Button layoutX="299.0" layoutY="255.0" mnemonicParsing="false" onAction="#openMatches" text="Input Match Scores" />
    </children>
 </Pane>

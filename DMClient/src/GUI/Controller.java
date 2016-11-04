@@ -149,6 +149,28 @@ public class Controller implements Initializable {
         }
     }
 
+    public void openMatches(ActionEvent event) throws IOException
+    {
+        if (MethodProvider.checkForSetup()) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
+                Parent root1 = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Match Select");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Standings do not exist. Please log in if you would like to create them.", "Standings error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public void goBack(ActionEvent event)
     {
         try{

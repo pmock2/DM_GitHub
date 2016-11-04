@@ -6,13 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ChangeScore_9a extends Application {
+public class MatchSelect extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("ChangeScore1.fxml"));
-        primaryStage.setTitle("Super User Score Change");
-        primaryStage.setScene(new Scene(root, 540, 325));
+        Parent root = FXMLLoader.load(getClass().getResource("MatchSelect.fxml"));
+        primaryStage.setTitle("Select Match To Score");
+        primaryStage.setScene(new Scene(root, 600, 375));
         primaryStage.show();
     }
 
