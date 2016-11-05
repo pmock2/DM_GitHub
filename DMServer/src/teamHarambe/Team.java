@@ -13,7 +13,7 @@ public class Team {
         this.name = name;
         this.wins = 0;
     }
-    
+
     public Team(int id, String name, double wins) {
     	this(id, name);
     	this.wins = wins;
@@ -22,18 +22,18 @@ public class Team {
     public String getName() {
         return name;
     }
-    
+
     public int getId() {
     	return id;
     }
-    
+
     public double getWins() {
     	return wins;
     }
-    
+
     public String toJSON() {
     	String s = "{\"Name\" : \"" + name + "\", \"Wins\" : " + wins + "}";
-    	
+
     	return s;
     }
 }

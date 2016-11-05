@@ -86,7 +86,10 @@ public class Schedule {
 		int matchesPerWeek = teams.size()/2;
 		Iterator iterator = referees.listIterator();
 		Referee r = (Referee)iterator.next();
-
+		while (r.isSuperReferee)
+		{
+			r = (Referee) iterator.next();
+		}
 
 		if (evenNumTeams) {
 			pivot = teams.get(0);
@@ -100,12 +103,20 @@ public class Schedule {
 				matches.add(new Match(matches.size(), pivot, teams.get(offset), r, weekDate));
 				if (iterator.hasNext())
 				{
-					r = (Referee)iterator.next();
+					r = (Referee) iterator.next();
+					while (r.isSuperReferee)
+					{
+						r = (Referee) iterator.next();
+					}
 				}
 				else
 				{
 					iterator = referees.listIterator();
-					r = (Referee)iterator.next();
+					r = (Referee) iterator.next();
+					while (r.isSuperReferee)
+					{
+						r = (Referee) iterator.next();
+					}
 				}
 			}
 			for (int i=1; i < matchesPerWeek + (evenNumTeams ? 0 : 1); i++) {
@@ -114,12 +125,20 @@ public class Schedule {
 				matches.add(new Match(matches.size(), teams.get(slot0 % teams.size()), teams.get(slot1 % teams.size()), r, weekDate));
 				if (iterator.hasNext())
 				{
-					r = (Referee)iterator.next();
+					r = (Referee) iterator.next();
+					while (r.isSuperReferee)
+					{
+						r = (Referee) iterator.next();
+					}
 				}
 				else
 				{
 					iterator = referees.listIterator();
-					r = (Referee)iterator.next();
+					r = (Referee) iterator.next();
+					while (r.isSuperReferee)
+					{
+						r = (Referee) iterator.next();
+					}
 				}
 			}
 		}
