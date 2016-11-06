@@ -228,8 +228,15 @@ public class ConnectionHandler implements Runnable {
 						JSONObject jsonMatches = new JSONObject();
 						
 						for(int i=0; i < seasonMatches.size(); i++) {
-							if (seasonMatches.get(i).getReferee() == userAccount && seasonMatches.get(i).isMatchOnDate(today)) {
-								jsonMatches.put(seasonMatches.get(i).getId()+"", seasonMatches.get(i).toJSON());
+							Match m = seasonMatches.get(i);
+							if (seasonMatches.get(i).getReferee() == userAccount) {
+								JSONObject matchesJSON = new JSONObject();
+								matchesJSON.put("Team0Name", m.getTeam1().getName());
+								matchesJSON.put("Team1Name", m.getTeam2().getName());
+								matchesJSON.put("Scored", m.getScored());
+								matchesJSON.put("Score0", m.getTeam1Score());
+								matchesJSON.put("Score1", m.getTeam2Score());
+								jsonMatches.put(seasonMatches.get(i).getId()+"", matchesJSON);
 							}
 						}
 						

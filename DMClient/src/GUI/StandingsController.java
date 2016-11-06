@@ -37,40 +37,12 @@ public class StandingsController implements Initializable {
         try {
             data = getStandingsData();
             tv.setItems(data);
-
-            if (Client.permissionLevel > 1)
-            {
-                tv.setEditable(true);
-                teamcolumn.setEditable(true);
-                winscolumn.setEditable(true);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-       teamcolumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        teamcolumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Standings.StandingsData, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<Standings.StandingsData, String> t) {
-                        ((Standings.StandingsData) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setTeam1(t.getNewValue());
-                    }
-                }
-        );
 
-        winscolumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        winscolumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Standings.StandingsData, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<Standings.StandingsData, String> t) {
-                        ((Standings.StandingsData) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setWins(t.getNewValue());
-                    }
-                }
-        );
+
     }
 
     public ObservableList<Standings.StandingsData> getStandingsData() throws IOException
