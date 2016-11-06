@@ -57,6 +57,19 @@ public class Server {
 		}
 		return resources.getPath()+"/Database.json";
 	}
+
+	public static List<Referee> getNonSupers(List<Referee> fullList)
+	{
+		List<Referee> nonSupers = new LinkedList<>();
+		for (Referee referee : fullList)
+		{
+			if (!referee.isSuperReferee)
+			{
+				nonSupers.add(referee);
+			}
+		}
+		return nonSupers;
+	}
 	
 	private static void createDatabase() throws IOException {
 		System.out.println("Creating database");

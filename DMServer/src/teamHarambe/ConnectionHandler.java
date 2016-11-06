@@ -87,7 +87,7 @@ public class ConnectionHandler implements Runnable {
 						}
 						
 						Server.teams = teams;
-						Server.schedule = new Schedule(Server.teams, Server.referees, selectedDate);
+						Server.schedule = new Schedule(Server.teams, Server.getNonSupers(Server.referees), selectedDate);
 						Server.saveData();
 
 						if (dbFile.exists()) {
