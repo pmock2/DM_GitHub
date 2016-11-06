@@ -14,7 +14,7 @@ public class AddTeams extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("AddTeams.fxml"));
         primaryStage.setTitle("Add Teams");
-        primaryStage.setScene(new Scene(root, 600, 375));
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
 
     }
