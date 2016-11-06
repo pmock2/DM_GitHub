@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
       <Pane layoutX="291.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
@@ -62,23 +61,5 @@
             </Button>
          </children>
       </Pane>
-
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="199.0" layoutY="78.0" prefHeight="42.0" prefWidth="191.0" text="Referee Menu" textAlignment="JUSTIFY" textFill="#c62b17" wrapText="true">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Button layoutX="184.0" layoutY="200.0" mnemonicParsing="false" onAction="#openStandings" text="Standings" />
-      <Label layoutX="244.0" layoutY="430.0" text="Team Harabme 2016">
-         <font>
-            <Font size="9.0" />
-         </font>
-      </Label>
-      <Button layoutX="312.0" layoutY="200.0" mnemonicParsing="false" onAction="#openSchedule" text="View Schedule" />
-      <Label layoutX="212.0" layoutY="120.0" text="Advanced Options for Referees" />
-      <Button fx:id="createButton" layoutX="239.0" layoutY="341.0" mnemonicParsing="false" onAction="#createSchedule" text="New Schedule" />
-      <Button fx:id="auditLogButton" layoutX="170.0" layoutY="255.0" mnemonicParsing="false" text="View Audit Log" />
-      <Hyperlink fx:id="sLogoutButton" layoutX="524.0" onAction="#superLogout" text="Logout" />
-      <Button layoutX="299.0" layoutY="255.0" mnemonicParsing="false" onAction="#openMatches" text="Input Match Scores" />
    </children>
 </AnchorPane>
