@@ -14,7 +14,7 @@ public class Landing extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Landing.fxml"));
         primaryStage.setTitle("Landing Page");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 436, 450));
         primaryStage.show();
     }
 

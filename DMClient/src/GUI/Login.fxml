@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -12,29 +8,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <TextField fx:id="loginText" layoutX="315.0" layoutY="236.0" prefWidth="250.0" />
-            <PasswordField fx:id="loginPassword" layoutX="312.0" layoutY="321.0" prefWidth="250.0" />
-            <Hyperlink fx:id="forgot" layoutX="739.0" layoutY="14.0" onAction="#openForgotten" text="Forget Password?" underline="true" />
-            <Button fx:id="loginButton" layoutX="362.0" layoutY="429.0" mnemonicParsing="false" onAction="#attemptLogin" prefWidth="150.0" style="-fx-alignment: center;" text="Submit" />
-            <Label layoutX="334.0" layoutY="56.0" style="-fx-alignment: center;" text="Referee Login" textFill="#c31d1d">
-               <font>
-                  <Font size="34.0" />
-               </font>
-            </Label>
-            <Label layoutX="273.0" layoutY="125.0" text="Please enter your username and password">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="248.0" layoutY="241.0" text="E-Mail" />
-            <Label layoutX="238.0" layoutY="326.0" text="Password" />
-            <Button fx:id="backButton" layoutX="50.0" layoutY="568.0" mnemonicParsing="false" onAction="#goBack" text="Back to Main Menu" />
-            <Label fx:id="invalidCredentials" layoutX="284.0" layoutY="361.0" text="Invalid Username or Password. Please try again." textFill="RED" visible="false" />
-         </children>
-      </Pane>
+      <TextField fx:id="loginText" layoutX="175.0" layoutY="213.0" />
+      <PasswordField fx:id="loginPassword" layoutX="175.0" layoutY="267.0" />
+      <Hyperlink fx:id="forgot" layoutX="188.0" layoutY="317.0" onAction="#openForgotten" text="I forgot my Password" />
+      <Button fx:id="loginButton" layoutX="148.0" layoutY="340.0" mnemonicParsing="false" onAction="#attemptLogin" text="Submit" />
+      <Label layoutX="147.0" layoutY="106.0" text="Referee Login" textFill="#c31d1d">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="138.0" layoutY="148.0" text="Please enter your username and password" />
+      <Label layoutX="233.0" layoutY="196.0" text="E-Mail" />
+      <Label layoutX="224.0" layoutY="250.0" text="Password" />
+      <Button fx:id="backButton" layoutX="235.0" layoutY="340.0" mnemonicParsing="false" onAction="#goBack" text="Back to Main Menu" />
+      <Label fx:id="invalidCredentials" layoutX="124.0" layoutY="292.0" text="Invalid Username or Password. Please try again." textFill="RED" visible="false" />
    </children>
-</AnchorPane>
+</Pane>

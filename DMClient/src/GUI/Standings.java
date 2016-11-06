@@ -13,7 +13,7 @@ public class Standings extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Standings.fxml"));
         primaryStage.setTitle("Standings");
-        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.setScene(new Scene(root, 500, 450));
         primaryStage.show();
     }
 

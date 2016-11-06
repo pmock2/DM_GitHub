@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.StandingsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.StandingsController">
    <children>
-      <Pane layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label layoutX="362.0" layoutY="28.0" text="Standings" textFill="RED">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <TableView fx:id="tv" layoutX="90.0" layoutY="110.0" prefHeight="500.0" prefWidth="700.0">
-              <columns>
-                <TableColumn fx:id="teamcolumn" editable="false" prefWidth="534.0" text="Team" />
-                <TableColumn fx:id="winscolumn" editable="false" minWidth="6.0" prefWidth="165.0" text="Wins" />
-              </columns>
-            </TableView>
-         </children>
-      </Pane>
+      <Label layoutX="119.0" layoutY="-3.0" text="Standings" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tv" layoutX="20.0" layoutY="67.0" prefHeight="266.0" prefWidth="301.0">
+        <columns>
+          <TableColumn fx:id="teamcolumn" editable="false" prefWidth="123.0" text="Team" />
+          <TableColumn fx:id="winscolumn" editable="false" minWidth="6.0" prefWidth="175.0" text="Wins" />
+        </columns>
+      </TableView>
    </children>
-</AnchorPane>
+</Pane>

@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 /**
  * Created by claytonleikness on 10/4/16.
  */
-public class Main_3 extends Application {
+public class InputScore extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        primaryStage.setTitle("Main Page");
-        primaryStage.setScene(new Scene(root, 500, 450));
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("InputScore.fxml"));
+        primaryStage.setTitle("Change Score");
+        primaryStage.setScene(new Scene(root, 710, 380));
         primaryStage.show();
     }
 

@@ -1,66 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
-      <Pane layoutX="291.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="55.0" prefHeight="53.0" prefWidth="364.0" text="Referee Menu" textAlignment="JUSTIFY" textFill="DARKRED" wrapText="true">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <Button layoutX="184.0" layoutY="200.0" mnemonicParsing="false" onAction="#openStandings" prefHeight="50.0" prefWidth="190.0" text="Standings">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Label layoutX="390.0" layoutY="673.0" text="Team Harambe 2016">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Button layoutX="506.0" layoutY="200.0" mnemonicParsing="false" onAction="#openSchedule" prefHeight="50.0" prefWidth="190.0" text="View Schedule">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Label layoutX="317.0" layoutY="125.0" text="Advanced Options for Referees">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Button fx:id="createButton" layoutX="345.0" layoutY="460.0" mnemonicParsing="false" onAction="#createSchedule" prefHeight="50.0" prefWidth="190.0" text="New Schedule">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="auditLogButton" layoutX="184.0" layoutY="321.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="190.0" text="View Audit Log">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Hyperlink fx:id="sLogoutButton" layoutX="797.0" layoutY="14.0" onAction="#superLogout" text="Logout" underline="true">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Hyperlink>
-            <Button layoutX="506.0" layoutY="321.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="190.0" text="Input Match Scores">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="199.0" layoutY="78.0" prefHeight="42.0" prefWidth="191.0" text="Referee Menu" textAlignment="JUSTIFY" textFill="#c62b17" wrapText="true">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Button layoutX="184.0" layoutY="200.0" mnemonicParsing="false" onAction="#openStandings" text="Standings" />
+      <Label layoutX="244.0" layoutY="430.0" text="Team Harabme 2016">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Button layoutX="312.0" layoutY="200.0" mnemonicParsing="false" onAction="#openSchedule" text="View Schedule" />
+      <Label layoutX="212.0" layoutY="120.0" text="Advanced Options for Referees" />
+      <Button fx:id="createButton" layoutX="239.0" layoutY="341.0" mnemonicParsing="false" onAction="#createSchedule" text="New Schedule" />
+      <Button fx:id="auditLogButton" layoutX="170.0" layoutY="255.0" mnemonicParsing="false" text="View Audit Log" />
+      <Hyperlink fx:id="sLogoutButton" layoutX="524.0" onAction="#superLogout" text="Logout" />
+      <Button layoutX="299.0" layoutY="255.0" mnemonicParsing="false" text="Input Match Scores" />
    </children>
-</AnchorPane>
+</Pane>
