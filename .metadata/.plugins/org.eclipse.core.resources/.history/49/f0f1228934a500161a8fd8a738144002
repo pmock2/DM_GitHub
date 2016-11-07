@@ -1,0 +1,46 @@
+package teamHarambe;
+
+import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import org.json.JSONObject;
+
+public class AuditLog {
+	private static final int LOG_CAPACITY = 100;
+	
+	private ArrayList<JSONObject> logs = new ArrayList<>();
+	
+	public AuditLog() {}
+	
+	public AuditLog(JSONObject JSONlogs) {
+		String[] keyNames = JSONObject.getNames(JSONlogs);
+		
+		for (int i=0; i < keyNames.length; i++) {
+			int index = Integer.parseInt(keyNames[i]);
+			logs.set(index, JSONlogs.getJSONObject(keyNames[i]));
+		}
+	}
+	
+	public void logAction(String action, Referee referee) {
+		int refereeId = referee.getId();
+		Calendar today = Calendar.getInstance();
+		
+		if (logs.size() == LOG_CAPACITY) {
+			logs.removeLast();
+		}
+
+		JSONObject data = new JSONObject();
+		data.put("ActionType", action);
+		data.put("Referee", refereeId);
+		data.put("Date", today.getTimeInMillis());
+		
+		logs.addFirst(data);
+		try {
+			Server.saveData();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

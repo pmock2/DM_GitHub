@@ -89,7 +89,8 @@ public class ConnectionHandler implements Runnable {
 						Server.teams = teams;
 						Server.schedule = new Schedule(Server.teams, Server.getNonSupers(Server.referees), selectedDate);
 						Server.saveData();
-
+						Server.auditLog.logAction("CreateNewSeason", userAccount);
+						
 						if (dbFile.exists()) {
 							toClient.println("Success");
 						} else {
@@ -153,6 +154,8 @@ public class ConnectionHandler implements Runnable {
 										      team0Score, team1Score, scored)
 							);
 						}
+						
+						Server.auditLog.logAction("ModifySeasonData", userAccount);
 						
 						if (!conflictingDate) {
 							Server.schedule = new Schedule(newSchedule);
@@ -288,6 +291,18 @@ public class ConnectionHandler implements Runnable {
 							toClient.println("Exception_InsufficientPermissions");
 						}
 						
+						Server.auditLog.logAction("SetMatchScore", userAccount);
+						
+						break;
+					}
+					case "Get_AuditLog":
+					{
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						toClient.println(Server.auditLog.getJSONLogs().toString());
 						break;
 					}
 				}

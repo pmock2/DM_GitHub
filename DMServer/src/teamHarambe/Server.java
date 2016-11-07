@@ -34,6 +34,7 @@ public class Server {
 	public static List<Team> teams = new LinkedList<>();
 	public static List<Referee> referees = new LinkedList<>();
 	public static Schedule schedule;
+	public static AuditLog auditLog;
 	
 	private static String databasePath = getDatabasePath();
 
@@ -80,7 +81,8 @@ public class Server {
 		dbString += "\t\"Teams\" : {},\n";
 		dbString += "\t\"Referees\" : {\n";
 		dbString += "\t\t" + superReferee.getId() + " : " + superReferee.toJSON() + "\n";
-		dbString += "\t}\n";
+		dbString += "\t},\n";
+		dbString += "\t\"Logs\" : {}\n";
 		dbString += "}";
 		
 		saveData(dbString);
@@ -96,6 +98,7 @@ public class Server {
 		loadTeams(database.getJSONObject("Teams"));
 		loadReferees(database.getJSONObject("Referees"));
 		try {loadSchedule(database.getJSONObject("Schedule"));} catch(JSONException e) {}
+		loadLogs(database.getJSONObject("Logs"));
 	}
 	
 	private static void loadTeams(JSONObject teamList) {
@@ -145,6 +148,10 @@ public class Server {
 		schedule = new Schedule(matches);
 	}
 	
+	private static void loadLogs(JSONObject logs) {
+		auditLog = new AuditLog(logs);
+	}
+	
 	public static void saveData() throws IOException {
 		saveData(generateDatabaseJSON());
 	}
@@ -169,6 +176,14 @@ public class Server {
 		s += "\t\"Referees\" : {\n";
 		for (int i=0; i < referees.size(); i++) {
 			s += "\t\t" + referees.get(i).getId() + " : " + referees.get(i).toJSON() + (i+1 == referees.size() ? "" : ",") + "\n";
+		}
+		s += "\t},\n";
+		
+		s += "\t\"Logs\" : {\n";
+		if (auditLog != null) {
+			for (int i=0; i < auditLog.getLogs().size(); i++) {
+				s += "\t\t" + i + " : " + auditLog.getLogs().get(i).toString() + (i+1 == auditLog.getLogs().size() ? "" : ",") +"\n";
+			}
 		}
 		s += "\t}\n";
 		
