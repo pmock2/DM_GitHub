@@ -18,11 +18,16 @@
          <image>
             <Image url="@blue-question.png" />
          </image></ImageView>
-      <Label layoutX="318.0" layoutY="320.0" text="No Schedule Found">
+      <Label layoutX="268.0" layoutY="346.0" text="Please log in to create schedule">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="create" layoutX="282.0" layoutY="361.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="31.0" prefWidth="236.0" text="Log In To Create Schedule" />
+      <Button fx:id="create" layoutX="346.0" layoutY="417.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="31.0" prefWidth="109.0" text="Okay" />
+      <Label layoutX="185.0" layoutY="306.0" text="The super referee has not created the schedule yet.">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
