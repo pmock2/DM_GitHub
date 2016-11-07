@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf1d76f0-33cb-4d81-aeab-84e02e50662d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/AddTeams.fxml" afterPath="$PROJECT_DIR$/DMClient/src/GUI/AddTeams.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/MatchSelect.fxml" afterPath="$PROJECT_DIR$/DMClient/src/GUI/MatchSelect.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/StandingsController.java" afterPath="$PROJECT_DIR$/DMClient/src/GUI/StandingsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml" afterPath="$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" afterPath="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/InputScore.fxml" afterPath="$PROJECT_DIR$/DMClient/src/GUI/InputScore.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" afterPath="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java" afterPath="$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java" />
     </list>
     <ignored path="DM_GitHub.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,9 +46,12 @@
         <option value="$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml" />
         <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/Match.java" />
         <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" />
-        <option value="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/MatchSelect.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/AddTeams.fxml" />
+        <option value="$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/InputScore.fxml" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java" />
       </list>
     </option>
   </component>
@@ -91,7 +92,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -205,7 +206,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -544,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478408884332</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed &quot;Get_RefereedMatches&quot;,  Added dynamically populated list of matches to referee, Minor GUI fixes">
+      <created>1478421662839</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1478421662839</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -594,7 +602,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated schedule generation to not include super referees." />
     <MESSAGE value="Deleted unnecessary files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Deleted unnecessary files." />
+    <MESSAGE value="Fixed &quot;Get_RefereedMatches&quot;,  Added dynamically populated list of matches to referee, Minor GUI fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed &quot;Get_RefereedMatches&quot;,  Added dynamically populated list of matches to referee, Minor GUI fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -631,26 +640,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/bin/GUI/Style.css" />
-    <entry file="file://$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ChangeScore1.fxml" />
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ChangeScore.fxml" />
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/InputScore.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Match.fxml" />
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeams1.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
@@ -663,19 +654,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18565">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/StandingsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="54" column="12" selection-start-line="54" selection-start-column="12" selection-end-line="55" selection-end-column="125" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -694,7 +676,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1126">
           <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -702,7 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1564">
           <caret line="96" column="59" selection-start-line="96" selection-start-column="59" selection-end-line="96" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -710,7 +690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="143" column="87" selection-start-line="143" selection-start-column="87" selection-end-line="143" selection-end-column="87" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -718,7 +697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
           <caret line="99" column="4" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -726,7 +704,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="231" column="83" selection-start-line="231" selection-start-column="83" selection-end-line="231" selection-end-column="83" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -752,10 +729,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/teamHarambe/Schedule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="e#133#134#0" expanded="false" />
+            <element signature="e#161#162#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="54" column="19" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="87" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/InputScore.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
-          <caret line="41" column="126" selection-start-line="41" selection-start-column="126" selection-end-line="41" selection-end-column="126" />
+          <caret line="87" column="5" selection-start-line="68" selection-start-column="3" selection-end-line="87" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="99" column="39" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
           <folding />
         </state>
       </provider>

@@ -2,15 +2,22 @@ package GUI;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.json.JSONObject;
 import teamHarambe.Client;
 
@@ -38,8 +45,28 @@ public class MatchSelectController implements Initializable {
                 String[] keyNames = JSONObject.getNames(matches);
                 for (int i=0; i < keyNames.length; i++)
                 {
+                    int matchSelected = i;
                     JSONObject matchData = matches.getJSONObject(keyNames[i]);
                     Hyperlink h = new Hyperlink(matchData.getString("Team0Name") + " vs " + matchData.getString("Team1Name"));
+                    h.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override public void handle(ActionEvent e) {
+                            try{
+                                Client.selectedMatch = matchSelected;
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InputScore.fxml"));
+                                Parent root1 = (Parent) fxmlLoader.load();
+                                Stage stage = new Stage();
+                                stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.initStyle(StageStyle.DECORATED);
+                                stage.setTitle("Set Team Score");
+                                stage.setScene(new Scene(root1));
+                                stage.show();
+                                System.out.println(Client.selectedMatch);
+                            }
+                            catch (IOException f) {
+                                f.printStackTrace();
+                            }
+                        }
+                    });
                     vb.getChildren().add(h);
                 }
             }

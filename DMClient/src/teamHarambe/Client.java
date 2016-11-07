@@ -22,6 +22,7 @@ public class Client {
 	public static PrintStream toServer;
 	public static int permissionLevel = -1;
 	static boolean serverRunning = false;
+	public static int selectedMatch = -1;
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		try {
