@@ -234,6 +234,7 @@ public class ConnectionHandler implements Runnable {
 							Match m = seasonMatches.get(i);
 							if (seasonMatches.get(i).getReferee() == userAccount) {
 								JSONObject matchesJSON = new JSONObject();
+								matchesJSON.put("MatchId", m.getId());
 								matchesJSON.put("Team0Name", m.getTeam1().getName());
 								matchesJSON.put("Team1Name", m.getTeam2().getName());
 								matchesJSON.put("Scored", m.getScored());
@@ -279,19 +280,22 @@ public class ConnectionHandler implements Runnable {
 						int matchId = args.getInt("MatchId");
 						int team0Score = args.getInt("Team0Score");
 						int team1Score = args.getInt("Team1Score");
-						boolean team0Forfiet = args.getBoolean("Team0Forfiet");
-						boolean team1Forfiet = args.getBoolean("Team1Forfiet");
+						//boolean team0Forfeit = args.getBoolean("Team0Forfeit");
+						//boolean team1Forfeit = args.getBoolean("Team1Forfeit");
+						boolean reschedule = args.getBoolean("Reschedule");
 						
 						Match match = Server.schedule.getMatches().get(matchId);
 						if (permissionLevel >= 2 || (match.getReferee() == userAccount && !match.isScored())) {
 							match.setTeam1Score(team0Score);
 							match.setTeam2Score(team1Score);
+							match.scored = true;
 							Server.saveData();
+							toClient.println("Success");
 						} else {
 							toClient.println("Exception_InsufficientPermissions");
 						}
 						
-						Server.auditLog.logAction("SetMatchScore", userAccount);
+						Server.auditLog.logAction("SetMatchScore: ID " + matchId + " " + team0Score + " - " + team1Score + " Reschedule: " + reschedule, userAccount);
 						
 						break;
 					}

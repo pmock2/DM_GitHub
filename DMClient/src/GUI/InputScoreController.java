@@ -20,6 +20,7 @@ import javafx.stage.StageStyle;
 import org.json.JSONObject;
 import teamHarambe.Client;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -144,8 +145,30 @@ public class InputScoreController implements Initializable {
 
     public void attemptSubmit(ActionEvent event)
     {
+        JSONObject matchToSend = new JSONObject();
         try{
-            System.out.println("TODO Add this");
+            JSONObject matches = importMatches();
+            String[] keyNames = JSONObject.getNames(matches);
+            JSONObject matchData = matches.getJSONObject(keyNames[Client.selectedMatch]);
+            matchToSend.put("MatchId", matchData.getInt("MatchId"));
+            matchToSend.put("Team0Score", Integer.parseInt(ascore.getText()));
+            matchToSend.put("Team1Score", Integer.parseInt(bscore.getText()));
+            //matchToSend.put("Team0Forfeit", aforfeit.isSelected());
+            //matchToSend.put("Team1Forfeit", bforfeit.isSelected());
+            matchToSend.put("Reschedule", rs.isSelected());
+
+            Client.toServer.println("Set_MatchScore");
+            Client.toServer.println(matchToSend.toString());
+            String reply = Client.fromServer.readLine();
+            if (reply.equals("Success"))
+            {
+                Stage stage = (Stage) rs.getScene().getWindow();
+                stage.hide();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Error: " +reply, "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
