@@ -5,9 +5,9 @@
 	},
 	"Teams" : {
 		0 : {"Name" : "t1", "Wins" : 0.0},
-		1 : {"Name" : "t2", "Wins" : 0.0},
-		2 : {"Name" : "t3", "Wins" : 0.0},
-		3 : {"Name" : "t4", "Wins" : 0.0}
+		1 : {"Name" : "t2", "Wins" : 3.0},
+		2 : {"Name" : "t3", "Wins" : 5.0},
+		3 : {"Name" : "t4", "Wins" : 3.0}
 	},
 	"Referees" : {
 		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : "8fe4c11451281c094a6578e6ddbf5eed", "LoginCode" : null, "IsSuper" : true},

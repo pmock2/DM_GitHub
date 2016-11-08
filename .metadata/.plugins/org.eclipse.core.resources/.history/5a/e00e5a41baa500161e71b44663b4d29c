@@ -215,17 +215,18 @@ public class Server {
 			Team team = entry.getValue();
 			
 			int insertedAt = 0;
-			for (int j=0; j < sortedTeams.size(); j++) {
-				Team team2 = sortedTeams.get(j);
+			int j=0;
+			for (Map.Entry<Integer, Team> entry2 : teams.entrySet()) {
+				int id2 = entry.getKey();
+				Team team2 = entry.getValue();
 				
 				if (team2.getWins() > team.getWins()) {
 					insertedAt++;
-				} else {
-					break;
+				} else if (id == id2) {
+					sortedTeams.add(insertedAt, team);
 				}
+				j++;
 			}
-
-			sortedTeams.add(insertedAt, team);
 			
 			i++;
 		}
