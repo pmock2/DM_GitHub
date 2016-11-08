@@ -19,7 +19,8 @@
             <TableView fx:id="tv" layoutX="90.0" layoutY="110.0" prefHeight="500.0" prefWidth="700.0">
               <columns>
                 <TableColumn fx:id="datecolumn" editable="false" prefWidth="128.0" text="Date" />
-                <TableColumn fx:id="actioncolumn" editable="false" minWidth="6.0" prefWidth="571.0" text="Action" />
+                  <TableColumn fx:id="refereecolumn" prefWidth="198.0" text="Referee" />
+                <TableColumn fx:id="actioncolumn" editable="false" minWidth="6.0" prefWidth="373.0" text="Action" />
               </columns>
             </TableView>
          </children>

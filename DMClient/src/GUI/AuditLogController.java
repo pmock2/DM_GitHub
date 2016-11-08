@@ -23,13 +23,14 @@ public class AuditLogController implements Initializable {
 
     @FXML
     public TableView<AuditLog.LogData> tv = new TableView<>();
-    public TableColumn datecolumn, actioncolumn;
+    public TableColumn datecolumn, actioncolumn, refereecolumn;
     private ObservableList<AuditLog.LogData> data = FXCollections.observableArrayList();
 
 
     public void initialize(URL url, ResourceBundle rb) {
         datecolumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         actioncolumn.setCellValueFactory(new PropertyValueFactory<>("action"));
+        refereecolumn.setCellValueFactory(new PropertyValueFactory<>("em"));
 
         try {
             data = getLogData();
@@ -51,7 +52,7 @@ public class AuditLogController implements Initializable {
             c.setTimeInMillis(matchData.getLong("Date"));
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
             dateFormat.setTimeZone(c.getTimeZone());
-            data.add(new AuditLog.LogData(dateFormat.format(c.getTime()), matchData.getString("ActionType")));
+            data.add(new AuditLog.LogData(dateFormat.format(c.getTime()), matchData.getString("ActionType"), matchData.getString("Referee")));
         }
         return data;
     }

@@ -23,10 +23,12 @@ public class AuditLog extends Application {
 
         private final SimpleStringProperty date;
         private final SimpleStringProperty action;
+        private final SimpleStringProperty em;
 
-        public LogData(String d, String a) {
+        public LogData(String d, String a, String r) {
             this.date = new SimpleStringProperty(d);
             this.action = new SimpleStringProperty(a);
+            this.em = new SimpleStringProperty(r);
         }
 
         public String getDate() {
@@ -45,7 +47,15 @@ public class AuditLog extends Application {
             action.set(w);
         }
 
+        public String getEm() {
+            return em.get();
+        }
+
+        public void setReferee(String r) {
+            em.set(r);
+        }
     }
+
     public static void main(String[] args) {
         launch(args);
     }

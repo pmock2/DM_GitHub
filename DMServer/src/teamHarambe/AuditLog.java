@@ -25,7 +25,6 @@ public class AuditLog {
 	}
 	
 	public void logAction(String action, Referee referee) {
-		int refereeId = referee.getId();
 		Calendar today = Calendar.getInstance();
 		
 		if (logs.size() == LOG_CAPACITY) {
@@ -34,7 +33,7 @@ public class AuditLog {
 
 		JSONObject data = new JSONObject();
 		data.put("ActionType", action);
-		data.put("Referee", refereeId);
+		data.put("Referee", referee.getEmail());
 		data.put("Date", today.getTimeInMillis());
 		
 		logs.add(0, data);
