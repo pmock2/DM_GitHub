@@ -35,6 +35,7 @@ public class MatchSelectController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
+            vb.getChildren().clear();
             JSONObject matches = importMatches();
             if (matches == null)
             {
@@ -43,31 +44,34 @@ public class MatchSelectController implements Initializable {
             else
             {
                 String[] keyNames = JSONObject.getNames(matches);
-                for (int i=0; i < keyNames.length; i++)
-                {
+                for (int i=0; i < keyNames.length; i++) {
                     int matchSelected = i;
                     JSONObject matchData = matches.getJSONObject(keyNames[i]);
-                    Hyperlink h = new Hyperlink(matchData.getString("Team0Name") + " vs " + matchData.getString("Team1Name"));
-                    h.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override public void handle(ActionEvent e) {
-                            try{
-                                Client.selectedMatch = matchSelected;
-                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InputScore.fxml"));
-                                Parent root1 = (Parent) fxmlLoader.load();
-                                Stage stage = new Stage();
-                                stage.initModality(Modality.APPLICATION_MODAL);
-                                stage.initStyle(StageStyle.DECORATED);
-                                stage.setTitle("Set Team Score");
-                                stage.setScene(new Scene(root1));
-                                stage.show();
-                                System.out.println(Client.selectedMatch);
+                    if (!matchData.getBoolean("Scored")) {
+                        Hyperlink h = new Hyperlink(matchData.getString("Team0Name") + " vs " + matchData.getString("Team1Name"));
+                        h.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent e) {
+                                try {
+                                    Client.selectedMatch = matchSelected;
+                                    Stage stage = (Stage) h.getScene().getWindow();
+                                    stage.hide();
+                                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InputScore.fxml"));
+                                    Parent root1 = (Parent) fxmlLoader.load();
+                                    stage = new Stage();
+                                    stage.initModality(Modality.APPLICATION_MODAL);
+                                    stage.initStyle(StageStyle.DECORATED);
+                                    stage.setTitle("Set Team Score");
+                                    stage.setScene(new Scene(root1));
+                                    stage.show();
+                                    System.out.println(Client.selectedMatch);
+                                } catch (IOException f) {
+                                    f.printStackTrace();
+                                }
                             }
-                            catch (IOException f) {
-                                f.printStackTrace();
-                            }
-                        }
-                    });
-                    vb.getChildren().add(h);
+                        });
+                        vb.getChildren().add(h);
+                    }
                 }
             }
             } catch (Exception e) {

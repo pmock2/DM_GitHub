@@ -241,7 +241,7 @@ public class ConnectionHandler implements Runnable {
 						for (Map.Entry<Integer, Match> entry : Server.schedule.getMatches().entrySet()) {
 							int id = entry.getKey();
 							Match match = entry.getValue();
-							if (match.getReferee() == userAccount) {
+							if (match.getReferee() == userAccount && !match.isScored()) {
 								JSONObject matchesJSON = new JSONObject();
 								matchesJSON.put("MatchId", match.getId());
 								matchesJSON.put("Team0Name", match.getTeam1().getName());
@@ -296,7 +296,7 @@ public class ConnectionHandler implements Runnable {
 						boolean reschedule = args.getBoolean("Reschedule");
 						
 						Match match = Server.schedule.getMatches().get(matchId);
-						if (permissionLevel >= 2 || (match.getReferee() == userAccount && !match.isScored())) {
+						if (permissionLevel >= 2 || (match.getReferee() == userAccount)) {
 							match.setTeam1Score(team0Score);
 							match.setTeam2Score(team1Score);
 							match.scored = true;

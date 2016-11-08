@@ -53,7 +53,7 @@ public class Match {
     	this(matchId, team0, team1, referee, date);
     	this.team1Score = team0Score;
     	this.team2Score = team1Score;
-    	this.scored = true;
+    	this.scored = scored;
     }
 
     public void setTeam1(Team team1) {

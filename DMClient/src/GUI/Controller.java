@@ -192,7 +192,6 @@ public class Controller implements Initializable {
 
     public void openSchedule(ActionEvent event) throws IOException
     {
-    	System.out.println("Opening schedule");
         if (MethodProvider.checkForSetup()) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Schedule.fxml"));
@@ -211,6 +210,22 @@ public class Controller implements Initializable {
         {
             JOptionPane.showMessageDialog(null, "Schedule does not exist. The super referee must create the schedule.", "Schedule error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void openLog(ActionEvent event) throws IOException
+    {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AuditLog.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Audit Log");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+
+            }
     }
 
 	public void attemptLogin(ActionEvent event)
