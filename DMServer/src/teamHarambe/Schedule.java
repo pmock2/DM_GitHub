@@ -90,6 +90,7 @@ public class Schedule {
 		int numWeeks = teams.size() - (evenNumTeams ? 1 : 0);
 		int matchesPerWeek = teams.size() / 2;
 		Random r = new Random();
+		int keyValue = 0;
 
 
 		if (evenNumTeams) {
@@ -101,14 +102,16 @@ public class Schedule {
 			Calendar weekDate = getDateFromWeek(offset);
 
 			if (evenNumTeams) {
-				matches.put(0,new Match(matches.size(), pivot, teams.get(offset), referees.get(r.nextInt(referees.size())), weekDate));
+				matches.put(keyValue,new Match(matches.size(), pivot, teams.get(offset), referees.get(r.nextInt(referees.size())), weekDate));
+				keyValue++;
 			}
 			for (int i = 1; i < matchesPerWeek + (evenNumTeams ? 0 : 1); i++) {
 				int slot0 = (i + offset);
 				int slot1 = slot0 + (teams.size() - (2 * i));
 				Referee referee = referees.get(r.nextInt(referees.size()));
 				Match match = new Match(matches.size(), teams.get(slot0 % teams.size()), teams.get(slot1 % teams.size()), referee, weekDate);
-				matches.put(i - (evenNumTeams ? 0 : 1),match);
+				matches.put(keyValue,match);
+				keyValue++;
 			}
 		}
 	}
