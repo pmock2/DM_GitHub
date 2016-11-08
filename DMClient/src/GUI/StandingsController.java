@@ -25,7 +25,7 @@ public class StandingsController implements Initializable {
 
     @FXML
     public TableView<Standings.StandingsData> tv = new TableView<>();
-    public TableColumn teamcolumn, winscolumn;
+    public TableColumn teamcolumn, winscolumn, rankcolumn;
     public Button saveButton;
     private ObservableList<Standings.StandingsData> data = FXCollections.observableArrayList();
 
@@ -33,6 +33,7 @@ public class StandingsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         teamcolumn.setCellValueFactory(new PropertyValueFactory<>("team1"));
         winscolumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
+        rankcolumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
 
         try {
             data = getStandingsData();
@@ -53,7 +54,7 @@ public class StandingsController implements Initializable {
         for (int i=0; i < keyNames.length; i++)
         {
             JSONObject matchData = standings.getJSONObject(keyNames[i]);
-            data.add(new Standings.StandingsData(matchData.getString("Name"), Double.toString(matchData.getDouble("Wins"))));
+            data.add(new Standings.StandingsData(matchData.getString("Name"), Double.toString(matchData.getDouble("Wins")), Integer.toString(matchData.getInt("Rank"))));
         }
         return data;
     }

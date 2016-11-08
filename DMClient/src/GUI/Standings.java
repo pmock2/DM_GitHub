@@ -23,10 +23,12 @@ public class Standings extends Application {
 
         private final SimpleStringProperty team1;
         private final SimpleStringProperty wins;
+        private final SimpleStringProperty rank;
 
-        public StandingsData(String t1, String wins) {
+        public StandingsData(String t1, String wins, String r) {
             this.team1 = new SimpleStringProperty(t1);
             this.wins = new SimpleStringProperty(wins);
+            this.rank = new SimpleStringProperty(r);
         }
 
         public String getTeam1() {
@@ -43,6 +45,14 @@ public class Standings extends Application {
 
         public void setWins(String w) {
             wins.set(w);
+        }
+
+        public String getRank() {
+            return rank.get();
+        }
+
+        public void setRank(String r) {
+            rank.set(r);
         }
 
     }
