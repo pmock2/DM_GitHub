@@ -8,8 +8,10 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -39,12 +41,15 @@ public class ConnectionHandler implements Runnable {
 				switch(message)
 				{
 					case "Create_DB":
-					{
+					{						
 						int numTeams = Integer.parseInt(fromClient.readLine());
-						List<Team> teams = new LinkedList<>();
+						Map<Integer, Team> teams = new HashMap<>();
+						List<Team> teamList = new LinkedList<>();
 						for (int i = 0; i < numTeams; i++)
 						{
-							teams.add(new Team(i, fromClient.readLine()));
+							Team team = new Team(i, fromClient.readLine());
+							teams.put(i, team);
+							teamList.add(team);
 						}
 						String dateYear = fromClient.readLine();
 						String dateMonth = fromClient.readLine();
@@ -57,37 +62,39 @@ public class ConnectionHandler implements Runnable {
 						for (int i=0; i < refereeIds.length; i++) {
 							int refereeId = Integer.parseInt(refereeIds[i]);
 							JSONObject data = referees.getJSONObject(refereeIds[i]);
-							boolean found = false;;
-							
-							for (int j=0; j < Server.referees.size(); j++) {
-								if (Server.referees.get(j).getId() == refereeId) {
-									found = true;
-									Server.referees.get(j).setEmail(data.getString("Email"));
-									break;
-								}
-							}
-							if (!found) {
-								Server.referees.add(new Referee(refereeId, data.getString("Email"), false));
+
+							if (!(Server.referees.get(refereeId) == null)) {
+								System.out.println("Updating: "+refereeId);
+								Server.referees.get(refereeId).setEmail(data.getString("Email"));
+							} else {
+								System.out.println("Creating: "+refereeId);
+								Server.referees.put(refereeId, new Referee(refereeId, data.getString("Email"), false));
 							}
 						}
 						
-						for (int i=Server.referees.size()-1; i >= 0 ; i--) {
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
 							boolean found = false;
 							for (int v=0; v < refereeIds.length; v++) {
 								int refereeId = Integer.parseInt(refereeIds[v]);
-								if (refereeId == Server.referees.get(i).getId()) {
+								if (refereeId == entry.getKey()) {
 									found = true;
 									break;
 								}
 							}
 							
-							if (!(found || Server.referees.get(i).isSuperReferee)) {
-								Server.referees.remove(i);
+							if (!found && entry.getValue().isSuperReferee == false) {
+								System.out.println("Removing: "+entry.getKey());
+								Server.referees.remove(entry.getKey());
 							}
 						}
-						
+
 						Server.teams = teams;
-						Server.schedule = new Schedule(Server.teams, Server.getNonSupers(Server.referees), selectedDate);
+						Server.schedule = new Schedule(teamList, Server.getNonSupers(), selectedDate);
 						Server.saveData();
 						Server.auditLog.logAction("CreateNewSeason", userAccount);
 						
@@ -116,8 +123,8 @@ public class ConnectionHandler implements Runnable {
 					case "Update_Schedule":
 					{
 						JSONObject changedSchedule = new JSONObject(fromClient.readLine());
-						List<Match> currentSchedule = Server.schedule.getMatches();
-						List<Match> newSchedule = new LinkedList<>();
+						Map<Integer,Match> currentSchedule = Server.schedule.getMatches();
+						Map<Integer,Match> newSchedule = new HashMap<>();
 						
 						if (permissionLevel < 2) {
 							toClient.println("Exception_InsufficientPermissions");
@@ -149,7 +156,7 @@ public class ConnectionHandler implements Runnable {
 							boolean changed = (team0Score != currentMatch.getTeam1Score()) || (team1Score != currentMatch.getTeam2Score());
 							boolean scored = changed ? true : currentMatch.getScored();
 							
-							newSchedule.add(
+							newSchedule.put(matchId,
 									new Match(matchId, currentMatch.getTeam1(), currentMatch.getTeam2(), referee, newDate, 
 										      team0Score, team1Score, scored)
 							);
@@ -171,6 +178,7 @@ public class ConnectionHandler implements Runnable {
 						String email = fromClient.readLine();
 						String password = fromClient.readLine();
 						Referee loginAs = refereeFromEmail(email);
+						System.out.println("Logging in, "+email+", "+loginAs.getEmail());
 						
 						if (loginAs == null) {
 							toClient.println("Login_Fail");
@@ -227,20 +235,22 @@ public class ConnectionHandler implements Runnable {
 					case "Get_RefereedMatches":
 					{
 						Calendar today = Calendar.getInstance();
-						List<Match> seasonMatches = Server.schedule.getMatches();
+						Map<Integer,Match> seasonMatches = Server.schedule.getMatches();
 						JSONObject jsonMatches = new JSONObject();
 						
-						for(int i=0; i < seasonMatches.size(); i++) {
-							Match m = seasonMatches.get(i);
-							if (seasonMatches.get(i).getReferee() == userAccount) {
+						for (Map.Entry<Integer, Match> entry : Server.schedule.getMatches().entrySet()) {
+							int id = entry.getKey();
+							Match match = entry.getValue();
+							if (match.getReferee() == userAccount) {
 								JSONObject matchesJSON = new JSONObject();
-								matchesJSON.put("MatchId", m.getId());
-								matchesJSON.put("Team0Name", m.getTeam1().getName());
-								matchesJSON.put("Team1Name", m.getTeam2().getName());
-								matchesJSON.put("Scored", m.getScored());
-								matchesJSON.put("Score0", m.getTeam1Score());
-								matchesJSON.put("Score1", m.getTeam2Score());
-								jsonMatches.put(seasonMatches.get(i).getId()+"", matchesJSON);
+								matchesJSON.put("MatchId", match.getId());
+								matchesJSON.put("Team0Name", match.getTeam1().getName());
+								matchesJSON.put("Team1Name", match.getTeam2().getName());
+								matchesJSON.put("Scored", match.getScored());
+								matchesJSON.put("Score0", match.getTeam1Score());
+								matchesJSON.put("Score1", match.getTeam2Score());
+								
+								jsonMatches.put(match.getId()+"", matchesJSON);
 							}
 						}
 						
@@ -255,8 +265,9 @@ public class ConnectionHandler implements Runnable {
 						}
 						
 						JSONObject referees = new JSONObject();
-						for (int i=0; i < Server.referees.size(); i++) {
-							Referee referee = Server.referees.get(i);
+						for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
+							int id = entry.getKey();
+							Referee referee = entry.getValue();
 							if (!referee.isSuperReferee) {
 								JSONObject refereeJSON = new JSONObject();
 								refereeJSON.put("Email", referee.getEmail());
@@ -323,9 +334,11 @@ public class ConnectionHandler implements Runnable {
 	
 	private Referee refereeFromEmail(String email) {
 		Referee referee = null;
-		for (int i=0; i < Server.referees.size(); i++) {
-			if (Server.referees.get(i).getEmail().toLowerCase().equals(email.toLowerCase())) {
-				return Server.referees.get(i);
+		
+		for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
+			referee = entry.getValue();
+			if (referee.getEmail().equals(email)) {
+				return referee;
 			}
 		}
 		
@@ -333,15 +346,17 @@ public class ConnectionHandler implements Runnable {
 	}
 	
 	private boolean dateConflicts(int matchId, Calendar newDate) {
-		List<Match> matches = Server.schedule.getMatches();
+		Map<Integer,Match> matches = Server.schedule.getMatches();
 		Match match = matches.get(matchId);
-		for (int i=0; i < matches.size(); i++) {
-			Match other = matches.get(i);
-			if (i != matchId && match.isMatchOnDate(other.getDate())) {
+		
+		for (Map.Entry<Integer, Match> entry : Server.schedule.getMatches().entrySet()) {
+			int matchId2 = entry.getKey();
+			Match match2 = entry.getValue();
+			if (matchId2 != matchId && match.isMatchOnDate(match2.getDate())) {
 				String team0Name = match.getTeam1().getName();
 				String team1Name = match.getTeam2().getName();
-				String team2Name = other.getTeam1().getName();
-				String team3Name = other.getTeam2().getName();
+				String team2Name = match2.getTeam1().getName();
+				String team3Name = match2.getTeam2().getName();
 				
 				if (team0Name.equals(team2Name) || team0Name.equals(team3Name) ||
 				    team1Name.equals(team2Name) || team1Name.equals(team3Name)

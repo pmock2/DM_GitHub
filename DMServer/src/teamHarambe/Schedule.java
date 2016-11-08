@@ -4,14 +4,15 @@ import java.util.*;
 
 public class Schedule {
 	Calendar startDate;
-	List<Match> matches = new LinkedList<>();
+	Map<Integer,Match> matches;
 
 	public Schedule(List<Team> teamlist, List<Referee> refereelist, Calendar startDate) {
 		this.startDate = startDate;
+		matches = new HashMap<>();
 		generateSchedule(shuffleTeams(teamlist), refereelist);
 	}
 
-	public Schedule(List<Match> matches) {
+	public Schedule(Map<Integer,Match> matches) {
 		this.matches = matches;
 	}
 
@@ -27,17 +28,20 @@ public class Schedule {
 
 	public String toJSON() {
 		String s = "{\n";
-
-		for (int i = 0; i < matches.size(); i++) {
-			//s += "\t\t\"Week" + week + "\" : " + schedule[week].toJSON() + (week+1 == schedule.length ? "" : ",") + "\n";
-			s += "\t\t" + matches.get(i).getId() + " : " + matches.get(i).toJSON() + (i + 1 == matches.size() ? "" : ",") + "\n";
+		
+		int i=0;
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			int id = entry.getKey();
+			Match match = entry.getValue();
+			s += "\t\t" + id + " : " + match.toJSON() + (i+1 == matches.size() ? "" : ",") + "\n";
+			i++;
 		}
 
 		s += "\t}";
 		return s;
 	}
 
-	public List<Match> getMatches() {
+	public Map<Integer, Match> getMatches() {
 		return matches;
 	}
 
@@ -85,8 +89,7 @@ public class Schedule {
 		boolean evenNumTeams = teams.size() % 2 == 0;
 		int numWeeks = teams.size() - (evenNumTeams ? 1 : 0);
 		int matchesPerWeek = teams.size() / 2;
-		Iterator iterator = referees.listIterator();
-		Referee r = (Referee) iterator.next();
+		Random r = new Random();
 
 
 		if (evenNumTeams) {
@@ -98,24 +101,14 @@ public class Schedule {
 			Calendar weekDate = getDateFromWeek(offset);
 
 			if (evenNumTeams) {
-				matches.add(new Match(matches.size(), pivot, teams.get(offset), r, weekDate));
-				if (iterator.hasNext()) {
-					r = (Referee) iterator.next();
-				} else {
-					iterator = referees.listIterator();
-					r = (Referee) iterator.next();
-				}
+				matches.put(0,new Match(matches.size(), pivot, teams.get(offset), referees.get(r.nextInt(referees.size())), weekDate));
 			}
 			for (int i = 1; i < matchesPerWeek + (evenNumTeams ? 0 : 1); i++) {
 				int slot0 = (i + offset);
 				int slot1 = slot0 + (teams.size() - (2 * i));
-				matches.add(new Match(matches.size(), teams.get(slot0 % teams.size()), teams.get(slot1 % teams.size()), r, weekDate));
-				if (iterator.hasNext()) {
-					r = (Referee) iterator.next();
-				} else {
-					iterator = referees.listIterator();
-					r = (Referee) iterator.next();
-				}
+				Referee referee = referees.get(r.nextInt(referees.size()));
+				Match match = new Match(matches.size(), teams.get(slot0 % teams.size()), teams.get(slot1 % teams.size()), referee, weekDate);
+				matches.put(i - (evenNumTeams ? 0 : 1),match);
 			}
 		}
 	}

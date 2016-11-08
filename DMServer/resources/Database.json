@@ -1,33 +1,22 @@
 {
 	"Schedule" : {
-		0 : {"Team0" : 1, "Team1" : 3, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 7,}, "Scored" : true, "Score0" : 1, "Score1" : 1},
-		1 : {"Team0" : 4, "Team1" : 2, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 7,}, "Scored" : true, "Score0" : 1, "Score1" : 0},
-		2 : {"Team0" : 4, "Team1" : 0, "Referee" : 3, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "Scored" : true, "Score0" : 0, "Score1" : 0},
-		3 : {"Team0" : 2, "Team1" : 3, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "Scored" : true, "Score0" : 0, "Score1" : 0},
-		4 : {"Team0" : 2, "Team1" : 1, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "Scored" : true, "Score0" : 0, "Score1" : 0},
-		5 : {"Team0" : 3, "Team1" : 0, "Referee" : 3, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "Scored" : true, "Score0" : 0, "Score1" : 0},
-		6 : {"Team0" : 3, "Team1" : 4, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 28,}, "Scored" : true, "Score0" : 0, "Score1" : 0},
-		7 : {"Team0" : 0, "Team1" : 1, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 28,}, "Scored" : true, "Score0" : 0, "Score1" : 0},
-		8 : {"Team0" : 0, "Team1" : 2, "Referee" : 3, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 4,}, "Scored" : true, "Score0" : 0, "Score1" : 0},
-		9 : {"Team0" : 1, "Team1" : 4, "Referee" : 1, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 4,}, "Scored" : true, "Score0" : 0, "Score1" : 0}
+		0 : {"Team0" : 1, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "Scored" : false, "Score0" : 0, "Score1" : 0},
+		1 : {"Team0" : 3, "Team1" : 2, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "Scored" : false, "Score0" : 0, "Score1" : 0}
 	},
 	"Teams" : {
-		0 : {"Name" : "T1", "Wins" : 0.0},
-		1 : {"Name" : "T2", "Wins" : 0.0},
-		2 : {"Name" : "T3", "Wins" : 0.0},
-		3 : {"Name" : "T4", "Wins" : 0.0},
-		4 : {"Name" : "T5", "Wins" : 0.0}
+		0 : {"Name" : "t1", "Wins" : 0.0},
+		1 : {"Name" : "t2", "Wins" : 0.0},
+		2 : {"Name" : "t3", "Wins" : 0.0},
+		3 : {"Name" : "t4", "Wins" : 0.0}
 	},
 	"Referees" : {
 		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : "8fe4c11451281c094a6578e6ddbf5eed", "LoginCode" : null, "IsSuper" : true},
-		1 : {"Email" : "r1@mail.com", "Password" : null, "LoginCode" : {"Code":"a8eed3d6ee9831d950d5b4dc2e27e506"}, "IsSuper" : false},
-		2 : {"Email" : "r2@mail.com", "Password" : null, "LoginCode" : {"Code":"1298c07b86a250b780d60b4e50aa19fc"}, "IsSuper" : false},
-		3 : {"Email" : "r3@mail.com", "Password" : null, "LoginCode" : {"Code":"cc1535ff7ad6e0fdc085c19de7ba2da1"}, "IsSuper" : false}
+		1 : {"Email" : "r1@mail.com", "Password" : null, "LoginCode" : {"Code":"d6b65faf6f8cf2f343764098b17d32f3"}, "IsSuper" : false},
+		2 : {"Email" : "r5@mail.com", "Password" : null, "LoginCode" : {"Code":"153f08f81bce94a093b6f55f77fded4f"}, "IsSuper" : false}
 	},
 	"Logs" : {
-		0 : {"ActionType":"ModifySeasonData","Referee":0,"Date":1478557209484},
-		1 : {"ActionType":"ModifySeasonData","Referee":0,"Date":1478556645427},
-		2 : {"ActionType":"ModifySeasonData","Referee":0,"Date":1478556634662},
-		3 : {"ActionType":"CreateNewSeason","Referee":0,"Date":1478556625143}
+		0 : {"ActionType":"CreateNewSeason","Referee":0,"Date":1478573269904},
+		1 : {"ActionType":"CreateNewSeason","Referee":0,"Date":1478573188685},
+		2 : {"ActionType":"CreateNewSeason","Referee":0,"Date":1478572790783}
 	}
 }

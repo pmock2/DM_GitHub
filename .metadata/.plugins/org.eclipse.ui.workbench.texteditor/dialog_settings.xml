@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="ScheduleData" key="selection"/>
+		<item value="Non" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="non"/>
 			<item value="ScheduleData"/>
 			<item value="print"/>
 			<item value="s1 ="/>
@@ -15,7 +16,6 @@
 			<item value="server"/>
 			<item value="System.out.print"/>
 			<item value="initialize"/>
-			<item value="AddTeamsController"/>
 		</list>
 		<list key="replacehistory">
 		</list>

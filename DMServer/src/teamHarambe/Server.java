@@ -14,11 +14,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.security.*;
 
 import org.json.JSONException;
@@ -31,8 +34,8 @@ import javax.mail.internet.MimeMessage;
 import javax.activation.*;
 
 public class Server {	
-	public static List<Team> teams = new LinkedList<>();
-	public static List<Referee> referees = new LinkedList<>();
+	public static Map<Integer,Team> teams = new HashMap<>();
+	public static Map<Integer,Referee> referees = new HashMap<>();
 	public static Schedule schedule;
 	public static AuditLog auditLog;
 	
@@ -59,16 +62,16 @@ public class Server {
 		return resources.getPath()+"/Database.json";
 	}
 
-	public static List<Referee> getNonSupers(List<Referee> fullList)
+	public static List<Referee> getNonSupers()
 	{
 		List<Referee> nonSupers = new LinkedList<>();
-		for (Referee referee : fullList)
-		{
-			if (!referee.isSuperReferee)
-			{
+		for (Map.Entry<Integer, Referee> entry : referees.entrySet()) {
+			Referee referee = entry.getValue();
+			if (!referee.isSuperReferee) {
 				nonSupers.add(referee);
 			}
 		}
+		
 		return nonSupers;
 	}
 	
@@ -107,10 +110,9 @@ public class Server {
 		for (int i=0; i < teamIds.length; i ++) {
 			JSONObject teamData = teamList.getJSONObject(teamIds[i]);
 			int teamId = Integer.parseInt(teamIds[i]);
-
-			teams.add(new Team(
-					teamId, teamData.getString("Name"), teamData.getDouble("Wins")
-			));
+			teams.put(
+				teamId, new Team(teamId, teamData.getString("Name"), teamData.getDouble("Wins"))
+			);
 		}
 	}
 	
@@ -129,7 +131,7 @@ public class Server {
 				loginCode = refereeData.getJSONObject("LoginCode");
 			} catch (JSONException e) {}
 			
-			referees.add(new Referee (
+			referees.put(refereeId, new Referee (
 				refereeId, refereeData.getString("Email"), password, loginCode, refereeData.getBoolean("IsSuper")
 			));
 		}
@@ -138,11 +140,11 @@ public class Server {
 	private static void loadSchedule(JSONObject matchList) {
 		String[] matchIds = JSONObject.getNames(matchList);
 		matchIds = (matchIds == null ? new String[0] : matchIds);
-		List<Match> matches = new LinkedList<>();
+		Map<Integer,Match> matches = new HashMap<>();
 		
 		for (int i=0; i < matchIds.length; i++) {
 			int matchId = Integer.parseInt(matchIds[i]);
-			matches.add(new Match(matchId, matchList.getJSONObject(matchIds[i])));
+			matches.put(matchId, new Match(matchId, matchList.getJSONObject(matchIds[i])));
 		}
 		
 		schedule = new Schedule(matches);
@@ -168,20 +170,28 @@ public class Server {
 		s += "\t\"Schedule\" : " + (schedule == null ? "null" : schedule.toJSON()) + ",\n";
 		
 		s += "\t\"Teams\" : {\n";
-		for (int i=0; i < teams.size(); i++) {
-			s += "\t\t" + teams.get(i).getId() + " : " + teams.get(i).toJSON() + (i+1 == teams.size() ? "" : ",") + "\n";
+		int i=0;
+		for (Map.Entry<Integer, Team> entry : teams.entrySet()) {
+			int id = entry.getKey();
+			Team team = entry.getValue();
+			s += "\t\t" + id + " : " + team.toJSON() + (i+1 == teams.size() ? "" : ",") + "\n";
+			i++;
 		}
 		s += "\t},\n";
 		
 		s += "\t\"Referees\" : {\n";
-		for (int i=0; i < referees.size(); i++) {
-			s += "\t\t" + referees.get(i).getId() + " : " + referees.get(i).toJSON() + (i+1 == referees.size() ? "" : ",") + "\n";
+		i=0;
+		for (Map.Entry<Integer, Referee> entry : referees.entrySet()) {
+			int id = entry.getKey();
+			Referee referee = entry.getValue();
+			s += "\t\t" + id + " : " + referee.toJSON() + (i+1 == referees.size() ? "" : ",") + "\n";
+			i++;
 		}
 		s += "\t},\n";
 		
 		s += "\t\"Logs\" : {\n";
 		if (auditLog != null) {
-			for (int i=0; i < auditLog.getLogs().size(); i++) {
+			for (i=0; i < auditLog.getLogs().size(); i++) {
 				s += "\t\t" + i + " : " + auditLog.getLogs().get(i).toString() + (i+1 == auditLog.getLogs().size() ? "" : ",") +"\n";
 			}
 		}
@@ -197,39 +207,44 @@ public class Server {
 	}
 
 	public static JSONObject rankingsFromSchedule() {
-		Team[] sortedTeams = new Team[teams.size()];
+		List<Team> sortedTeams = new ArrayList<>(teams.size());
 		
-		for (int i=0; i < sortedTeams.length; i++) {
-			int insertAt = 0;
-			for (int j=0; j < i; j++) {
-				if (sortedTeams[j].getWins() > teams.get(i).getWins()) {
-					insertAt++;
-				} else {
-					break;
+		int i=0;
+		for (Map.Entry<Integer, Team> entry : teams.entrySet()) {
+			int id = entry.getKey();
+			Team team = entry.getValue();
+			
+			int insertedAt = 0;
+			int j=0;
+			for (Map.Entry<Integer, Team> entry2 : teams.entrySet()) {
+				int id2 = entry.getKey();
+				Team team2 = entry.getValue();
+				
+				if (team2.getWins() > team.getWins()) {
+					insertedAt++;
+				} else if (id == id2) {
+					sortedTeams.add(insertedAt, team);
 				}
+				j++;
 			}
 			
-			//Shift array over
-			for (int j=sortedTeams.length-1; j > insertAt; j--) {
-				sortedTeams[j] = sortedTeams[j-1];
-			}
-			sortedTeams[insertAt] = teams.get(i);
+			i++;
 		}
-		
+
 		JSONObject rankings = new JSONObject();
 		
 		int ranking = 1;
-		double lastScore = sortedTeams[0].getWins();
-		for (int i=0; i < sortedTeams.length; i++) {
-			double thisScore = sortedTeams[i].getWins();
+		double lastScore = sortedTeams.get(0).getWins();
+		for (i=0; i < sortedTeams.size(); i++) {
+			double thisScore = sortedTeams.get(i).getWins();
 			if (thisScore != lastScore) {
 				lastScore = thisScore;
 				ranking = i+1;
 			}
 			
 			JSONObject data = new JSONObject();
-			data.put("Name", sortedTeams[i].getName());
-			data.put("Wins", sortedTeams[i].getWins());
+			data.put("Name", sortedTeams.get(i).getName());
+			data.put("Wins", sortedTeams.get(i).getWins());
 			data.put("Rank", ranking);
 			rankings.put(""+i, data);
 		}

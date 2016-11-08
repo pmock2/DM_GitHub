@@ -1,0 +1,113 @@
+package teamHarambe;
+
+import java.util.*;
+
+public class Schedule {
+	Calendar startDate;
+	Map<Integer,Match> matches;
+
+	public Schedule(List<Team> teamlist, List<Referee> refereelist, Calendar startDate) {
+		this.startDate = startDate;
+		matches = new HashMap<>();
+		generateSchedule(shuffleTeams(teamlist), refereelist);
+	}
+
+	public Schedule(Map<Integer,Match> matches) {
+		this.matches = matches;
+	}
+
+	public String toString() {
+		String s = "";
+
+		for (int i = 0; i < matches.size(); i++) {
+			s += matches.get(i).toString() + "\n";
+		}
+
+		return s;
+	}
+
+	public String toJSON() {
+		String s = "{\n";
+		
+		int i=0;
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			int id = entry.getKey();
+			Match match = entry.getValue();
+			s += "\t\t" + id + " : " + match.toJSON() + (i+1 == matches.size() ? "" : ",") + "\n";
+			i++;
+		}
+
+		s += "\t}";
+		return s;
+	}
+
+	public Map<Integer, Match> getMatches() {
+		return matches;
+	}
+
+	private List<Team> shuffleTeams(List<Team> list) {
+		Random rand = new Random();
+
+		for (int i = list.size() - 1; i > 0; i--) {
+			int index = rand.nextInt(i + 1);
+			Team temp = list.get(index);
+			list.set(index, list.get(i));
+			list.set(i, temp);
+		}
+
+		return list;
+	}
+
+	long msInWeek = 1000 * 60 * 60 * 24 * 7;
+
+	private Calendar getDateFromWeek(int weekInt) {
+		long week = (long) weekInt;
+		long startMs = startDate.getTimeInMillis();
+		long newMs = startMs + (msInWeek * week);
+		Calendar newDate = Calendar.getInstance();
+		newDate.setTimeInMillis(newMs);
+
+		return newDate;
+	}
+
+	/*
+	 * Algorithm used is called the "Polygon method of round-robin scheduling"
+	 * Explanation and Visual examples of the algorithm can be found here:
+	 * 					http://mathforum.org/library/drmath/view/54715.html
+	 *
+	 * Supports even or odd number of teams, though with odd #teams each team
+	 * will have an idle/bye week
+	 *
+	 * Minimum required #weeks = #teams if odd or #teams-1 if even
+	 * #matches per week required for that amount of weeks = floor(#teams/2)
+	 *
+	 * Probably room to improve method's differentiation between even/odd #teams
+	 */
+	private void generateSchedule(List<Team> teams, List<Referee> referees) {
+		Random rand = new Random();
+		Team pivot = null;
+		boolean evenNumTeams = teams.size() % 2 == 0;
+		int numWeeks = teams.size() - (evenNumTeams ? 1 : 0);
+		int matchesPerWeek = teams.size() / 2;
+		Random r = new Random();
+
+
+		if (evenNumTeams) {
+			pivot = teams.get(0);
+			teams = teams.subList(1, teams.size());
+		}
+
+		for (int offset = 0; offset < numWeeks; offset++) {
+			Calendar weekDate = getDateFromWeek(offset);
+
+			if (evenNumTeams) {
+				matches.put(0,new Match(matches.size(), pivot, teams.get(offset), referees.get(r.nextInt(referees.size()+1)), weekDate));
+			}
+			for (int i = 1; i < matchesPerWeek + (evenNumTeams ? 0 : 1); i++) {
+				int slot0 = (i + offset);
+				int slot1 = slot0 + (teams.size() - (2 * i));
+				matches.put(i - (evenNumTeams ? 0 : 1),new Match(matches.size(), teams.get(slot0 % teams.size()), teams.get(slot1 % teams.size()), referees.get(r.nextInt(referees.size()+1)), weekDate));
+			}
+		}
+	}
+}
