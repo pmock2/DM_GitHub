@@ -6,19 +6,12 @@ package teamHarambe;
 public class Team {
 	int id;
     String name;
-    double wins;
 
     public Team(int id, String name) {
     	this.id = id;
         this.name = name;
-        this.wins = 0;
     }
     
-    public Team(int id, String name, double wins) {
-    	this(id, name);
-    	this.wins = wins;
-    }
-
     public String getName() {
         return name;
     }
@@ -27,12 +20,8 @@ public class Team {
     	return id;
     }
     
-    public double getWins() {
-    	return wins;
-    }
-    
     public String toJSON() {
-    	String s = "{\"Name\" : \"" + name + "\", \"Wins\" : " + wins + "}";
+    	String s = "{\"Name\" : \"" + name + "\"}";
     	
     	return s;
     }

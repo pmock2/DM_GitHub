@@ -111,7 +111,7 @@ public class Server {
 			JSONObject teamData = teamList.getJSONObject(teamIds[i]);
 			int teamId = Integer.parseInt(teamIds[i]);
 			teams.put(
-				teamId, new Team(teamId, teamData.getString("Name"), teamData.getDouble("Wins"))
+				teamId, new Team(teamId, teamData.getString("Name"))
 			);
 		}
 	}
@@ -207,43 +207,73 @@ public class Server {
 	}
 
 	public static JSONObject rankingsFromSchedule() {
-		List<Team> sortedTeams = new ArrayList<>(teams.size());
+		Map<Integer,Double> teamWins = new HashMap<>();
+		List<Integer> sortedTeams = new ArrayList<>(teams.size());
 		
-		int i=0;
-		for (Map.Entry<Integer, Team> entry : teams.entrySet()) {
-			int id = entry.getKey();
-			Team team = entry.getValue();
+		Map<Integer,Match> matches = schedule.getMatches();
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			Match match = entry.getValue();
+			int id0 = match.getTeam1().getId();
+			int id1 = match.getTeam2().getId();
+			
+			if (teamWins.get(id0) == null) {
+				teamWins.put(id0, 0.0);
+			}
+			if (teamWins.get(id1) == null) {
+				teamWins.put(id1, 0.0);
+			}
+			
+			if (match.getScored() == true) {
+				double score0 = match.getTeam1Score();
+				double score1 = match.getTeam2Score();
+				double delta0 = 0, delta1 = 0;
+				
+				if (score0 == score1) {
+					delta0 = 0.5; delta1 = 0.5;
+				} else if (score0 > score1) {
+					delta0 = 1;
+				} else {
+					delta1 = 1;
+				}
+				
+				teamWins.put(id0, teamWins.get(id0)+delta0);
+				teamWins.put(id1, teamWins.get(id1)+delta1);
+			}
+		}
+		
+		for (Map.Entry<Integer, Double> entry : teamWins.entrySet()) {
+			int id0 = entry.getKey();
 			
 			int insertedAt = 0;
 			for (int j=0; j < sortedTeams.size(); j++) {
-				Team team2 = sortedTeams.get(j);
+				int id1 = sortedTeams.get(j);
 				
-				if (team2.getWins() > team.getWins()) {
+				if (teamWins.get(id0) < teamWins.get(id1)) {
 					insertedAt++;
 				} else {
 					break;
 				}
 			}
 
-			sortedTeams.add(insertedAt, team);
-			
-			i++;
+			sortedTeams.add(insertedAt, id0);
 		}
 
 		JSONObject rankings = new JSONObject();
 		
 		int ranking = 1;
-		double lastScore = sortedTeams.get(0).getWins();
-		for (i=0; i < sortedTeams.size(); i++) {
-			double thisScore = sortedTeams.get(i).getWins();
+		double lastScore = teamWins.get(sortedTeams.get(0));
+		for (int i=0; i < sortedTeams.size(); i++) {
+			double thisScore = teamWins.get(sortedTeams.get(i));
 			if (thisScore != lastScore) {
 				lastScore = thisScore;
 				ranking = i+1;
 			}
 			
+			int id = sortedTeams.get(i);
+			Team team = teams.get(id);
 			JSONObject data = new JSONObject();
-			data.put("Name", sortedTeams.get(i).getName());
-			data.put("Wins", sortedTeams.get(i).getWins());
+			data.put("Name", team.getName());
+			data.put("Wins", thisScore);
 			data.put("Rank", ranking);
 			rankings.put(""+i, data);
 		}
