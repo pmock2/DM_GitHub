@@ -333,7 +333,7 @@ public class ConnectionHandler implements Runnable {
 	}
 	
 	private Referee refereeFromEmail(String email) {
-		Referee referee = null;
+		Referee referee;
 		
 		for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
 			referee = entry.getValue();
@@ -341,8 +341,7 @@ public class ConnectionHandler implements Runnable {
 				return referee;
 			}
 		}
-		
-		return referee;
+		return null;
 	}
 	
 	private boolean dateConflicts(int matchId, Calendar newDate) {
