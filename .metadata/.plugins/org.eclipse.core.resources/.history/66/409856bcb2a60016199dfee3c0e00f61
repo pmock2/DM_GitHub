@@ -30,8 +30,6 @@ import java.util.ResourceBundle;
 import org.json.JSONObject;
 import teamHarambe.MethodProvider;
 
-import javax.swing.*;
-
 public class Controller implements Initializable {
 
     @FXML
@@ -131,9 +129,11 @@ public class Controller implements Initializable {
     {
         if (MethodProvider.checkForSetup()) {
             try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Standings.fxml"));
                 Parent root1 = fxmlLoader.load();
-                Stage stage = new Stage();
+                stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.DECORATED);
                 stage.setTitle("Current Standings");
@@ -145,7 +145,39 @@ public class Controller implements Initializable {
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Standings do not exist. Please log in if you would like to create them.", "Standings error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need a schedule");
+            alert.setContentText("Standings cannot exist without a schedule. Please have the super referee create a schedule.");
+            alert.showAndWait();
+        }
+    }
+
+    public void openMatches(ActionEvent event) throws IOException
+    {
+        if (MethodProvider.checkForSetup()) {
+            try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
+                Parent root1 = fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Match Select");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need a schedule");
+            alert.setContentText("Standings cannot exist without a schedule. Please have the super referee create a schedule.");
+            alert.showAndWait();
         }
     }
 
@@ -172,9 +204,11 @@ public class Controller implements Initializable {
     {
         if (MethodProvider.checkForSetup()) {
             try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Schedule.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
-                Stage stage = new Stage();
+                stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.DECORATED);
                 stage.setTitle("Schedule");
@@ -186,8 +220,30 @@ public class Controller implements Initializable {
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Schedule does not exist. Please log in if you would like to create one.", "Schedule error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need a schedule");
+            alert.setContentText("Schedule does not exist. Please have the super referee create a schedule.");
+            alert.showAndWait();
         }
+    }
+
+    public void openLog(ActionEvent event) throws IOException
+    {
+            try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AuditLog.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Audit Log");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+
+            }
     }
 
 	public void attemptLogin(ActionEvent event)
@@ -268,7 +324,11 @@ public class Controller implements Initializable {
     {
         if (MethodProvider.checkForSetup())
         {
-            JOptionPane.showMessageDialog(null, "A schedule already exists. If you create a new one, the old one will be deleted.", "Schedule exists", JOptionPane.INFORMATION_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Schedule already exists");
+            alert.setContentText("A schedule already exists. If you create a new one, the old one will be deleted.");
+            alert.showAndWait();
         }
         try{
             Stage stage = (Stage) sLogoutButton.getScene().getWindow();

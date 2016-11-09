@@ -20,7 +20,7 @@
 	},
 	"Referees" : {
 		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : "8fe4c11451281c094a6578e6ddbf5eed", "LoginCode" : null, "IsSuper" : true},
-		1 : {"Email" : "r1@mail.com", "Password" : null, "LoginCode" : {"Code":"260927e43a467ca674c1d5e296eb84ff"}, "IsSuper" : false},
+		1 : {"Email" : "r1@mail.com", "Password" : "8fe4c11451281c094a6578e6ddbf5eed", "LoginCode" : null, "IsSuper" : false},
 		2 : {"Email" : "r2@mail.com", "Password" : null, "LoginCode" : {"Code":"5a608dbfdc14bae73e512e9c4a25ca33"}, "IsSuper" : false},
 		3 : {"Email" : "r3@mail.com", "Password" : null, "LoginCode" : {"Code":"2824eff5e407a94c9b7a411c7eefe4a"}, "IsSuper" : false}
 	},

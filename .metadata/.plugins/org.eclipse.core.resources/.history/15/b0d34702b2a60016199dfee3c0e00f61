@@ -204,12 +204,6 @@ public class ConnectionHandler implements Runnable {
 						}
 						break;
 					}
-					case "Logout":
-					{
-						userAccount = null;
-						permissionLevel = 0;
-						toClient.println("Logout_Success");
-					}
 					case "RequestPasswordReset":
 					{
 						String email = fromClient.readLine();
