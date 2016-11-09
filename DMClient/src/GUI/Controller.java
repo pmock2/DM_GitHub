@@ -129,9 +129,11 @@ public class Controller implements Initializable {
     {
         if (MethodProvider.checkForSetup()) {
             try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Standings.fxml"));
                 Parent root1 = fxmlLoader.load();
-                Stage stage = new Stage();
+                stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.DECORATED);
                 stage.setTitle("Current Standings");
@@ -155,9 +157,11 @@ public class Controller implements Initializable {
     {
         if (MethodProvider.checkForSetup()) {
             try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
                 Parent root1 = fxmlLoader.load();
-                Stage stage = new Stage();
+                stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.DECORATED);
                 stage.setTitle("Match Select");
@@ -200,9 +204,11 @@ public class Controller implements Initializable {
     {
         if (MethodProvider.checkForSetup()) {
             try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Schedule.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
-                Stage stage = new Stage();
+                stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.DECORATED);
                 stage.setTitle("Schedule");
@@ -225,9 +231,11 @@ public class Controller implements Initializable {
     public void openLog(ActionEvent event) throws IOException
     {
             try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AuditLog.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
-                Stage stage = new Stage();
+                stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.DECORATED);
                 stage.setTitle("Audit Log");

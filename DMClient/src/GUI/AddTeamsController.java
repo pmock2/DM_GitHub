@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class AddTeamsController implements Initializable {
     public CheckBox o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
     public Label l1, l2;
     public DatePicker dpDate;
-    public Button submit;
+    public Button submit, menuButton;
     private String s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 = null;
     public static final Pattern VALID_EMAIL =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -1629,6 +1630,39 @@ public class AddTeamsController implements Initializable {
         return true;
     }
 
+    public void openMainMenu(ActionEvent event) throws NoSuchAlgorithmException
+    {
+        try{
+            Stage stage = (Stage) menuButton.getScene().getWindow();
+            stage.hide();
+            if (Client.permissionLevel > 0)
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Referee Menu");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            }
+            else
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Main Menu");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            }
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private static boolean validEmail(String emailStr) {
         Matcher matcher = VALID_EMAIL .matcher(emailStr);
         return matcher.find();

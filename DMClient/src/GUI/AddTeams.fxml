@@ -61,7 +61,8 @@
             <TextField fx:id="e10" layoutX="559.0" layoutY="472.0" visible="false" />
             <CheckBox fx:id="o10" layoutX="769.0" layoutY="477.0" mnemonicParsing="false" visible="false" />
             <Separator layoutX="-6.0" layoutY="311.0" opacity="0.0" prefHeight="12.0" prefWidth="1093.0" visible="false" />
-            <Label fx:id="l2" layoutX="718.0" layoutY="72.0" text="Overwrite" />
+            <Label fx:id="l2" layoutX="718.0" layoutY="72.0" text="Overwrite" visible="false" />
+            <Button fx:id="menuButton" layoutX="82.0" layoutY="660.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
          </children>
       </Pane>
    </children>

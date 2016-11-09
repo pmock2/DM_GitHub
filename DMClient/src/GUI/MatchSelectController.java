@@ -22,12 +22,14 @@ import org.json.JSONObject;
 import teamHarambe.Client;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 public class MatchSelectController implements Initializable {
 
     @FXML
     public VBox vb;
+    public Button menuButton;
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,6 +89,40 @@ public class MatchSelectController implements Initializable {
             return null;
         }
         return new JSONObject(message);
+    }
+
+    public void backToMenu(ActionEvent event) throws NoSuchAlgorithmException
+    {
+        try{
+            Stage stage = (Stage) menuButton.getScene().getWindow();
+            stage.hide();
+            if (Client.permissionLevel > 0)
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Referee Menu");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            }
+            else
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Main Menu");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            }
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     }

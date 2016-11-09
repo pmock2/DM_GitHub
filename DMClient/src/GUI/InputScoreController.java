@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import teamHarambe.Client;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 public class InputScoreController implements Initializable {
@@ -26,6 +27,7 @@ public class InputScoreController implements Initializable {
     public Label matchname, aname, bname;
     public CheckBox aforfeit, bforfeit, rs;
     public TextField ascore, bscore;
+    public Button matchesButton;
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -187,6 +189,26 @@ public class InputScoreController implements Initializable {
             }
         }
         catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void backToMatches(ActionEvent event) throws NoSuchAlgorithmException
+    {
+        try{
+            Stage stage = (Stage) matchesButton.getScene().getWindow();
+            stage.hide();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Match Select");
+                stage.setScene(new Scene(root1));
+                stage.show();
+
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -6,16 +6,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import teamHarambe.Client;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -25,7 +31,7 @@ public class ScheduleController implements Initializable {
     @FXML
     public TableView<Schedule.ScheduleData> tv = new TableView<>();
     public TableColumn datecolumn, team1column, team2column, refcolumn, score1column, score2column;
-    public Button saveButton;
+    public Button saveButton, menuButton;
     private ObservableList<Schedule.ScheduleData> data = FXCollections.observableArrayList();
 
 
@@ -165,6 +171,39 @@ public class ScheduleController implements Initializable {
 
     }
 
+    public void openMainMenu(ActionEvent event) throws NoSuchAlgorithmException
+    {
+        try{
+            Stage stage = (Stage) menuButton.getScene().getWindow();
+            stage.hide();
+            if (Client.permissionLevel > 0)
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Referee Menu");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            }
+            else
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Main Menu");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            }
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public ObservableList<Schedule.ScheduleData> getScheduleData() throws IOException
     {

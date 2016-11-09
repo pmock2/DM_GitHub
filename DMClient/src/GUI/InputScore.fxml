@@ -17,7 +17,7 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Label>
-      <Button fx:id="submitButton" layoutX="309.0" layoutY="314.0" mnemonicParsing="false" onAction="#attemptSubmit" text="Submit Scores" />
+      <Button fx:id="submitButton" layoutX="221.0" layoutY="314.0" mnemonicParsing="false" onAction="#attemptSubmit" text="Submit Scores" />
       <CheckBox fx:id="rs" layoutX="314.0" layoutY="234.0" mnemonicParsing="false" text="Reschedule" />
       <Label layoutX="267.0" layoutY="21.0" text="Input Match Scores" textFill="#c62b17">
          <font>
@@ -29,5 +29,6 @@
       <CheckBox fx:id="aforfeit" layoutX="182.0" layoutY="182.0" mnemonicParsing="false" text="Forfeit" />
       <CheckBox fx:id="bforfeit" layoutX="442.0" layoutY="182.0" mnemonicParsing="false" text="Forfeit" />
       <Label fx:id="matchname" layoutX="307.0" layoutY="66.0" text="Team A vs Team B" />
+      <Button fx:id="matchesButton" layoutX="403.0" layoutY="314.0" mnemonicParsing="false" onAction="#backToMatches" text="Back to Matches" />
    </children>
 </Pane>
