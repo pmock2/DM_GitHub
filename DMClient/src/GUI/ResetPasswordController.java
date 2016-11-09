@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
@@ -14,8 +15,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.json.JSONObject;
 import teamHarambe.Client;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -40,12 +39,20 @@ public class ResetPasswordController implements Initializable {
 
             if (!pass1.getText().equals(pass2.getText()))
             {
-                JOptionPane.showMessageDialog(null, "Passwords must match.", "Error", JOptionPane.ERROR_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Passwords must match");
+                alert.setContentText("Please ensure your passwords match");
+                alert.showAndWait();
 
             }
             else if (pass1.getLength() == 0)
             {
-                JOptionPane.showMessageDialog(null, "Please enter a password", "Error", JOptionPane.ERROR_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Blank password");
+                alert.setContentText("Please enter a password");
+                alert.showAndWait();
             }
             else
             {
@@ -58,7 +65,11 @@ public class ResetPasswordController implements Initializable {
                 if (response.equals("Login_Success")) {
                 	Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());
                 	System.out.println("Client successfully logged in with permission level of " + Client.permissionLevel);
-	                JOptionPane.showMessageDialog(null, "Password reset successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("Success!");
+                    alert.setContentText("Password reset successfully.");
+                    alert.showAndWait();
 	                Stage stage = (Stage) resetButton.getScene().getWindow();
 	                stage.hide();
 	                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));

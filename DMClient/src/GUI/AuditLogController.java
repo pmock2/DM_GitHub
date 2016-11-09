@@ -4,14 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONObject;
 import teamHarambe.Client;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -61,7 +60,11 @@ public class AuditLogController implements Initializable {
         Client.toServer.println("Get_AuditLog");
         String message = Client.fromServer.readLine();
         if (message.equals("Exception_InsufficientPermissions")) {
-            JOptionPane.showMessageDialog(null, "You don't have permission to do that.", "Permissions error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Tsk. Tsk. Tsk.");
+            alert.setContentText("Looks like you don't have permission to do that.");
+            alert.showAndWait();
         } else {
             System.out.println(message);
             return new JSONObject(message);

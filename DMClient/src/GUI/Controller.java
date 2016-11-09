@@ -30,8 +30,6 @@ import java.util.ResourceBundle;
 import org.json.JSONObject;
 import teamHarambe.MethodProvider;
 
-import javax.swing.*;
-
 public class Controller implements Initializable {
 
     @FXML
@@ -145,7 +143,11 @@ public class Controller implements Initializable {
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Standings do not exist. The super referee must create the schedule.", "Standings error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need a schedule");
+            alert.setContentText("Standings cannot exist without a schedule. Please have the super referee create a schedule.");
+            alert.showAndWait();
         }
     }
 
@@ -167,7 +169,11 @@ public class Controller implements Initializable {
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Standings do not exist. Please log in if you would like to create them.", "Standings error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need a schedule");
+            alert.setContentText("Standings cannot exist without a schedule. Please have the super referee create a schedule.");
+            alert.showAndWait();
         }
     }
 
@@ -208,7 +214,11 @@ public class Controller implements Initializable {
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Schedule does not exist. The super referee must create the schedule.", "Schedule error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need a schedule");
+            alert.setContentText("Schedule does not exist. Please have the super referee create a schedule.");
+            alert.showAndWait();
         }
     }
 
@@ -306,7 +316,11 @@ public class Controller implements Initializable {
     {
         if (MethodProvider.checkForSetup())
         {
-            JOptionPane.showMessageDialog(null, "A schedule already exists. If you create a new one, the old one will be deleted.", "Schedule exists", JOptionPane.INFORMATION_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Schedule already exists");
+            alert.setContentText("A schedule already exists. If you create a new one, the old one will be deleted.");
+            alert.showAndWait();
         }
         try{
             Stage stage = (Stage) sLogoutButton.getScene().getWindow();

@@ -6,17 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 import teamHarambe.Client;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -63,7 +58,11 @@ public class StandingsController implements Initializable {
         Client.toServer.println("Get_Standings");
         String message = Client.fromServer.readLine();
         if (message.equals("No_Standings_Found")) {
-            JOptionPane.showMessageDialog(null, "Standings do not exist. Please log in if you would like to create them.", "Standings error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need a schedule");
+            alert.setContentText("Standings cannot exist without a schedule. Please have the super referee create a schedule.");
+            alert.showAndWait();
         } else {
             System.out.println(message);
             return new JSONObject(message);

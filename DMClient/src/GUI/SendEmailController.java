@@ -6,16 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import teamHarambe.Client;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -43,7 +38,11 @@ public class SendEmailController implements Initializable {
             if (message.equals("Reset_Success"))
             {
                 try {
-                    JOptionPane.showMessageDialog(null, "Email sent successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("Success!");
+                    alert.setContentText("Email sent successfully.");
+                    alert.showAndWait();
                     Stage stage = (Stage) mainMenu.getScene().getWindow();
                     stage.hide();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
@@ -65,7 +64,11 @@ public class SendEmailController implements Initializable {
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Oops. Something went wrong.", "We're doomed", JOptionPane.ERROR_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Whoops!");
+                alert.setContentText("Something went wrong.");
+                alert.showAndWait();
             }
 
     }

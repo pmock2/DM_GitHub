@@ -17,8 +17,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import org.json.JSONObject;
 import teamHarambe.Client;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -1355,7 +1353,11 @@ public class AddTeamsController implements Initializable {
             
             String result = Client.fromServer.readLine();
             if (result.equals("Success")) {
-                JOptionPane.showMessageDialog(null, "Database successfully created!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Success");
+                alert.setContentText("Database successfully created!");
+                alert.showAndWait();
                 Stage stage = (Stage) submit.getScene().getWindow();
                 stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
@@ -1367,7 +1369,11 @@ public class AddTeamsController implements Initializable {
                 stage.setScene(new Scene(root1));
                 stage.show();
             } else if (result.equals("Failure")) {
-                JOptionPane.showMessageDialog(null, "Database creation failed.", "Error", JOptionPane.ERROR_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Whoops");
+                alert.setContentText("Something went wrong. The database wasn't created.");
+                alert.showAndWait();
             }
         }
 
@@ -1375,15 +1381,23 @@ public class AddTeamsController implements Initializable {
 
     private boolean checkData()
     {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         try {
             if (Integer.parseInt(cb.getValue())/2 > Integer.parseInt(ref.getValue())) {
-                JOptionPane.showMessageDialog(null, "You must have one referee per every two teams.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Referee Amount");
+                alert.setContentText("You must have one referee per every two teams.");
+                alert.showAndWait();
                 return false;
             }
         }
         catch (NumberFormatException e)
             {
-                JOptionPane.showMessageDialog(null, "You must Select a number of teams and a number of referees", "Error", JOptionPane.ERROR_MESSAGE);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please make a selection");
+                alert.setContentText("You must select both a number of teams and a number of referees.");
+                alert.showAndWait();
                 return false;
             }
 
@@ -1393,7 +1407,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1402,7 +1419,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1411,7 +1431,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1420,7 +1443,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1429,7 +1455,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1438,7 +1467,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals("") || t7.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1447,7 +1479,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals("") || t7.getText().equals("") || t8.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1456,7 +1491,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals("") || t7.getText().equals("") || t8.getText().equals("") || t9.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1465,7 +1503,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("") || t4.getText().equals("") || t5.getText().equals("") || t6.getText().equals("") || t7.getText().equals("") || t8.getText().equals("") || t9.getText().equals("") || t10.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "You cannot enter blank team names. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Please enter team names");
+                    alert.setContentText("You cannot enter blank team names.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1478,7 +1519,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1487,7 +1531,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1496,7 +1543,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1505,7 +1555,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1514,7 +1567,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1523,7 +1579,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()) || !validEmail(e7.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1532,7 +1591,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()) || !validEmail(e7.getText()) || !validEmail(e8.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1541,7 +1603,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()) || !validEmail(e7.getText()) || !validEmail(e8.getText()) || !validEmail(e9.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;
@@ -1550,7 +1615,10 @@ public class AddTeamsController implements Initializable {
             {
                 if (!validEmail(e1.getText()) || !validEmail(e2.getText()) || !validEmail(e3.getText()) || !validEmail(e4.getText()) || !validEmail(e5.getText()) || !validEmail(e6.getText()) || !validEmail(e7.getText()) || !validEmail(e8.getText()) || !validEmail(e9.getText()) || !validEmail(e10.getText()))
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid E-Mail");
+                    alert.setContentText("Please enter a valid E-Mail address.");
+                    alert.showAndWait();
                     return false;
                 }
                 break;

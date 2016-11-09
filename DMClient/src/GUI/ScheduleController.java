@@ -12,9 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import teamHarambe.Client;
-
-import javax.swing.*;
-
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -159,7 +156,11 @@ public class ScheduleController implements Initializable {
         String response = Client.fromServer.readLine();//Exception_ConflictingDate or Exception_InsufficientPermissions
         if (response.equals("Exception_ConflictingDate"))
         {
-            JOptionPane.showMessageDialog(null, "Detected conflicting data. Data did not save", "Date error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Conflicting Dates");
+            alert.setContentText("Detected conflicting data. Data did not save.");
+            alert.showAndWait();
         }
 
     }

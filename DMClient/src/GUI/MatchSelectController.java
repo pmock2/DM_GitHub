@@ -20,8 +20,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.json.JSONObject;
 import teamHarambe.Client;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
