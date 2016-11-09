@@ -49,6 +49,23 @@ public class InputScoreController implements Initializable {
             e.printStackTrace();
         }
 
+        ascore.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                   ascore.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        bscore.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                   bscore.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         aforfeit.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
