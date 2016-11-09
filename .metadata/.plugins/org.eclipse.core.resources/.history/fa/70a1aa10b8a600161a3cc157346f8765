@@ -153,7 +153,6 @@ public class ScheduleController implements Initializable {
             date.put("Month", Integer.parseInt(data.get(i).dateToMonth())-1);
             date.put("Day", Integer.parseInt(data.get(i).dateToDay()));
             match.put("Date", date);
-            match.put("IsMorning", true);//Update here!
             
             schedule.put(""+(data.get(i).getMatchId()), match);
         }

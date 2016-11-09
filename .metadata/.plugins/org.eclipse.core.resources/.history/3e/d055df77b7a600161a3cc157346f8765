@@ -155,7 +155,7 @@ public class ConnectionHandler implements Runnable {
 							
 							boolean changed = (team0Score != currentMatch.getTeam1Score()) || (team1Score != currentMatch.getTeam2Score());
 							boolean scored = changed ? true : currentMatch.getScored();
-							boolean isMorning = changedMatch.getBoolean("IsMorning");
+							boolean isMorning = currentMatch.getIsMorning();
 							
 							newSchedule.put(matchId,
 									new Match(matchId, currentMatch.getTeam1(), currentMatch.getTeam2(), referee, newDate, 

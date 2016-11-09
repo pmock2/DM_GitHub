@@ -43,7 +43,6 @@ public class Match {
 		
 		this.id = id;
 		this.date = date;
-		this.isMorning = matchData.getBoolean("IsMorning");
 		this.team1 = Server.teams.get(matchData.getInt("Team0"));
 		this.team2 = Server.teams.get(matchData.getInt("Team1"));
 		this.referee = matchReferee;
@@ -120,14 +119,6 @@ public class Match {
     	return scored;
     }
     
-    public void setIsMorning(boolean isMorning) {
-    	this.isMorning = isMorning;
-    }
-    
-    public boolean getIsMorning() {
-    	return this.isMorning;
-    }
-    
     public boolean isMatchOnDate(Calendar date) {
     	return this.date.get(this.date.YEAR) == date.get(date.YEAR) &&
     		   this.date.get(this.date.MONTH) == date.get(date.MONTH) &&
@@ -152,7 +143,6 @@ public class Match {
     	String s = "{\"Team0\" : " + team1.getId() + ", \"Team1\" : " + team2.getId() + ", "
     			 + "\"Referee\" : " + getReferee().getId() + ", "
     			 + "\"Date\" : " + dateToJSON() + ", "
-    			 + "\"IsMorning\" : " + (isMorning == true ? "true" : "false") + ", "
     			 + "\"Scored\" : " + (scored ? "true" : "false") + ", "
     			 + "\"Score0\" : " + team1Score + ", \"Score1\" : " + team2Score + "}";
     	

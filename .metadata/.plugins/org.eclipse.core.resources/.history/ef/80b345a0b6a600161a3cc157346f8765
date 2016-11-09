@@ -15,9 +15,7 @@ public class Match {
     int id;
     int team1Score = 0;
     int team2Score = 0;
-    boolean isMorning = true;
     boolean scored = false;
-    
 
     public Match(int id, Team team1, Team team2, Referee referee, Calendar date) {
     	this.id = id;
@@ -43,7 +41,6 @@ public class Match {
 		
 		this.id = id;
 		this.date = date;
-		this.isMorning = matchData.getBoolean("IsMorning");
 		this.team1 = Server.teams.get(matchData.getInt("Team0"));
 		this.team2 = Server.teams.get(matchData.getInt("Team1"));
 		this.referee = matchReferee;
@@ -52,9 +49,8 @@ public class Match {
 		this.team2Score = matchData.getInt("Score1");
     }
     
-    public Match(int matchId, Team team0, Team team1, Referee referee, Calendar date, boolean isMorning, int team0Score, int team1Score, boolean scored) {
+    public Match(int matchId, Team team0, Team team1, Referee referee, Calendar date, int team0Score, int team1Score, boolean scored) {
     	this(matchId, team0, team1, referee, date);
-    	this.isMorning = isMorning;
     	this.team1Score = team0Score;
     	this.team2Score = team1Score;
     	this.scored = scored;
@@ -120,14 +116,6 @@ public class Match {
     	return scored;
     }
     
-    public void setIsMorning(boolean isMorning) {
-    	this.isMorning = isMorning;
-    }
-    
-    public boolean getIsMorning() {
-    	return this.isMorning;
-    }
-    
     public boolean isMatchOnDate(Calendar date) {
     	return this.date.get(this.date.YEAR) == date.get(date.YEAR) &&
     		   this.date.get(this.date.MONTH) == date.get(date.MONTH) &&
@@ -152,7 +140,6 @@ public class Match {
     	String s = "{\"Team0\" : " + team1.getId() + ", \"Team1\" : " + team2.getId() + ", "
     			 + "\"Referee\" : " + getReferee().getId() + ", "
     			 + "\"Date\" : " + dateToJSON() + ", "
-    			 + "\"IsMorning\" : " + (isMorning == true ? "true" : "false") + ", "
     			 + "\"Scored\" : " + (scored ? "true" : "false") + ", "
     			 + "\"Score0\" : " + team1Score + ", \"Score1\" : " + team2Score + "}";
     	
