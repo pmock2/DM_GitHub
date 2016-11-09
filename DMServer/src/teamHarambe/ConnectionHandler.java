@@ -209,6 +209,7 @@ public class ConnectionHandler implements Runnable {
 						userAccount = null;
 						permissionLevel = 0;
 						toClient.println("Logout_Success");
+						break;
 					}
 					case "RequestPasswordReset":
 					{
