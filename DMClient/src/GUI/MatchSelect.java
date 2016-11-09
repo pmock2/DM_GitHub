@@ -12,7 +12,7 @@ public class MatchSelect extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("MatchSelect.fxml"));
         primaryStage.setTitle("Select Match To Score");
-        primaryStage.setScene(new Scene(root, 600, 375));
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 
