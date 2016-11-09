@@ -179,6 +179,7 @@ public class ConnectionHandler implements Runnable {
 						String password = fromClient.readLine();
 						Referee loginAs = refereeFromEmail(email);
 
+						
 						if (loginAs == null) {
 							toClient.println("Login_Fail");
 							break;
@@ -343,7 +344,7 @@ public class ConnectionHandler implements Runnable {
 		
 		for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
 			referee = entry.getValue();
-			if (referee.getEmail().toLowerCase().equals(email.toLowerCase())) {
+			if (referee.getEmail().equals(email)) {
 				return referee;
 			}
 		}

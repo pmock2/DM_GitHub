@@ -343,7 +343,8 @@ public class ConnectionHandler implements Runnable {
 		
 		for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
 			referee = entry.getValue();
-			if (referee.getEmail().toLowerCase().equals(email.toLowerCase())) {
+			System.out.println(referee.getEmail() + " vs " + email + " are equal? " + referee.getEmail().equals(email));
+			if (referee.getEmail().equals(email)) {
 				return referee;
 			}
 		}
