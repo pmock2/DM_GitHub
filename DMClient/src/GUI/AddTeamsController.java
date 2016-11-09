@@ -23,9 +23,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -1383,7 +1381,44 @@ public class AddTeamsController implements Initializable {
     private boolean checkData()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        ArrayList<String> teamnames = new ArrayList<>();
+        ArrayList<String> teamnames2 = new ArrayList<>();
+        Set<String> hs = new HashSet<>();
+
+        teamnames.add(t1.getText());
+        teamnames.add(t2.getText());
+        teamnames.add(t3.getText());
+        teamnames.add(t4.getText());
+        teamnames.add(t5.getText());
+        teamnames.add(t6.getText());
+        teamnames.add(t7.getText());
+        teamnames.add(t8.getText());
+        teamnames.add(t9.getText());
+        teamnames.add(t10.getText());
+
+        hs.addAll(teamnames);
+        teamnames2.addAll(hs);
+
+        for (int i = 0; i < teamnames.size(); i++) {
+            for (int j = i+1; j < teamnames.size(); j++) {
+                if (teamnames.get(i).equals(teamnames.get(j)))
+                {
+                    if (!teamnames.get(i).equals("") && !teamnames.get(j).equals(""))
+                    {
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Team Name Duplication Detected");
+                        alert.setContentText("We have detected that \"" + teamnames.get(i) + "\" is duplicated in the team list. Please remove the duplicate entry and try again");
+                        alert.showAndWait();
+                        return false;
+                    }
+                }
+            }
+        }
+
+
         try {
+
+
             if (Integer.parseInt(cb.getValue())/2 > Integer.parseInt(ref.getValue())) {
 
                 alert.setTitle("Error");
@@ -1628,6 +1663,27 @@ public class AddTeamsController implements Initializable {
 
 
         return true;
+    }
+
+    public  boolean equalLists(List<String> one, List<String> two){
+        if (one == null && two == null){
+            return true;
+        }
+
+        if((one == null && two != null)
+                || one != null && two == null
+                || one.size() != two.size()){
+            return false;
+        }
+
+        //to avoid messing the order of the lists we will use a copy
+        //as noted in comments by A. R. S.
+        one = new ArrayList<String>(one);
+        two = new ArrayList<String>(two);
+
+        Collections.sort(one);
+        Collections.sort(two);
+        return one.equals(two);
     }
 
     public void openMainMenu(ActionEvent event) throws NoSuchAlgorithmException

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bf1d76f0-33cb-4d81-aeab-84e02e50662d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" afterPath="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java" afterPath="$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java" />
     </list>
     <ignored path="DM_GitHub.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,12 +23,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ConnectionHandler.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java">
+      <file leaf-file-name="AddTeamsController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="336" column="8" selection-start-line="336" selection-start-column="8" selection-end-line="336" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="387">
+              <caret line="1408" column="68" selection-start-line="1408" selection-start-column="68" selection-end-line="1408" selection-end-column="68" />
+              <folding>
+                <element signature="e#1574#1972#0" expanded="true" />
+                <element signature="e#1971#1972#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,7 +72,6 @@
         <option value="$PROJECT_DIR$/DMClient/src/GUI/ScheduleController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/Schedule.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/AddTeams.fxml" />
-        <option value="$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/Controller.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/AuditLog.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/AuditLogController.java" />
@@ -81,6 +83,7 @@
         <option value="$PROJECT_DIR$/DMClient/src/GUI/MatchSelect.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" />
         <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java" />
       </list>
     </option>
   </component>
@@ -696,7 +699,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478673494108</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Fixed Referee E-Mail Check">
+      <created>1478681281274</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1478681281274</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -757,7 +767,8 @@
     <MESSAGE value="Removed JOptionPane. Replaced with JavaFX version." />
     <MESSAGE value="Input score only allows integers." />
     <MESSAGE value="Created navigation buttons." />
-    <option name="LAST_COMMIT_MESSAGE" value="Created navigation buttons." />
+    <MESSAGE value="Fixed Referee E-Mail Check" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Referee E-Mail Check" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1003,24 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27252">
-          <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeams.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ScheduleController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13">
@@ -1131,6 +1124,28 @@
         <state relative-caret-position="204">
           <caret line="336" column="8" selection-start-line="336" selection-start-column="8" selection-end-line="336" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeams.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="1408" column="68" selection-start-line="1408" selection-start-column="68" selection-end-line="1408" selection-end-column="68" />
+          <folding>
+            <element signature="e#1574#1972#0" expanded="true" />
+            <element signature="e#1971#1972#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
