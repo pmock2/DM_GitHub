@@ -54,6 +54,15 @@ public class ScheduleController implements Initializable {
                 score2column.setEditable(true);
                 saveButton.setVisible(true);
             }
+            else
+            {
+                tv.setEditable(false);
+                datecolumn.setEditable(false);
+                refcolumn.setEditable(false);
+                score1column.setEditable(false);
+                score2column.setEditable(false);
+                saveButton.setVisible(false);
+            }
         }
         catch (Exception e)
             {
