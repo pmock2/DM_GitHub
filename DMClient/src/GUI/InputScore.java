@@ -15,7 +15,7 @@ public class InputScore extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("InputScore.fxml"));
         primaryStage.setTitle("Change Score");
-        primaryStage.setScene(new Scene(root, 710, 380));
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 
