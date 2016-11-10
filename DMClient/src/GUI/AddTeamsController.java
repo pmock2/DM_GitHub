@@ -57,7 +57,7 @@ public class AddTeamsController implements Initializable {
                         || item.getDayOfWeek() == DayOfWeek.THURSDAY
                         || item.getDayOfWeek() == DayOfWeek.FRIDAY
                         || item.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                    setStyle("-fx-background-color: #ffc0cb;");
+                    setStyle("-fx-background-color: #A9A9A9;");
                     setDisable(true);
                 }
             }
