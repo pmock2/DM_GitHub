@@ -22,6 +22,7 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -49,7 +50,13 @@ public class AddTeamsController implements Initializable {
             public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
 
-                if (item.isBefore(LocalDate.now()) || item.isAfter(LocalDate.now().plusYears(1))) {
+                if (item.isBefore(LocalDate.now()) || item.isAfter(LocalDate.now().plusMonths(10)) 
+                		|| item.getDayOfWeek() == DayOfWeek.MONDAY //
+                		|| item.getDayOfWeek() == DayOfWeek.TUESDAY //
+                        || item.getDayOfWeek() == DayOfWeek.WEDNESDAY
+                        || item.getDayOfWeek() == DayOfWeek.THURSDAY
+                        || item.getDayOfWeek() == DayOfWeek.FRIDAY
+                        || item.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     setStyle("-fx-background-color: #ffc0cb;");
                     setDisable(true);
                 }
