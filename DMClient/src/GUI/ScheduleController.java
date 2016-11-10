@@ -30,7 +30,7 @@ public class ScheduleController implements Initializable {
 
     @FXML
     public TableView<Schedule.ScheduleData> tv = new TableView<>();
-    public TableColumn datecolumn, team1column, team2column, refcolumn, score1column, score2column;
+    public TableColumn datecolumn, team1column, team2column, refcolumn, score1column, score2column, slotcolumn;
     public Button saveButton, menuButton;
     private ObservableList<Schedule.ScheduleData> data = FXCollections.observableArrayList();
 
@@ -42,6 +42,7 @@ public class ScheduleController implements Initializable {
         refcolumn.setCellValueFactory(new PropertyValueFactory<>("ref"));
         score1column.setCellValueFactory(new PropertyValueFactory<>("score1"));
         score2column.setCellValueFactory(new PropertyValueFactory<>("score2"));
+        slotcolumn.setCellValueFactory(new PropertyValueFactory<>("slot"));
 
 
         try {
@@ -55,6 +56,7 @@ public class ScheduleController implements Initializable {
                 refcolumn.setEditable(true);
                 score1column.setEditable(true);
                 score2column.setEditable(true);
+                slotcolumn.setEditable(true);
                 saveButton.setVisible(true);
             }
             else
@@ -64,6 +66,7 @@ public class ScheduleController implements Initializable {
                 refcolumn.setEditable(false);
                 score1column.setEditable(false);
                 score2column.setEditable(false);
+                slotcolumn.setEditable(false);
                 saveButton.setVisible(false);
             }
         }
@@ -114,9 +117,12 @@ public class ScheduleController implements Initializable {
                 new EventHandler<TableColumn.CellEditEvent<Schedule.ScheduleData, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<Schedule.ScheduleData, String> t) {
-                        ((Schedule.ScheduleData) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setScore1(t.getNewValue());
+                        if (t.getNewValue().matches("\\d*") || t.getNewValue().equals("-1"))
+                        {
+                            ((Schedule.ScheduleData) t.getTableView().getItems().get(
+                                    t.getTablePosition().getRow())
+                            ).setScore1(t.getNewValue());
+                        }
                     }
                 }
         );
@@ -126,9 +132,35 @@ public class ScheduleController implements Initializable {
                 new EventHandler<TableColumn.CellEditEvent<Schedule.ScheduleData, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<Schedule.ScheduleData, String> t) {
-                        ((Schedule.ScheduleData) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setScore2(t.getNewValue());
+                        if (t.getNewValue().matches("\\d*") || t.getNewValue().equals("-1"))
+                        {
+                            ((Schedule.ScheduleData) t.getTableView().getItems().get(
+                                    t.getTablePosition().getRow())
+                            ).setScore2(t.getNewValue());
+                        }
+                    }
+                }
+        );
+
+        slotcolumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        slotcolumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Schedule.ScheduleData, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Schedule.ScheduleData, String> t) {
+                        if (t.getNewValue().equals("Morning") || t.getNewValue().equals("Night"))
+                        {
+                            ((Schedule.ScheduleData) t.getTableView().getItems().get(
+                                    t.getTablePosition().getRow())
+                            ).setSlot(t.getNewValue());
+                        }
+                        else
+                        {
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Warning");
+                            alert.setHeaderText("Change Warning");
+                            alert.setContentText("The only timeslot changes that are saved are \"Morning\" and \"Night\". Anything else will not be reflected on the schedule.");
+                            alert.showAndWait();
+                        }
                     }
                 }
         );
@@ -146,14 +178,43 @@ public class ScheduleController implements Initializable {
         	JSONObject date = new JSONObject();
 
         	match.put("RefereeName", data.get(i).getRef());
-            match.put("Team0Score", Integer.parseInt(data.get(i).getScore1()));
-            match.put("Team1Score", Integer.parseInt(data.get(i).getScore2()));
-            
+            if (data.get(i).getScore1().equals("F"))
+            {
+                match.put("Team0Score", -1);
+            }
+            else if (data.get(i).getScore1().equals("W"))
+            {
+                match.put("Team0Score", 0);
+            }
+            else
+            {
+                match.put("Team0Score", Integer.parseInt(data.get(i).getScore1()));
+            }
+            if (data.get(i).getScore2().equals("F"))
+            {
+                match.put("Team1Score", -1);
+            }
+            else if (data.get(i).getScore2().equals("W"))
+            {
+                match.put("Team1Score", 0);
+            }
+            else
+            {
+                match.put("Team1Score", Integer.parseInt(data.get(i).getScore2()));
+            }
             date.put("Year", Integer.parseInt(data.get(i).dateToYear()));
             date.put("Month", Integer.parseInt(data.get(i).dateToMonth())-1);
             date.put("Day", Integer.parseInt(data.get(i).dateToDay()));
             match.put("Date", date);
-            match.put("IsMorning", true);//Update here!
+            if (data.get(i).getSlot().equals("Morning"))
+            {
+                match.put("IsMorning", true);
+            }
+            if (data.get(i).getSlot().equals("Night"))
+            {
+                match.put("IsMorning", false);
+            }
+
             
             schedule.put(""+(data.get(i).getMatchId()), match);
         }
@@ -218,11 +279,31 @@ public class ScheduleController implements Initializable {
             int year = date.getInt("Year");
             int month = (date.getInt("Month")+1);
             int day = date.getInt("Day");
+
             data.add(new Schedule.ScheduleData(
-            		Integer.parseInt(keyNames[i]), matchData.getString("Team0Name"), matchData.getString("Team1Name"), 
-            		matchData.getString("RefereeName"), month+"/"+day+"/"+year, Integer.toString(matchData.getInt("Score0")), 
-            		Integer.toString(matchData.getInt("Score1")
-            )));
+                    Integer.parseInt(keyNames[i]), matchData.getString("Team0Name"), matchData.getString("Team1Name"),
+                    matchData.getString("RefereeName"), month + "/" + day + "/" + year, Integer.toString(matchData.getInt("Score0")),
+                    Integer.toString(matchData.getInt("Score1")), Boolean.toString(matchData.getBoolean("IsMorning"))
+                        ));
+                    //DISPLAY EDITS
+            if (matchData.getInt("Score0") == -1)
+            {
+                data.get(i).setScore1("F");
+                data.get(i).setScore2("W");
+            }
+            if (matchData.getInt("Score1") == -1)
+            {
+                data.get(i).setScore1("W");
+                data.get(i).setScore2("F");
+            }
+            if (matchData.getBoolean("IsMorning"))
+            {
+                data.get(i).setSlot("Morning");
+            }
+            if (!matchData.getBoolean("IsMorning"))
+            {
+                data.get(i).setSlot("Night");
+            }
         }
         return data;
     }

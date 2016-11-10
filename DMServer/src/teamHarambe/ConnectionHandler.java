@@ -299,15 +299,32 @@ public class ConnectionHandler implements Runnable {
 						int matchId = args.getInt("MatchId");
 						int team0Score = args.getInt("Team0Score");
 						int team1Score = args.getInt("Team1Score");
-						//boolean team0Forfeit = args.getBoolean("Team0Forfeit");
-						//boolean team1Forfeit = args.getBoolean("Team1Forfeit");
+						boolean team0forfeit = args.getBoolean("Team0Forfeit");
+						boolean team1forfeit = args.getBoolean("Team1Forfeit");
 						boolean reschedule = args.getBoolean("Reschedule");
 						
 						Match match = Server.schedule.getMatches().get(matchId);
 						if (permissionLevel >= 2 || (match.getReferee() == userAccount)) {
-							match.setTeam1Score(team0Score);
-							match.setTeam2Score(team1Score);
-							match.scored = true;
+							if (reschedule)
+							{
+								match.setIsMorning(false);
+							}
+							else if (team0forfeit)
+							{
+								match.setTeam1Score(-1);
+								match.scored = true;
+							}
+							else if (team1forfeit)
+							{
+								match.setTeam2Score(-1);
+								match.scored = true;
+							}
+							else
+							{
+								match.setTeam1Score(team0Score);
+								match.setTeam2Score(team1Score);
+								match.scored = true;
+							}
 							Server.saveData();
 							toClient.println("Success");
 						} else {

@@ -25,9 +25,10 @@ public class Schedule extends Application {
         private final SimpleStringProperty date;
         private final SimpleStringProperty score1;
         private final SimpleStringProperty score2;
+        private final SimpleStringProperty slot;
         private final int matchId;
 
-        public ScheduleData(int matchId, String t1, String t2, String ref, String date, String s1, String s2) {
+        public ScheduleData(int matchId, String t1, String t2, String ref, String date, String s1, String s2, String s) {
         	this.matchId = matchId;
             this.team1 = new SimpleStringProperty(t1);
             this.team2 = new SimpleStringProperty(t2);
@@ -35,6 +36,7 @@ public class Schedule extends Application {
             this.date = new SimpleStringProperty(date);
             this.score1 = new SimpleStringProperty(s1);
             this.score2 = new SimpleStringProperty(s2);
+            this.slot = new SimpleStringProperty(s);
         }
         
         public int getMatchId() {
@@ -87,6 +89,14 @@ public class Schedule extends Application {
 
         public void setScore2(String s2) {
             this.score2.set(s2);
+        }
+
+        public String getSlot() {
+            return slot.get();
+        }
+
+        public void setSlot(String s) {
+            this.slot.set(s);
         }
 
         public String dateToYear()

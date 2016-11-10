@@ -25,7 +25,8 @@
                   <TableColumn fx:id="team2column" editable="false" prefWidth="140.0" text="Away" />
                   <TableColumn fx:id="score1column" editable="false" minWidth="0.0" prefWidth="60.0" text="Score A" />
                   <TableColumn fx:id="score2column" editable="false" prefWidth="60.0" text="Score B" />
-                  <TableColumn fx:id="refcolumn" editable="false" prefWidth="224.0" text="Referee" />
+                  <TableColumn fx:id="refcolumn" editable="false" prefWidth="151.0" text="Referee" />
+                  <TableColumn fx:id="slotcolumn" prefWidth="73.0" text="Timeslot" />
               </columns>
             </TableView>
             <Button fx:id="saveButton" layoutX="34.0" layoutY="23.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" visible="false" />

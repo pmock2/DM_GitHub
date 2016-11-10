@@ -76,8 +76,8 @@ public class InputScoreController implements Initializable {
                     bforfeit.setDisable(true);
                     rs.setSelected(false);
                     rs.setDisable(true);
-                    ascore.setText("-1");
-                    bscore.setText("0");
+                    ascore.setText("0");
+                    bscore.setText("1");
                     ascore.setDisable(true);
                     bscore.setDisable(true);
 
@@ -102,8 +102,8 @@ public class InputScoreController implements Initializable {
                     aforfeit.setDisable(true);
                     rs.setSelected(false);
                     rs.setDisable(true);
-                    ascore.setText("0");
-                    bscore.setText("-1");
+                    ascore.setText("1");
+                    bscore.setText("0");
                     ascore.setDisable(true);
                     bscore.setDisable(true);
 
@@ -167,8 +167,8 @@ public class InputScoreController implements Initializable {
             matchToSend.put("MatchId", matchData.getInt("MatchId"));
             matchToSend.put("Team0Score", Integer.parseInt(ascore.getText()));
             matchToSend.put("Team1Score", Integer.parseInt(bscore.getText()));
-            //matchToSend.put("Team0Forfeit", aforfeit.isSelected());
-            //matchToSend.put("Team1Forfeit", bforfeit.isSelected());
+            matchToSend.put("Team0Forfeit", aforfeit.isSelected());
+            matchToSend.put("Team1Forfeit", bforfeit.isSelected());
             matchToSend.put("Reschedule", rs.isSelected());
 
             Client.toServer.println("Set_MatchScore");
@@ -178,6 +178,14 @@ public class InputScoreController implements Initializable {
             {
                 Stage stage = (Stage) rs.getScene().getWindow();
                 stage.hide();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Match Select");
+                stage.setScene(new Scene(root1));
+                stage.show();
             }
             else
             {
