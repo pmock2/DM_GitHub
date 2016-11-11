@@ -11,49 +11,48 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.InputScoreController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="710.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="710.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="aname" alignment="TOP_CENTER" layoutX="182.0" layoutY="233.0" text="Team A" textAlignment="CENTER">
+            <Label id="text" fx:id="aname" alignment="TOP_CENTER" layoutX="278.0" layoutY="233.0" text="Team A" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="bname" alignment="TOP_CENTER" layoutX="466.0" layoutY="233.0" text="Team B" textAlignment="CENTER">
+            <Label id="text" fx:id="bname" alignment="TOP_CENTER" layoutX="546.0" layoutY="233.0" text="Team B" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="submitButton" layoutX="278.0" layoutY="471.0" mnemonicParsing="false" onAction="#attemptSubmit" prefHeight="31.0" prefWidth="156.0" text="Submit Results" />
-            <CheckBox fx:id="rs" layoutX="302.0" layoutY="376.0" mnemonicParsing="false" text="Reschedule" />
-            <Label layoutX="203.0" layoutY="14.0" text="Input Match Scores" textFill="#c62b17">
+            <Button id="button" fx:id="submitButton" layoutX="364.0" layoutY="476.0" mnemonicParsing="false" onAction="#attemptSubmit" prefHeight="31.0" prefWidth="156.0" text="Submit Results" />
+            <CheckBox id="text" fx:id="rs" layoutX="380.0" layoutY="379.0" mnemonicParsing="false" text="Reschedule" />
+            <Label id="title" layoutX="232.0" layoutY="14.0" text="Input Match Scores" textFill="#c62b17">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <TextField fx:id="ascore" layoutX="165.0" layoutY="272.0" prefHeight="31.0" prefWidth="103.0" />
-            <TextField fx:id="bscore" layoutX="442.0" layoutY="272.0" prefHeight="31.0" prefWidth="103.0" />
-            <CheckBox fx:id="aforfeit" layoutX="175.0" layoutY="315.0" mnemonicParsing="false" text="Forfeit" />
-            <CheckBox fx:id="bforfeit" layoutX="458.0" layoutY="315.0" mnemonicParsing="false" text="Forfeit" />
-            <Label fx:id="matchname" layoutX="284.0" layoutY="177.0" text="Team A vs Team B" underline="true">
+            <TextField fx:id="ascore" layoutX="257.0" layoutY="273.0" prefHeight="31.0" prefWidth="103.0" />
+            <TextField fx:id="bscore" layoutX="525.0" layoutY="273.0" prefHeight="31.0" prefWidth="103.0" />
+            <CheckBox id="text" fx:id="aforfeit" layoutX="265.0" layoutY="327.0" mnemonicParsing="false" text="Forfeit" />
+            <CheckBox id="text" fx:id="bforfeit" layoutX="533.0" layoutY="327.0" mnemonicParsing="false" text="Forfeit" />
+            <Label id="text" fx:id="matchname" layoutX="368.0" layoutY="178.0" text="Team A vs Team B" underline="true">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="matchesButton" layoutX="290.0" layoutY="563.0" mnemonicParsing="false" onAction="#backToMatches" text="Back to Matches" />
-            <Label fx:id="matchname1" layoutX="171.0" layoutY="73.0" text="Please input the results of your current match.">
+            <Button id="button" fx:id="matchesButton" layoutX="377.0" layoutY="566.0" mnemonicParsing="false" onAction="#backToMatches" text="Back to Matches" />
+            <Label id="text" fx:id="matchname1" layoutX="252.0" layoutY="90.0" text="Please input the results of your current match.">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="matchname11" layoutX="133.0" layoutY="100.0" text="Check the boxs for forfeits and reschedules accordingly,">
+            <Label id="text" fx:id="matchname11" layoutX="215.0" layoutY="111.0" text="Check the boxs for forfeits and reschedules accordingly,">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="matchname12" layoutX="159.0" layoutY="127.0" text="and hit the &quot;submit results&quot; button when finished.">
+            <Label id="text" fx:id="matchname12" layoutX="241.0" layoutY="132.0" text="and hit the &quot;submit results&quot; button when finished.">
                <font>
                   <Font size="18.0" />
                </font>

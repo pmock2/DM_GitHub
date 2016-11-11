@@ -12,19 +12,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LandingController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../bin/GUI/Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LandingController">
    <children>
       <ImageView fitHeight="130.0" fitWidth="258.0" layoutX="335.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@blue-question.png" />
          </image></ImageView>
-      <Label layoutX="268.0" layoutY="346.0" text="Please log in to create schedule">
+      <Label id="text" layoutX="272.0" layoutY="347.0" text="Please log in to create schedule">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="create" layoutX="346.0" layoutY="417.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="31.0" prefWidth="109.0" text="Okay" />
-      <Label layoutX="185.0" layoutY="306.0" text="The super referee has not created the schedule yet.">
+      <Button id="button" fx:id="create" layoutX="346.0" layoutY="417.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="31.0" prefWidth="109.0" text="Okay" />
+      <Label id="text" layoutX="189.0" layoutY="306.0" text="The super referee has not created the schedule yet.">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

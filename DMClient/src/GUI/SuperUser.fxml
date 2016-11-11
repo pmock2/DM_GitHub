@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -7,16 +11,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
-      <Pane layoutX="291.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="291.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="55.0" prefHeight="53.0" prefWidth="364.0" text="Referee Menu" textAlignment="JUSTIFY" textFill="DARKRED" wrapText="true">
+            <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="55.0" prefHeight="53.0" prefWidth="364.0" text="Referee Menu" textAlignment="JUSTIFY" textFill="DARKRED" wrapText="true">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <Button layoutX="184.0" layoutY="200.0" mnemonicParsing="false" onAction="#openStandings" prefHeight="50.0" prefWidth="190.0" text="Standings">
+            <Button id="button" layoutX="184.0" layoutY="200.0" mnemonicParsing="false" onAction="#openStandings" prefHeight="50.0" prefWidth="190.0" text="Standings">
                <font>
                   <Font size="18.0" />
                </font>
@@ -26,32 +30,32 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Button fx:id="scheduleButton" layoutX="506.0" layoutY="200.0" mnemonicParsing="false" onAction="#openSchedule" prefHeight="50.0" prefWidth="190.0" text="View Schedule">
+            <Button id="button" fx:id="scheduleButton" layoutX="506.0" layoutY="200.0" mnemonicParsing="false" onAction="#openSchedule" prefHeight="50.0" prefWidth="190.0" text="View Schedule">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="317.0" layoutY="125.0" text="Advanced Options for Referees">
+            <Label id="text" layoutX="317.0" layoutY="125.0" text="Advanced Options for Referees">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="createButton" layoutX="345.0" layoutY="460.0" mnemonicParsing="false" onAction="#createSchedule" prefHeight="50.0" prefWidth="190.0" text="New Schedule">
+            <Button id="button" fx:id="createButton" layoutX="345.0" layoutY="460.0" mnemonicParsing="false" onAction="#createSchedule" prefHeight="50.0" prefWidth="190.0" text="New Schedule">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="auditLogButton" layoutX="184.0" layoutY="321.0" mnemonicParsing="false" onAction="#openLog" prefHeight="50.0" prefWidth="190.0" text="View Audit Log">
+            <Button id="button" fx:id="auditLogButton" layoutX="184.0" layoutY="321.0" mnemonicParsing="false" onAction="#openLog" prefHeight="50.0" prefWidth="190.0" text="View Audit Log">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Hyperlink fx:id="sLogoutButton" layoutX="797.0" layoutY="14.0" onAction="#superLogout" text="Logout" underline="true">
+            <Hyperlink id="hyperlink" fx:id="sLogoutButton" layoutX="797.0" layoutY="14.0" onAction="#superLogout" text="Logout" underline="true">
                <font>
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <Button layoutX="506.0" layoutY="321.0" mnemonicParsing="false" onAction="#openMatches" prefHeight="50.0" prefWidth="190.0" text="Input Match Scores">
+            <Button id="button" layoutX="506.0" layoutY="321.0" mnemonicParsing="false" onAction="#openMatches" prefHeight="50.0" prefWidth="190.0" text="Input Match Scores">
                <font>
                   <Font size="18.0" />
                </font>

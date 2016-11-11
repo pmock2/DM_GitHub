@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -14,7 +15,7 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="328.0" layoutY="42.0" prefHeight="46.0" prefWidth="224.0" stylesheets="@../../bin/GUI/Style.css" text="Main Menu" textAlignment="JUSTIFY" textFill="#c30f0f" wrapText="true">
+            <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="252.0" layoutY="32.0" prefHeight="59.0" prefWidth="376.0" text="Main Menu" textAlignment="JUSTIFY" textFill="#3c2323" wrapText="true">
                <font>
                   <Font size="36.0" />
                </font>
@@ -42,7 +43,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Hyperlink layoutX="744.0" layoutY="14.0" onAction="#openLogin" text="Referee Login" underline="true">
+            <Hyperlink id="text" layoutX="744.0" layoutY="14.0" onAction="#openLogin" text="Referee Login" underline="true">
                <font>
                   <Font size="18.0" />
                </font></Hyperlink>

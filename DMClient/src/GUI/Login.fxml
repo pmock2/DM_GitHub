@@ -14,25 +14,25 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
             <TextField fx:id="loginText" layoutX="315.0" layoutY="236.0" prefWidth="250.0" />
             <PasswordField fx:id="loginPassword" layoutX="312.0" layoutY="321.0" prefWidth="250.0" />
-            <Hyperlink fx:id="forgot" layoutX="739.0" layoutY="14.0" onAction="#openForgotten" text="Forget Password?" underline="true" />
-            <Button fx:id="loginButton" layoutX="362.0" layoutY="429.0" mnemonicParsing="false" onAction="#attemptLogin" prefWidth="150.0" style="-fx-alignment: center;" text="Submit" />
-            <Label layoutX="334.0" layoutY="56.0" style="-fx-alignment: center;" text="Referee Login" textFill="#c31d1d">
+            <Hyperlink id="hyperlink" fx:id="forgot" layoutX="739.0" layoutY="14.0" onAction="#openForgotten" text="Forget Password?" underline="true" />
+            <Button id="button" fx:id="loginButton" layoutX="362.0" layoutY="429.0" mnemonicParsing="false" onAction="#attemptLogin" prefWidth="150.0" style="-fx-alignment: center;" text="Submit" />
+            <Label id="title" layoutX="286.0" layoutY="43.0" style="-fx-alignment: center;" text="Referee Login" textFill="#c31d1d">
                <font>
                   <Font size="34.0" />
                </font>
             </Label>
-            <Label layoutX="273.0" layoutY="125.0" text="Please enter your username and password">
+            <Label id="text" layoutX="267.0" layoutY="125.0" text="Please enter your username and password">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="248.0" layoutY="241.0" text="E-Mail" />
-            <Label layoutX="238.0" layoutY="326.0" text="Password" />
-            <Button fx:id="backButton" layoutX="50.0" layoutY="568.0" mnemonicParsing="false" onAction="#goBack" text="Back to Main Menu" />
+            <Label id="text" layoutX="243.0" layoutY="241.0" text="E-Mail" />
+            <Label id="text" layoutX="230.0" layoutY="326.0" text="Password" />
+            <Button id="button" fx:id="backButton" layoutX="50.0" layoutY="568.0" mnemonicParsing="false" onAction="#goBack" text="Back to Main Menu" />
             <Label fx:id="invalidCredentials" layoutX="284.0" layoutY="361.0" text="Invalid Username or Password. Please try again." textFill="RED" visible="false" />
          </children>
       </Pane>

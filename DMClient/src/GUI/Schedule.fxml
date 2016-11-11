@@ -14,9 +14,9 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ScheduleController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="368.0" layoutY="12.0" text="Schedule" textFill="RED">
+            <Label id="title" layoutX="337.0" layoutY="14.0" text="Schedule" textFill="RED">
                <font>
                   <Font size="36.0" />
                </font>
@@ -26,15 +26,15 @@
                 <TableColumn fx:id="datecolumn" editable="false" prefWidth="113.0" text="Date" />
                 <TableColumn fx:id="team1column" editable="false" minWidth="6.0" prefWidth="140.0" text="Home" />
                   <TableColumn fx:id="team1column1" editable="false" minWidth="0.0" prefWidth="31.0" text="Vs." />
-                  <TableColumn fx:id="team2column" editable="false" prefWidth="140.0" text="Away" />
-                  <TableColumn fx:id="score1column" editable="false" minWidth="0.0" prefWidth="60.0" text="Score A" />
-                  <TableColumn fx:id="score2column" editable="false" prefWidth="60.0" text="Score B" />
-                  <TableColumn fx:id="refcolumn" editable="false" prefWidth="151.0" text="Referee" />
+                  <TableColumn fx:id="team2column" editable="false" prefWidth="112.0" text="Away" />
+                  <TableColumn fx:id="score1column" editable="false" minWidth="0.0" prefWidth="84.0" text="Score A" />
+                  <TableColumn fx:id="score2column" editable="false" prefWidth="82.0" text="Score B" />
+                  <TableColumn fx:id="refcolumn" editable="false" prefWidth="133.0" text="Referee" />
                   <TableColumn fx:id="slotcolumn" prefWidth="101.0" text="Timeslot" />
               </columns>
             </TableView>
-            <Button fx:id="saveButton" layoutX="384.0" layoutY="644.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" />
-            <Button fx:id="menuButton" layoutX="42.0" layoutY="644.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
+            <Button id="button" fx:id="saveButton" layoutX="383.0" layoutY="660.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" visible="false" />
+            <Button id="button" fx:id="menuButton" layoutX="42.0" layoutY="660.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
          </children>
       </Pane>
    </children>

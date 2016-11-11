@@ -14,9 +14,9 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.StandingsController">
    <children>
-      <Pane layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="362.0" layoutY="28.0" text="Standings" textFill="RED">
+            <Label id="title" layoutX="335.0" layoutY="26.0" text="Standings" textFill="RED">
                <font>
                   <Font size="36.0" />
                </font>
@@ -28,7 +28,7 @@
                 <TableColumn fx:id="winscolumn" editable="false" minWidth="6.0" prefWidth="136.0" text="Wins" />
               </columns>
             </TableView>
-            <Button fx:id="menuButton" layoutX="90.0" layoutY="618.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
+            <Button id="button" fx:id="menuButton" layoutX="90.0" layoutY="618.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
          </children>
       </Pane>
    </children>
