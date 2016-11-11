@@ -25,7 +25,8 @@
 		3 : {"Email" : "r3@mail.com", "Password" : null, "LoginCode" : {"Code":"98088b0dc4c9ddfdcfd1963618465e14"}, "IsSuper" : false}
 	},
 	"Logs" : {
-		0 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1478722045221},
-		1 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1478721919559}
+		0 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1478821830716},
+		1 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1478722045221},
+		2 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1478721919559}
 	}
 }

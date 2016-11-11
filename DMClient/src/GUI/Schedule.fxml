@@ -21,7 +21,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <TableView id="myTable" fx:id="tv" layoutX="56.0" layoutY="90.0" prefHeight="541.0" prefWidth="769.0" styleClass="table-column" stylesheets="@Style.css">
+            <TableView id="myTable" fx:id="tv" layoutX="42.0" layoutY="90.0" prefHeight="541.0" prefWidth="797.0" styleClass="table-column" stylesheets="@Style.css">
               <columns>
                 <TableColumn fx:id="datecolumn" editable="false" prefWidth="113.0" text="Date" />
                 <TableColumn fx:id="team1column" editable="false" minWidth="6.0" prefWidth="140.0" text="Home" />
@@ -30,11 +30,11 @@
                   <TableColumn fx:id="score1column" editable="false" minWidth="0.0" prefWidth="60.0" text="Score A" />
                   <TableColumn fx:id="score2column" editable="false" prefWidth="60.0" text="Score B" />
                   <TableColumn fx:id="refcolumn" editable="false" prefWidth="151.0" text="Referee" />
-                  <TableColumn fx:id="slotcolumn" prefWidth="73.0" text="Timeslot" />
+                  <TableColumn fx:id="slotcolumn" prefWidth="101.0" text="Timeslot" />
               </columns>
             </TableView>
-            <Button fx:id="saveButton" layoutX="34.0" layoutY="23.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" visible="false" />
-            <Button fx:id="menuButton" layoutX="385.0" layoutY="659.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
+            <Button fx:id="saveButton" layoutX="384.0" layoutY="644.0" mnemonicParsing="false" onAction="#attemptSave" text="Save Changes" />
+            <Button fx:id="menuButton" layoutX="42.0" layoutY="644.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
          </children>
       </Pane>
    </children>

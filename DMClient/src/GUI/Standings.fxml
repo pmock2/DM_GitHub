@@ -28,7 +28,7 @@
                 <TableColumn fx:id="winscolumn" editable="false" minWidth="6.0" prefWidth="136.0" text="Wins" />
               </columns>
             </TableView>
-            <Button fx:id="menuButton" layoutX="385.0" layoutY="643.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
+            <Button fx:id="menuButton" layoutX="90.0" layoutY="618.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
          </children>
       </Pane>
    </children>
