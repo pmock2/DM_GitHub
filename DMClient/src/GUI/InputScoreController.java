@@ -159,45 +159,52 @@ public class InputScoreController implements Initializable {
 
     public void attemptSubmit(ActionEvent event)
     {
-        JSONObject matchToSend = new JSONObject();
-        try{
-            JSONObject matches = importMatches();
-            String[] keyNames = JSONObject.getNames(matches);
-            JSONObject matchData = matches.getJSONObject(keyNames[Client.selectedMatch]);
-            matchToSend.put("MatchId", matchData.getInt("MatchId"));
-            matchToSend.put("Team0Score", Integer.parseInt(ascore.getText()));
-            matchToSend.put("Team1Score", Integer.parseInt(bscore.getText()));
-            matchToSend.put("Team0Forfeit", aforfeit.isSelected());
-            matchToSend.put("Team1Forfeit", bforfeit.isSelected());
-            matchToSend.put("Reschedule", rs.isSelected());
+        if (checkData())
+        {
+            JSONObject matchToSend = new JSONObject();
+            try {
+                JSONObject matches = importMatches();
+                String[] keyNames = JSONObject.getNames(matches);
+                JSONObject matchData = matches.getJSONObject(keyNames[Client.selectedMatch]);
+                matchToSend.put("MatchId", matchData.getInt("MatchId"));
+                if (ascore.getText().equals("")) {
+                    matchToSend.put("Team0Score", 0);
+                } else {
+                    matchToSend.put("Team0Score", Integer.parseInt(ascore.getText()));
+                }
+                if (bscore.getText().equals("")) {
+                    matchToSend.put("Team1Score", 0);
+                } else {
+                    matchToSend.put("Team1Score", Integer.parseInt(bscore.getText()));
+                }
+                matchToSend.put("Team0Forfeit", aforfeit.isSelected());
+                matchToSend.put("Team1Forfeit", bforfeit.isSelected());
+                matchToSend.put("Reschedule", rs.isSelected());
 
-            Client.toServer.println("Set_MatchScore");
-            Client.toServer.println(matchToSend.toString());
-            String reply = Client.fromServer.readLine();
-            if (reply.equals("Success"))
-            {
-                Stage stage = (Stage) rs.getScene().getWindow();
-                stage.hide();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
-                stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.initStyle(StageStyle.DECORATED);
-                stage.setTitle("Match Select");
-                stage.setScene(new Scene(root1));
-                stage.show();
+                Client.toServer.println("Set_MatchScore");
+                Client.toServer.println(matchToSend.toString());
+                String reply = Client.fromServer.readLine();
+                if (reply.equals("Success")) {
+                    Stage stage = (Stage) rs.getScene().getWindow();
+                    stage.hide();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initStyle(StageStyle.DECORATED);
+                    stage.setTitle("Match Select");
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(reply);
+                    alert.setContentText("Something went wrong. Reply: " + reply);
+                    alert.showAndWait();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            else
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(reply);
-                alert.setContentText("Something went wrong. Reply: " +reply);
-                alert.showAndWait();
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -219,6 +226,20 @@ public class InputScoreController implements Initializable {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean checkData()
+    {
+        if ((ascore.getText().equals("") && !rs.isSelected()) || (bscore.getText().equals("") && !rs.isSelected()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("Please enter a score");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 
     }
