@@ -328,7 +328,7 @@
       <option name="presentableId" value="Default" />
       <updated>1478294916833</updated>
       <workItem from="1478294922820" duration="861000" />
-      <workItem from="1478820771362" duration="3597000" />
+      <workItem from="1478820771362" duration="3693000" />
     </task>
     <task id="LOCAL-00001" summary="Updated schedule generation to not include super referees.">
       <created>1478407240637</created>
@@ -446,10 +446,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4458000" />
+    <option name="totallyTimeSpent" value="4554000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18489583" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />

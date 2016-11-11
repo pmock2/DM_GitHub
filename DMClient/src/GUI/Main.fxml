@@ -14,7 +14,7 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="345.0" layoutY="42.0" prefHeight="46.0" prefWidth="224.0" text="Main Menu" textAlignment="JUSTIFY" textFill="#c30f0f" wrapText="true">
+            <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="328.0" layoutY="42.0" prefHeight="46.0" prefWidth="224.0" stylesheets="@../../bin/GUI/Style.css" text="Main Menu" textAlignment="JUSTIFY" textFill="#c30f0f" wrapText="true">
                <font>
                   <Font size="36.0" />
                </font>
@@ -32,12 +32,12 @@
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Label layoutX="130.0" layoutY="109.0" text="Welcome to the DM System! Here you can view the schedule or the standings.">
+            <Label id="text" layoutX="125.0" layoutY="109.0" text="Welcome to the DM System! Here you can view the schedule or the standings.">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="248.0" layoutY="136.0" text="For all referees, click &quot;Referee Login&quot; to continue">
+            <Label id="text" layoutX="240.0" layoutY="130.0" text="For all referees, click &quot;Referee Login&quot; to continue">
                <font>
                   <Font size="18.0" />
                </font>
