@@ -43,7 +43,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Hyperlink id="text" layoutX="744.0" layoutY="14.0" onAction="#openLogin" text="Referee Login" underline="true">
+            <Hyperlink id="hyperlink" layoutX="744.0" layoutY="14.0" onAction="#openLogin" text="Referee Login" underline="true">
                <font>
                   <Font size="18.0" />
                </font></Hyperlink>
