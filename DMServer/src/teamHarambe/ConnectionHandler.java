@@ -307,6 +307,9 @@ public class ConnectionHandler implements Runnable {
 						if (permissionLevel >= 2 || (match.getReferee() == userAccount)) {
 							if (reschedule)
 							{
+								Calendar c = Calendar.getInstance();
+								c.set(args.getInt("Year"), args.getInt("Month")-1, args.getInt("Day"));
+								match.setDate(c);
 								match.setIsMorning(false);
 							}
 							else if (team0forfeit)

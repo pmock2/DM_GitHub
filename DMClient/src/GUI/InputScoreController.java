@@ -14,11 +14,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import org.json.JSONObject;
 import teamHarambe.Client;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class InputScoreController implements Initializable {
@@ -28,11 +31,13 @@ public class InputScoreController implements Initializable {
     public CheckBox aforfeit, bforfeit, rs;
     public TextField ascore, bscore;
     public Button matchesButton;
+    public DatePicker dpDate;
 
 
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
+            dpDate.setVisible(false);
             JSONObject matches = importMatches();
             if (matches == null)
             {
@@ -47,6 +52,23 @@ public class InputScoreController implements Initializable {
                 bname.setText(matchData.getString("Team1Name"));
 
             }
+
+            dpDate.setValue(LocalDate.now());
+
+            Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item.isBefore(LocalDate.now()) || item.isAfter(LocalDate.now().plusMonths(10))) {
+                        setStyle("-fx-background-color: #A9A9A9;");
+                        setDisable(true);
+                    }
+                }
+            };
+
+            dpDate.setDayCellFactory(dayCellFactory);
+
             } catch (Exception e) {
             e.printStackTrace();
         }
@@ -106,7 +128,6 @@ public class InputScoreController implements Initializable {
                     bscore.setText("0");
                     ascore.setDisable(true);
                     bscore.setDisable(true);
-
                 }
                 else
                 {
@@ -125,6 +146,7 @@ public class InputScoreController implements Initializable {
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
                 if (rs.isSelected())
                 {
+                    dpDate.setVisible(true);
                     aforfeit.setSelected(false);
                     aforfeit.setDisable(true);
                     bforfeit.setSelected(false);
@@ -136,6 +158,7 @@ public class InputScoreController implements Initializable {
                 }
                 else
                 {
+                    dpDate.setVisible(false);
                     aforfeit.setDisable(false);
                     bforfeit.setDisable(false);
                     ascore.setDisable(false);
@@ -176,6 +199,12 @@ public class InputScoreController implements Initializable {
                     matchToSend.put("Team1Score", 0);
                 } else {
                     matchToSend.put("Team1Score", Integer.parseInt(bscore.getText()));
+                }
+                if (rs.isSelected())
+                {
+                    matchToSend.put("Year", dpDate.getValue().getYear());
+                    matchToSend.put("Month", dpDate.getValue().getMonthValue());
+                    matchToSend.put("Day", dpDate.getValue().getDayOfMonth());
                 }
                 matchToSend.put("Team0Forfeit", aforfeit.isSelected());
                 matchToSend.put("Team1Forfeit", bforfeit.isSelected());
