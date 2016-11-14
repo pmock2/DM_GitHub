@@ -43,6 +43,7 @@ public class ConnectionHandler implements Runnable {
 					case "Create_DB":
 					{						
 						int numTeams = Integer.parseInt(fromClient.readLine());
+						
 						Map<Integer, Team> teams = new HashMap<>();
 						List<Team> teamList = new LinkedList<>();
 						for (int i = 0; i < numTeams; i++)
@@ -56,8 +57,13 @@ public class ConnectionHandler implements Runnable {
 						String dateDay = fromClient.readLine();
 						Calendar selectedDate = Calendar.getInstance();
 						selectedDate.set(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
-						
 						JSONObject referees = new JSONObject(fromClient.readLine());
+						
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
 						String[] refereeIds = JSONObject.getNames(referees);
 						for (int i=0; i < refereeIds.length; i++) {
 							int refereeId = Integer.parseInt(refereeIds[i]);
@@ -70,11 +76,6 @@ public class ConnectionHandler implements Runnable {
 								System.out.println("Creating: "+refereeId);
 								Server.referees.put(refereeId, new Referee(refereeId, data.getString("Email"), false));
 							}
-						}
-						
-						if (permissionLevel < 2) {
-							toClient.println("Exception_InsufficientPermissions");
-							break;
 						}
 						
 						for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
@@ -93,10 +94,12 @@ public class ConnectionHandler implements Runnable {
 							}
 						}
 
-						Server.teams = teams;
-						Server.schedule = new Schedule(teamList, Server.getNonSupers(), selectedDate);
+						Schedule schedule = new Schedule(teamList, Server.getNonSupers(), selectedDate);
+						AuditLog auditLog = new AuditLog();
+						auditLog.logAction("CreateNewSeason", userAccount);
+						Season season = new Season((Server.getActiveSeason() == null ? 0 : ++Server.activeSeason), teams, schedule, auditLog);
+						Server.addSeason(season);
 						Server.saveData();
-						Server.auditLog.logAction("CreateNewSeason", userAccount);
 						
 						if (dbFile.exists()) {
 							toClient.println("Success");
@@ -107,12 +110,13 @@ public class ConnectionHandler implements Runnable {
 					}
 					case "Get_Schedule":
 					{
-						JSONObject clientSchedule = new JSONObject(Server.schedule.toJSON());
+						Season season = Server.getActiveSeason();
+						JSONObject clientSchedule = new JSONObject(season.schedule.toJSON());
 						String[] keyNames = JSONObject.getNames(clientSchedule);
 						for (int i=0; i < keyNames.length; i++) {
 							JSONObject match = clientSchedule.getJSONObject(keyNames[i]);
-							match.put("Team0Name", Server.teams.get(match.getInt("Team0")).getName());
-							match.put("Team1Name", Server.teams.get(match.getInt("Team1")).getName());
+							match.put("Team0Name", season.teams.get(match.getInt("Team0")).getName());
+							match.put("Team1Name", season.teams.get(match.getInt("Team1")).getName());
 							match.put("RefereeName", Server.referees.get(match.getInt("Referee")).getEmail());
 						}
 						toClient.println(clientSchedule.toString());
@@ -122,8 +126,9 @@ public class ConnectionHandler implements Runnable {
 					}
 					case "Update_Schedule":
 					{
+						Season season = Server.getActiveSeason();
 						JSONObject changedSchedule = new JSONObject(fromClient.readLine());
-						Map<Integer,Match> currentSchedule = Server.schedule.getMatches();
+						Map<Integer,Match> currentSchedule = season.schedule.getMatches();
 						Map<Integer,Match> newSchedule = new HashMap<>();
 						
 						if (permissionLevel < 2) {
@@ -163,10 +168,10 @@ public class ConnectionHandler implements Runnable {
 							);
 						}
 						
-						Server.auditLog.logAction("ModifySeasonData", userAccount);
+						season.auditLog.logAction("ModifySeasonData", userAccount);
 						
 						if (!conflictingDate) {
-							Server.schedule = new Schedule(newSchedule);
+							season.schedule = new Schedule(newSchedule);
 							Server.saveData();
 							toClient.println("Update_Success");
 						} else {
@@ -187,10 +192,13 @@ public class ConnectionHandler implements Runnable {
 
 						System.out.println("Logging in, "+email+", "+loginAs.getEmail());
 						if (loginAs.verifyLoginCode(password)) {
+							System.out.println("Correct login code");
 							toClient.println("Login_CodeSuccess");
 							String newPassword = fromClient.readLine();
 							password = newPassword;
 							loginAs.setPassword(password);
+						} else {
+							System.out.println("No login code");
 						}
 						
 						if (loginAs.verifyPassword(password)) {
@@ -226,8 +234,8 @@ public class ConnectionHandler implements Runnable {
 					}
 					case "Get_Standings":
 					{
-						toClient.println(Server.rankingsFromSchedule().toString());
-						Server.rankingsFromSchedule().remove("");
+						Season season = Server.getActiveSeason();
+						toClient.println(season.getRankings().toString());
 						break;
 					}
 					case "Does_DB_Exist":
@@ -237,16 +245,17 @@ public class ConnectionHandler implements Runnable {
 					}
 					case "Does_Schedule_Exist":
 					{
-						toClient.println(Server.schedule == null ? "false" : "true");
+						toClient.println(Server.getActiveSeason() == null ? "false" : "true");
 						break;
 					}
 					case "Get_RefereedMatches":
 					{
 						Calendar today = Calendar.getInstance();
-						Map<Integer,Match> seasonMatches = Server.schedule.getMatches();
+						Season season = Server.getActiveSeason();
+						Map<Integer,Match> seasonMatches = season.schedule.getMatches();
 						JSONObject jsonMatches = new JSONObject();
 						
-						for (Map.Entry<Integer, Match> entry : Server.schedule.getMatches().entrySet()) {
+						for (Map.Entry<Integer, Match> entry : season.schedule.getMatches().entrySet()) {
 							int id = entry.getKey();
 							Match match = entry.getValue();
 							if (match.getReferee() == userAccount && !match.isScored()) {
@@ -303,7 +312,8 @@ public class ConnectionHandler implements Runnable {
 						boolean team1forfeit = args.getBoolean("Team1Forfeit");
 						boolean reschedule = args.getBoolean("Reschedule");
 						
-						Match match = Server.schedule.getMatches().get(matchId);
+						Season season = Server.getActiveSeason();
+						Match match = season.schedule.getMatches().get(matchId);
 						if (permissionLevel >= 2 || (match.getReferee() == userAccount)) {
 							if (reschedule)
 							{
@@ -334,7 +344,7 @@ public class ConnectionHandler implements Runnable {
 							toClient.println("Exception_InsufficientPermissions");
 						}
 						
-						Server.auditLog.logAction("SetMatchScore: ID " + matchId + " " + team0Score + " - " + team1Score + " Reschedule: " + reschedule, userAccount);
+						season.auditLog.logAction("SetMatchScore: ID " + matchId + " " + team0Score + " - " + team1Score + " Reschedule: " + reschedule, userAccount);
 						
 						break;
 					}
@@ -345,7 +355,8 @@ public class ConnectionHandler implements Runnable {
 							break;
 						}
 						
-						toClient.println(Server.auditLog.getJSONLogs().toString());
+						Season season = Server.getActiveSeason();
+						toClient.println(season.auditLog.getJSONLogs().toString());
 						break;
 					}
 				}
@@ -373,10 +384,11 @@ public class ConnectionHandler implements Runnable {
 	}
 	
 	private boolean dateConflicts(int matchId, Calendar newDate) {
-		Map<Integer,Match> matches = Server.schedule.getMatches();
+		Season season = Server.getActiveSeason();
+		Map<Integer,Match> matches = season.schedule.getMatches();
 		Match match = matches.get(matchId);
 		
-		for (Map.Entry<Integer, Match> entry : Server.schedule.getMatches().entrySet()) {
+		for (Map.Entry<Integer, Match> entry : season.schedule.getMatches().entrySet()) {
 			int matchId2 = entry.getKey();
 			Match match2 = entry.getValue();
 			if (matchId2 != matchId && match.isMatchOnDate(match2.getDate())) {

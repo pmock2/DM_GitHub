@@ -27,7 +27,7 @@ public class Match {
         this.date = date;
     }
     
-    public Match(int id, JSONObject matchData) {
+    public Match(int id, JSONObject matchData, Team team0, Team team1) {
     	int matchRefereeId = matchData.getInt("Referee");
 		Referee matchReferee = null;
 		for (int j=0; j < Server.referees.size(); j++) {
@@ -44,8 +44,8 @@ public class Match {
 		this.id = id;
 		this.date = date;
 		this.isMorning = matchData.getBoolean("IsMorning");
-		this.team1 = Server.teams.get(matchData.getInt("Team0"));
-		this.team2 = Server.teams.get(matchData.getInt("Team1"));
+		this.team1 = team0;
+		this.team2 = team1;
 		this.referee = matchReferee;
 		this.scored = matchData.getBoolean("Scored");
 		this.team1Score = matchData.getInt("Score0");

@@ -1,0 +1,6 @@
+{
+	"ActiveSeason" : null,
+	"Seasons" : {},
+	"Referees" : {
+		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : null, "LoginCode" : {"Code":"613a860c64f31c9f10e5a37f6f014a3"}, "IsSuper" : true}
+	}}

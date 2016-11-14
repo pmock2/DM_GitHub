@@ -12,12 +12,14 @@ public class AuditLog {
 	
 	private ArrayList<JSONObject> logs;
 	
-	public AuditLog() {}
+	public AuditLog() {
+		logs = new ArrayList<>();
+	}
 	
 	public AuditLog(JSONObject JSONlogs) {
+		this();
 		String[] keyNames = JSONObject.getNames(JSONlogs);
 		keyNames = (keyNames == null) ? new String[0] : keyNames;
-		logs = new ArrayList<>();
 		
 		for (int i=0; i < keyNames.length; i++) {
 			logs.add(JSONlogs.getJSONObject(i+""));

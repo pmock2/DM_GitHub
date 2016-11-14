@@ -1,0 +1,21 @@
+package teamHarambe;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+public class Season {
+	public Map<Integer,Team> teams = new HashMap<>();
+	public Map<Integer,Referee> referees = new HashMap<>();
+	public Schedule schedule;
+	public AuditLog auditLog;
+	
+	public Season() {
+		
+	}
+	
+	public Season(int id, JSONObject data) {
+		
+	}
+}

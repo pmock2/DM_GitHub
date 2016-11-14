@@ -34,10 +34,9 @@ import javax.mail.internet.MimeMessage;
 import javax.activation.*;
 
 public class Server {	
-	public static Map<Integer,Team> teams = new HashMap<>();
 	public static Map<Integer,Referee> referees = new HashMap<>();
-	public static Schedule schedule;
-	public static AuditLog auditLog;
+	public static Map<Integer,Season> seasons = new HashMap<>();
+	public static int activeSeason;
 	
 	private static String databasePath = getDatabasePath();
 
@@ -61,9 +60,77 @@ public class Server {
 		}
 		return resources.getPath()+"/Database.json";
 	}
-
-	public static List<Referee> getNonSupers()
-	{
+	
+	private static void loadData() throws IOException, NoSuchAlgorithmException {
+		File dbFile = new File(databasePath);
+		if (!dbFile.exists()) {
+			createDatabase();
+		}
+		
+		JSONObject database = new JSONObject(readFile(databasePath, StandardCharsets.UTF_8));
+		try {activeSeason = database.getInt("ActiveSeason");} catch (Exception e) {}
+		loadReferees(database.getJSONObject("Referees"));
+		loadSeasons(database.getJSONObject("Seasons"));
+		
+	}
+	
+	private static void createDatabase() throws IOException {
+		System.out.println("Creating database");
+		String dbString = "";
+		dbString += "{\n";
+		dbString += "\t\"ActiveSeason\" : null,\n";
+		dbString += "\t\"Seasons\" : {},\n";
+		dbString += "\t\"Referees\" : {\n";
+		dbString += "\t\t0 : " + new Referee(0, "DMSuperReferee@mail.com", true).toJSON() + "\n";
+		dbString += "\t}\n";
+		dbString += "}";
+		
+		saveData(dbString);
+	}
+	
+	public static void saveData() throws IOException {
+		saveData(generateDatabaseJSON());
+	}
+	
+	private static void saveData(String dbString) throws IOException {
+		PrintWriter writer = new PrintWriter(databasePath, "UTF-8");
+		writer.println(dbString);
+		writer.close();
+	}
+	
+	private static String generateDatabaseJSON() {
+		String s = "{\n";
+		int i;
+	
+		s += "\t\"ActiveSeason\" : " + (seasons.get(activeSeason) == null ? "null" : activeSeason) + ",\n";
+		s += "\t\"Seasons\" : {\n";
+		
+		i=0;
+		for (Map.Entry<Integer, Season> entry : seasons.entrySet()) {
+			int id = entry.getKey();
+			Season season = entry.getValue();
+			s += "\t\t" + id + " : " + season.toJSON() + (i+1 == seasons.size() ? "" : ",") + "\n";
+			i++;
+		}
+		
+		s += "\t},\n";
+		s += "\t\"Referees\" : {\n";
+		
+		i=0;
+		for (Map.Entry<Integer, Referee> entry : referees.entrySet()) {
+			int id = entry.getKey();
+			Referee referee = entry.getValue();
+			s += "\t\t" + id + " : " + referee.toJSON() + (i+1 == referees.size() ? "" : ",") + "\n";
+			i++;
+		}
+		
+		s += "\t}\n";
+		s += "}";
+		
+		return s;
+	}
+	
+	public static List<Referee> getNonSupers() {
 		List<Referee> nonSupers = new LinkedList<>();
 		for (Map.Entry<Integer, Referee> entry : referees.entrySet()) {
 			Referee referee = entry.getValue();
@@ -75,45 +142,8 @@ public class Server {
 		return nonSupers;
 	}
 	
-	private static void createDatabase() throws IOException {
-		System.out.println("Creating database");
-		Referee superReferee = new Referee(0, "DMSuperReferee@mail.com", true);
-		String dbString = "";
-		dbString += "{\n";
-		dbString += "\t\"Schedule\" : null,\n";
-		dbString += "\t\"Teams\" : {},\n";
-		dbString += "\t\"Referees\" : {\n";
-		dbString += "\t\t" + superReferee.getId() + " : " + superReferee.toJSON() + "\n";
-		dbString += "\t},\n";
-		dbString += "\t\"Logs\" : {}\n";
-		dbString += "}";
-		
-		saveData(dbString);
-	}
-	
-	private static void loadData() throws IOException, NoSuchAlgorithmException {
-		File dbFile = new File(databasePath);
-		if (!dbFile.exists()) {
-			createDatabase();
-		}
-		
-		JSONObject database = new JSONObject(readFile(databasePath, StandardCharsets.UTF_8));
-		loadTeams(database.getJSONObject("Teams"));
-		loadReferees(database.getJSONObject("Referees"));
-		try {loadSchedule(database.getJSONObject("Schedule"));} catch(JSONException e) {}
-		loadLogs(database.getJSONObject("Logs"));
-	}
-	
-	private static void loadTeams(JSONObject teamList) {
-		String[] teamIds = JSONObject.getNames(teamList);
-		teamIds = (teamIds == null ? new String[0] : teamIds);
-		for (int i=0; i < teamIds.length; i ++) {
-			JSONObject teamData = teamList.getJSONObject(teamIds[i]);
-			int teamId = Integer.parseInt(teamIds[i]);
-			teams.put(
-				teamId, new Team(teamId, teamData.getString("Name"))
-			);
-		}
+	public static Season getActiveSeason() {
+		return seasons.get(activeSeason);
 	}
 	
 	private static void loadReferees(JSONObject refereeList) {
@@ -121,163 +151,27 @@ public class Server {
 		for (int i=0; i < refereeIds.length; i ++) {
 			JSONObject refereeData = refereeList.getJSONObject(refereeIds[i]);
 			int refereeId = Integer.parseInt(refereeIds[i]);
-			String password = null;
-			JSONObject loginCode = null;
-			
-			try {
-				password = refereeData.getString("Password");
-			} catch (JSONException e) {}
-			try {
-				loginCode = refereeData.getJSONObject("LoginCode");
-			} catch (JSONException e) {}
-			
-			referees.put(refereeId, new Referee (
-				refereeId, refereeData.getString("Email"), password, loginCode, refereeData.getBoolean("IsSuper")
-			));
+			referees.put(refereeId, new Referee (refereeId, refereeData));
 		}
 	}
 	
-	private static void loadSchedule(JSONObject matchList) {
-		String[] matchIds = JSONObject.getNames(matchList);
-		matchIds = (matchIds == null ? new String[0] : matchIds);
-		Map<Integer,Match> matches = new HashMap<>();
-		
-		for (int i=0; i < matchIds.length; i++) {
-			int matchId = Integer.parseInt(matchIds[i]);
-			matches.put(matchId, new Match(matchId, matchList.getJSONObject(matchIds[i])));
+	private static void loadSeasons(JSONObject seasonList) {
+		String[] seasonIds = JSONObject.getNames(seasonList);
+		seasonIds = (seasonIds == null ? new String[0] : seasonIds);
+		for (int i=0; i < seasonIds.length; i ++) {
+			JSONObject seasonData = seasonList.getJSONObject(seasonIds[i]);
+			int seasonId = Integer.parseInt(seasonIds[i]);
+			seasons.put(seasonId, new Season(seasonId, seasonData));
 		}
-		
-		schedule = new Schedule(matches);
 	}
 	
-	private static void loadLogs(JSONObject logs) {
-		auditLog = new AuditLog(logs);
+	public static void addSeason(Season season) {
+		seasons.put(season.getId(), season);
+		activeSeason = season.getId();
 	}
 	
-	public static void saveData() throws IOException {
-		saveData(generateDatabaseJSON());
-	}
-	
-	public static void saveData(String dbString) throws IOException {
-		PrintWriter writer = new PrintWriter(databasePath, "UTF-8");
-		writer.println(dbString);
-		writer.close();
-	}
-	
-	private static String generateDatabaseJSON() {
-		String s = "{\n";
-		
-		s += "\t\"Schedule\" : " + (schedule == null ? "null" : schedule.toJSON()) + ",\n";
-		
-		s += "\t\"Teams\" : {\n";
-		int i=0;
-		for (Map.Entry<Integer, Team> entry : teams.entrySet()) {
-			int id = entry.getKey();
-			Team team = entry.getValue();
-			s += "\t\t" + id + " : " + team.toJSON() + (i+1 == teams.size() ? "" : ",") + "\n";
-			i++;
-		}
-		s += "\t},\n";
-		
-		s += "\t\"Referees\" : {\n";
-		i=0;
-		for (Map.Entry<Integer, Referee> entry : referees.entrySet()) {
-			int id = entry.getKey();
-			Referee referee = entry.getValue();
-			s += "\t\t" + id + " : " + referee.toJSON() + (i+1 == referees.size() ? "" : ",") + "\n";
-			i++;
-		}
-		s += "\t},\n";
-		
-		s += "\t\"Logs\" : {\n";
-		if (auditLog != null) {
-			for (i=0; i < auditLog.getLogs().size(); i++) {
-				s += "\t\t" + i + " : " + auditLog.getLogs().get(i).toString() + (i+1 == auditLog.getLogs().size() ? "" : ",") +"\n";
-			}
-		}
-		s += "\t}\n";
-		
-		s += "}";
-		return s;
-	}
-	
-	public static String readFile(String path, Charset encoding) throws IOException {
+	private static String readFile(String path, Charset encoding) throws IOException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		return new String(encoded, encoding);
-	}
-
-	public static JSONObject rankingsFromSchedule() {
-		Map<Integer,Double> teamWins = new HashMap<>();
-		List<Integer> sortedTeams = new ArrayList<>(teams.size());
-		
-		Map<Integer,Match> matches = schedule.getMatches();
-		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
-			Match match = entry.getValue();
-			int id0 = match.getTeam1().getId();
-			int id1 = match.getTeam2().getId();
-			
-			if (teamWins.get(id0) == null) {
-				teamWins.put(id0, 0.0);
-			}
-			if (teamWins.get(id1) == null) {
-				teamWins.put(id1, 0.0);
-			}
-			
-			if (match.getScored() == true) {
-				double score0 = match.getTeam1Score();
-				double score1 = match.getTeam2Score();
-				double delta0 = 0, delta1 = 0;
-				
-				if (score0 == score1) {
-					delta0 = 0.5; delta1 = 0.5;
-				} else if (score0 > score1) {
-					delta0 = 1;
-				} else {
-					delta1 = 1;
-				}
-				
-				teamWins.put(id0, teamWins.get(id0)+delta0);
-				teamWins.put(id1, teamWins.get(id1)+delta1);
-			}
-		}
-		
-		for (Map.Entry<Integer, Double> entry : teamWins.entrySet()) {
-			int id0 = entry.getKey();
-			
-			int insertedAt = 0;
-			for (int j=0; j < sortedTeams.size(); j++) {
-				int id1 = sortedTeams.get(j);
-				
-				if (teamWins.get(id0) < teamWins.get(id1)) {
-					insertedAt++;
-				} else {
-					break;
-				}
-			}
-
-			sortedTeams.add(insertedAt, id0);
-		}
-
-		JSONObject rankings = new JSONObject();
-		
-		int ranking = 1;
-		double lastScore = teamWins.get(sortedTeams.get(0));
-		for (int i=0; i < sortedTeams.size(); i++) {
-			double thisScore = teamWins.get(sortedTeams.get(i));
-			if (thisScore != lastScore) {
-				lastScore = thisScore;
-				ranking = i+1;
-			}
-			
-			int id = sortedTeams.get(i);
-			Team team = teams.get(id);
-			JSONObject data = new JSONObject();
-			data.put("Name", team.getName());
-			data.put("Wins", thisScore);
-			data.put("Rank", ranking);
-			rankings.put(""+i, data);
-		}
-		
-		return rankings;
 	}
 }

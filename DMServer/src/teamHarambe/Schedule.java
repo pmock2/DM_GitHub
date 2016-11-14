@@ -33,11 +33,11 @@ public class Schedule {
 		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
 			int id = entry.getKey();
 			Match match = entry.getValue();
-			s += "\t\t" + id + " : " + match.toJSON() + (i+1 == matches.size() ? "" : ",") + "\n";
+			s += "\t\t\t\t" + id + " : " + match.toJSON() + (i+1 == matches.size() ? "" : ",") + "\n";
 			i++;
 		}
 
-		s += "\t}";
+		s += "\t\t\t}";
 		return s;
 	}
 
