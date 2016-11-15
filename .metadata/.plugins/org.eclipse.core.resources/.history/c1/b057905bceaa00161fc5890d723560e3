@@ -82,14 +82,14 @@ public class ConnectionHandler implements Runnable {
 						for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
 							boolean found = false;
 							for (int v=0; v < refereeIds.length; v++) {
-								JSONObject data = referees.getJSONObject(refereeIds[v]);
-								if (entry.getValue().emailMatches(data.getString("Email"))) {
+								int refereeId = Integer.parseInt(refereeIds[v]);
+								if (refereeId == entry.getKey()) {
 									found = true;
 									break;
 								}
 							}
 							
-							if ((!found) && (!entry.getValue().isSuperReferee)) {
+							if (!found && !entry.getValue().isSuperReferee) {
 								System.out.println("Deactivating: "+entry.getValue().getEmail());
 								entry.getValue().setActive(false);
 							}
@@ -99,7 +99,6 @@ public class ConnectionHandler implements Runnable {
 						AuditLog auditLog = new AuditLog();
 						auditLog.logAction("CreateNewSeason", userAccount);
 						Season season = new Season((Server.getActiveSeason() == null ? 0 : ++Server.activeSeason), teams, schedule, auditLog);
-						targetSeason = season;
 						Server.addSeason(season);
 						Server.saveData();
 						
@@ -393,7 +392,7 @@ public class ConnectionHandler implements Runnable {
 		
 		for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
 			referee = entry.getValue();
-			if (referee.emailMatches(email)) {
+			if (referee.getEmail().toLowerCase().equals(email.toLowerCase())) {
 				return referee;
 			}
 		}

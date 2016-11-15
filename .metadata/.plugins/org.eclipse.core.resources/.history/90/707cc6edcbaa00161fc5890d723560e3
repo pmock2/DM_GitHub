@@ -50,10 +50,6 @@ public class Referee {
     	return isActive;
     }
     
-    public void setActive(boolean isActive) {
-    	this.isActive = isActive;
-    }
-    
     public void clearLoginCode() {
     	this.loginCode = null;
     	try {Server.saveData();} catch (Exception e){e.printStackTrace();}
@@ -92,10 +88,6 @@ public class Referee {
     	String s = (password == null ? "DM Password Setup" : "DM Password Reset");
     	
     	return s;
-    }
-    
-    public boolean emailMatches(String email) {
-    	return this.email.toLowerCase().equals(email.toLowerCase());
     }
     
     private String getPasswordResetMessage(String code) {

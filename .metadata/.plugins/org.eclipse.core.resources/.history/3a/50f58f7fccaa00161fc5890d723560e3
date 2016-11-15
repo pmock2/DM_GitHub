@@ -69,37 +69,36 @@ public class ConnectionHandler implements Runnable {
 						for (int i=0; i < refereeIds.length; i++) {
 							int refereeId = Integer.parseInt(refereeIds[i]);
 							JSONObject data = referees.getJSONObject(refereeIds[i]);
-							Referee existingReferee = refereeFromEmail(data.getString("Email"));
-							if (existingReferee == null) {
-								System.out.println("Creating referee: " + data.getString("Email"));
-								Server.referees.put(Server.referees.size(), new Referee(refereeId, data.getString("Email"), false));
+
+							if (!(Server.referees.get(refereeId) == null)) {
+								System.out.println("Updating: "+refereeId);
+								Server.referees.get(refereeId).setEmail(data.getString("Email"));
 							} else {
-								System.out.println("Activating referee: " + data.getString("Email"));
-								existingReferee.setActive(true);
+								System.out.println("Creating: "+refereeId);
+								Server.referees.put(refereeId, new Referee(refereeId, data.getString("Email"), false));
 							}
 						}
 						
 						for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
 							boolean found = false;
 							for (int v=0; v < refereeIds.length; v++) {
-								JSONObject data = referees.getJSONObject(refereeIds[v]);
-								if (entry.getValue().emailMatches(data.getString("Email"))) {
+								int refereeId = Integer.parseInt(refereeIds[v]);
+								if (refereeId == entry.getKey()) {
 									found = true;
 									break;
 								}
 							}
 							
-							if ((!found) && (!entry.getValue().isSuperReferee)) {
-								System.out.println("Deactivating: "+entry.getValue().getEmail());
-								entry.getValue().setActive(false);
+							if (!found && entry.getValue().isSuperReferee == false) {
+								System.out.println("Removing: "+entry.getKey());
+								Server.referees.remove(entry.getKey());
 							}
 						}
 
-						Schedule schedule = new Schedule(teamList, Server.getActiveReferees(), selectedDate);
+						Schedule schedule = new Schedule(teamList, Server.getNonSupers(), selectedDate);
 						AuditLog auditLog = new AuditLog();
 						auditLog.logAction("CreateNewSeason", userAccount);
 						Season season = new Season((Server.getActiveSeason() == null ? 0 : ++Server.activeSeason), teams, schedule, auditLog);
-						targetSeason = season;
 						Server.addSeason(season);
 						Server.saveData();
 						
@@ -280,12 +279,14 @@ public class ConnectionHandler implements Runnable {
 						}
 						
 						JSONObject referees = new JSONObject();
-						List<Referee> activeReferees = Server.getActiveReferees();
-						for (int i=0; i < activeReferees.size(); i++) {
-							JSONObject refereeJSON = new JSONObject();
-							Referee referee = activeReferees.get(i);
-							refereeJSON.put("Email", referee.getEmail());
-							referees.put(referee.getId()+"", refereeJSON);
+						for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
+							int id = entry.getKey();
+							Referee referee = entry.getValue();
+							if (!referee.isSuperReferee) {
+								JSONObject refereeJSON = new JSONObject();
+								refereeJSON.put("Email", referee.getEmail());
+								referees.put(referee.getId()+"", refereeJSON);
+							}
 						}
 						
 						toClient.println(referees.toString());
@@ -393,7 +394,7 @@ public class ConnectionHandler implements Runnable {
 		
 		for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
 			referee = entry.getValue();
-			if (referee.emailMatches(email)) {
+			if (referee.getEmail().toLowerCase().equals(email.toLowerCase())) {
 				return referee;
 			}
 		}

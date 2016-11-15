@@ -94,10 +94,6 @@ public class Referee {
     	return s;
     }
     
-    public boolean emailMatches(String email) {
-    	return this.email.toLowerCase().equals(email.toLowerCase());
-    }
-    
     private String getPasswordResetMessage(String code) {
     	String s = "Your login code is: " + code + "\n\nPlease log in with this code to "
     			+ (password == null ? "set" : "reset") + " your password."
