@@ -388,6 +388,34 @@ public class ConnectionHandler implements Runnable {
 						toClient.println("Success");
 						break;
 					}
+					case "Set_RefereeActive":
+					{
+						boolean setActive = Boolean.parseBoolean(fromClient.readLine());
+						String email = fromClient.readLine();
+						
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						Referee referee = refereeFromEmail(email);
+						if (referee == null) {
+							toClient.println("Exception_InvalidReferee");
+							break;
+						}
+						
+						if (Server.getActiveReferees().size() <= 1) {
+							toClient.println("Exception_TooLittleReferees");
+							break;
+						}
+						
+						referee.setActive(setActive);
+						if (!setActive) {
+							targetSeason.unscheduleReferee(referee);
+						}
+						
+						break;
+					}
 				}
 
 			} catch (SocketException e) {

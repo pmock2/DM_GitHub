@@ -122,11 +122,7 @@ public class Season {
 			}
 		}
 		
-		try {
-			Server.saveData();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Server.saveData();
 	}
 	
 	public void scheduleRematch(Team team0, Team team1) {

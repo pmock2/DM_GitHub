@@ -106,29 +106,6 @@ public class Season {
 		auditLog = new AuditLog(logs);
 	}
 	
-	public void unscheduleReferee(Referee referee) {
-		List<Referee> activeReferees = Server.getActiveReferees();
-		for (Map.Entry<Integer, Match> entry : schedule.getMatches().entrySet()) {
-			Match match = entry.getValue();
-			if (match.getReferee().getId() == referee.getId()) {
-				Random r = new Random();
-				Referee newReferee = null;
-				
-				do {
-					newReferee = activeReferees.get(r.nextInt(activeReferees.size()));
-				} while (newReferee.getId() == referee.getId());
-				
-				match.setReferee(newReferee);
-			}
-		}
-		
-		try {
-			Server.saveData();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public void scheduleRematch(Team team0, Team team1) {
 		List<Referee> referees = Server.getActiveReferees();
 		Random r = new Random();
