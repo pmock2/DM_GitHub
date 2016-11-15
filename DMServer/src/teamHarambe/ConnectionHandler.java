@@ -477,8 +477,14 @@ public class ConnectionHandler implements Runnable {
 						Calendar newDate = Calendar.getInstance();
 						newDate.set(year, month, day);
 						
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
 						targetSeason.schedule.setMatchDate(matchId, newDate);
 						Server.saveData();
+						break;
 					}
 				}
 
