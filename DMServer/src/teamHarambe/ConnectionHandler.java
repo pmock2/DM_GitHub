@@ -362,7 +362,7 @@ public class ConnectionHandler implements Runnable {
 						for (Map.Entry<Integer, Season> entry : Server.seasons.entrySet()) {
 							int id = entry.getKey();
 							Season season = entry.getValue();
-							seasonList.put(id+"", season.toJSONShort());
+							seasonList.put(id+"", new JSONObject(season.toJSONShort()));
 						}
 						data.put("SeasonList", seasonList);
 						toClient.println(data.toString());
