@@ -200,6 +200,34 @@ public class Controller implements Initializable {
         }
     }
 
+    public void pastSeasons(ActionEvent event) throws IOException
+    {
+        if (MethodProvider.checkForSetup()) {
+            try {
+                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                stage.hide();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PastSeason.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.DECORATED);
+                stage.setTitle("Past Seasons");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need some past seasons");
+            alert.setContentText("There are currently no past seasons.");
+            alert.showAndWait();
+        }
+    }
+
     public void openSchedule(ActionEvent event) throws IOException
     {
         if (MethodProvider.checkForSetup()) {

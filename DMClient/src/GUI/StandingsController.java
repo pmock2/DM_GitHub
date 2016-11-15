@@ -103,7 +103,6 @@ public class StandingsController implements Initializable {
             alert.setContentText("Standings cannot exist without a schedule. Please have the super referee create a schedule.");
             alert.showAndWait();
         } else {
-            System.out.println(message);
             return new JSONObject(message);
         }
         return null;

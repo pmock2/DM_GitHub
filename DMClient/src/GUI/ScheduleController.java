@@ -313,7 +313,6 @@ public class ScheduleController implements Initializable {
             String message = Client.fromServer.readLine();
             String scheduleString = "";
             while (!message.equals("End_Schedule")) {
-                System.out.println(message);
                 scheduleString += message;
                 message = Client.fromServer.readLine();
             }

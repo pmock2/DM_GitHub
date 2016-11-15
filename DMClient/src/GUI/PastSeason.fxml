@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="background" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../bin/GUI/Style.css" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.PastSeasonController">
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label id="title" layoutX="331.0" layoutY="30.0" text="Season Select" textFill="RED">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Button id="button" fx:id="menuButton" layoutX="396.0" layoutY="267.0" mnemonicParsing="false" onAction="#openMainMenu" text="Back to Menu" />
+            <ComboBox fx:id="seasonBox" layoutX="365.0" layoutY="167.0" prefWidth="150.0" />
+            <Label layoutX="381.0" layoutY="96.0" text="Please select a season." />
+            <Label layoutX="204.0" layoutY="128.0" text="Once a season is selected, You may view the corresponding data through the main menu." />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
