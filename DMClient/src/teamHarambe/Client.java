@@ -23,6 +23,7 @@ public class Client {
 	public static int permissionLevel = 0;
 	static boolean serverRunning = false;
 	public static int selectedMatch = -1;
+	public static String email = null;
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		try {

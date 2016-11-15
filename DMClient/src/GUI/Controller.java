@@ -39,7 +39,7 @@ public class Controller implements Initializable {
     public Button scheduleButton;
     public Button backButton;
     public Button showButton;
-    public Hyperlink sLogoutButton;
+    public Hyperlink sLogoutButton, myAccount;
     public TextField loginText;
     public PasswordField loginPassword;
     public TextArea sTextArea;
@@ -61,6 +61,10 @@ public class Controller implements Initializable {
             {
                 auditLogButton.setDisable(true);
             }
+        }
+        if (myAccount != null)
+        {
+            myAccount.setText(Client.email);
         }
     }
 
@@ -200,6 +204,25 @@ public class Controller implements Initializable {
         }
     }
 
+    public void openAccount(ActionEvent event)
+    {
+        try{
+            Stage stage = (Stage) myAccount.getScene().getWindow();
+            stage.hide();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyAccount.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Account Overview");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void pastSeasons(ActionEvent event) throws IOException
     {
         if (MethodProvider.checkForSetup()) {
@@ -306,7 +329,8 @@ public class Controller implements Initializable {
         	if (loginResult.equals("Login_Success")) {
                 try{
                 	Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());
-            		System.out.println("Client successfully logged in with permission level of " + Client.permissionLevel);
+                    Client.email = Client.fromServer.readLine();
+            		System.out.println(Client.email + " successfully logged in with permission level of " + Client.permissionLevel);
             		Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.hide();
     	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuperUser.fxml"));
@@ -335,6 +359,7 @@ public class Controller implements Initializable {
         	Client.toServer.println("Logout");
         	Client.fromServer.readLine();//Response -- only success for now
         	Client.permissionLevel = 0;
+            Client.email = null;
             Stage stage = (Stage) sLogoutButton.getScene().getWindow();
             stage.hide();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));

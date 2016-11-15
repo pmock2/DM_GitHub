@@ -207,6 +207,7 @@ public class ConnectionHandler implements Runnable {
 							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
 							toClient.println("Login_Success");
 							toClient.println(permissionLevel);
+							toClient.println(email);
 						} else {
 							System.out.println("Verification failed");
 							toClient.println("Login_Fail");
@@ -381,6 +382,7 @@ public class ConnectionHandler implements Runnable {
 						String newEmail = fromClient.readLine();
 						userAccount.setEmail(newEmail);
 						Server.saveData();
+						toClient.println("Success");
 						break;
 					}
 				}

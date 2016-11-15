@@ -61,6 +61,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Hyperlink fx:id="myAccount" layoutY="14.0" onAction="#openAccount" text="My Account" textOverrun="CLIP" />
          </children>
       </Pane>
    </children>
