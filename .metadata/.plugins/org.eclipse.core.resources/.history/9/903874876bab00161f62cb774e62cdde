@@ -37,14 +37,6 @@ public class Schedule {
 		return false;
 	}
 	
-	public void markMatchForReschedule(int id) {
-		matches.get(id).setMarkedForReschedule(true);
-	}
-	
-	public void setMatchDate(int matchId, Calendar newDate) {
-		matches.get(matchId).setDate(newDate);
-	}
-	
 	public boolean dateConflicts(int matchId, Calendar newDate) {
 		return dateConflicts(matches.get(matchId), newDate);
 	}

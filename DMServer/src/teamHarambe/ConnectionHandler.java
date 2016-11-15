@@ -416,6 +416,70 @@ public class ConnectionHandler implements Runnable {
 						
 						break;
 					}
+					case "Add_Referee":
+					{
+						String email = fromClient.readLine();
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						if (refereeFromEmail(email) != null) {
+							toClient.println("Exception_ExistingReferee");
+							break;
+						}
+						
+						Referee referee = new Referee(Server.referees.size(), email, false);
+						Server.referees.put(referee.getId(), referee);
+						Server.saveData();
+						
+						break;
+					}
+					case "Set_RescheduleNeeded":
+					{
+						int id = Integer.parseInt(fromClient.readLine());
+						if (permissionLevel < 1) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						targetSeason.schedule.markMatchForReschedule(id);
+						Server.saveData();
+						break;
+					}
+					case "Get_MatchesNeedingReschedule":
+					{
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						JSONObject jsonMatches = new JSONObject();
+						for (Map.Entry<Integer, Match> entry : targetSeason.schedule.getMatches().entrySet()) {
+							Match match = entry.getValue();
+							if (match.getNeedsReschedule()) {
+								JSONObject matchesJSON = new JSONObject(match.toJSON());
+								matchesJSON.put("Team0Name", match.getTeam1().getName());
+								matchesJSON.put("Team1Name", match.getTeam2().getName());
+								jsonMatches.put(match.getId()+"", matchesJSON);
+							}
+						}
+						
+						toClient.println(jsonMatches.toString());
+						
+						break;
+					}
+					case "Set_MatchDate":
+					{
+						int matchId = Integer.parseInt(fromClient.readLine());
+						int year = Integer.parseInt(fromClient.readLine());
+						int month = Integer.parseInt(fromClient.readLine());
+						int day = Integer.parseInt(fromClient.readLine());
+						Calendar newDate = Calendar.getInstance();
+						newDate.set(year, month, day);
+						
+						targetSeason.schedule.setMatchDate(matchId, newDate);
+						Server.saveData();
+					}
 				}
 
 			} catch (SocketException e) {

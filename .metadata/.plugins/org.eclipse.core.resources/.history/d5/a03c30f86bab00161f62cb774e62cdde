@@ -89,10 +89,6 @@ public class Match {
     public boolean getScored() {
     	return scored;
     }
-    
-    public boolean getNeedsReschedule() {
-    	return needsReschedule;
-    }
 
     public Referee getReferee() {
         return referee;

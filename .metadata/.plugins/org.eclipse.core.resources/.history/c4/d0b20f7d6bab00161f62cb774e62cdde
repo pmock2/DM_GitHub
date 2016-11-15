@@ -17,7 +17,6 @@ public class Match {
     int team2Score = 0;
     boolean isMorning = true;
     boolean scored = false;
-    boolean needsReschedule = false;
     
 
     public Match(int id, Team team1, Team team2, Referee referee, Calendar date) {
@@ -49,7 +48,6 @@ public class Match {
 		this.team2 = team1;
 		this.referee = matchReferee;
 		this.scored = matchData.getBoolean("Scored");
-		this.needsReschedule = matchData.getBoolean("NeedsReschedule");
 		this.team1Score = matchData.getInt("Score0");
 		this.team2Score = matchData.getInt("Score1");
     }
@@ -88,10 +86,6 @@ public class Match {
     
     public boolean getScored() {
     	return scored;
-    }
-    
-    public boolean getNeedsReschedule() {
-    	return needsReschedule;
     }
 
     public Referee getReferee() {
@@ -149,10 +143,6 @@ public class Match {
 
     	return s;
     }
-    
-    public void setMarkedForReschedule(boolean enabled) {
-    	this.needsReschedule = enabled;
-    }
 
     public String toString() {
         return team1.getName() + " - " + team2.getName() + "; Refereed by ID # " + getReferee().getId();
@@ -164,7 +154,6 @@ public class Match {
     			 + "\"Date\" : " + dateToJSON() + ", "
     			 + "\"IsMorning\" : " + (isMorning == true ? "true" : "false") + ", "
     			 + "\"Scored\" : " + (scored ? "true" : "false") + ", "
-    			 + "\"NeedsRechedule\" : " + (needsReschedule == true ? "true" : "false") + ", "
     			 + "\"Score0\" : " + team1Score + ", \"Score1\" : " + team2Score + "}";
     	
     	return s;
