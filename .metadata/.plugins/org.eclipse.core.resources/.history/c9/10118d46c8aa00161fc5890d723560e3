@@ -354,29 +354,6 @@ public class ConnectionHandler implements Runnable {
 						toClient.println(targetSeason.auditLog.getJSONLogs().toString());
 						break;
 					}
-					case "Get_SeasonList":
-					{
-						JSONObject data = new JSONObject();
-						JSONObject seasonList = new JSONObject();
-						data.put("ActiveSeason", Server.activeSeason);
-						
-						for (Map.Entry<Integer, Season> entry : Server.seasons.entrySet()) {
-							int id = entry.getKey();
-							Season season = entry.getValue();
-							seasonList.put(id+"", season.toJSONShort());
-						}
-						data.put("SeasonList", seasonList);
-						toClient.println(data.toString());
-						
-						break;
-					}
-					case "Set_TargetSeason":
-					{
-						int targetSeasonId = Integer.parseInt(fromClient.readLine());
-						targetSeason = Server.seasons.get(targetSeasonId);
-						toClient.println("Success");
-						break;
-					}
 				}
 
 			} catch (SocketException e) {

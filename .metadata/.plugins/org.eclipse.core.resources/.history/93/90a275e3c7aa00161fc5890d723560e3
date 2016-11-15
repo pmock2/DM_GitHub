@@ -64,8 +64,10 @@ public class Season {
 	
 	public String toJSONShort() {
 		String s = "{";
+		s += "\"Id\" : " + id + ", ";
 		
 		String[] datesJSON = schedule.getDatesJSON();
+		
 		s += "\"StartDate\" : " + datesJSON[0] + ", ";
 		s += "\"EndDate\" : " + datesJSON[1];
 		

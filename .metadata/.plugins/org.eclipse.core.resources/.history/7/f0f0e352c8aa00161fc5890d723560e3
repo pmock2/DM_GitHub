@@ -374,7 +374,6 @@ public class ConnectionHandler implements Runnable {
 					{
 						int targetSeasonId = Integer.parseInt(fromClient.readLine());
 						targetSeason = Server.seasons.get(targetSeasonId);
-						toClient.println("Success");
 						break;
 					}
 				}

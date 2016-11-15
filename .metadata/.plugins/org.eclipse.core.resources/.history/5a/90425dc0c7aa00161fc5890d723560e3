@@ -62,17 +62,6 @@ public class Season {
 		return s;
 	}
 	
-	public String toJSONShort() {
-		String s = "{";
-		
-		String[] datesJSON = schedule.getDatesJSON();
-		s += "\"StartDate\" : " + datesJSON[0] + ", ";
-		s += "\"EndDate\" : " + datesJSON[1];
-		
-		s += "}";
-		return s;
-	}
-	
 	private void loadTeams(JSONObject teamList) {
 		String[] teamIds = JSONObject.getNames(teamList);
 		teamIds = (teamIds == null ? new String[0] : teamIds);

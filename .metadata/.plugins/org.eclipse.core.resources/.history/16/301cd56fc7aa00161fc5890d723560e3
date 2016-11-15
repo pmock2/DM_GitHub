@@ -41,29 +41,14 @@ public class Schedule {
 		return s;
 	}
 	
-	public String[] getDatesJSON() {
-		String start = "{";
-		start += "\"Year\" : " + startDate.YEAR + ", ";
-		start += "\"Month\" : " + startDate.MONTH + ", ";
-		start += "\"Day\" : " + startDate.DAY_OF_MONTH;
-		start += "}";
+	public String dateToJSON() {
+		String s = "{";
 		
-		Match latest = null;
-		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
-			Match match = entry.getValue();
-			if (latest == null || latest.getDate().after(match.getDate())) {
-				latest = match;
-			}
-		}
-		Calendar latestDate = latest.getDate();
+		s += "\"Year\" : " + startDate.YEAR + ", ";
+		s += "\"Month\" : " + startDate.MONTH + ", ";
+		s += "\"Day\" : " + startDate.DAY_OF_MONTH + ", ";
 		
-		String end = "{";
-		end += "\"Year\" : " + latestDate.YEAR + ", ";
-		end += "\"Month\" : " + latestDate.MONTH + ", ";
-		end += "\"Day\" : " + latestDate.DAY_OF_MONTH;
-		end += "}";
-		
-		String[] s = {start, end};
+		s += "}";
 		return s;
 	}
 
