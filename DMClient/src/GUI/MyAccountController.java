@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.json.JSONObject;
 import teamHarambe.Client;
+import teamHarambe.MethodProvider;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +28,7 @@ public class MyAccountController implements Initializable {
     @FXML
     public Button menuButton;
     public Label permissions, matchesLabel;
-    public Hyperlink changeEmail;
+    public Hyperlink changeEmail, addRef;
     public int matchescount;
 
 
@@ -36,30 +37,63 @@ public class MyAccountController implements Initializable {
         try {
             if (Client.permissionLevel == 1) {
                 permissions.setText(Client.email + " - Referee");
+                addRef.setVisible(false);
             }
             if (Client.permissionLevel == 2) {
                 permissions.setText(Client.email + " - Super Referee");
             }
-
-            JSONObject matches = importMatches();
+            if (MethodProvider.checkForSetup())
+            {
+                JSONObject matches;
+                if (Client.permissionLevel == 2)
+                {
+                    matches = importReschedules();
+                }
+                else
+                {
+                    matches = importMatches();
+                }
             if (matches == null)
             {
+                if (Client.permissionLevel == 2)
+                {
+                    matchesLabel.setText("There are currently no matches that need rescheduling.");
+                }
                 matchesLabel.setText("You currently have no matches to score this season.");
             }
+
             else
-            {
+                {
                 String[] keyNames = JSONObject.getNames(matches);
-                for (int i=0; i < keyNames.length; i++) {
+                for (int i = 0; i < keyNames.length; i++) {
                     matchescount++;
                 }
                 if (matchescount == 1)
                 {
-                    matchesLabel.setText("You currently have " + matchescount + " match to score this season.");
-                }
-                else
+                    if (Client.permissionLevel == 2)
+                    {
+                        matchesLabel.setText("You currently have " + matchescount + " match to reschedule this season.");
+                    }
+                    else
+                    {
+                        matchesLabel.setText("You currently have " + matchescount + " match to score this season.");
+                    }
+                } else
                 {
-                    matchesLabel.setText("You currently have " + matchescount + " matches to score this season.");
+                    if (Client.permissionLevel == 2)
+                    {
+                        matchesLabel.setText("You currently have " + matchescount + " matches to reschedule this season.");
+                    }
+                    else
+                    {
+                        matchesLabel.setText("You currently have " + matchescount + " matches to score this season.");
+                    }
                 }
+            }
+            }
+            else
+            {
+                matchesLabel.setText("There is currently no active season.");
             }
         } catch (IOException e)
         {
@@ -121,8 +155,38 @@ public class MyAccountController implements Initializable {
         }
     }
 
+    public void addReferee(ActionEvent event)
+    {
+        try{
+            Stage stage = (Stage) changeEmail.getScene().getWindow();
+            stage.hide();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RefereeList.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Manage Referees");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public JSONObject importMatches() throws IOException {
         Client.toServer.println("Get_RefereedMatches");
+        String message = Client.fromServer.readLine();
+        System.out.println(message);
+        if (message.equals("{}"))
+        {
+            return null;
+        }
+        return new JSONObject(message);
+    }
+
+    public JSONObject importReschedules() throws IOException {
+        Client.toServer.println("Get_MatchesNeedingReschedule");
         String message = Client.fromServer.readLine();
         System.out.println(message);
         if (message.equals("{}"))

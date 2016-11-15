@@ -263,7 +263,7 @@ public class ConnectionHandler implements Runnable {
 						for (Map.Entry<Integer, Match> entry : targetSeason.schedule.getMatches().entrySet()) {
 							int id = entry.getKey();
 							Match match = entry.getValue();
-							if (match.getReferee() == userAccount && !match.isScored()) {
+							if (match.getReferee() == userAccount && !match.isScored() && !match.getNeedsReschedule()) {
 								JSONObject matchesJSON = new JSONObject();
 								matchesJSON.put("MatchId", match.getId());
 								matchesJSON.put("Team0Name", match.getTeam1().getName());
@@ -298,6 +298,26 @@ public class ConnectionHandler implements Runnable {
 						toClient.println(referees.toString());
 						break;
 					}
+					case "Get_AllReferees":
+					{
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+
+						JSONObject referees = new JSONObject();
+						List<Referee> allReferees = Server.getReferees();
+						for (int i=0; i < allReferees.size(); i++) {
+							JSONObject refereeJSON = new JSONObject();
+							Referee referee = allReferees.get(i);
+							refereeJSON.put("Email", referee.getEmail());
+							refereeJSON.put("IsActive", referee.isActive());
+							referees.put(referee.getId()+"", refereeJSON);
+						}
+
+						toClient.println(referees.toString());
+						break;
+					}
 					case "Set_MatchScore":
 					{	
 						if (permissionLevel < 1) {
@@ -319,10 +339,7 @@ public class ConnectionHandler implements Runnable {
 						if (permissionLevel >= 2 || (match.getReferee() == userAccount)) {
 							if (reschedule)
 							{
-								Calendar c = Calendar.getInstance();
-								c.set(args.getInt("Year"), args.getInt("Month")-1, args.getInt("Day"));
-								match.setDate(c);
-								match.setIsMorning(false);
+								match.setMarkedForReschedule(true);
 							}
 							else if (team0forfeit)
 							{
@@ -435,7 +452,7 @@ public class ConnectionHandler implements Runnable {
 						Referee referee = new Referee(Server.referees.size(), email, false);
 						Server.referees.put(referee.getId(), referee);
 						Server.saveData();
-						
+						toClient.println("Success");
 						break;
 					}
 					case "Set_RescheduleNeeded":
@@ -462,6 +479,7 @@ public class ConnectionHandler implements Runnable {
 							Match match = entry.getValue();
 							if (match.getNeedsReschedule()) {
 								JSONObject matchesJSON = new JSONObject(match.toJSON());
+								matchesJSON.put("MatchId", match.getId());
 								matchesJSON.put("Team0Name", match.getTeam1().getName());
 								matchesJSON.put("Team1Name", match.getTeam2().getName());
 								jsonMatches.put(match.getId()+"", matchesJSON);
@@ -488,6 +506,7 @@ public class ConnectionHandler implements Runnable {
 						
 						targetSeason.schedule.setMatchDate(matchId, newDate);
 						Server.saveData();
+						toClient.println("Success");
 						break;
 					}
 				}

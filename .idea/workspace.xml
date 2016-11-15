@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf1d76f0-33cb-4d81-aeab-84e02e50662d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/ChangeEmail.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/ChangeEmailController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/MyAccount.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/MyAccountController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/AddReferee.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/AddRefereeController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/RefereeList.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DMClient/src/GUI/RefereeListController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/Controller.java" afterPath="$PROJECT_DIR$/DMClient/src/GUI/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java" afterPath="$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" afterPath="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/MyAccount.fxml" afterPath="$PROJECT_DIR$/DMClient/src/GUI/MyAccount.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/MyAccountController.java" afterPath="$PROJECT_DIR$/DMClient/src/GUI/MyAccountController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/ScheduleController.java" afterPath="$PROJECT_DIR$/DMClient/src/GUI/ScheduleController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml" afterPath="$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java" afterPath="$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" afterPath="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMServer/src/teamHarambe/Match.java" afterPath="$PROJECT_DIR$/DMServer/src/teamHarambe/Match.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMServer/src/teamHarambe/Schedule.java" afterPath="$PROJECT_DIR$/DMServer/src/teamHarambe/Schedule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMServer/src/teamHarambe/Server.java" afterPath="$PROJECT_DIR$/DMServer/src/teamHarambe/Server.java" />
     </list>
     <ignored path="DM_GitHub.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +61,6 @@
         <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/BabylonianSquareRoot.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/AuditLog.java" />
         <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/AuditLog.java" />
-        <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/Schedule.java" />
-        <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/Server.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/Standings.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/ResetPasswordController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/SendEmailController.java" />
@@ -64,27 +69,33 @@
         <option value="$PROJECT_DIR$/DMClient/src/GUI/AuditLogController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/Standings.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/MatchSelect.fxml" />
-        <option value="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/Schedule.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/Schedule.java" />
-        <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/Match.java" />
         <option value="$PROJECT_DIR$/DMClient/bin/GUI/Style.css" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/InputScore.fxml" />
-        <option value="$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/PastSeason.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/Main.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/PastSeasonController.java" />
-        <option value="$PROJECT_DIR$/DMClient/src/GUI/ScheduleController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/StandingsController.java" />
         <option value="$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java" />
-        <option value="$PROJECT_DIR$/DMClient/src/GUI/Controller.java" />
-        <option value="$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/ChangeEmail.fxml" />
-        <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/ChangeEmailController.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/Controller.java" />
+        <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/Match.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java" />
+        <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/Schedule.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/ScheduleController.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/AddReferee.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/MyAccount.fxml" />
         <option value="$PROJECT_DIR$/DMClient/src/GUI/MyAccountController.java" />
+        <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/Server.java" />
+        <option value="$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/RefereeListController.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/AddRefereeController.java" />
+        <option value="$PROJECT_DIR$/DMClient/src/GUI/RefereeList.fxml" />
       </list>
     </option>
   </component>
@@ -125,7 +136,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -238,8 +248,9 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -254,6 +265,244 @@
       <recent name="C:\Users\Daylon\IdeaProjects\DM_GitHub4\DMClient\src\GUI" />
       <recent name="C:\Users\Payton\workspace\DM_GitHub\DMClient\bin\GUI" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.log</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.mylyn/.tasks.xml.zip</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.mylyn/tasks.xml.zip</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.projects/DMClient/.markers</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.projects/DMClient/org.eclipse.jdt.core/state.dat</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.projects/DMServer/.indexes/e4/95/history.index</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.projects/DMServer/.markers</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.projects/DMServer/org.eclipse.jdt.core/state.dat</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/2337201826.index</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/375852801.index</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.ui/QualifiedTypeNameHistory.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.ui.workbench.texteditor/dialog_settings.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/version.ini</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/segments.gen</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/DMServer/resources/Database.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/DMServer/src/teamHarambe/Match.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/DMServer/src/teamHarambe/Schedule.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/DMServer/src/teamHarambe/Season.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/12/00dfa47d4cab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/18/a0818ae44eab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/19/00c6d30252ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/19/d0b2107554ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/1a/d0ec43d455ab00161802809967743292</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/22/805a8c336dab001619bbe1bb2b7c09ff</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/22/f01e9abd4bab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/24/70fd5ba052ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/25/402d31946bab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/26/e0f53d804bab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/29/8022cfa94bab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/31/d0585f2f50ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/32/9013814953ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/35/3016bdab53ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/36/6081e0d155ab00161802809967743292</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/38/40142f144dab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/46/30a301a36cab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/4e/807c865953ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/4f/809addbb4eab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/50/60816fed50ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/53/a0a301f84cab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/62/10807dfc52ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/62/508862694fab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/63/e06af5736cab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/65/80524c674fab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/69/4095d0e251ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/6e/20c6a5cc6dab001616a2c6501933b012</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/7a/a08133374eab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/7d/00c28fce50ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/7f/c0ab355b56ab00161802809967743292</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/8/a0f025f952ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/8/d03e73754cab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/80/00ab307c4bab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/80/d057d29b6cab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/80/d0fe793f4dab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/86/9068f16954ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/87/70e5c75f53ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/87/c065914150ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/8e/805431a94eab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/9/903874876bab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/a4/00386c3d4eab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/a4/a00225764cab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/a6/60fbb1a252ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/a8/c08c03316dab001619bbe1bb2b7c09ff</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/af/50bc286356ab00161802809967743292</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/b/80b4e8f04eab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/b8/8007ef7052ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/bd/50f540124cab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/c4/d0b20f7d6bab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/cc/807cdc3350ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/d2/402fa0d252ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/d5/a03c30f86bab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/ea/204d493a4eab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/f/4074ae9a4bab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/f6/e0f123f66bab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/f7/10458fb94bab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/f8/000ba9dc53ab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/fc/f0da43ef4aab00161749b8cec2f85b5e</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/fd/906aed266cab00161f62cb774e62cdde</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/fe/2013966655ab00161802809967743292</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.root/50.tree</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_z.fdt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_z.fdx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_z.fnm</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_z.frq</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_z.nrm</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_z.prx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_z.tii</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_z.tis</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/segments_10</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/15/b0d34702b2a60016199dfee3c0e00f61</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/1f/b0e53205b2a60016199dfee3c0e00f61</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/3/d0b0c400bdaa00161fc5890d723560e3</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/3e/d055df77b7a600161a3cc157346f8765</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/45/f066801bb5a600161b2bee5b1f50e709</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/4a/808230debaa500161e71b44663b4d29c</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/4e/90cfe767b7a600161a3cc157346f8765</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/56/20d2dc455da500161031d754a19f0f33</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/5a/e00e5a41baa500161e71b44663b4d29c</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/72/d0809138b5a600161b2bee5b1f50e709</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/76/c0745b33b2a60016199dfee3c0e00f61</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/81/608fc012b9aa00161fc5890d723560e3</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/97/10d8dde3b8aa00161fc5890d723560e3</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/a1/b0858127b5a600161b2bee5b1f50e709</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/a8/404946e2b4a600161b2bee5b1f50e709</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/b7/507b3613bcaa00161fc5890d723560e3</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/b7/c04986e0b4a600161b2bee5b1f50e709</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/ba/a0db1ad0baa500161e71b44663b4d29c</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/bc/3035d88ab7a600161a3cc157346f8765</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/bd/0083cb0ab9aa00161fc5890d723560e3</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/ca/f0abacf45ca500161031d754a19f0f33</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/cf/f05e66a55da500161031d754a19f0f33</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/d6/00858e0a5ea500161031d754a19f0f33</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/e4/40fafc185ea500161031d754a19f0f33</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/ee/8064ab77baa500161e71b44663b4d29c</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/ef/80b345a0b6a600161a3cc157346f8765</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history/f/60a29e21b3a60016199dfee3c0e00f61</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.root/45.tree</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_v.fdt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_v.fdx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_v.fnm</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_v.frq</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_v.nrm</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_v.prx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_v.tii</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/_v.tis</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.recommenders/index/http___download_eclipse_org_recommenders_models_neon_/segments_w</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunManager" selected="Application.Client">
     <configuration default="false" name="BabylonianSquareRoot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -720,7 +969,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479182083256</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Added client storing email, user GUI, changing email.">
+      <created>1479185916751</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1479185916751</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -787,11 +1043,12 @@
     <MESSAGE value="Fixed bugs" />
     <MESSAGE value="Added date picker to reschedule" />
     <MESSAGE value="Added GUI for season changing." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added GUI for season changing." />
+    <MESSAGE value="Added client storing email, user GUI, changing email." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added client storing email, user GUI, changing email." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="42" />
+      <option name="time" value="43" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -800,30 +1057,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ChangeScore1.fxml" />
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ChangeScore.fxml" />
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Match.fxml" />
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeams1.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/teamHarambe/Schedule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/test.java" />
     <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/BabylonianSquareRoot.java" />
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Landing.fxml">
@@ -858,13 +1091,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="21" column="49" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="257" column="45" selection-start-line="257" selection-start-column="45" selection-end-line="257" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -931,28 +1157,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/Schedule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_40/javafx-src.zip!/javafx/event/EventHandler.java" />
-    <entry file="file://$PROJECT_DIR$/DMClient/src/teamHarambe/MethodProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/Match.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="152" column="63" selection-start-line="152" selection-start-column="63" selection-end-line="152" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/public_html/css/style.css" />
     <entry file="file://$PROJECT_DIR$/DMClient/bin/GUI/Style.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -975,37 +1180,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/InputScore.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeams.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="203" column="17" selection-start-line="203" selection-start-column="17" selection-end-line="203" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeams.fxml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/PastSeason.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/PastSeason.fxml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
@@ -1014,36 +1203,25 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Main.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Main.fxml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Schedule.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Schedule.fxml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ScheduleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="314" column="53" selection-start-line="314" selection-start-column="53" selection-end-line="314" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -1052,7 +1230,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="710">
           <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1060,19 +1237,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
           <caret line="96" column="74" selection-start-line="96" selection-start-column="74" selection-end-line="96" selection-end-column="74" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/MatchSelect.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/src/teamHarambe/Client.java">
@@ -1083,26 +1248,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ChangeEmail.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ChangeEmail.fxml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddTeamsController.java">
@@ -1113,53 +1267,191 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Controller.java">
+    <entry file="file://$PROJECT_DIR$/DMClient/src/teamHarambe/MethodProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="218" column="25" selection-start-line="209" selection-start-column="12" selection-end-line="218" selection-end-column="25" />
+        <state relative-caret-position="255">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="379" column="37" selection-start-line="379" selection-start-column="37" selection-end-line="379" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ChangeEmailController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="85" column="53" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/MyAccount.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/SuperUser.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/MyAccountController.java">
+    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/Season.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="72" column="12" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="12" />
+        <state relative-caret-position="211">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="57" column="35" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/Match.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/MatchSelect.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/org/json/JSONObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="598" column="0" selection-start-line="598" selection-start-column="0" selection-end-line="598" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/MatchSelectController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        <state relative-caret-position="285">
+          <caret line="50" column="16" selection-start-line="50" selection-start-column="16" selection-end-line="50" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/InputScoreController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3659">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/Schedule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#1458#1459#0" expanded="false" />
+            <element signature="e#1516#1517#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ScheduleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="271" column="61" selection-start-line="271" selection-start-column="61" selection-end-line="271" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/InputScore.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/ChangeEmailController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="132" column="4" selection-start-line="132" selection-start-column="4" selection-end-line="135" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/MyAccount.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/MyAccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="150" column="25" selection-start-line="141" selection-start-column="12" selection-end-line="150" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="147" column="47" selection-start-line="147" selection-start-column="47" selection-end-line="147" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMServer/src/teamHarambe/ConnectionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="293" column="73" selection-start-line="293" selection-start-column="73" selection-end-line="293" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddRefereeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="101" column="46" selection-start-line="101" selection-start-column="46" selection-end-line="101" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/AddReferee.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/RefereeList.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMClient/src/GUI/RefereeListController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2002">
+          <caret line="144" column="5" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
           <folding />
         </state>
       </provider>

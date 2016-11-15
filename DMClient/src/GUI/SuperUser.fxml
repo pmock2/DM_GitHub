@@ -51,7 +51,7 @@
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <Button id="button" layoutX="506.0" layoutY="321.0" mnemonicParsing="false" onAction="#openMatches" prefHeight="50.0" prefWidth="190.0" text="Input Match Scores">
+            <Button id="button" fx:id="inputButton" layoutX="506.0" layoutY="321.0" mnemonicParsing="false" onAction="#openMatches" prefHeight="50.0" prefWidth="190.0" text="Input Match Scores">
                <font>
                   <Font size="18.0" />
                </font>

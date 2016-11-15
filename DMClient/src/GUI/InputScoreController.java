@@ -39,6 +39,10 @@ public class InputScoreController implements Initializable {
         try {
             dpDate.setVisible(false);
             JSONObject matches = importMatches();
+            if (Client.permissionLevel == 2)
+            {
+                matches = importReschedules();
+            }
             if (matches == null)
             {
                 matchname.setText("Something went wrong. Please try again.");
@@ -50,6 +54,18 @@ public class InputScoreController implements Initializable {
                 matchname.setText(matchData.getString("Team0Name") + " vs " + matchData.getString("Team1Name"));
                 aname.setText(matchData.getString("Team0Name"));
                 bname.setText(matchData.getString("Team1Name"));
+
+            }
+
+            if (Client.permissionLevel == 2)
+            {
+                ascore.setDisable(true);
+                bscore.setDisable(true);
+                aforfeit.setDisable(true);
+                bforfeit.setDisable(true);
+                dpDate.setVisible(true);
+                rs.setDisable(true);
+                rs.setSelected(true);
 
             }
 
@@ -146,7 +162,7 @@ public class InputScoreController implements Initializable {
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
                 if (rs.isSelected())
                 {
-                    dpDate.setVisible(true);
+                    dpDate.setVisible(false);
                     aforfeit.setSelected(false);
                     aforfeit.setDisable(true);
                     bforfeit.setSelected(false);
@@ -187,6 +203,10 @@ public class InputScoreController implements Initializable {
             JSONObject matchToSend = new JSONObject();
             try {
                 JSONObject matches = importMatches();
+                if (Client.permissionLevel == 2)
+                {
+                    matches = importReschedules();
+                }
                 String[] keyNames = JSONObject.getNames(matches);
                 JSONObject matchData = matches.getJSONObject(keyNames[Client.selectedMatch]);
                 matchToSend.put("MatchId", matchData.getInt("MatchId"));
@@ -202,6 +222,7 @@ public class InputScoreController implements Initializable {
                 }
                 if (rs.isSelected())
                 {
+
                     matchToSend.put("Year", dpDate.getValue().getYear());
                     matchToSend.put("Month", dpDate.getValue().getMonthValue());
                     matchToSend.put("Day", dpDate.getValue().getDayOfMonth());
@@ -210,27 +231,38 @@ public class InputScoreController implements Initializable {
                 matchToSend.put("Team1Forfeit", bforfeit.isSelected());
                 matchToSend.put("Reschedule", rs.isSelected());
 
-                Client.toServer.println("Set_MatchScore");
-                Client.toServer.println(matchToSend.toString());
-                String reply = Client.fromServer.readLine();
-                if (reply.equals("Success")) {
-                    Stage stage = (Stage) rs.getScene().getWindow();
-                    stage.hide();
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
-                    stage = new Stage();
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.initStyle(StageStyle.DECORATED);
-                    stage.setTitle("Match Select");
-                    stage.setScene(new Scene(root1));
-                    stage.show();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(reply);
-                    alert.setContentText("Something went wrong. Reply: " + reply);
-                    alert.showAndWait();
+                if (Client.permissionLevel == 2)
+                {
+                    Client.toServer.println("Set_MatchDate");
+                    Client.toServer.println(matchData.getInt("MatchId"));
+                    Client.toServer.println(dpDate.getValue().getYear());
+                    Client.toServer.println(dpDate.getValue().getMonthValue()-1);
+                    Client.toServer.println(dpDate.getValue().getDayOfMonth());
                 }
+                else
+                {
+                    Client.toServer.println("Set_MatchScore");
+                    Client.toServer.println(matchToSend.toString());
+                }
+                    String reply = Client.fromServer.readLine();
+                    if (reply.equals("Success")) {
+                        Stage stage = (Stage) rs.getScene().getWindow();
+                        stage.hide();
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));
+                        Parent root1 = (Parent) fxmlLoader.load();
+                        stage = new Stage();
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.initStyle(StageStyle.DECORATED);
+                        stage.setTitle("Match Select");
+                        stage.setScene(new Scene(root1));
+                        stage.show();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(reply);
+                        alert.setContentText("Something went wrong. Reply: " + reply);
+                        alert.showAndWait();
+                    }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -269,6 +301,17 @@ public class InputScoreController implements Initializable {
             return false;
         }
         return true;
+    }
+
+    public JSONObject importReschedules() throws IOException {
+        Client.toServer.println("Get_MatchesNeedingReschedule");
+        String message = Client.fromServer.readLine();
+        System.out.println(message);
+        if (message.equals("{}"))
+        {
+            return null;
+        }
+        return new JSONObject(message);
     }
 
     }

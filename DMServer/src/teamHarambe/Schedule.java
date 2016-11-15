@@ -43,6 +43,7 @@ public class Schedule {
 	
 	public void setMatchDate(int matchId, Calendar newDate) {
 		matches.get(matchId).setDate(newDate);
+		matches.get(matchId).setMarkedForReschedule(false);
 	}
 	
 	public boolean dateConflicts(int matchId, Calendar newDate) {

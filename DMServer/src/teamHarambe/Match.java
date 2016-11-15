@@ -164,7 +164,7 @@ public class Match {
     			 + "\"Date\" : " + dateToJSON() + ", "
     			 + "\"IsMorning\" : " + (isMorning == true ? "true" : "false") + ", "
     			 + "\"Scored\" : " + (scored ? "true" : "false") + ", "
-    			 + "\"NeedsRechedule\" : " + (needsReschedule == true ? "true" : "false") + ", "
+    			 + "\"NeedsReschedule\" : " + (needsReschedule == true ? "true" : "false") + ", "
     			 + "\"Score0\" : " + team1Score + ", \"Score1\" : " + team2Score + "}";
     	
     	return s;

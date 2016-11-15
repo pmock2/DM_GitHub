@@ -45,7 +45,7 @@ public class Controller implements Initializable {
     public TextArea sTextArea;
     public Label invalidCredentials;
     public ChoiceBox cb;
-    public Button createButton, auditLogButton;
+    public Button createButton, auditLogButton, inputButton;
 
     public void initialize(URL url, ResourceBundle rb) {
         if (createButton != null)
@@ -65,6 +65,10 @@ public class Controller implements Initializable {
         if (myAccount != null)
         {
             myAccount.setText(Client.email);
+        }
+        if (Client.permissionLevel == 2 && inputButton != null)
+        {
+            inputButton.setText("Reschedule Matches");
         }
     }
 
@@ -281,8 +285,9 @@ public class Controller implements Initializable {
 
     public void openLog(ActionEvent event) throws IOException
     {
+        if (MethodProvider.checkForSetup()) {
             try {
-                Stage stage = (Stage)scheduleButton.getScene().getWindow();
+                Stage stage = (Stage) scheduleButton.getScene().getWindow();
                 stage.hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AuditLog.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
@@ -295,6 +300,15 @@ public class Controller implements Initializable {
             } catch (Exception e) {
 
             }
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Whoops!");
+            alert.setHeaderText("Whoops, we need a schedule");
+            alert.setContentText("There's nothing to log if there's no schedule. Please have the super referee create a schedule.");
+            alert.showAndWait();
+        }
     }
 
 	public void attemptLogin(ActionEvent event)

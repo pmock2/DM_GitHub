@@ -141,6 +141,18 @@ public class Server {
 		
 		return activeReferees;
 	}
+
+	public static List<Referee> getReferees() {
+		List<Referee> Referees = new LinkedList<>();
+		for (Map.Entry<Integer, Referee> entry : referees.entrySet()) {
+			Referee referee = entry.getValue();
+			if (!referee.isSuperReferee) {
+				Referees.add(referee);
+			}
+		}
+
+		return Referees;
+	}
 	
 	public static Season getActiveSeason() {
 		return seasons.get(activeSeason);

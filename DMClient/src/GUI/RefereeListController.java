@@ -1,31 +1,28 @@
 package GUI;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.json.JSONObject;
 import teamHarambe.Client;
+
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
-public class MatchSelectController implements Initializable {
+public class RefereeListController implements Initializable {
 
     @FXML
     public VBox vb;
@@ -35,65 +32,67 @@ public class MatchSelectController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
 
-        if (Client.permissionLevel == 2)
-        {
-            l.setText("Matches to Reschedule");
-            l1.setText("Please select the matches to reschedule them");
-        }
-
         try {
                 vb.getChildren().clear();
-                JSONObject matches = null;
-            if (Client.permissionLevel == 2)
-            {
-                matches = importReschedules();
-            }
-            else
-            {
-                matches = importMatches();
-            }
-                if (matches == null) {
-                    if (Client.permissionLevel == 2)
-                    {
-                        vb.getChildren().add(new Label("You currently have no matches to reschedule."));
-                    }
-                    else {
-                        vb.getChildren().add(new Label("You currently have no matches to score."));
-                    }
+                JSONObject referees = importReferees();
+                if (referees == null)
+                {
+                        vb.getChildren().add(new Label("There are currently no referees besides yourself."));
                 }
                 else
                     {
-                    String[] keyNames = JSONObject.getNames(matches);
+                    String[] keyNames = JSONObject.getNames(referees);
                     for (int i = 0; i < keyNames.length; i++) {
                         int matchSelected = i;
-                        JSONObject matchData = matches.getJSONObject(keyNames[i]);
-                        if (!matchData.getBoolean("Scored")) {
-                            Hyperlink h = new Hyperlink(matchData.getString("Team0Name") + " vs " + matchData.getString("Team1Name"));
+                        JSONObject matchData = referees.getJSONObject(keyNames[i]);
+                            Hyperlink h = new Hyperlink(matchData.getString("Email") + " - " + (matchData.getBoolean("IsActive") ? "Active" : "Inactive"));
                             h.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent e) {
                                     try {
-                                        Client.selectedMatch = matchSelected;
-                                        Stage stage = (Stage) h.getScene().getWindow();
+                                        Client.toServer.println("Set_RefereeActive");
+                                        Client.toServer.println(matchData.getBoolean("IsActive") ? "false" : "true");
+                                        Client.toServer.println(matchData.getString("Email"));
+                                        Stage stage = (Stage) vb.getScene().getWindow();
                                         stage.hide();
-                                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InputScore.fxml"));
+                                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RefereeList.fxml"));
                                         Parent root1 = (Parent) fxmlLoader.load();
                                         stage = new Stage();
                                         stage.initModality(Modality.APPLICATION_MODAL);
                                         stage.initStyle(StageStyle.DECORATED);
-                                        stage.setTitle("Set Team Score");
+                                        stage.setTitle("Manage Referees");
                                         stage.setScene(new Scene(root1));
                                         stage.show();
-                                        System.out.println(Client.selectedMatch);
-                                    } catch (IOException f) {
+                                    } catch (Exception f) {
                                         f.printStackTrace();
                                     }
                                 }
                             });
                             vb.getChildren().add(h);
                         }
+                        Hyperlink h = new Hyperlink("Add new referee");
+                        h.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent e) {
+                                try {
+                                        Stage stage = (Stage) vb.getScene().getWindow();
+                                        stage.hide();
+                                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddReferee.fxml"));
+                                        Parent root1 = (Parent) fxmlLoader.load();
+                                        stage = new Stage();
+                                        stage.initModality(Modality.APPLICATION_MODAL);
+                                        stage.initStyle(StageStyle.DECORATED);
+                                        stage.setTitle("Add New Referee");
+                                        stage.setScene(new Scene(root1));
+                                        stage.show();
+
+                                } catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                            }
+                        });
+                        vb.getChildren().add(h);
                     }
-                }
             } catch (Exception e) {
             e.printStackTrace();
         }
@@ -145,8 +144,8 @@ public class MatchSelectController implements Initializable {
         }
     }
 
-    public JSONObject importReschedules() throws IOException {
-        Client.toServer.println("Get_MatchesNeedingReschedule");
+    public JSONObject importReferees() throws IOException {
+        Client.toServer.println("Get_AllReferees");
         String message = Client.fromServer.readLine();
         System.out.println(message);
         if (message.equals("{}"))

@@ -25,6 +25,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ScheduleController implements Initializable {
 
@@ -33,6 +35,8 @@ public class ScheduleController implements Initializable {
     public TableColumn datecolumn, team1column, team2column, refcolumn, score1column, score2column, slotcolumn;
     public Button saveButton, menuButton;
     private ObservableList<Schedule.ScheduleData> data = FXCollections.observableArrayList();
+    public static final Pattern VALID_EMAIL =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -165,6 +169,28 @@ public class ScheduleController implements Initializable {
                 }
         );
 
+        refcolumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        refcolumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Schedule.ScheduleData, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Schedule.ScheduleData, String> t) {
+                        if (validEmail(t.getNewValue())) {
+                            ((Schedule.ScheduleData) t.getTableView().getItems().get(
+                                    t.getTablePosition().getRow())
+                            ).setRef(t.getNewValue());
+                        }
+                        else
+                        {
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Warning");
+                            alert.setHeaderText("Change Warning");
+                            alert.setContentText("Only valid emails will be updated through the schedule. Please try again.");
+                            alert.showAndWait();
+                        }
+                    }
+                }
+        );
+
 
     }
 
@@ -221,13 +247,29 @@ public class ScheduleController implements Initializable {
 
         Client.toServer.println("Update_Schedule");
         Client.toServer.println(schedule.toString());
-        String response = Client.fromServer.readLine();//Exception_ConflictingDate or Exception_InsufficientPermissions
+        String response = Client.fromServer.readLine();//Exception_ConflictingDate, Exception_NonexistantReferee or Exception_InsufficientPermissions
         if (response.equals("Exception_ConflictingDate"))
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Conflicting Dates");
             alert.setContentText("Detected conflicting data. Data did not save.");
+            alert.showAndWait();
+        }
+        else if (response.equals("Exception_NonexistantReferee"))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Non-existant Referee");
+            alert.setContentText("Changes not saved. Please enter a referee that exists in the database. You may add new referees through account options.");
+            alert.showAndWait();
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Success!");
+            alert.setContentText("Changes saved successfully.");
             alert.showAndWait();
         }
 
@@ -319,5 +361,10 @@ public class ScheduleController implements Initializable {
             
             return new JSONObject(scheduleString);
         }
+
+    private static boolean validEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL .matcher(emailStr);
+        return matcher.find();
+    }
 
     }
