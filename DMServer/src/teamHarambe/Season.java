@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,6 +106,13 @@ public class Season {
 		auditLog = new AuditLog(logs);
 	}
 	
+	public void scheduleRematch(Team team0, Team team1) {
+		List<Referee> referees = Server.getActiveReferees();
+		Random r = new Random();
+		Referee referee = referees.get(r.nextInt(referees.size()));
+		schedule.scheduleRematch(team0, team1, referee, teams.size());
+	}
+	
 	public JSONObject getRankings() {
 		Map<Integer,Double> teamWins = new HashMap<>();
 		List<Integer> sortedTeams = new ArrayList<>(teams.size());
@@ -174,6 +182,7 @@ public class Season {
 			data.put("Name", team.getName());
 			data.put("Wins", thisScore);
 			data.put("Rank", ranking);
+			data.put("Id", id);
 			rankings.put(""+i, data);
 		}
 		

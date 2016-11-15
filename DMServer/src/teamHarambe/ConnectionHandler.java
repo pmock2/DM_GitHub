@@ -7,6 +7,7 @@ import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -150,7 +151,7 @@ public class ConnectionHandler implements Runnable {
 							int year = date.getInt("Year"), month = date.getInt("Month"), day = date.getInt("Day");
 							Calendar newDate = Calendar.getInstance();
 							newDate.set(year, month, day);
-							if (dateConflicts(targetSeason, matchId, newDate)) {
+							if (targetSeason.schedule.dateConflicts(matchId, newDate)) {
 								conflictingDate = true;
 								break;
 							}
@@ -172,6 +173,7 @@ public class ConnectionHandler implements Runnable {
 						
 						if (!conflictingDate) {
 							targetSeason.schedule = new Schedule(newSchedule);
+							processTiebreakers(targetSeason);
 							Server.saveData();
 							toClient.println("Update_Success");
 						} else {
@@ -341,6 +343,7 @@ public class ConnectionHandler implements Runnable {
 						}
 						
 						targetSeason.auditLog.logAction("SetMatchScore: ID " + matchId + " " + team0Score + " - " + team1Score + " Reschedule: " + reschedule, userAccount);
+						processTiebreakers(targetSeason);
 						
 						break;
 					}
@@ -397,6 +400,39 @@ public class ConnectionHandler implements Runnable {
 		}
 	}
 	
+	private void processTiebreakers(Season currentSeason) {
+		if (currentSeason.getId() == Server.activeSeason && currentSeason.schedule.allMatchesScored()) {
+			JSONObject rankings = currentSeason.getRankings();
+			String[] keys = JSONObject.getNames(rankings);
+			List<Team> firstPlace = new ArrayList<>();
+			List<Team> secondPlace = new ArrayList<>();
+			
+			for (int i=0; i < keys.length; i++) {
+				JSONObject teamData = rankings.getJSONObject(keys[i]);
+				int rank = teamData.getInt("Rank");
+				if (rank == 1) {
+					firstPlace.add(currentSeason.teams.get(teamData.getInt("Id")));
+				} else if (rank == 2) {
+					secondPlace.add(currentSeason.teams.get(teamData.getInt("Id")));
+				}
+			}
+			
+			if (firstPlace.size() > 1) {
+				for (int i=0; i < firstPlace.size(); i+=2) {
+					Team team0 = firstPlace.get(i);
+					Team team1 = firstPlace.get(i+1);
+					currentSeason.scheduleRematch(team0,team1);
+				}
+			} else if (secondPlace.size() > 1) {
+				for (int i=0; i < secondPlace.size(); i+=2) {
+					Team team0 = secondPlace.get(i);
+					Team team1 = secondPlace.get(i+1);
+					currentSeason.scheduleRematch(team0,team1);
+				}
+			}
+		}
+	}
+	
 	private Referee refereeFromEmail(String email) {
 		Referee referee;
 		
@@ -407,29 +443,5 @@ public class ConnectionHandler implements Runnable {
 			}
 		}
 		return null;
-	}
-	
-	private boolean dateConflicts(Season season, int matchId, Calendar newDate) {
-		Map<Integer,Match> matches = season.schedule.getMatches();
-		Match match = matches.get(matchId);
-		
-		for (Map.Entry<Integer, Match> entry : season.schedule.getMatches().entrySet()) {
-			int matchId2 = entry.getKey();
-			Match match2 = entry.getValue();
-			if (matchId2 != matchId && match.isMatchOnDate(match2.getDate())) {
-				String team0Name = match.getTeam1().getName();
-				String team1Name = match.getTeam2().getName();
-				String team2Name = match2.getTeam1().getName();
-				String team3Name = match2.getTeam2().getName();
-				
-				if (team0Name.equals(team2Name) || team0Name.equals(team3Name) ||
-				    team1Name.equals(team2Name) || team1Name.equals(team3Name)
-				) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
 	}
 }

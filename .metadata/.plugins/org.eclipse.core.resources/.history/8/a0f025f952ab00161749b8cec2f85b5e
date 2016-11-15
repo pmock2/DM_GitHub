@@ -1,0 +1,232 @@
+package teamHarambe;
+
+import java.util.*;
+
+public class Schedule {
+	Calendar startDate;
+	Map<Integer,Match> matches;
+
+	public Schedule(List<Team> teamlist, List<Referee> refereelist, Calendar startDate) {
+		this.startDate = startDate;
+		matches = new HashMap<>();
+		generateSchedule(shuffleTeams(teamlist), refereelist);
+	}
+
+	public Schedule(Map<Integer,Match> matches) {
+		this.matches = matches;
+	}
+	
+	private boolean dateConflicts(Match match, Calendar newDate) {
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			int matchId2 = entry.getKey();
+			Match match2 = entry.getValue();
+			if (matchId2 != match.getId() && match.isMatchOnDate(match2.getDate()) && match.getIsMorning() == match2.getIsMorning()) {
+				String team0Name = match.getTeam1().getName();
+				String team1Name = match.getTeam2().getName();
+				String team2Name = match2.getTeam1().getName();
+				String team3Name = match2.getTeam2().getName();
+				
+				if (team0Name.equals(team2Name) || team0Name.equals(team3Name) ||
+				    team1Name.equals(team2Name) || team1Name.equals(team3Name)
+				) {
+					System.out.println("MatchDates conflict: " + match.getIsMorning() + "||" + match2.getIsMorning() + ", " + match.getDate().DAY_OF_MONTH + "||" + match2.getDate().DAY_OF_MONTH);
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean dateConflicts(int matchId, Calendar newDate) {
+		return dateConflicts(matches.get(matchId), newDate);
+	}
+	
+	public void scheduleRematch(Team team0, Team team1, Referee referee, int numSeasonTeams) {
+		Calendar latestDate = getLatestDate();
+		int matchesPerWeek = numSeasonTeams/2;
+		int numMorning = 0, numNight = 0;
+
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			Match match = entry.getValue();
+			if (match.isMatchOnDate(latestDate)) {
+				if (match.getIsMorning()) {
+					numMorning++;
+				} else {
+					numNight++;
+				}
+			}
+		}
+		
+		Match newMatch = null;
+		if (numMorning < matchesPerWeek) {
+			Match tempMatch = new Match(matches.size(), team0, team1, referee, latestDate, true, 0, 0, false);
+			if (!dateConflicts(tempMatch, tempMatch.getDate())) {
+				newMatch = tempMatch;
+			}
+		}
+		if (numNight < matchesPerWeek && newMatch == null) {
+			Match tempMatch = new Match(matches.size(), team0, team1, referee, latestDate, false, 0, 0, false);
+			if (!dateConflicts(tempMatch, tempMatch.getDate())) {
+				newMatch = tempMatch;
+			}
+		}
+		if (newMatch == null) {
+			newMatch = new Match(matches.size(), team0, team1, referee, getNextWeekDate(latestDate), true, 0, 0, false);
+		}
+		
+		matches.put(newMatch.getId(), newMatch);
+	}
+
+	public String toString() {
+		String s = "";
+
+		for (int i = 0; i < matches.size(); i++) {
+			s += matches.get(i).toString() + "\n";
+		}
+
+		return s;
+	}
+
+	public String toJSON() {
+		String s = "{\n";
+		
+		int i=0;
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			int id = entry.getKey();
+			Match match = entry.getValue();
+			s += "\t\t\t\t" + id + " : " + match.toJSON() + (i+1 == matches.size() ? "" : ",") + "\n";
+			i++;
+		}
+
+		s += "\t\t\t}";
+		return s;
+	}
+	
+	private Calendar getLatestDate() {
+		Match latest = null;
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			Match match = entry.getValue();
+			if (latest == null || latest.getDate().after(match.getDate())) {
+				latest = match;
+			}
+		}
+		
+		return latest.getDate();
+	}
+	
+	public String[] getDatesJSON() {
+		String start = "{";
+		start += "\"Year\" : " + startDate.YEAR + ", ";
+		start += "\"Month\" : " + startDate.MONTH + ", ";
+		start += "\"Day\" : " + startDate.DAY_OF_MONTH;
+		start += "}";
+		
+		
+		Calendar latestDate = getLatestDate();
+		String end = "{";
+		end += "\"Year\" : " + latestDate.YEAR + ", ";
+		end += "\"Month\" : " + latestDate.MONTH + ", ";
+		end += "\"Day\" : " + latestDate.DAY_OF_MONTH;
+		end += "}";
+		
+		String[] s = {start, end};
+		return s;
+	}
+	
+	public boolean allMatchesScored() {
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			Match match = entry.getValue();
+			if (!match.isScored()) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	public Map<Integer, Match> getMatches() {
+		return matches;
+	}
+
+	private List<Team> shuffleTeams(List<Team> list) {
+		Random rand = new Random();
+
+		for (int i = list.size() - 1; i > 0; i--) {
+			int index = rand.nextInt(i + 1);
+			Team temp = list.get(index);
+			list.set(index, list.get(i));
+			list.set(i, temp);
+		}
+
+		return list;
+	}
+
+	long msInWeek = 1000 * 60 * 60 * 24 * 7;
+
+	private Calendar getDateFromWeek(int weekInt) {
+		long week = (long) weekInt;
+		long startMs = startDate.getTimeInMillis();
+		long newMs = startMs + (msInWeek * week);
+		Calendar newDate = Calendar.getInstance();
+		newDate.setTimeInMillis(newMs);
+
+		return newDate;
+	}
+	
+	private Calendar getNextWeekDate(Calendar date) {
+		long startMs = date.getTimeInMillis();
+		long newMs = startMs + msInWeek;
+		
+		Calendar newDate = Calendar.getInstance();
+		newDate.setTimeInMillis(newMs);
+
+		return newDate;
+	}
+
+	/*
+	 * Algorithm used is called the "Polygon method of round-robin scheduling"
+	 * Explanation and Visual examples of the algorithm can be found here:
+	 * 					http://mathforum.org/library/drmath/view/54715.html
+	 *
+	 * Supports even or odd number of teams, though with odd #teams each team
+	 * will have an idle/bye week
+	 *
+	 * Minimum required #weeks = #teams if odd or #teams-1 if even
+	 * #matches per week required for that amount of weeks = floor(#teams/2)
+	 *
+	 * Probably room to improve method's differentiation between even/odd #teams
+	 */
+	private void generateSchedule(List<Team> teams, List<Referee> referees) {
+		Random rand = new Random();
+		Team pivot = null;
+		boolean evenNumTeams = teams.size() % 2 == 0;
+		int numWeeks = teams.size() - (evenNumTeams ? 1 : 0);
+		int matchesPerWeek = teams.size() / 2;
+		Random r = new Random();
+		int keyValue = 0;
+
+
+		if (evenNumTeams) {
+			pivot = teams.get(0);
+			teams = teams.subList(1, teams.size());
+		}
+
+		for (int offset = 0; offset < numWeeks; offset++) {
+			Calendar weekDate = getDateFromWeek(offset);
+
+			if (evenNumTeams) {
+				matches.put(keyValue,new Match(matches.size(), pivot, teams.get(offset), referees.get(r.nextInt(referees.size())), weekDate));
+				keyValue++;
+			}
+			for (int i = 1; i < matchesPerWeek + (evenNumTeams ? 0 : 1); i++) {
+				int slot0 = (i + offset);
+				int slot1 = slot0 + (teams.size() - (2 * i));
+				Referee referee = referees.get(r.nextInt(referees.size()));
+				Match match = new Match(matches.size(), teams.get(slot0 % teams.size()), teams.get(slot1 % teams.size()), referee, weekDate);
+				matches.put(keyValue,match);
+				keyValue++;
+			}
+		}
+	}
+}

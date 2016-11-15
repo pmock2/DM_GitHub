@@ -15,6 +15,67 @@ public class Schedule {
 	public Schedule(Map<Integer,Match> matches) {
 		this.matches = matches;
 	}
+	
+	private boolean dateConflicts(Match match, Calendar newDate) {
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			int matchId2 = entry.getKey();
+			Match match2 = entry.getValue();
+			if (matchId2 != match.getId() && match.isMatchOnDate(match2.getDate()) && match.getIsMorning() == match2.getIsMorning()) {
+				String team0Name = match.getTeam1().getName();
+				String team1Name = match.getTeam2().getName();
+				String team2Name = match2.getTeam1().getName();
+				String team3Name = match2.getTeam2().getName();
+				
+				if (team0Name.equals(team2Name) || team0Name.equals(team3Name) ||
+				    team1Name.equals(team2Name) || team1Name.equals(team3Name)
+				) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean dateConflicts(int matchId, Calendar newDate) {
+		return dateConflicts(matches.get(matchId), newDate);
+	}
+	
+	public void scheduleRematch(Team team0, Team team1, Referee referee, int numSeasonTeams) {
+		Calendar latestDate = getLatestDate();
+		int matchesPerWeek = numSeasonTeams/2;
+		int numMorning = 0, numNight = 0;
+
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			Match match = entry.getValue();
+			if (match.isMatchOnDate(latestDate)) {
+				if (match.getIsMorning()) {
+					numMorning++;
+				} else {
+					numNight++;
+				}
+			}
+		}
+		
+		Match newMatch = null;
+		if (numMorning < matchesPerWeek) {
+			Match tempMatch = new Match(matches.size(), team0, team1, referee, latestDate, true, 0, 0, false);
+			if (!dateConflicts(tempMatch, tempMatch.getDate())) {
+				newMatch = tempMatch;
+			}
+		}
+		if (numNight < matchesPerWeek && newMatch == null) {
+			Match tempMatch = new Match(matches.size(), team0, team1, referee, latestDate, false, 0, 0, false);
+			if (!dateConflicts(tempMatch, tempMatch.getDate())) {
+				newMatch = tempMatch;
+			}
+		}
+		if (newMatch == null) {
+			newMatch = new Match(matches.size(), team0, team1, referee, getNextWeekDate(latestDate), true, 0, 0, false);
+		}
+		
+		matches.put(newMatch.getId(), newMatch);
+	}
 
 	public String toString() {
 		String s = "";
@@ -41,6 +102,18 @@ public class Schedule {
 		return s;
 	}
 	
+	private Calendar getLatestDate() {
+		Match latest = null;
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			Match match = entry.getValue();
+			if (latest == null || latest.getDate().before(match.getDate())) {
+				latest = match;
+			}
+		}
+		
+		return latest.getDate();
+	}
+	
 	public String[] getDatesJSON() {
 		String start = "{";
 		start += "\"Year\" : " + startDate.YEAR + ", ";
@@ -48,15 +121,8 @@ public class Schedule {
 		start += "\"Day\" : " + startDate.DAY_OF_MONTH;
 		start += "}";
 		
-		Match latest = null;
-		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
-			Match match = entry.getValue();
-			if (latest == null || latest.getDate().after(match.getDate())) {
-				latest = match;
-			}
-		}
-		Calendar latestDate = latest.getDate();
 		
+		Calendar latestDate = getLatestDate();
 		String end = "{";
 		end += "\"Year\" : " + latestDate.YEAR + ", ";
 		end += "\"Month\" : " + latestDate.MONTH + ", ";
@@ -65,6 +131,17 @@ public class Schedule {
 		
 		String[] s = {start, end};
 		return s;
+	}
+	
+	public boolean allMatchesScored() {
+		for (Map.Entry<Integer, Match> entry : matches.entrySet()) {
+			Match match = entry.getValue();
+			if (!match.isScored()) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 	public Map<Integer, Match> getMatches() {
@@ -90,6 +167,16 @@ public class Schedule {
 		long week = (long) weekInt;
 		long startMs = startDate.getTimeInMillis();
 		long newMs = startMs + (msInWeek * week);
+		Calendar newDate = Calendar.getInstance();
+		newDate.setTimeInMillis(newMs);
+
+		return newDate;
+	}
+	
+	private Calendar getNextWeekDate(Calendar date) {
+		long startMs = date.getTimeInMillis();
+		long newMs = startMs + msInWeek;
+		
 		Calendar newDate = Calendar.getInstance();
 		newDate.setTimeInMillis(newMs);
 
