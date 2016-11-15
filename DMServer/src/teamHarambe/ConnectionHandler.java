@@ -376,6 +376,13 @@ public class ConnectionHandler implements Runnable {
 						toClient.println("Success");
 						break;
 					}
+					case "Set_Email":
+					{
+						String newEmail = fromClient.readLine();
+						userAccount.setEmail(newEmail);
+						Server.saveData();
+						break;
+					}
 				}
 
 			} catch (SocketException e) {
