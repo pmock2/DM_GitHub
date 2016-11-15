@@ -158,6 +158,10 @@ public class ConnectionHandler implements Runnable {
 							
 							String refereeEmail = changedMatch.getString("RefereeName");
 							Referee referee = refereeFromEmail(refereeEmail);
+							if (referee == null) {
+								toClient.println("Exception_NonexistantReferee");
+								break;
+							}
 							
 							boolean changed = (team0Score != currentMatch.getTeam1Score()) || (team1Score != currentMatch.getTeam2Score());
 							boolean scored = changed ? true : currentMatch.getScored();
