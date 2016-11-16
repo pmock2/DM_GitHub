@@ -113,9 +113,21 @@ public class AddRefereeController implements Initializable {
                     stage.setScene(new Scene(root1));
                     stage.show();
                 }
-                else
+                else if (response.equals("Exception_ExistingReferee"))
                 {
-                    //Something went wrong.
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Referee already exists");
+                    alert.setContentText("Please enter a new referee.");
+                    alert.showAndWait();
+                }
+                else if (response.equals("Exception_InsufficientPermissions"))
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Tsk. Tsk. Tsk.");
+                    alert.setContentText("You aren't authorized to do that.");
+                    alert.showAndWait();
                 }
             }
         }
