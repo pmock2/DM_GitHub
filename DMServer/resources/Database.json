@@ -1,129 +1,38 @@
 {
-	"ActiveSeason" : 10,
+	"ActiveSeason" : 2,
 	"Seasons" : {
 		0 : {
 			"Schedule" : {
-				0 : {"Team0" : 0, "Team1" : 1, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				1 : {"Team0" : 3, "Team1" : 2, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				2 : {"Team0" : 3, "Team1" : 4, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				3 : {"Team0" : 2, "Team1" : 1, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				4 : {"Team0" : 2, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 28,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				5 : {"Team0" : 1, "Team1" : 4, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 28,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				6 : {"Team0" : 1, "Team1" : 3, "Referee" : 2, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 4,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				7 : {"Team0" : 4, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 4,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				8 : {"Team0" : 4, "Team1" : 2, "Referee" : 1, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 11,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				9 : {"Team0" : 0, "Team1" : 3, "Referee" : 1, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 11,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0}
+				0 : {"Team0" : 0, "Team1" : 1, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0}
 			},
 			"Teams" : {
-				0 : {"Name" : "Team1"},
-				1 : {"Name" : "Team2"},
-				2 : {"Name" : "Team3"},
-				3 : {"Name" : "Team4"},
-				4 : {"Name" : "Team5"}
+				0 : {"Name" : "t1"},
+				1 : {"Name" : "t2"}
 			},
 			"Logs" : {
-				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479171293569}
+				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479252124780}
 			}
 		},
 		1 : {
 			"Schedule" : {
-				0 : {"Team0" : 2, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				1 : {"Team0" : 0, "Team1" : 1, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				2 : {"Team0" : 1, "Team1" : 2, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 28,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0}
+				0 : {"Team0" : 1, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0}
 			},
 			"Teams" : {
-				0 : {"Name" : "Team1"},
-				1 : {"Name" : "Team2"},
-				2 : {"Name" : "Team3"}
+				0 : {"Name" : "t1"},
+				1 : {"Name" : "t2"}
 			},
 			"Logs" : {
-				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479171328896}
+				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479252130366}
 			}
 		},
 		2 : {
 			"Schedule" : {
-				0 : {"Team0" : 2, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				1 : {"Team0" : 0, "Team1" : 1, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				2 : {"Team0" : 1, "Team1" : 2, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 28,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0}
-			},
-			"Teams" : {
-				0 : {"Name" : "t1"},
-				1 : {"Name" : "t2"},
-				2 : {"Name" : "t3"}
-			},
-			"Logs" : {
-				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479171462916}
-			}
-		},
-		3 : {
-			"Schedule" : {
-				0 : {"Team0" : 2, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				1 : {"Team0" : 0, "Team1" : 1, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				2 : {"Team0" : 1, "Team1" : 2, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 28,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0}
-			},
-			"Teams" : {
-				0 : {"Name" : "t1"},
-				1 : {"Name" : "t2"},
-				2 : {"Name" : "t3"}
-			},
-			"Logs" : {
-				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479171556839}
-			}
-		},
-		4 : {
-			"Schedule" : {
-				0 : {"Team0" : 2, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				1 : {"Team0" : 0, "Team1" : 1, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 21,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0},
-				2 : {"Team0" : 1, "Team1" : 2, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 28,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0}
-			},
-			"Teams" : {
-				0 : {"Name" : "T1"},
-				1 : {"Name" : "T2"},
-				2 : {"Name" : "T3"}
-			},
-			"Logs" : {
-				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479172074570}
-			}
-		},
-		5 : {
-			"Schedule" : {
-				0 : {"Team0" : 1, "Team1" : 0, "Referee" : 4, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 14,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0}
-			},
-			"Teams" : {
-				0 : {"Name" : "T1"},
-				1 : {"Name" : "T2"}
-			},
-			"Logs" : {
-				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479172108276}
-			}
-		},
-		6 : {
-			"Schedule" : {
-				0 : {"Team0" : 0, "Team1" : 1, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				1 : {"Team0" : 1, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "IsMorning" : false, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				2 : {"Team0" : 1, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 22,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0}
-			},
-			"Teams" : {
-				0 : {"Name" : "T1"},
-				1 : {"Name" : "T2"}
-			},
-			"Logs" : {
-				0 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479226845771},
-				1 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479226733847},
-				2 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479226720985},
-				3 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479226700224}
-			}
-		},
-		7 : {
-			"Schedule" : {
-				0 : {"Team0" : 1, "Team1" : 3, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				1 : {"Team0" : 2, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : true, "Score0" : 0, "Score1" : 1},
-				2 : {"Team0" : 1, "Team1" : 2, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				3 : {"Team0" : 0, "Team1" : 3, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				4 : {"Team0" : 1, "Team1" : 0, "Referee" : 3, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				5 : {"Team0" : 3, "Team1" : 2, "Referee" : 1, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				6 : {"Team0" : 3, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : false, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				7 : {"Team0" : 1, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : false, "Scored" : false, "Score0" : 0, "Score1" : 0}
+				0 : {"Team0" : 0, "Team1" : 3, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0},
+				1 : {"Team0" : 2, "Team1" : 1, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0},
+				2 : {"Team0" : 0, "Team1" : 2, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0},
+				3 : {"Team0" : 1, "Team1" : 3, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0},
+				4 : {"Team0" : 0, "Team1" : 1, "Referee" : 2, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0},
+				5 : {"Team0" : 3, "Team1" : 2, "Referee" : 2, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0}
 			},
 			"Teams" : {
 				0 : {"Name" : "Team1"},
@@ -132,94 +41,14 @@
 				3 : {"Name" : "Team4"}
 			},
 			"Logs" : {
-				0 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479227080561},
-				1 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479227027400},
-				2 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479226972359},
-				3 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479226923648}
-			}
-		},
-		8 : {
-			"Schedule" : {
-				0 : {"Team0" : 2, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : true, "Score0" : 0, "Score1" : 1},
-				1 : {"Team0" : 3, "Team1" : 1, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : true, "Score0" : 0, "Score1" : 1},
-				2 : {"Team0" : 2, "Team1" : 3, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				3 : {"Team0" : 1, "Team1" : 0, "Referee" : 3, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				4 : {"Team0" : 2, "Team1" : 1, "Referee" : 3, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : true, "Scored" : true, "Score0" : 0, "Score1" : 1},
-				5 : {"Team0" : 0, "Team1" : 3, "Referee" : 3, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				6 : {"Team0" : 1, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : false, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				7 : {"Team0" : 1, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : false, "Score0" : 0, "Score1" : 0}
-			},
-			"Teams" : {
-				0 : {"Name" : "Team1"},
-				1 : {"Name" : "Team2"},
-				2 : {"Name" : "Team3"},
-				3 : {"Name" : "Team4"}
-			},
-			"Logs" : {
-				0 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228549440},
-				1 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228385870},
-				2 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228311793},
-				3 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228185078},
-				4 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228163842},
-				5 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228154757},
-				6 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228062375},
-				7 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228007583},
-				8 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479227981399}
-			}
-		},
-		9 : {
-			"Schedule" : {
-				0 : {"Team0" : 1, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				1 : {"Team0" : 3, "Team1" : 2, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				2 : {"Team0" : 1, "Team1" : 3, "Referee" : 3, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 22,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				3 : {"Team0" : 2, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 22,}, "IsMorning" : true, "Scored" : true, "Score0" : 0, "Score1" : 1},
-				4 : {"Team0" : 1, "Team1" : 2, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 29,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				5 : {"Team0" : 0, "Team1" : 3, "Referee" : 3, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 29,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				6 : {"Team0" : 1, "Team1" : 0, "Referee" : 3, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 15,}, "IsMorning" : false, "Scored" : false, "Score0" : 0, "Score1" : 0}
-			},
-			"Teams" : {
-				0 : {"Name" : "T1"},
-				1 : {"Name" : "T2"},
-				2 : {"Name" : "T3"},
-				3 : {"Name" : "T4"}
-			},
-			"Logs" : {
-				0 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228716513},
-				1 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479228684137}
-			}
-		},
-		10 : {
-			"Schedule" : {
-				0 : {"Team0" : 2, "Team1" : 1, "Referee" : 3, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : true, "Score0" : 0, "Score1" : 1},
-				1 : {"Team0" : 3, "Team1" : 0, "Referee" : 3, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : true, "Score0" : 0, "Score1" : 1},
-				2 : {"Team0" : 2, "Team1" : 3, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				3 : {"Team0" : 0, "Team1" : 1, "Referee" : 2, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 26,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				4 : {"Team0" : 2, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : true, "Scored" : true, "Score0" : 0, "Score1" : 1},
-				5 : {"Team0" : 1, "Team1" : 3, "Referee" : 1, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 0},
-				6 : {"Team0" : 1, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 2,}, "IsMorning" : false, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				7 : {"Team0" : 1, "Team1" : 0, "Referee" : 1, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 9,}, "IsMorning" : true, "Scored" : true, "Score0" : 1, "Score1" : 1},
-				8 : {"Team0" : 1, "Team1" : 0, "Referee" : 2, "Date" : {"Year" : 2017, "Month" : 0, "Day" : 9,}, "IsMorning" : false, "Scored" : true, "Score0" : 0, "Score1" : 1}
-			},
-			"Teams" : {
-				0 : {"Name" : "Team1"},
-				1 : {"Name" : "Team2"},
-				2 : {"Name" : "Team3"},
-				3 : {"Name" : "Team4"}
-			},
-			"Logs" : {
-				0 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228836975},
-				1 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228829353},
-				2 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228817251},
-				3 : {"ActionType":"ModifySeasonData","Referee":"DMSuperReferee@mail.com","Date":1479228797630},
-				4 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479228773283}
+				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479259205704}
 			}
 		}
 	},
 	"Referees" : {
-		0 : {"Email" : "super@mail.com", "Password" : "8fe4c11451281c094a6578e6ddbf5eed", "LoginCode" : null, "IsActive" : true, "IsSuper" : true},
-		1 : {"Email" : "r1@mail.com", "Password" : null, "LoginCode" : {"Code":"2e6b8e2cd0c69722592c88a2e5f1641a"}, "IsActive" : true, "IsSuper" : false},
-		2 : {"Email" : "r2@mail.com", "Password" : null, "LoginCode" : {"Code":"1339cfde78e72ef7a1ebe6406aadfefa"}, "IsActive" : true, "IsSuper" : false},
-		3 : {"Email" : "r3@mail.com", "Password" : null, "LoginCode" : {"Code":"ea306e55212fefc93ba9d22b8a2ad89b"}, "IsActive" : true, "IsSuper" : false},
-		4 : {"Email" : "r4@mail.com", "Password" : null, "LoginCode" : {"Code":"9ece7e4673b3dea6575bc5a34835411b"}, "IsActive" : false, "IsSuper" : false}
+		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : "8fe4c11451281c094a6578e6ddbf5eed", "LoginCode" : null, "IsActive" : true, "IsSuper" : true},
+		1 : {"Email" : "r1@mail.com", "Password" : null, "LoginCode" : {"Code":"575351879b78b176bc0713cee06b86bd"}, "IsActive" : true, "IsSuper" : false},
+		2 : {"Email" : "r2@mail.com", "Password" : null, "LoginCode" : {"Code":"823714d5e2f58933bf8dbfb57a316a84"}, "IsActive" : true, "IsSuper" : false},
+		3 : {"Email" : "r3@mail.com", "Password" : null, "LoginCode" : {"Code":"6e74cd1dcc5e23bc48cf928387f5a71c"}, "IsActive" : true, "IsSuper" : false}
 	}
 }

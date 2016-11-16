@@ -53,6 +53,8 @@ public class RefereeListController implements Initializable {
                                         Client.toServer.println("Set_RefereeActive");
                                         Client.toServer.println(matchData.getBoolean("IsActive") ? "false" : "true");
                                         Client.toServer.println(matchData.getString("Email"));
+                                        String result = Client.fromServer.readLine();
+                                        System.out.println("Result: "+result);
                                         Stage stage = (Stage) vb.getScene().getWindow();
                                         stage.hide();
                                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RefereeList.fxml"));

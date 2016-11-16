@@ -137,6 +137,7 @@ public class ConnectionHandler implements Runnable {
 							break;
 						}
 						
+						boolean nonexistantReferee = false;
 						boolean conflictingDate = false;
 						String matchIds[] = JSONObject.getNames(changedSchedule);
 						for (int i=0; i < matchIds.length; i++) {
@@ -159,6 +160,7 @@ public class ConnectionHandler implements Runnable {
 							String refereeEmail = changedMatch.getString("RefereeName");
 							Referee referee = refereeFromEmail(refereeEmail);
 							if (referee == null) {
+								nonexistantReferee = true;
 								toClient.println("Exception_NonexistantReferee");
 								break;
 							}
@@ -171,6 +173,10 @@ public class ConnectionHandler implements Runnable {
 									new Match(matchId, currentMatch.getTeam1(), currentMatch.getTeam2(), referee, newDate, 
 										      isMorning, team0Score, team1Score, scored)
 							);
+						}
+						
+						if (nonexistantReferee == true) {
+							break;
 						}
 						
 						targetSeason.auditLog.logAction("ModifySeasonData", userAccount);
@@ -425,7 +431,7 @@ public class ConnectionHandler implements Runnable {
 							break;
 						}
 						
-						if (Server.getActiveReferees().size() <= 1) {
+						if ((!setActive) && Server.getActiveReferees().size() <= 1) {
 							toClient.println("Exception_TooLittleReferees");
 							break;
 						}
@@ -434,6 +440,8 @@ public class ConnectionHandler implements Runnable {
 						if (!setActive) {
 							targetSeason.unscheduleReferee(referee);
 						}
+						Server.saveData();
+						toClient.println("Success");
 						
 						break;
 					}

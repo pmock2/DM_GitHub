@@ -248,6 +248,7 @@ public class ScheduleController implements Initializable {
         Client.toServer.println("Update_Schedule");
         Client.toServer.println(schedule.toString());
         String response = Client.fromServer.readLine();//Exception_ConflictingDate, Exception_NonexistantReferee or Exception_InsufficientPermissions
+        System.out.println("Response: "+response);
         if (response.equals("Exception_ConflictingDate"))
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -272,7 +273,6 @@ public class ScheduleController implements Initializable {
             alert.setContentText("Changes saved successfully.");
             alert.showAndWait();
         }
-
     }
 
     public void openMainMenu(ActionEvent event) throws NoSuchAlgorithmException

@@ -1352,6 +1352,7 @@ public class AddTeamsController implements Initializable {
             Client.toServer.println(newReferees().toString());
             
             String result = Client.fromServer.readLine();
+            System.out.println("Result: "+result);
             if (result.equals("Success")) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Success");
