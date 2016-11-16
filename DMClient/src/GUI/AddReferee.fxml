@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="background" prefHeight="700.0" prefWidth="1200.0" style="-: lightgrey;" stylesheets="@../../bin/GUI/Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddRefereeController">
+<AnchorPane id="background" prefHeight="700.0" prefWidth="1200.0" style="-: lightgrey;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddRefereeController">
    <children>
-      <Pane layoutX="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../../bin/GUI/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../css/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button id="button" fx:id="changeButton" layoutX="317.0" layoutY="387.0" mnemonicParsing="false" onAction="#attemptChange" prefHeight="27.0" prefWidth="167.0" text="Add Referee" />
             <Label id="text" layoutX="344.0" layoutY="269.0" text="Confirm Email">
@@ -21,7 +21,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label id="title" layoutX="204.0" layoutY="14.0" stylesheets="@../../bin/GUI/Style.css" text="Add New Referee" textFill="RED">
+            <Label id="title" layoutX="203.0" layoutY="21.0" stylesheets="@../css/Style.css" text="Add New Referee" textFill="RED">
                <font>
                   <Font size="36.0" />
                </font>
