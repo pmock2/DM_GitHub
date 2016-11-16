@@ -14,16 +14,16 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../bin/GUI/Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LandingController">
    <children>
-      <ImageView fitHeight="130.0" fitWidth="258.0" layoutX="335.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="188.0" fitWidth="247.0" layoutX="307.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@blue-question.png" />
          </image></ImageView>
-      <Label id="text" layoutX="272.0" layoutY="347.0" text="Please log in to create schedule">
+      <Label id="text" layoutX="162.0" layoutY="327.0" text="Please allow the super referee to log in to create schedule">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button id="button" fx:id="create" layoutX="346.0" layoutY="417.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="31.0" prefWidth="109.0" text="Okay" />
+      <Button id="button" fx:id="create" layoutX="14.0" layoutY="555.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="31.0" prefWidth="109.0" text="Log in" />
       <Label id="text" layoutX="189.0" layoutY="306.0" text="The super referee has not created the schedule yet.">
          <font>
             <Font name="System Bold" size="18.0" />

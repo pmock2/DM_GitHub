@@ -18,7 +18,7 @@
          <children>
             <TextField fx:id="loginText" layoutX="315.0" layoutY="236.0" prefWidth="250.0" />
             <PasswordField fx:id="loginPassword" layoutX="312.0" layoutY="321.0" prefWidth="250.0" />
-            <Hyperlink id="hyperlink" fx:id="forgot" layoutX="739.0" layoutY="14.0" onAction="#openForgotten" text="Forget Password?" underline="true" />
+            <Hyperlink id="hyperlink" fx:id="forgot" layoutX="715.0" layoutY="14.0" onAction="#openForgotten" text="Forget Password?" underline="true" />
             <Button id="button" fx:id="loginButton" layoutX="362.0" layoutY="429.0" mnemonicParsing="false" onAction="#attemptLogin" prefWidth="150.0" style="-fx-alignment: center;" text="Submit" />
             <Label id="title" layoutX="286.0" layoutY="43.0" style="-fx-alignment: center;" text="Referee Login" textFill="#c31d1d">
                <font>
@@ -32,7 +32,7 @@
             </Label>
             <Label id="text" layoutX="243.0" layoutY="241.0" text="E-Mail" />
             <Label id="text" layoutX="230.0" layoutY="326.0" text="Password" />
-            <Button id="button" fx:id="backButton" layoutX="50.0" layoutY="568.0" mnemonicParsing="false" onAction="#goBack" text="Back to Main Menu" />
+            <Button id="button" fx:id="backButton" layoutX="14.0" layoutY="675.0" mnemonicParsing="false" onAction="#goBack" text="Back to Main Menu" />
             <Label fx:id="invalidCredentials" layoutX="284.0" layoutY="361.0" text="Invalid Username or Password. Please try again." textFill="RED" visible="false" />
          </children>
       </Pane>
