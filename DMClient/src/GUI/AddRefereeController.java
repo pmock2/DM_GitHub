@@ -97,7 +97,6 @@ public class AddRefereeController implements Initializable {
                 String response = Client.fromServer.readLine();
                 if (response.equals("Success"))
                 {
-                    Client.email = e1.getText();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Success");
                     alert.setHeaderText("Success!");
