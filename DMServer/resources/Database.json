@@ -1,5 +1,5 @@
 {
-	"ActiveSeason" : 2,
+	"ActiveSeason" : 3,
 	"Seasons" : {
 		0 : {
 			"Schedule" : {
@@ -43,12 +43,24 @@
 			"Logs" : {
 				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479259205704}
 			}
+		},
+		3 : {
+			"Schedule" : {
+				0 : {"Team0" : 0, "Team1" : 1, "Referee" : 1, "Date" : {"Year" : 2016, "Month" : 11, "Day" : 19,}, "IsMorning" : true, "Scored" : false, "NeedsReschedule" : false, "Score0" : 0, "Score1" : 0}
+			},
+			"Teams" : {
+				0 : {"Name" : "t1"},
+				1 : {"Name" : "t2"}
+			},
+			"Logs" : {
+				0 : {"ActionType":"CreateNewSeason","Referee":"DMSuperReferee@mail.com","Date":1479408986728}
+			}
 		}
 	},
 	"Referees" : {
 		0 : {"Email" : "DMSuperReferee@mail.com", "Password" : "8fe4c11451281c094a6578e6ddbf5eed", "LoginCode" : null, "IsActive" : true, "IsSuper" : true},
 		1 : {"Email" : "r1@mail.com", "Password" : null, "LoginCode" : {"Code":"575351879b78b176bc0713cee06b86bd"}, "IsActive" : true, "IsSuper" : false},
-		2 : {"Email" : "r2@mail.com", "Password" : null, "LoginCode" : {"Code":"823714d5e2f58933bf8dbfb57a316a84"}, "IsActive" : true, "IsSuper" : false},
-		3 : {"Email" : "r3@mail.com", "Password" : null, "LoginCode" : {"Code":"6e74cd1dcc5e23bc48cf928387f5a71c"}, "IsActive" : true, "IsSuper" : false}
+		2 : {"Email" : "r2@mail.com", "Password" : null, "LoginCode" : {"Code":"823714d5e2f58933bf8dbfb57a316a84"}, "IsActive" : false, "IsSuper" : false},
+		3 : {"Email" : "r3@mail.com", "Password" : null, "LoginCode" : {"Code":"6e74cd1dcc5e23bc48cf928387f5a71c"}, "IsActive" : false, "IsSuper" : false}
 	}
 }

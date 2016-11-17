@@ -67,6 +67,16 @@ public class ConnectionHandler implements Runnable {
 						}
 						
 						String[] refereeIds = JSONObject.getNames(referees);
+						if (refereeIds.length == 1) {
+							JSONObject data = referees.getJSONObject(refereeIds[0]);
+							Referee existingReferee = refereeFromEmail(data.getString("Email"));
+							if (existingReferee.isSuperReferee) {
+								toClient.println("Exception_NotEnoughReferees");
+								break;
+							}
+						}
+						
+						
 						for (int i=0; i < refereeIds.length; i++) {
 							int refereeId = Integer.parseInt(refereeIds[i]);
 							JSONObject data = referees.getJSONObject(refereeIds[i]);

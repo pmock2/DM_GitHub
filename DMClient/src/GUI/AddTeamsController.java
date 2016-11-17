@@ -645,8 +645,8 @@ public class AddTeamsController implements Initializable {
         @Override
         public void changed (ObservableValue < ? extends String > selected, String oldSelection, String newSelection)
         {
-            l1.setVisible(true);
-            l2.setVisible(true);
+            //l1.setVisible(true);
+            //l2.setVisible(true);
             switch ((String) ref.getValue()) {
                 case "1": {
                     e1.setVisible(true);
@@ -1533,7 +1533,7 @@ public class AddTeamsController implements Initializable {
                 stage.setTitle("Main Menu");
                 stage.setScene(new Scene(root1));
                 stage.show();
-            } else if (result.equals("Failure")) {
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Whoops");

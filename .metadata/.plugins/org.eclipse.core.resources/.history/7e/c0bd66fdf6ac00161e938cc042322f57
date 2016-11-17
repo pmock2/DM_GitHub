@@ -1,0 +1,590 @@
+package teamHarambe;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.net.Socket;
+import java.net.SocketException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+public class ConnectionHandler implements Runnable {
+	Socket s;
+	BufferedReader fromClient;
+	PrintStream toClient;
+	private static String databasePath = "resources/Database.json";
+	File dbFile = new File(databasePath);
+	
+	//TODO store schedule in database and have ConnectionHandler read from db
+	ConnectionHandler(Socket s) throws IOException {
+		this.s = s;
+		this.fromClient = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		this.toClient = new PrintStream(s.getOutputStream());
+	}
+	
+	public void run() {
+		int permissionLevel = 0;
+		Season targetSeason = Server.getActiveSeason();
+		Referee userAccount = null;
+		
+		while (true) {
+			try {
+				String message = fromClient.readLine();
+				System.out.println("Command from client: " + message);
+
+				switch(message)
+				{
+					case "Create_DB":
+					{						
+						int numTeams = Integer.parseInt(fromClient.readLine());
+						
+						Map<Integer, Team> teams = new HashMap<>();
+						List<Team> teamList = new LinkedList<>();
+						for (int i = 0; i < numTeams; i++)
+						{
+							Team team = new Team(i, fromClient.readLine());
+							teams.put(i, team);
+							teamList.add(team);
+						}
+						String dateYear = fromClient.readLine();
+						String dateMonth = fromClient.readLine();
+						String dateDay = fromClient.readLine();
+						Calendar selectedDate = Calendar.getInstance();
+						selectedDate.set(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+						JSONObject referees = new JSONObject(fromClient.readLine());
+						
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						String[] refereeIds = JSONObject.getNames(referees);
+						if (refereeIds.length == 1) {
+							JSONObject data = referees.getJSONObject(refereeIds[1]);
+							Referee existingReferee = refereeFromEmail(data.getString("Email"));
+							if (existingReferee.isSuperReferee) {
+								toClient.println("Exception_NotEnoughReferees");
+								break;
+							}
+						}
+						
+						
+						for (int i=0; i < refereeIds.length; i++) {
+							int refereeId = Integer.parseInt(refereeIds[i]);
+							JSONObject data = referees.getJSONObject(refereeIds[i]);
+							Referee existingReferee = refereeFromEmail(data.getString("Email"));
+							if (existingReferee == null) {
+								System.out.println("Creating referee: " + data.getString("Email"));
+								Server.referees.put(Server.referees.size(), new Referee(refereeId, data.getString("Email"), false));
+							} else {
+								System.out.println("Activating referee: " + data.getString("Email"));
+								existingReferee.setActive(true);
+							}
+						}
+						
+						for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
+							boolean found = false;
+							for (int v=0; v < refereeIds.length; v++) {
+								JSONObject data = referees.getJSONObject(refereeIds[v]);
+								if (entry.getValue().emailMatches(data.getString("Email"))) {
+									found = true;
+									break;
+								}
+							}
+							
+							if ((!found) && (!entry.getValue().isSuperReferee)) {
+								System.out.println("Deactivating: "+entry.getValue().getEmail());
+								entry.getValue().setActive(false);
+							}
+						}
+
+						Schedule schedule = new Schedule(teamList, Server.getActiveReferees(), selectedDate);
+						AuditLog auditLog = new AuditLog();
+						auditLog.logAction("CreateNewSeason", userAccount);
+						Season season = new Season((Server.getActiveSeason() == null ? 0 : ++Server.activeSeason), teams, schedule, auditLog);
+						targetSeason = season;
+						Server.addSeason(season);
+						Server.saveData();
+						
+						if (dbFile.exists()) {
+							toClient.println("Success");
+						} else {
+							toClient.println("Failure");
+						}
+						break;
+					}
+					case "Get_Schedule":
+					{
+						JSONObject clientSchedule = new JSONObject(targetSeason.schedule.toJSON());
+						String[] keyNames = JSONObject.getNames(clientSchedule);
+						for (int i=0; i < keyNames.length; i++) {
+							JSONObject match = clientSchedule.getJSONObject(keyNames[i]);
+							match.put("Team0Name", targetSeason.teams.get(match.getInt("Team0")).getName());
+							match.put("Team1Name", targetSeason.teams.get(match.getInt("Team1")).getName());
+							match.put("RefereeName", Server.referees.get(match.getInt("Referee")).getEmail());
+						}
+						toClient.println(clientSchedule.toString());
+						toClient.println("End_Schedule");
+						System.out.println("Sent schedule to client");
+						break;
+					}
+					case "Update_Schedule":
+					{
+						JSONObject changedSchedule = new JSONObject(fromClient.readLine());
+						Map<Integer,Match> currentSchedule = targetSeason.schedule.getMatches();
+						Map<Integer,Match> newSchedule = new HashMap<>();
+						
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						boolean nonexistantReferee = false;
+						boolean conflictingDate = false;
+						String matchIds[] = JSONObject.getNames(changedSchedule);
+						for (int i=0; i < matchIds.length; i++) {
+							int matchId = Integer.parseInt(matchIds[i]);
+							JSONObject changedMatch = changedSchedule.getJSONObject(matchIds[i]);
+							Match currentMatch = currentSchedule.get(matchId);
+
+							int team0Score = changedMatch.getInt("Team0Score");
+							int team1Score = changedMatch.getInt("Team1Score");
+
+							JSONObject date = changedMatch.getJSONObject("Date");
+							int year = date.getInt("Year"), month = date.getInt("Month"), day = date.getInt("Day");
+							Calendar newDate = Calendar.getInstance();
+							newDate.set(year, month, day);
+							if (targetSeason.schedule.dateConflicts(matchId, newDate)) {
+								conflictingDate = true;
+								break;
+							}
+							
+							String refereeEmail = changedMatch.getString("RefereeName");
+							Referee referee = refereeFromEmail(refereeEmail);
+							if (referee == null) {
+								nonexistantReferee = true;
+								toClient.println("Exception_NonexistantReferee");
+								break;
+							}
+							
+							boolean changed = (team0Score != currentMatch.getTeam1Score()) || (team1Score != currentMatch.getTeam2Score());
+							boolean scored = changed ? true : currentMatch.getScored();
+							boolean isMorning = changedMatch.getBoolean("IsMorning");
+							
+							newSchedule.put(matchId,
+									new Match(matchId, currentMatch.getTeam1(), currentMatch.getTeam2(), referee, newDate, 
+										      isMorning, team0Score, team1Score, scored)
+							);
+						}
+						
+						if (nonexistantReferee == true) {
+							break;
+						}
+						
+						targetSeason.auditLog.logAction("ModifySeasonData", userAccount);
+						
+						if (!conflictingDate) {
+							targetSeason.schedule = new Schedule(newSchedule);
+							processTiebreakers(targetSeason);
+							Server.saveData();
+							toClient.println("Update_Success");
+						} else {
+							toClient.println("Exception_ConflictingDate");
+						}
+						break;
+					}
+					case "Login":
+					{
+						String email = fromClient.readLine();
+						String password = fromClient.readLine();
+						Referee loginAs = refereeFromEmail(email);
+
+						if (loginAs == null) {
+							toClient.println("Login_Fail");
+							break;
+						}
+
+						System.out.println("Logging in, "+email+", "+loginAs.getEmail());
+						if (loginAs.verifyLoginCode(password)) {
+							System.out.println("Correct login code");
+							toClient.println("Login_CodeSuccess");
+							String newPassword = fromClient.readLine();
+							password = newPassword;
+							loginAs.setPassword(password);
+						} else {
+							System.out.println("No login code");
+						}
+						
+						if (loginAs.verifyPassword(password)) {
+							userAccount = loginAs;
+							userAccount.clearLoginCode();
+							permissionLevel = (userAccount.isSuperReferee ? 2 : 1);
+							toClient.println("Login_Success");
+							toClient.println(permissionLevel);
+							toClient.println(email);
+						} else {
+							System.out.println("Verification failed");
+							toClient.println("Login_Fail");
+						}
+						break;
+					}
+					case "Logout":
+					{
+						userAccount = null;
+						permissionLevel = 0;
+						toClient.println("Logout_Success");
+						break;
+					}
+					case "RequestPasswordReset":
+					{
+						String email = fromClient.readLine();
+						Referee referee = refereeFromEmail(email);
+						if (referee != null) {
+							referee.sendPasswordReset();
+							toClient.println("Reset_Success");
+						} else {
+							toClient.println("Reset_Fail");
+						}
+						break;
+					}
+					case "Get_Standings":
+					{
+						toClient.println(targetSeason.getRankings().toString());
+						break;
+					}
+					case "Does_DB_Exist":
+					{
+						toClient.println("true");
+						break;
+					}
+					case "Does_Schedule_Exist":
+					{
+						toClient.println(Server.getActiveSeason() == null ? "false" : "true");
+						break;
+					}
+					case "Get_RefereedMatches":
+					{
+						Calendar today = Calendar.getInstance();
+						Map<Integer,Match> seasonMatches = targetSeason.schedule.getMatches();
+						JSONObject jsonMatches = new JSONObject();
+						
+						for (Map.Entry<Integer, Match> entry : targetSeason.schedule.getMatches().entrySet()) {
+							int id = entry.getKey();
+							Match match = entry.getValue();
+							if (match.getReferee() == userAccount && !match.isScored() && !match.getNeedsReschedule()) {
+								JSONObject matchesJSON = new JSONObject();
+								matchesJSON.put("MatchId", match.getId());
+								matchesJSON.put("Team0Name", match.getTeam1().getName());
+								matchesJSON.put("Team1Name", match.getTeam2().getName());
+								matchesJSON.put("Scored", match.getScored());
+								matchesJSON.put("Score0", match.getTeam1Score());
+								matchesJSON.put("Score1", match.getTeam2Score());
+								
+								jsonMatches.put(match.getId()+"", matchesJSON);
+							}
+						}
+						
+						toClient.println(jsonMatches.toString());
+						break;
+					}
+					case "Get_Referees":
+					{
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						JSONObject referees = new JSONObject();
+						List<Referee> activeReferees = Server.getActiveReferees();
+						for (int i=0; i < activeReferees.size(); i++) {
+							JSONObject refereeJSON = new JSONObject();
+							Referee referee = activeReferees.get(i);
+							refereeJSON.put("Email", referee.getEmail());
+							referees.put(referee.getId()+"", refereeJSON);
+						}
+						
+						toClient.println(referees.toString());
+						break;
+					}
+					case "Get_AllReferees":
+					{
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+
+						JSONObject referees = new JSONObject();
+						List<Referee> allReferees = Server.getReferees();
+						for (int i=0; i < allReferees.size(); i++) {
+							JSONObject refereeJSON = new JSONObject();
+							Referee referee = allReferees.get(i);
+							refereeJSON.put("Email", referee.getEmail());
+							refereeJSON.put("IsActive", referee.isActive());
+							referees.put(referee.getId()+"", refereeJSON);
+						}
+
+						toClient.println(referees.toString());
+						break;
+					}
+					case "Set_MatchScore":
+					{	
+						if (permissionLevel < 1) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						String argsString = fromClient.readLine();
+						JSONObject args = new JSONObject(argsString);
+						
+						int matchId = args.getInt("MatchId");
+						int team0Score = args.getInt("Team0Score");
+						int team1Score = args.getInt("Team1Score");
+						boolean team0forfeit = args.getBoolean("Team0Forfeit");
+						boolean team1forfeit = args.getBoolean("Team1Forfeit");
+						boolean reschedule = args.getBoolean("Reschedule");
+						
+						Match match = targetSeason.schedule.getMatches().get(matchId);
+						if (permissionLevel >= 2 || (match.getReferee() == userAccount)) {
+							if (reschedule)
+							{
+								match.setMarkedForReschedule(true);
+							}
+							else if (team0forfeit)
+							{
+								match.setTeam1Score(-1);
+								match.scored = true;
+							}
+							else if (team1forfeit)
+							{
+								match.setTeam2Score(-1);
+								match.scored = true;
+							}
+							else
+							{
+								match.setTeam1Score(team0Score);
+								match.setTeam2Score(team1Score);
+								match.scored = true;
+							}
+							Server.saveData();
+							toClient.println("Success");
+						} else {
+							toClient.println("Exception_InsufficientPermissions");
+						}
+						
+						targetSeason.auditLog.logAction("SetMatchScore: ID " + matchId + " " + team0Score + " - " + team1Score + " Reschedule: " + reschedule, userAccount);
+						processTiebreakers(targetSeason);
+						
+						break;
+					}
+					case "Get_AuditLog":
+					{
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						toClient.println(targetSeason.auditLog.getJSONLogs().toString());
+						break;
+					}
+					case "Get_SeasonList":
+					{
+						JSONObject data = new JSONObject();
+						JSONObject seasonList = new JSONObject();
+						data.put("ActiveSeason", Server.activeSeason);
+						
+						for (Map.Entry<Integer, Season> entry : Server.seasons.entrySet()) {
+							int id = entry.getKey();
+							Season season = entry.getValue();
+							seasonList.put(id+"", new JSONObject(season.toJSONShort()));
+						}
+						data.put("SeasonList", seasonList);
+						toClient.println(data.toString());
+						
+						break;
+					}
+					case "Set_TargetSeason":
+					{
+						int targetSeasonId = Integer.parseInt(fromClient.readLine());
+						targetSeason = Server.seasons.get(targetSeasonId);
+						toClient.println("Success");
+						break;
+					}
+					case "Set_Email":
+					{
+						String newEmail = fromClient.readLine();
+						if (refereeFromEmail(newEmail) != null) {
+							toClient.println("Exception_ExistingReferee");
+							break;
+						}
+						userAccount.setEmail(newEmail);
+						Server.saveData();
+						toClient.println("Success");
+						break;
+					}
+					case "Set_RefereeActive":
+					{
+						boolean setActive = Boolean.parseBoolean(fromClient.readLine());
+						String email = fromClient.readLine();
+						
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						Referee referee = refereeFromEmail(email);
+						if (referee == null) {
+							toClient.println("Exception_InvalidReferee");
+							break;
+						}
+						
+						if ((!setActive) && Server.getActiveReferees().size() <= 1) {
+							toClient.println("Exception_TooLittleReferees");
+							break;
+						}
+						
+						referee.setActive(setActive);
+						if (!setActive) {
+							targetSeason.unscheduleReferee(referee);
+						}
+						Server.saveData();
+						toClient.println("Success");
+						
+						break;
+					}
+					case "Add_Referee":
+					{
+						String email = fromClient.readLine();
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						if (refereeFromEmail(email) != null) {
+							toClient.println("Exception_ExistingReferee");
+							break;
+						}
+						
+						Referee referee = new Referee(Server.referees.size(), email, false);
+						Server.referees.put(referee.getId(), referee);
+						Server.saveData();
+						toClient.println("Success");
+						break;
+					}
+					case "Set_RescheduleNeeded":
+					{
+						int id = Integer.parseInt(fromClient.readLine());
+						if (permissionLevel < 1) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						targetSeason.schedule.markMatchForReschedule(id);
+						Server.saveData();
+						break;
+					}
+					case "Get_MatchesNeedingReschedule":
+					{
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						JSONObject jsonMatches = new JSONObject();
+						for (Map.Entry<Integer, Match> entry : targetSeason.schedule.getMatches().entrySet()) {
+							Match match = entry.getValue();
+							if (match.getNeedsReschedule()) {
+								JSONObject matchesJSON = new JSONObject(match.toJSON());
+								matchesJSON.put("MatchId", match.getId());
+								matchesJSON.put("Team0Name", match.getTeam1().getName());
+								matchesJSON.put("Team1Name", match.getTeam2().getName());
+								jsonMatches.put(match.getId()+"", matchesJSON);
+							}
+						}
+						
+						toClient.println(jsonMatches.toString());
+						
+						break;
+					}
+					case "Set_MatchDate":
+					{
+						int matchId = Integer.parseInt(fromClient.readLine());
+						int year = Integer.parseInt(fromClient.readLine());
+						int month = Integer.parseInt(fromClient.readLine());
+						int day = Integer.parseInt(fromClient.readLine());
+						Calendar newDate = Calendar.getInstance();
+						newDate.set(year, month, day);
+						
+						if (permissionLevel < 2) {
+							toClient.println("Exception_InsufficientPermissions");
+							break;
+						}
+						
+						targetSeason.schedule.setMatchDate(matchId, newDate);
+						Server.saveData();
+						toClient.println("Success");
+						break;
+					}
+				}
+
+			} catch (SocketException e) {
+				System.out.println("Client disconnected.");
+				break;
+			} catch (IOException e) {
+				System.out.println("There was an issue: " + e);
+				break;
+			}
+		}
+	}
+	
+	private void processTiebreakers(Season currentSeason) {
+		if (currentSeason.getId() == Server.activeSeason && currentSeason.schedule.allMatchesScored()) {
+			JSONObject rankings = currentSeason.getRankings();
+			String[] keys = JSONObject.getNames(rankings);
+			List<Team> firstPlace = new ArrayList<>();
+			List<Team> secondPlace = new ArrayList<>();
+			
+			for (int i=0; i < keys.length; i++) {
+				JSONObject teamData = rankings.getJSONObject(keys[i]);
+				int rank = teamData.getInt("Rank");
+				if (rank == 1) {
+					firstPlace.add(currentSeason.teams.get(teamData.getInt("Id")));
+				} else if (rank == 2) {
+					secondPlace.add(currentSeason.teams.get(teamData.getInt("Id")));
+				}
+			}
+			
+			if (firstPlace.size() > 1) {
+				for (int i=0; i < firstPlace.size(); i+=2) {
+					Team team0 = firstPlace.get(i);
+					Team team1 = firstPlace.get(i+1);
+					currentSeason.scheduleRematch(team0,team1);
+				}
+			} else if (secondPlace.size() > 1) {
+				for (int i=0; i < secondPlace.size(); i+=2) {
+					Team team0 = secondPlace.get(i);
+					Team team1 = secondPlace.get(i+1);
+					currentSeason.scheduleRematch(team0,team1);
+				}
+			}
+		}
+	}
+	
+	private Referee refereeFromEmail(String email) {
+		Referee referee;
+		
+		for (Map.Entry<Integer, Referee> entry : Server.referees.entrySet()) {
+			referee = entry.getValue();
+			if (referee.emailMatches(email)) {
+				return referee;
+			}
+		}
+		return null;
+	}
+}
