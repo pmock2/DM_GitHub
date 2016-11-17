@@ -1,5 +1,7 @@
 package GUI;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +37,25 @@ public class ChangeEmailController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb)
     {
+        e1.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e1.getText().length() > 40) {
+                    String s = e1.getText().substring(0, 40);
+                    e1.setText(s);
+                }
+            }
+        });
+
+        e2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e2.getText().length() > 40) {
+                    String s = e2.getText().substring(0, 40);
+                    e2.setText(s);
+                }
+            }
+        });
     }
 
 
@@ -92,7 +113,7 @@ public class ChangeEmailController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Same Email");
-                alert.setContentText("Please enter a NEW email");
+                alert.setContentText("Why would you want to change to your current email?");
                 alert.showAndWait();
             }
             else
@@ -118,6 +139,14 @@ public class ChangeEmailController implements Initializable {
                     stage.setTitle("Account Overview");
                     stage.setScene(new Scene(root1));
                     stage.show();
+                }
+                else if (response.equals("Exception_ExistingReferee"))
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Existing Referee");
+                    alert.setContentText("This email already exists in the database. Please enter a new email.");
+                    alert.showAndWait();
                 }
                 else
                 {

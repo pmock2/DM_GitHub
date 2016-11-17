@@ -1,5 +1,7 @@
 package GUI;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +32,25 @@ public class AddRefereeController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb)
     {
+        e1.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e1.getText().length() > 40) {
+                    String s = e1.getText().substring(0, 40);
+                    e1.setText(s);
+                }
+            }
+        });
+
+        e2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e2.getText().length() > 40) {
+                    String s = e2.getText().substring(0, 40);
+                    e2.setText(s);
+                }
+            }
+        });
     }
 
 

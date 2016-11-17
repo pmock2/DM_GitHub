@@ -147,7 +147,7 @@ public class ConnectionHandler implements Runnable {
 
 							int team0Score = changedMatch.getInt("Team0Score");
 							int team1Score = changedMatch.getInt("Team1Score");
-							
+
 							JSONObject date = changedMatch.getJSONObject("Date");
 							int year = date.getInt("Year"), month = date.getInt("Month"), day = date.getInt("Day");
 							Calendar newDate = Calendar.getInstance();
@@ -410,6 +410,10 @@ public class ConnectionHandler implements Runnable {
 					case "Set_Email":
 					{
 						String newEmail = fromClient.readLine();
+						if (refereeFromEmail(newEmail) != null) {
+							toClient.println("Exception_ExistingReferee");
+							break;
+						}
 						userAccount.setEmail(newEmail);
 						Server.saveData();
 						toClient.println("Success");

@@ -59,7 +59,10 @@ public class MyAccountController implements Initializable {
                 {
                     matchesLabel.setText("There are currently no matches that need rescheduling.");
                 }
-                matchesLabel.setText("You currently have no matches to score this season.");
+                else
+                {
+                    matchesLabel.setText("You currently have no matches to score this season.");
+                }
             }
 
             else

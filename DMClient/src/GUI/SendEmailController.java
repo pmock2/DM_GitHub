@@ -1,5 +1,7 @@
 package GUI;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +30,15 @@ public class SendEmailController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb)
     {
+        email.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (email.getText().length() > 40) {
+                    String s = email.getText().substring(0, 40);
+                    email.setText(s);
+                }
+            }
+        });
     }
 
     public void attemptSend(ActionEvent event) throws NoSuchAlgorithmException, IOException
