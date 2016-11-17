@@ -246,6 +246,11 @@ public class InputScoreController implements Initializable {
                 }
                     String reply = Client.fromServer.readLine();
                     if (reply.equals("Success")) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Success");
+                        alert.setHeaderText("Success");
+                        alert.setContentText("Match successfully scored.");
+                        alert.showAndWait();
                         Stage stage = (Stage) rs.getScene().getWindow();
                         stage.hide();
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MatchSelect.fxml"));

@@ -1,0 +1,54 @@
+#myTable .table-column {
+    -fx-alignment: CENTER;
+    -fx-font-size: 18;
+}
+
+#auditLog .table-column {
+    -fx-alignment: CENTER;
+    -fx-font-size: 14;
+}
+
+#button {
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    
+}
+
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('ufonts.com_century-gothic.ttf');
+}
+
+#title
+{
+    -fx-font-family: "Century Gothic";
+    -fx-font-size: 45;
+    -fx-text-fill: CRIMSON;
+    -fx-text-alignment: center;
+}
+
+#text
+{
+    -fx-font-family: "Trebuchet Ms";
+    -fx-font-size: 18;
+}
+
+#hyperlink
+{
+    -fx-font-family: "Trebuchet Ms";
+    -fx-text-fill: BLUE;
+    -fx-font-size: 18;
+}
+
+#background
+{
+	-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 65% , RED, BLACK);
+}
+
+#pane
+{
+	-fx-background-color: WHITE;
+	-fx-border-color: BLACAK;
+}

@@ -358,7 +358,7 @@ public class ScheduleController implements Initializable {
                 scheduleString += message;
                 message = Client.fromServer.readLine();
             }
-            
+
             return new JSONObject(scheduleString);
         }
 

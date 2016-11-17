@@ -43,8 +43,6 @@ public class AddTeamsController implements Initializable {
 
 
     public void initialize(URL url, ResourceBundle rb) {
-        dpDate.setValue(LocalDate.now());
-
         Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
@@ -60,6 +58,188 @@ public class AddTeamsController implements Initializable {
         dpDate.setDayCellFactory(dayCellFactory);
         setData();
 
+
+        ////////////////////////START CHANGE LISTENERS////////////////////////////////////////////
+        t1.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t1.getText().length() > 20) {
+                    String s = t1.getText().substring(0, 20);
+                    t1.setText(s);
+                }
+            }
+        });
+        t2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t2.getText().length() > 20) {
+                    String s = t2.getText().substring(0, 20);
+                    t2.setText(s);
+                }
+            }
+        });
+        t3.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t3.getText().length() > 20) {
+                    String s = t3.getText().substring(0, 20);
+                    t3.setText(s);
+                }
+            }
+        });
+        t4.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t4.getText().length() > 20) {
+                    String s = t4.getText().substring(0, 20);
+                    t4.setText(s);
+                }
+            }
+        });
+        t5.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t5.getText().length() > 20) {
+                    String s = t5.getText().substring(0, 20);
+                    t5.setText(s);
+                }
+            }
+        });
+        t6.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t6.getText().length() > 20) {
+                    String s = t6.getText().substring(0, 20);
+                    t6.setText(s);
+                }
+            }
+        });
+        t7.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t7.getText().length() > 20) {
+                    String s = t7.getText().substring(0, 20);
+                    t7.setText(s);
+                }
+            }
+        });
+        t8.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t8.getText().length() > 20) {
+                    String s = t8.getText().substring(0, 20);
+                    t8.setText(s);
+                }
+            }
+        });
+        t9.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t9.getText().length() > 20) {
+                    String s = t9.getText().substring(0, 20);
+                    t9.setText(s);
+                }
+            }
+        });
+        t10.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (t10.getText().length() > 20) {
+                    String s = t10.getText().substring(0, 20);
+                    t10.setText(s);
+                }
+            }
+        });
+        e1.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e1.getText().length() > 40) {
+                    String s = e1.getText().substring(0, 40);
+                    e1.setText(s);
+                }
+            }
+        });
+        e2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e2.getText().length() > 40) {
+                    String s = e2.getText().substring(0, 40);
+                    e2.setText(s);
+                }
+            }
+        });
+        e3.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e3.getText().length() > 40) {
+                    String s = e3.getText().substring(0, 40);
+                    e3.setText(s);
+                }
+            }
+        });
+        e4.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e4.getText().length() > 40) {
+                    String s = e4.getText().substring(0, 40);
+                    e4.setText(s);
+                }
+            }
+        });
+        e5.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e5.getText().length() > 40) {
+                    String s = e5.getText().substring(0, 40);
+                    e5.setText(s);
+                }
+            }
+        });
+        e6.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e6.getText().length() > 40) {
+                    String s = e6.getText().substring(0, 40);
+                    e6.setText(s);
+                }
+            }
+        });
+        e7.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e7.getText().length() > 40) {
+                    String s = e7.getText().substring(0, 40);
+                    e7.setText(s);
+                }
+            }
+        });
+        e8.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e8.getText().length() > 40) {
+                    String s = e8.getText().substring(0, 40);
+                    e8.setText(s);
+                }
+            }
+        });
+        e9.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e9.getText().length() > 40) {
+                    String s = e9.getText().substring(0, 40);
+                    e9.setText(s);
+                }
+            }
+        });
+        e10.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (e10.getText().length() > 40) {
+                    String s = e10.getText().substring(0, 40);
+                    e10.setText(s);
+                }
+            }
+        });
         o1.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -84,7 +264,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o2.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -109,7 +288,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o3.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -134,7 +312,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o4.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -159,7 +336,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o5.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -184,7 +360,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o6.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -209,7 +384,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o7.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -234,7 +408,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o8.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -259,7 +432,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o9.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -284,7 +456,6 @@ public class AddTeamsController implements Initializable {
                 }
             }
         });
-
         o10.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -308,7 +479,7 @@ public class AddTeamsController implements Initializable {
                     }
                 }
         }
-                                           });
+        });
         cb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldSelection, String newSelection) {
@@ -1178,13 +1349,6 @@ public class AddTeamsController implements Initializable {
 
     	return data.getString("Email");
     }
-
-    private int getRefereeCount() throws IOException
-    {
-        JSONObject referees = Client.getReferees();
-        String[] idList = JSONObject.getNames(referees);
-        return idList.length;
-    }
     
     private void setData()
     {
@@ -1354,7 +1518,7 @@ public class AddTeamsController implements Initializable {
             String result = Client.fromServer.readLine();
             System.out.println("Result: "+result);
             if (result.equals("Success")) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText("Success");
                 alert.setContentText("Database successfully created!");
@@ -1429,12 +1593,21 @@ public class AddTeamsController implements Initializable {
                 alert.showAndWait();
                 return false;
             }
+            if (dpDate.getValue() == null) {
+
+                alert.setTitle("Error");
+                alert.setHeaderText("Please make a selection");
+                alert.setContentText("You must select a date.");
+                alert.showAndWait();
+                return false;
+            }
+
         }
         catch (NumberFormatException e)
             {
                 alert.setTitle("Error");
                 alert.setHeaderText("Please make a selection");
-                alert.setContentText("You must select both a number of teams and a number of referees.");
+                alert.setContentText("You must select a number of teams, a date, and a number of referees.");
                 alert.showAndWait();
                 return false;
             }
