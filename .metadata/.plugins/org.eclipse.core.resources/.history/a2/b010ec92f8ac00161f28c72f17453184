@@ -70,7 +70,7 @@ public class ConnectionHandler implements Runnable {
 						if (refereeIds.length == 1) {
 							JSONObject data = referees.getJSONObject(refereeIds[0]);
 							Referee existingReferee = refereeFromEmail(data.getString("Email"));
-							if (existingReferee != null && existingReferee.isSuperReferee) {
+							if (existingReferee.isSuperReferee) {
 								toClient.println("Exception_NotEnoughReferees");
 								break;
 							}
