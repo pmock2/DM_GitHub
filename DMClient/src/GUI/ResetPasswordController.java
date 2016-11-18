@@ -64,6 +64,7 @@ public class ResetPasswordController implements Initializable {
                 
                 if (response.equals("Login_Success")) {
                 	Client.permissionLevel = Integer.parseInt(Client.fromServer.readLine());
+                    Client.email = Client.fromServer.readLine();
                 	System.out.println("Client successfully logged in with permission level of " + Client.permissionLevel);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Success");
