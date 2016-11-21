@@ -525,8 +525,9 @@ public class ConnectionHandler implements Runnable {
 							toClient.println("Exception_InsufficientPermissions");
 							break;
 						}
-						
+
 						targetSeason.schedule.setMatchDate(matchId, newDate);
+						targetSeason.schedule.getMatches().get(matchId).setIsMorning(false);
 						Server.saveData();
 						toClient.println("Success");
 						break;
